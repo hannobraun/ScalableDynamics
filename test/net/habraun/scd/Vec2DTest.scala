@@ -116,22 +116,4 @@ class Vec2DTest {
 		val vec2 = Vec2D(1, 0)
 		assertEquals(Vec2D(5, 0), vec1.project(vec2))
 	}
-
-
-
-	@Test
-	def splitCheckOrthogonalPart {
-		val vec1 = Vec2D(5, 5)
-		val vec2 = Vec2D(1, 0)
-		assertEquals(Vec2D(0, 5), vec1.split(vec2)._1)
-	}
-
-
-
-	@Test
-	def splitCheckParallelPart {
-		val vec1 = Vec2D(5, 5)
-		val vec2 = Vec2D(1, 0)
-		assertEquals(Vec2D(5, 0), vec1.split(vec2)._2)
-	}
 }

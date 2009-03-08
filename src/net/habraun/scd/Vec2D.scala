@@ -118,16 +118,4 @@ case class Vec2D(x: Double, y: Double) {
 	 */
 
 	def project(vec: Vec2D) = vec * ((this * vec) / (vec * vec))
-
-
-
-
-	/**
-	 * Splits the vector into two parts, one of which is orthogonal to the given vector, the other being
-	 * parallel. Both part vector added together result in the original vector.
-	 * This method returns a pair of vectors, the orthogonal vector being the first, the parallel one being
-	 * the second.
-	 */
-
-	def split(vec: Vec2D) = (this - vec * ((this * vec) / (vec * vec)), vec * ((this * vec) / (vec * vec)))
 }
