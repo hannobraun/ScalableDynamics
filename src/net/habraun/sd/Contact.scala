@@ -34,6 +34,10 @@ import math._
  */
 
 case class Contact(b1: Body, b2: Body, normal1: Vec2D, normal2: Vec2D, point: Vec2D) {
+	// Make sure the parameters are not null.
+	if (b1 == null || b2 == null || normal1 == null || point == null)
+		throw new NullPointerException
+	
 	// Check if normal vectors are inverse to each other,
 	if (normal1 != -normal2)
 		throw new IllegalArgumentException("Both collision normals must be inverse to each other.")

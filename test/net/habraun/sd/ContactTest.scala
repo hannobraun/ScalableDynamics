@@ -65,4 +65,39 @@ class ContactTest {
 		Contact(new Body, new Body, Vec2D(1.02, 0), Vec2D(-1.02, 0), Vec2D(0, 0))
 		Contact(new Body, new Body, Vec2D(0.98, 0), Vec2D(-0.98, 0), Vec2D(0, 0))
 	}
+
+
+
+	@Test { val expected = classOf[NullPointerException]}
+	def createContactSetB1Null {
+		Contact(null, new Body, Vec2D(1, 0), Vec2D(-1, 0), Vec2D(0, 0))
+	}
+
+
+
+	@Test { val expected = classOf[NullPointerException]}
+	def createContactSetB2Null {
+		Contact(new Body, null, Vec2D(1, 0), Vec2D(-1, 0), Vec2D(0, 0))
+	}
+
+
+
+	@Test { val expected = classOf[NullPointerException]}
+	def createContactSetNormal1Null {
+		Contact(new Body, new Body, null, Vec2D(-1, 0), Vec2D(0, 0))
+	}
+
+
+
+	@Test { val expected = classOf[NullPointerException]}
+	def createContactSetNormal2Null {
+		Contact(new Body, new Body, Vec2D(1, 0), null, Vec2D(0, 0))
+	}
+
+
+
+	@Test { val expected = classOf[NullPointerException]}
+	def createContactSetPointNull {
+		Contact(new Body, new Body, Vec2D(1, 0), Vec2D(-1, 0), null)
+	}
 }
