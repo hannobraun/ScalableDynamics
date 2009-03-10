@@ -444,4 +444,12 @@ class WorldTest {
 
 		assertTrue((b2.position - b1.position).squaredLength >= 35.0 * 35.0)
 	}
+
+
+
+	@Test { val expected = classOf[IllegalArgumentException] }
+	def stepPassNegativeDelta {
+		val world = new World
+		world.step(-1.0)
+	}
 }

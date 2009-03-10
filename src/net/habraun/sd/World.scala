@@ -95,6 +95,9 @@ class World {
 	 */
 	
 	def step(delta: Double) {
+		// Check if delta is valid.
+		if (delta < 0.0) throw new IllegalArgumentException("Time delta must be 0 or greater.")
+
 		// Apply forces and impulses, make sure speed constraints are fulfilled.
 		bodies.foreach((body) => {
 			var velocity = body.velocity
