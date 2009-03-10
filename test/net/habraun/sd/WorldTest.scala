@@ -241,7 +241,10 @@ class WorldTest {
 
 		val narrowPhase = new NarrowPhase {
 			var passedPairs: List[(Body, Body)] = Nil
-			def inspectCollision(delta: Double, b1: Body, b2: Body) = { passedPairs = passedPairs:::List((b1, b2)); None }
+			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
+				passedPairs = passedPairs:::List((b1, b2))
+				None
+			}
 		}
 		world.narrowPhase = narrowPhase
 
