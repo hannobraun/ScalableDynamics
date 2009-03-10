@@ -20,6 +20,8 @@ package net.habraun.sd
 
 
 
+import math._
+
 import org.junit._
 import org.junit.Assert._
 
