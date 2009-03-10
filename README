@@ -1,8 +1,8 @@
 This library was created by Hanno Braun.
 Website: http://habraun.net
 
-Scalable Dynamics (short: ScD) is a 2D physics library targetted at games. It is written in Scala (http://scala-lang.org/).
-ScD is in early stages of development and still misses many basic features. The following functionality is currently implemented:
+Scalable Dynamics (short: SD) is a 2D physics library targetted at games. It is written in Scala (http://scala-lang.org/).
+SD is in early stages of development and still misses many basic features. The following functionality is currently implemented:
 * Rigid bodies
 * Linear movement
 * Applying forces and impulses to bodies
