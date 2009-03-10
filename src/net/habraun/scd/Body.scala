@@ -20,6 +20,10 @@ package net.habraun.scd
 
 
 
+import math._
+
+
+
 /**
  * Models a rigid body.
  * Body is mostly a data structure with very little logic. It needs to be added to a world in order to do

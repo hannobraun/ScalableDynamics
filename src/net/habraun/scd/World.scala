@@ -20,6 +20,8 @@ package net.habraun.scd
 
 
 
+import math._
+
 import scala.collection.mutable._
 
 

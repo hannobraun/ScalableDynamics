@@ -20,6 +20,10 @@ package net.habraun.scd
 
 
 
+import math._
+
+
+
 class SimpleNarrowPhase extends NarrowPhase {
 
 	def inspectCollision(delta: Double, b1: Body, b2: Body) = {

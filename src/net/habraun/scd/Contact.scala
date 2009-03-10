@@ -20,6 +20,10 @@ package net.habraun.scd
 
 
 
+import math._
+
+
+
 /**
  * Models a contact point between two bodies.
  * A contact point has the following attributes:

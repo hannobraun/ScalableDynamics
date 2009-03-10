@@ -20,6 +20,10 @@ package net.habraun.scd
 
 
 
+import math._
+
+
+
 /**
  * Models a line segment.
  * A line segment is defined by the following attributes:

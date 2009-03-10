@@ -16,7 +16,7 @@
 
 
 
-package net.habraun.scd
+package net.habraun.scd.math
 
 
 
