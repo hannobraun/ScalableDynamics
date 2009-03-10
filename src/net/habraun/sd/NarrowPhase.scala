@@ -16,23 +16,23 @@
 
 
 
-package net.habraun.scd
+package net.habraun.sd
 
 
 
 /**
- * The broad phase is the first of two phases of collision detection.
- * It is responsible for doing a rough and cheap test, determining what bodies _could_ collide, thus reducing
- * the number of body pairs the second phase (narrow phase) has to test.
+ * The narrow phase is the second of two phases of collision detection.
+ * It determines if two bodies collide, and if they do, the properties of that collision. This operation is
+ * potentially expensive, so the narrow phase only tests bodies that were deemed likely candidates for
+ * collision by the broad phase.
  */
 
-trait BroadPhase {
+trait NarrowPhase {
 
 	/**
-	 * Determines which of the given bodies could potentially collide.
-	 * Returns a list of body pairs that should be further tested by the narrow phase. The list of body pairs
-	 * must not contain duplicates.
+	 * Determines if the two bodies collide, and if they do, returns a Collision object that describes the
+	 * collision. If the bodies do not collide, this method returns None.
 	 */
 
-	def detectPossibleCollisions(bodies: List[Body]): List[(Body, Body)]
+	def inspectCollision(delta: Double, b1: Body, b2: Body): Option[Collision]
 }

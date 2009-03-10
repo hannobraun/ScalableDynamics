@@ -16,23 +16,23 @@
 
 
 
-package net.habraun.scd
-
-
-
-import math._
+package net.habraun.sd
 
 
 
 /**
- * Models a line segment.
- * A line segment is defined by the following attributes:
- * * p: The position vector of the first point of the line segment.
- * * d: The direction vector of the line segment. It points from the first point to the second point. Its
- *      length is equal to the length of the line segment.
+ * The broad phase is the first of two phases of collision detection.
+ * It is responsible for doing a rough and cheap test, determining what bodies _could_ collide, thus reducing
+ * the number of body pairs the second phase (narrow phase) has to test.
  */
 
-case class LineSegment(p: Vec2D, d: Vec2D) extends Shape {
-	if (d == Vec2D(0, 0)) throw new IllegalArgumentException("Direction vector must not be 0.")
-	if (p == null || d == null) throw new NullPointerException
+trait BroadPhase {
+
+	/**
+	 * Determines which of the given bodies could potentially collide.
+	 * Returns a list of body pairs that should be further tested by the narrow phase. The list of body pairs
+	 * must not contain duplicates.
+	 */
+
+	def detectPossibleCollisions(bodies: List[Body]): List[(Body, Body)]
 }

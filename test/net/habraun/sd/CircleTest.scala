@@ -16,12 +16,29 @@
 
 
 
-package net.habraun.scd
+package net.habraun.sd
 
 
 
-abstract class Shape
+import org.junit._
+import org.junit.Assert._
 
 
 
-object NoShape extends Shape
+class CircleTest {
+
+	@Test
+	def createCircleCheckRadius {
+		val radius = 1.0
+		val circle = new Circle(radius)
+		assertEquals(radius, circle.radius, 0.0)
+	}
+
+
+
+	@Test
+	def createCircleVerifyIsShape {
+		val circle = new Circle(1.0)
+		assertTrue(circle.isInstanceOf[Shape])
+	}
+}
