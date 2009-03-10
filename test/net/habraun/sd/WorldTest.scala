@@ -252,6 +252,26 @@ class WorldTest {
 
 		assertEquals((b1, b2)::(b3, b4)::Nil, narrowPhase.passedPairs)
 	}
+
+
+
+	def verifyDeltaIsPassedToNarrowPhase {
+		val world = new World
+
+		world.add(new Body)
+		world.add(new Body)
+
+		val narrowPhase = new NarrowPhase {
+			var d = 0.0
+			def inspectCollision(delta: Double, b1: Body, b2: Body) = { d = delta; None }
+		}
+		world.narrowPhase = narrowPhase
+
+		val d = 2.0
+		world.step(d)
+
+		assertEquals(d, narrowPhase.d)
+	}
 	
 	
 	
