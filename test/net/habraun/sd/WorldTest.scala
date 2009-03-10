@@ -452,4 +452,19 @@ class WorldTest {
 		val world = new World
 		world.step(-1.0)
 	}
+
+
+
+	@Test
+	def applyImpulseToStaticBody {
+		val body = new Body
+		body.mass = Double.PositiveInfinity
+		body.applyImpulse(Vec2D(2, 0))
+
+		val world = new World
+		world.add(body)
+		world.step(2.0)
+
+		assertEquals(Vec2D(0, 0), body.velocity)
+	}
 }
