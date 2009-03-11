@@ -38,6 +38,8 @@ class ContinuousCircleCircleTestTest {
 		test = new ContinuousCircleCircleTest
 	}
 
+	
+
 	@Test
 	def noMovementNoCollision {
 		val c1 = Circle(1)
