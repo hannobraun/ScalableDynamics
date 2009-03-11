@@ -39,27 +39,29 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 	 */
 
 	def apply(c1: Circle, c2: Circle, p1: Vec2D, p2: Vec2D, v1: Vec2D, v2: Vec2D): Option[TestResult] = {
-		// This algorithms does continious collision detection between two moving circles. I got this
-		// from "Real-Time Collision Detection" by Christer Ericson, page 223/224.
+		// This algorithms does continious collision detection between two moving circles. I got this from
+		// "Real-Time Collision Detection" by Christer Ericson, page 223/224.
 
 		val s = p2 - p1 // vector between sphere centers
 		val r = c1.radius + c2.radius // the sum of both radii
 		val v = v2 - v1 // relative movement between the circles.
 
-		// The time of impact is given by the smaller solution of the quadratic equation
-		// at^2 + 2bt + c = 0.
-		val a = v * v //a, b and c from the equation in the comment above
+		// The time of impact is given by the smaller solution of the quadratic equation at^2 + 2bt + c = 0.
+		// The following 3 variables are a, b and c from that equation.
+		val a = v * v
 		val b = v * s
 		val c = (s * s) - (r * r)
-		val d = (b * b) - (a * c) // the discriminant of the solution
 
-		// Check for several corner cases. If none of these occurs, we can compute t after the general
+		// The discriminant of the solution.
+		val d = (b * b) - (a * c)
+
+		// Check for several corner cases. If none of these occurs, we can compute t with the general
 		// formula.
 		if (c < 0.0) {
 			// Spheres are initially overlapping.
 			val normal = (p2 - p1).normalize
-			val point = Vec2D(0, 0) // This doesn't really make sense. The point should be the real point
-			                        // of impact and t should be negative.
+			val point = Vec2D(0, 0) // This doesn't really make sense. The point should be the real point of
+			                        // impact and t should be negative.
 			Some(TestResult(0.0, point, normal))
 		}
 		else if (a == 0) {
