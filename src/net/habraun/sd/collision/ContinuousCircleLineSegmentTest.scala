@@ -31,31 +31,29 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 		// This algorithms does continious collision detection between a moving circle and a moving line
 		// segment. I got this from "Real-Time Collision Detection" by Christer Ericson, page 219-222.
 
-		// For this algorithm, we need the normal and the distance from the origin, which together define
-		// the line on which the line segments lies.
-		// The normal is one of two possible line normals. The distance is the distance from the origin
-		// in units of the normal, which basically means that the distance is negative if the normal
-		// points towards the origin, positive if the normal points away from the origin.
+		// For this algorithm, we need the normal and the distance from the origin, which together define the
+		// line on which the line segments lies.
+		// The normal is one of two possible line normals. The distance is the distance from the origin in
+		// units of the normal, which basically means that the distance is negative if the normal points
+		// towards the origin, positive if the normal points away from the origin.
 		val lineNormal = ls.d.orthogonal.normalize
 		val lineDistance = (pls + ls.p) * lineNormal
 
-		// Compute the distance between the line and the circle. The distance is positive if the line
-		// normal points towards the circle (the circle lies in front of the line), negative otherwise.
+		// Compute the distance between the line and the circle. The distance is positive if the line normal
+		// points towards the circle (the circle lies in front of the line), negative otherwise.
 		val distance = lineNormal * pc - lineDistance
 
 		// Check if the circle and the line are already intersecting.
 		if (Math.abs(distance) <= c.radius) {
 			// Circle and line are already intersecting.
 
-			// The collision normals.
-			val nLine = if (distance > 0) lineNormal else -lineNormal
-			val nCircle = -nLine
+			// The surface normal of the circle at the point of impact.
+			val normal = if (distance > 0) -lineNormal else lineNormal
 
 			// The point on the line that lies nearest to the circle center.
 			val lambda = (pc - pls - ls.p) * ls.d /	ls.d.squaredLength
 			if (lambda >= 0 && lambda <= ls.d.length) {
-				//val point = segmentBody.position + segmentShape.p + segmentShape.d * lambda
-				Some(TestResult(0.0, Vec2D(0, 0), nCircle))
+				Some(TestResult(0.0, Vec2D(0, 0), normal))
 			}
 			else {
 				None
@@ -66,26 +64,25 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 			// actually moves, we will model this as a moving sphere and a stationary line segment.
 			val v = vc - vls
 
-			// Compute the direction of the circle's movement relative to the line normal. A positive
-			// value denotes movment in the direction of the line normal, a negative value the opposite.
+			// Compute the direction of the circle's movement relative to the line normal. A positive value
+			// denotes movment in the direction of the line normal, a negative value the opposite.
 			// A value of zero means, that the sphere moves parallel to the line.
 			val direction = lineNormal * v
 
-			// Check if the circle moves towards the line. This is the case if the direction multiplied
-			// with the distance between the line and the circle is negative.
-			// If both are positive, the circle lies in front of the circle (line normal points towards
-			// it) and moves in the direction of the normal. If both are negative, it lies behind the
-			// line (normal points away from the circle) and it moves against the direction of the
-			// normal.
-			// The value can only be zero if the circle moves parallel to the line. The direction can't
-			// be zero because that has already been ruled out before.
+			// Check if the circle moves towards the line. This is the case if the direction multiplied with
+			// the distance between the line and the circle is negative.
+			// If both are positive, the circle lies in front of the circle (line normal points towards it)
+			// and moves in the direction of the normal. If both are negative, it lies behind theline (normal
+			// points away from the circle) and it moves against the direction of the normal.
+			// The value can only be zero if the circle moves parallel to the line. The direction can't be
+			// zero because that has already been ruled out before.
 			if (direction * distance < 0.0) {
-				// The circle moves towards the line. What's left to do is compute the time of impact,
-				// check if it lies within the current timeframe and check if the point of impact lies on
-				// the line segment.
+				// The circle moves towards the line. What's left to do is compute the time of impact, check
+				// if it lies within the current timeframe and check if the point of impact lies on the line
+				// segment.
 
-				// For the following computation, we need the radius of the circle as a positive value if
-				// it lies in front of the plane, as a negative value otherwise.
+				// For the following computation, we need the radius of the circle as a positive value if it
+				// lies in front of the plane, as a negative value otherwise.
 				val radius = if (distance > 0.0) c.radius else -c.radius
 
 				// Compute the time of impact.
@@ -93,22 +90,21 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 
 				// Check if the time is within the movement interval.
 				if (t >= 0.0 && t <= 1.0) {
-					// The time is within the movement interval, which  means the circle will hit the
-					// line. Compute the point of impact and the normals.
+					// The time is within the movement interval, which  means the circle will hit the line.
+					// Compute the point of impact and the normals.
 
-					// The collision normals.
-					val nLine = if (distance > 0) lineNormal else -lineNormal
-					val nCircle = -nLine
+					// The surface normal of the circle at the point of impact.
+					val normal = if (distance > 0) -lineNormal else lineNormal
 
 					// Point of impact.
-					val point = pc + (nCircle * c.radius) +	(vc * t)
+					val point = pc + (normal * c.radius) +	(vc * t)
 
-					// We now have the point of impact between the circle and the line. But does this
-					// point lie on the line segment?
+					// We now have the point of impact between the circle and the line. But does this point
+					// lie on the line segment?
 					val pt = (point.x - (pls.x + ls.p.x)) / ls.d.x
 					if (pt >= 0.0 && pt <= 1.0) {
 						// Yes it does.
-						Some(TestResult(t, point, nCircle))
+						Some(TestResult(t, point, normal))
 					}
 					else {
 						// No, it doesn't. No collision.
