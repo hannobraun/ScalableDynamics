@@ -118,4 +118,12 @@ case class Vec2D(x: Double, y: Double) {
 	 */
 
 	def project(vec: Vec2D) = vec * ((this * vec) / (vec * vec))
+
+
+
+	/**
+	 * Returns true if the vector is a unit vector, false otherwise.
+	 */
+
+	def unit = squaredLength < 1.05 && squaredLength > 0.95
 }

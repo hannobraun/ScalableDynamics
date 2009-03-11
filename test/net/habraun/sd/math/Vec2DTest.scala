@@ -116,4 +116,19 @@ class Vec2DTest {
 		val vec2 = Vec2D(1, 0)
 		assertEquals(Vec2D(5, 0), vec1.project(vec2))
 	}
+
+
+
+	@Test
+	def isUnit {
+		val unit = Vec2D(1, 0)
+		val nonUnit = Vec2D(2, 0)
+		val unitWithTolerance1 = Vec2D(0.98, 0)
+		val unitWithTolerance2 = Vec2D(1.02, 0)
+
+		assertTrue(unit.unit)
+		assertFalse(nonUnit.unit)
+		assertTrue(unitWithTolerance1.unit)
+		assertTrue(unitWithTolerance2.unit)
+	}
 }
