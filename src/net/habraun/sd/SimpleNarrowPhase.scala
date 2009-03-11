@@ -36,26 +36,14 @@ class SimpleNarrowPhase extends NarrowPhase {
 		case s1: Circle =>
 			b2.shape match {
 				case s2: Circle =>
-					val c1 = s1
-					val c2 = s2
-					val p1 = b1.position
-					val p2 = b2.position
-					val v1 = b1.velocity
-					val v2 = b2.velocity
-
-					for (r <- testCircleCircle(c1, c2, p1, p2, v1 * delta, v2 * delta)) yield {
+					for (r <- testCircleCircle(s1, s2, b1.position, b2.position, b1.velocity * delta,
+							b2.velocity * delta)) yield {
 						Collision(r.t, Contact(b1, b2, r.normal, -r.normal, r.contact))
 					}
 
 				case s2: LineSegment =>
-					val c = s1
-					val ls = s2
-					val pc = b1.position
-					val pls = b2.position
-					val vc = b1.velocity * delta
-					val vls = b2.velocity * delta
-
-					for (r <- testCircleLineSegment(c, ls, pc, pls, vc, vls)) yield {
+					for (r <- testCircleLineSegment(s1, s2, b1.position, b2.position, b1.velocity * delta,
+							b2.velocity * delta)) yield {
 						Collision(r.t, Contact(b1, b2, r.normal, -r.normal, r.contact))
 					}
 
@@ -66,14 +54,8 @@ class SimpleNarrowPhase extends NarrowPhase {
 		case s1: LineSegment =>
 			b2.shape match {
 				case s2: Circle =>
-					val c = s2
-					val ls = s1
-					val pc = b2.position
-					val pls = b1.position
-					val vc = b2.velocity * delta
-					val vls = b1.velocity * delta
-
-					for (r <- testCircleLineSegment(c, ls, pc, pls, vc, vls)) yield {
+					for (r <- testCircleLineSegment(s2, s1, b2.position, b1.position, b2.velocity * delta,
+							b1.velocity * delta)) yield {
 						Collision(r.t, Contact(b1, b2, r.normal, -r.normal, r.contact))
 					}
 
