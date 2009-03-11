@@ -20,66 +20,28 @@ package net.habraun.sd
 
 
 
+import collision._
 import math._
 
 
 
 class SimpleNarrowPhase extends NarrowPhase {
 
+	var testCircleCircle: CircleCircleTest = new ContinuousCircleCircleTest
+
+
+
 	def inspectCollision(delta: Double, b1: Body, b2: Body) = {
 		if (b1.shape.isInstanceOf[Circle] && b2.shape.isInstanceOf[Circle]) {
-			// This algorithms does continious collision detection between two moving circles. I got this
-			// from "Real-Time Collision Detection" by Christer Ericson, page 223/224.
+			val c1 = b1.shape.asInstanceOf[Circle]
+			val c2 = b2.shape.asInstanceOf[Circle]
+			val p1 = b1.position
+			val p2 = b2.position
+			val v1 = b1.velocity
+			val v2 = b2.velocity 
 
-			// The two (possibly) colliding circles.
-			val circle1 = b1.shape.asInstanceOf[Circle]
-			val circle2 = b2.shape.asInstanceOf[Circle]
-
-			val s = b2.position - b1.position // vector between sphere centers
-			val v = (b2.velocity - b1.velocity) * delta // relative motion between the circles
-			val r = circle1.radius + circle2.radius // the sum of both radii
-
-			// The time of impact is given by the smaller solution of the quadratic equation
-			// at^2 + 2bt + c = 0.
-			val a = v * v //a, b and c from the equation in the comment above
-			val b = v * s
-			val c = (s * s) - (r * r)
-			val d = (b * b) - (a * c) // the discriminant of the solution
-
-			// Check for several corner cases. If none of these occurs, we can compute t after the general
-			// formula.
-			if (c < 0.0) {
-				// Spheres are initially overlapping.
-				val normal1 = (b2.position - b1.position).normalize
-				val normal2 = (b1.position - b2.position).normalize
-				val point = Vec2D(0, 0) // This doesn't really make sense. The point should be the real point
-				                        // of impact and t should be negative.
-				Some(Collision(0.0, Contact(b1, b2, normal1, normal2, point)))
-			}
-			else if (a == 0) {
-				// Spheres are not moving relative to each other.
-				None
-			}
-			else if (b >= 0.0) {
-				// Spheres are not moving towards each other.
-				None
-			}
-			else if (d < 0.0) {
-				// Discriminant is negative, no real solution.
-				None
-			}
-			else {
-				// None of the edge cases has occured, so we need to compute the time of contact.
-				val t = (-b - Math.sqrt(d)) / a
-				if (t <= 1.0) {
-					val normal1 = (b2.position - b1.position).normalize
-					val normal2 = (b1.position - b2.position).normalize
-					val point = b1.position + (b1.velocity * delta * t) + (normal1 * circle1.radius)
-					Some(Collision(t, Contact(b1, b2, normal1, normal2, point)))
-				}
-				else {
-					None
-				}
+			for (r <- testCircleCircle(c1, c2, p1, p2, v1 * delta, v2 * delta)) yield {
+				Collision(r.t, Contact(b1, b2, r.normal, -r.normal, r.contact))
 			}
 		}
 		else if ((b1.shape.isInstanceOf[Circle] && b2.shape.isInstanceOf[LineSegment])
