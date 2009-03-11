@@ -92,7 +92,7 @@ class SimpleNarrowPhaseTest {
 			var p2: Vec2D = null
 			var v1: Vec2D = null
 			var v2: Vec2D = null
-			override def apply (_c1: Circle, _c2: Circle, _p1: Vec2D, _p2: Vec2D, _v1: Vec2D, _v2: Vec2D) = {
+			def apply (_c1: Circle, _c2: Circle, _p1: Vec2D, _p2: Vec2D, _v1: Vec2D, _v2: Vec2D) = {
 				c1 = _c1; c2 = _c2; p1 = _p1; p2 = _p2; v1 = _v1; v2 = _v2
 				None
 			}
