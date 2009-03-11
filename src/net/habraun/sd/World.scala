@@ -33,7 +33,15 @@ import scala.collection.mutable._
 
 class World {
 
-	private[this] val bodies = new HashSet[Body]
+	private[this] val _bodies = new HashSet[Body]
+
+
+
+	/**
+	 * Returns a copy of the body set as an Iterable.
+	 */
+
+	def bodies: Iterable[Body] = _bodies.clone
 
 	
 
@@ -74,7 +82,7 @@ class World {
 	 */
 	
 	def add(body: Body) {
-		bodies.addEntry(body)
+		_bodies.addEntry(body)
 	}
 
 
@@ -84,7 +92,7 @@ class World {
 	 */
 
 	def remove(body: Body) {
-		bodies.removeEntry(body)
+		_bodies.removeEntry(body)
 	}
 	
 
@@ -99,7 +107,7 @@ class World {
 		if (delta < 0.0) throw new IllegalArgumentException("Time delta must be 0 or greater.")
 
 		// Apply forces and impulses, make sure speed constraints are fulfilled.
-		bodies.foreach((body) => {
+		_bodies.foreach((body) => {
 			var velocity = body.velocity
 
 			// Apply forces.
@@ -120,7 +128,7 @@ class World {
 		})
 
 		// Collision detection.
-		val possibleCollisionPairs = broadPhase.detectPossibleCollisions(bodies.toList)
+		val possibleCollisionPairs = broadPhase.detectPossibleCollisions(_bodies.toList)
 		val possibleCollisions = possibleCollisionPairs.map((pair) => {
 			narrowPhase.inspectCollision(delta, pair._1, pair._2)
 		})
@@ -169,7 +177,7 @@ class World {
 		}
 
 		// Apply speed.
-		bodies.foreach((body) => {
+		_bodies.foreach((body) => {
 			// Move bodies.
 			body.position = body.position + (body.velocity * delta)
 		})

@@ -23,6 +23,8 @@ package net.habraun.sd
 import collision._
 import math._
 
+import scala.collection.mutable._
+
 import org.junit._
 import org.junit.Assert._
 
@@ -490,5 +492,23 @@ class WorldTest {
 	def stepPassNegativeDelta {
 		val world = new World
 		world.step(-1.0)
+	}
+
+
+
+	@Test
+	def verifyBodyIterableIsAccessible {
+		val world = new World
+		assertTrue(world.bodies.isInstanceOf[Iterable[Body]])
+	}
+
+
+
+	@Test
+	def verifyBodyIterableCantChangeWorld {
+		val world = new World
+		val body = new Body
+		world.bodies.asInstanceOf[HashSet[Body]].addEntry(body)
+		assertFalse(world.bodies.exists(_ == body))
 	}
 }
