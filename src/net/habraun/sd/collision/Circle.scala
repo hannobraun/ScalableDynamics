@@ -16,12 +16,8 @@
 
 
 
-package net.habraun.sd
+package net.habraun.sd.collision
 
 
 
-abstract class Shape
-
-
-
-object NoShape extends Shape
+case class Circle(radius: Double) extends Shape
