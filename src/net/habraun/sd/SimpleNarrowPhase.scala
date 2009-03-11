@@ -32,37 +32,59 @@ class SimpleNarrowPhase extends NarrowPhase {
 
 
 
-	def inspectCollision(delta: Double, b1: Body, b2: Body) = {
-		if (b1.shape.isInstanceOf[Circle] && b2.shape.isInstanceOf[Circle]) {
-			val c1 = b1.shape.asInstanceOf[Circle]
-			val c2 = b2.shape.asInstanceOf[Circle]
-			val p1 = b1.position
-			val p2 = b2.position
-			val v1 = b1.velocity
-			val v2 = b2.velocity 
+	def inspectCollision(delta: Double, b1: Body, b2: Body) = b1.shape match {
+		case s1: Circle =>
+			b2.shape match {
+				case s2: Circle =>
+					val c1 = s1
+					val c2 = s2
+					val p1 = b1.position
+					val p2 = b2.position
+					val v1 = b1.velocity
+					val v2 = b2.velocity
 
-			for (r <- testCircleCircle(c1, c2, p1, p2, v1 * delta, v2 * delta)) yield {
-				Collision(r.t, Contact(b1, b2, r.normal, -r.normal, r.contact))
-			}
-		}
-		else if ((b1.shape.isInstanceOf[Circle] && b2.shape.isInstanceOf[LineSegment])
-				|| (b1.shape.isInstanceOf[LineSegment] && b2.shape.isInstanceOf[Circle])) {
-			val circle = if (b1.shape.isInstanceOf[Circle]) b1 else b2
-			val segment = if (b1.shape.isInstanceOf[Circle]) b2 else b1
-			
-			val c = circle.shape.asInstanceOf[Circle]
-			val ls = segment.shape.asInstanceOf[LineSegment]
-			val pc = circle.position
-			val pls = segment.position
-			val vc = circle.velocity * delta
-			val vls = segment.velocity * delta
+					for (r <- testCircleCircle(c1, c2, p1, p2, v1 * delta, v2 * delta)) yield {
+						Collision(r.t, Contact(b1, b2, r.normal, -r.normal, r.contact))
+					}
 
-			for (r <- testCircleLineSegment(c, ls, pc, pls, vc, vls)) yield {
-				Collision(r.t, Contact(circle, segment, r.normal, -r.normal, r.contact))
+				case s2: LineSegment =>
+					val c = s1
+					val ls = s2
+					val pc = b1.position
+					val pls = b2.position
+					val vc = b1.velocity * delta
+					val vls = b2.velocity * delta
+
+					for (r <- testCircleLineSegment(c, ls, pc, pls, vc, vls)) yield {
+						Collision(r.t, Contact(b1, b2, r.normal, -r.normal, r.contact))
+					}
+
+				case _ =>
+					None
 			}
-		}
-		else {
+
+		case s1: LineSegment =>
+			b2.shape match {
+				case s2: Circle =>
+					val c = s2
+					val ls = s1
+					val pc = b2.position
+					val pls = b1.position
+					val vc = b2.velocity * delta
+					val vls = b1.velocity * delta
+
+					for (r <- testCircleLineSegment(c, ls, pc, pls, vc, vls)) yield {
+						Collision(r.t, Contact(b1, b2, r.normal, -r.normal, r.contact))
+					}
+
+				case s2: LineSegment =>
+					None
+
+				case _ =>
+					None
+			}
+
+		case _ =>
 			None
-		}
 	}
 }
