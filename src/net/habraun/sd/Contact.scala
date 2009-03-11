@@ -43,8 +43,7 @@ case class Contact(b1: Body, b2: Body, normal1: Vec2D, normal2: Vec2D, point: Ve
 		throw new IllegalArgumentException("Both collision normals must be inverse to each other.")
 
 	// Check if vectors are unit vectors.
-	val absSquaredLength = Math.abs(normal1.squaredLength)
-	if (absSquaredLength > 1.05 || absSquaredLength < 0.95)
+	if (normal1.squaredLength > 1.05 || normal1.squaredLength < 0.95)
 		throw new IllegalArgumentException("Normals must be unit vectors. Normal 1: " + normal1
 				+ ", Normal 2: " + normal2)
 }
