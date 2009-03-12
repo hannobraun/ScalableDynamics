@@ -25,25 +25,20 @@ import math._
 
 
 /**
- * Models a contact point between two bodies.
- * A contact point has the following attributes:
- * * b1 and b2 are the two bodies that have contact.
- * * normal1 is the surface normal for b1 at the point of contact. This is a unit vector.
- * * normal2 is the surface normal for b2 at the point of contact. This is a unit vector.
- * * point is the position vector of the point of contact.
+ * Models a contact of one body to another.
+ * A contact has the following attributes:
+ * * b: The body that has contact to another.
+ * * point: The position vector of the point of contact.
+ * * normal: The surface normal of b at the point of contact. This is a unit vector.
+ * * other: The other body that b has contact to.
  */
 
-case class Contact(b1: Body, b2: Body, normal1: Vec2D, normal2: Vec2D, point: Vec2D) {
+case class Contact(b: Body, point: Vec2D, normal: Vec2D, other: Body) {
 	// Make sure the parameters are not null.
-	if (b1 == null || b2 == null || normal1 == null || point == null)
+	if (b == null || point == null || normal == null || other == null)
 		throw new NullPointerException
 	
-	// Check if normal vectors are inverse to each other,
-	if (normal1 != -normal2)
-		throw new IllegalArgumentException("Both collision normals must be inverse to each other.")
-
 	// Check if vectors are unit vectors.
-	if (normal1.squaredLength > 1.05 || normal1.squaredLength < 0.95)
-		throw new IllegalArgumentException("Normals must be unit vectors. Normal 1: " + normal1
-				+ ", Normal 2: " + normal2)
+	if (normal.squaredLength < 0.95 || normal.squaredLength > 1.05)
+		throw new IllegalArgumentException("Normal must be a unit vectors (normal: " + normal + ").")
 }

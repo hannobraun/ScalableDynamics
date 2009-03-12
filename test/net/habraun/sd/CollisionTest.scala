@@ -32,30 +32,41 @@ class CollisionTest {
 	@Test
 	def verifyHasAttributes {
 		val t = 0.5
-		val contact = Contact(new Body, new Body, Vec2D(1, 0), Vec2D(-1, 0), Vec2D(5, 5))
-		val collision = Collision(t, contact)
+		val contact1 = Contact(new Body, Vec2D(5, 5), Vec2D(1, 0),  new Body)
+		val contact2 = Contact(new Body, Vec2D(6, 6), Vec2D(-1, 0), new Body)
+		val collision = Collision(t, contact1, contact2)
 		assertEquals(t, collision.t, 0.0)
-		assertEquals(contact, collision.contact)
+		assertEquals(contact1, collision.contact1)
+		assertEquals(contact2, collision.contact2)
 	}
 
 
 
 	@Test { val expected = classOf[IllegalArgumentException] }
 	def createCollisionWithInvalidTime {
-		Collision(1.1, Contact(new Body, new Body, Vec2D(1, 0), Vec2D(-1, 0), Vec2D(5, 5)))
+		val contact = Contact(new Body, Vec2D(5, 5), Vec2D(1, 0), new Body)
+		Collision(1.1, contact, contact)
 	}
 
 
 
 	@Test { val expected = classOf[IllegalArgumentException] }
 	def createCollisionWithInvalidTime2 {
-		Collision(-1.0, Contact(new Body, new Body, Vec2D(1, 0), Vec2D(-1, 0), Vec2D(5, 5)))
+		val contact = Contact(new Body, Vec2D(5, 5), Vec2D(1, 0), new Body)
+		Collision(-1.0, contact, contact)
 	}
 
 
 
 	@Test { val expected = classOf[NullPointerException] }
-	def createCollisionWithNullContact {
-		Collision(0.5, null)
+	def createCollisionWithNullContact1 {
+		Collision(0.5, null, Contact(new Body, Vec2D(5, 5), Vec2D(1, 0), new Body))
+	}
+
+
+
+	@Test { val expected = classOf[NullPointerException] }
+	def createCollisionWithNullContact2 {
+		Collision(0.5, Contact(new Body, Vec2D(5, 5), Vec2D(1, 0), new Body), null)
 	}
 }

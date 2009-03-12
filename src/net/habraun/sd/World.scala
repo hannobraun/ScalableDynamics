@@ -144,12 +144,12 @@ class World {
 		// of possible collisions. We execute the yield stuff only for actual collisions, not for None.
 		for ( possibleCollision <- possibleCollisions; collision <- possibleCollision ) yield {
 			// Get the bodies out of the contact, so we can access them easier.
-			val b1 = collision.contact.b1
-			val b2 = collision.contact.b2
+			val b1 = collision.contact1.b
+			val b2 = collision.contact2.b
 
 			// Compute the part of the velocities that points in the direction of the collision normals.
-			val v1 = b1.velocity.project(collision.contact.normal1)
-			val v2 = b2.velocity.project(collision.contact.normal2)
+			val v1 = b1.velocity.project(collision.contact1.normal)
+			val v2 = b2.velocity.project(collision.contact2.normal)
 
 			// Apply impulses along the collision normals.
 			val m1 = b1.mass

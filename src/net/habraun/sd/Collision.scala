@@ -23,13 +23,14 @@ package net.habraun.sd
 /**
  * Models a collision between two bodies.
  * A collision has the following attributes:
- * * t is the time of impact, relative to the timeframe that was inspected by the collision solver. A value
- *   of 0.0 means, the collision took place at the beginning of the time frame, 1.0 means at the end. A value
- *   of 0.5 would means, that the collision occured halfway through timeframe.
- * * contact is the point of contact between the two bodies.
+ * * t: The time of impact, relative to the timeframe that was inspected by the collision solver. A value of
+ *      0.0 means, the collision took place at the beginning of the time frame, 1.0 means at the end. A value
+ *      of 0.5 would means, that the collision occured halfway through timeframe.
+ * * contact1, contact2: The contact objects that represent the collision from the viewpoint of each of the
+ *                       colliding bodies.
  */
 
-case class Collision(t: Double, contact: Contact) {
+case class Collision(t: Double, contact1: Contact, contact2: Contact) {
 	if (t < 0.0 || t > 1.0) throw new IllegalArgumentException("Time of impact must be between 0.0 and 1.0.")
-	if (contact == null) throw new NullPointerException("contact must not be null.")
+	if (contact1 == null || contact2 == null) throw new NullPointerException("Contact must not be null.")
 }

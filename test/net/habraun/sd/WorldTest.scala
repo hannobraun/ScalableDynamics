@@ -293,7 +293,8 @@ class WorldTest {
 
 		world.narrowPhase = new NarrowPhase {
 			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
-				Some(Collision(1.0, Contact(b1, b2, Vec2D(0, -1), Vec2D(0, 1), Vec2D(0, 0))))
+				Some(Collision(1.0, Contact(b1, Vec2D(0, 0), Vec2D(0, -1), b2),
+						Contact(b2, Vec2D(0, 0), Vec2D(0, 1), b1)))
 			}
 		}
 
@@ -319,7 +320,8 @@ class WorldTest {
 
 		world.narrowPhase = new NarrowPhase {
 			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
-				Some(Collision(1.0, Contact(b1, b2, Vec2D(0, -1), Vec2D(0, 1), Vec2D(0, 0))))
+				Some(Collision(1.0, Contact(b1, Vec2D(0, 0), Vec2D(0, -1), b2),
+						Contact(b2, Vec2D(0, 0), Vec2D(0, 1), b1)))
 			}
 		}
 
@@ -345,7 +347,8 @@ class WorldTest {
 
 		world.narrowPhase = new NarrowPhase {
 			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
-				Some(Collision(1.0, Contact(b1, b2, Vec2D(0, 1), Vec2D(0, -1), Vec2D(0, 0))))
+				Some(Collision(1.0, Contact(b1, Vec2D(0, 0), Vec2D(0, 1), b2),
+						Contact(b2, Vec2D(0, 0), Vec2D(0, -1), b1)))
 			}
 		}
 
@@ -433,7 +436,8 @@ class WorldTest {
 
 		val narrowPhase = new NarrowPhase {
 			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
-				Some(Collision(0.5, Contact(b1, b2, Vec2D(1, 0), Vec2D(-1, 0), Vec2D(3, 0))))
+				Some(Collision(0.5, Contact(b1, Vec2D(3, 0), Vec2D(1, 0), b2),
+						Contact(b2, Vec2D(3, 0), Vec2D(-1, 0), b1)))
 			}
 		}
 		world.narrowPhase = narrowPhase
@@ -474,9 +478,9 @@ class WorldTest {
 
 		val narrowPhase = new NarrowPhase {
 			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
-				Some(Collision(0.4766389925763854, Contact(b1, b2,
-						Vec2D(-0.8732041733361332, -0.4873545646327327),
-						Vec2D(0.8732041733361332, 0.4873545646327327), Vec2D(3, 0))))
+				Some(Collision(0.4766389925763854,
+						Contact(b1, Vec2D(3, 0), Vec2D(-0.8732041733361332, -0.4873545646327327), b2),
+						Contact(b2, Vec2D(3, 0), Vec2D(0.8732041733361332, 0.4873545646327327), b1)))
 			}
 		}
 		world.narrowPhase = narrowPhase

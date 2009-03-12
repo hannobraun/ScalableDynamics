@@ -38,13 +38,15 @@ class SimpleNarrowPhase extends NarrowPhase {
 				case s2: Circle =>
 					for (r <- testCircleCircle(s1, s2, b1.position, b2.position, b1.velocity * delta,
 							b2.velocity * delta)) yield {
-						Collision(r.t, Contact(b1, b2, r.normal, -r.normal, r.contact))
+						Collision(r.t, Contact(b1, r.contact, r.normal, b2),
+								Contact(b2, r.contact, -r.normal, b1))
 					}
 
 				case s2: LineSegment =>
 					for (r <- testCircleLineSegment(s1, s2, b1.position, b2.position, b1.velocity * delta,
 							b2.velocity * delta)) yield {
-						Collision(r.t, Contact(b1, b2, r.normal, -r.normal, r.contact))
+						Collision(r.t, Contact(b1, r.contact, r.normal, b2),
+								Contact(b2, r.contact, -r.normal, b1))
 					}
 
 				case _ =>
@@ -56,7 +58,8 @@ class SimpleNarrowPhase extends NarrowPhase {
 				case s2: Circle =>
 					for (r <- testCircleLineSegment(s2, s1, b2.position, b1.position, b2.velocity * delta,
 							b1.velocity * delta)) yield {
-						Collision(r.t, Contact(b1, b2, r.normal, -r.normal, r.contact))
+						Collision(r.t, Contact(b1, r.contact, r.normal, b2),
+								null)
 					}
 
 				case s2: LineSegment =>

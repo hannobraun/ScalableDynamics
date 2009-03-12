@@ -140,7 +140,8 @@ class SimpleNarrowPhaseTest {
 
 		val collision = simpleNarrowPhase.inspectCollision(2.0, b1, b2)
 
-		val expected = Collision(0.5, Contact(b1, b2, Vec2D(1, 0), Vec2D(-1, 0), Vec2D(5, 5)))
+		val expected = Collision(0.5, Contact(b1, Vec2D(5, 5), Vec2D(1, 0), b2),
+				Contact(b2, Vec2D(5, 5), Vec2D(-1, 0), b1))
 
 		assertEquals(Some(expected), collision)
 	}
@@ -266,7 +267,8 @@ class SimpleNarrowPhaseTest {
 
 		val collision = simpleNarrowPhase.inspectCollision(2.0, b1, b2)
 
-		val expected = Collision(0.5, Contact(b1, b2, Vec2D(1, 0), Vec2D(-1, 0), Vec2D(5, 5)))
+		val expected = Collision(0.5, Contact(b1, Vec2D(5, 5), Vec2D(1, 0), b2),
+				Contact(b2, Vec2D(5, 5), Vec2D(-1, 0), b1))
 
 		assertEquals(Some(expected), collision)
 	}
