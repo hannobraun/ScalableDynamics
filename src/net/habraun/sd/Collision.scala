@@ -31,6 +31,15 @@ package net.habraun.sd
  */
 
 case class Collision(t: Double, contact1: Contact, contact2: Contact) {
+	// Verify time of impact is valid.
 	if (t < 0.0 || t > 1.0) throw new IllegalArgumentException("Time of impact must be between 0.0 and 1.0.")
+
+	// Verify contacts are not null.
 	if (contact1 == null || contact2 == null) throw new NullPointerException("Contact must not be null.")
+
+	// Verify contacts match each other.
+	if (contact1.b != contact2.other || contact1.other != contact2.b || contact1.point != contact2.point
+			|| contact1.normal != -contact2.normal)
+		throw new IllegalArgumentException("Contacts do not match each other (contac1: " + contact1 + ","
+				+ " contact2: " + contact2 + ").")
 }
