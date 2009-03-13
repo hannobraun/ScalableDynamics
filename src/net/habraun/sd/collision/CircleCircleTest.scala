@@ -24,6 +24,4 @@ import math._
 
 
 
-trait CircleCircleTest extends Function6[Circle, Circle, Vec2D, Vec2D, Vec2D, Vec2D, Option[TestResult]] {
-
-}
+trait CircleCircleTest extends Function6[Circle, Circle, Vec2D, Vec2D, Vec2D, Vec2D, Option[TestResult]]
