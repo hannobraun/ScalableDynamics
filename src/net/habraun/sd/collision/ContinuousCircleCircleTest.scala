@@ -24,8 +24,11 @@ import math._
 
 
 
+/**
+ * An circle-circle collision test implementation that performs continuous collision detection.
+ */
+
 class ContinuousCircleCircleTest extends CircleCircleTest {
-		//extends Function6[Circle, Circle, Vec2D, Vec2D, Vec2D, Vec2D, Option[TestResult]] {
 
 	/**
 	 * Performs continuous collision detection between two circles with relative movement.
@@ -36,6 +39,9 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 	 * * p2: Position of the second circle.
 	 * * v1: Movement of the first circle.
 	 * * v2: Movement of the second circle.
+	 *
+	 * Attention: If the circles already overlap at the beginning of the movement, no valid contact point is
+	 * reported. In that case, the collision point will always be (0, 0).
 	 */
 
 	def apply(c1: Circle, c2: Circle, p1: Vec2D, p2: Vec2D, v1: Vec2D, v2: Vec2D): Option[TestResult] = {
@@ -60,8 +66,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 		if (c < 0.0) {
 			// Spheres are initially overlapping.
 			val normal = (p2 - p1).normalize
-			val point = Vec2D(0, 0) // This doesn't really make sense. The point should be the real point of
-			                        // impact and t should be negative.
+			val point = Vec2D(0, 0)
 			Some(TestResult(0.0, point, normal))
 		}
 		else if (a == 0) {

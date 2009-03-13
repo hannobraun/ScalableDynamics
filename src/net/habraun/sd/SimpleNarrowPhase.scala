@@ -25,12 +25,24 @@ import math._
 
 
 
+/**
+ * A narrow phase implementation that uses the collision tests from the sd.collision package by default.
+ */
+
 class SimpleNarrowPhase extends NarrowPhase {
+
+	/**
+	 * The tests this narrow phase uses can be set here.
+	 */
 
 	var testCircleCircle: CircleCircleTest = new ContinuousCircleCircleTest
 	var testCircleLineSegment: CircleLineSegmentTest = new ContinuousCircleLineSegmentTest
 
 
+
+	/**
+	 * Handles circle-circle and circle-line segment collisions.
+	 */
 
 	def inspectCollision(delta: Double, b1: Body, b2: Body) = b1.shape match {
 		case s1: Circle =>

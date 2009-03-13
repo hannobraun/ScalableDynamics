@@ -24,7 +24,17 @@ import math._
 
 
 
+/**
+ * An implementation of the circle - line segment test that performs continuous collision detection.
+ */
+
 class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
+
+	/**
+	 * Performs continuous collision detection between a circle and a line segment.
+	 * Attention: If the circle and the line segment overlap initially, the reported contact point is
+	 * invalid. It will always be (0, 0).
+	 */
 
 	def apply(c: Circle, ls: LineSegment, pc: Vec2D, pls: Vec2D, vc: Vec2D, vls: Vec2D):
 			Option[TestResult] = {

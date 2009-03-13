@@ -24,5 +24,16 @@ import math._
 
 
 
+/**
+ * The definition for collision tests for circle - line segment collisions. Circle - line segment tests take
+ * the following parameters:
+ * * c: The circle.
+ * * ls: The line segment.
+ * * pc: The position of the circle.
+ * * pls: The position of the line segment.
+ * * vc: The velocity of the circle.
+ * * vls: The velocity of the line segment.
+ */
+
 trait CircleLineSegmentTest
 		extends Function6[Circle, LineSegment, Vec2D, Vec2D, Vec2D, Vec2D, Option[TestResult]]

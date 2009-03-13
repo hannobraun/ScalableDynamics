@@ -20,8 +20,17 @@ package net.habraun.sd.collision
 
 
 
+/**
+ * Base class for all body shapes.
+ * A body needs a shape in order to collide.
+ */
+
 abstract class Shape
 
 
+
+/**
+ * A special shape that denotes the absence of any shape. A body with NoShape as its shape will not collide.
+ */
 
 object NoShape extends Shape
