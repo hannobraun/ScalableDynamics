@@ -84,6 +84,54 @@ class SimpleNarrowPhaseTest {
 
 
 	@Test
+	def inspectLineSegmentAndNoShapeExpectNoCollision {
+		val b1 = new Body
+		val b2 = new Body
+		b1.shape = LineSegment(Vec2D(0, 0), Vec2D(1, 1))
+		b2.shape = NoShape
+
+		assertEquals(None, narrowPhase.inspectCollision(0.0, b1, b2))
+	}
+
+
+
+	@Test { val expected = classOf[IllegalArgumentException] }
+	def inspectUnsupportedShapeAndCircleExpectException {
+		val b1 = new Body
+		val b2 = new Body
+		b1.shape = new Shape {}
+		b2.shape = Circle(1)
+
+		narrowPhase.inspectCollision(0.0, b1, b2)
+	}
+
+
+
+	@Test { val expected = classOf[IllegalArgumentException] }
+	def inspectCircleAndUnsupportedShapeExpectException {
+		val b1 = new Body
+		val b2 = new Body
+		b1.shape = Circle(1)
+		b2.shape = new Shape {}
+
+		narrowPhase.inspectCollision(0.0, b1, b2)
+	}
+
+
+
+	@Test { val expected = classOf[IllegalArgumentException] }
+	def inspectLineSegmentAndUnsupportedShapeExpectException {
+		val b1 = new Body
+		val b2 = new Body
+		b1.shape = LineSegment(Vec2D(0, 0), Vec2D(1, 0))
+		b2.shape = new Shape {}
+
+		narrowPhase.inspectCollision(0.0, b1, b2)
+	}
+
+
+
+	@Test
 	def inspectTwoCirclesVerifyParametersArePassed {
 		val test = new CircleCircleTest {
 			var c1: Circle = null

@@ -61,8 +61,11 @@ class SimpleNarrowPhase extends NarrowPhase {
 								Contact(b2, r.contact, -r.normal, b1))
 					}
 
-				case _ =>
+				case NoShape =>
 					None
+
+				case _ =>
+					throw new IllegalArgumentException("Unsupported shape: " + b2.shape)
 			}
 
 		case s1: LineSegment =>
@@ -77,11 +80,17 @@ class SimpleNarrowPhase extends NarrowPhase {
 				case s2: LineSegment =>
 					None
 
-				case _ =>
+				case NoShape =>
 					None
+
+				case _ =>
+					throw new IllegalArgumentException("Unsupported shape: " + b2.shape)
 			}
 
-		case _ =>
+		case NoShape =>
 			None
+
+		case _ =>
+			throw new IllegalArgumentException("Unsupported shape: " + b1.shape)
 	}
 }
