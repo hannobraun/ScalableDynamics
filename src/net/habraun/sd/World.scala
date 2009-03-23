@@ -130,7 +130,7 @@ class World {
 		// Collision detection.
 		val possibleCollisionPairs = broadPhase.detectPossibleCollisions(_bodies.toList)
 		val possibleCollisions = possibleCollisionPairs.map((pair) => {
-			narrowPhase.inspectCollision(delta, pair._1, pair._2)
+			narrowPhase.inspectCollision(pair._1, pair._2)
 		})
 
 		// Compute collision effects.

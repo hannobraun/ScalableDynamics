@@ -244,7 +244,7 @@ class WorldTest {
 
 		val narrowPhase = new NarrowPhase {
 			var passedPairs: List[(Body, Body)] = Nil
-			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
+			def inspectCollision(b1: Body, b2: Body) = {
 				passedPairs = passedPairs:::List((b1, b2))
 				None
 			}
@@ -254,26 +254,6 @@ class WorldTest {
 		world.step(2.0)
 
 		assertEquals((b1, b2)::(b3, b4)::Nil, narrowPhase.passedPairs)
-	}
-
-
-
-	def verifyDeltaIsPassedToNarrowPhase {
-		val world = new World
-
-		world.add(new Body)
-		world.add(new Body)
-
-		val narrowPhase = new NarrowPhase {
-			var d = 0.0
-			def inspectCollision(delta: Double, b1: Body, b2: Body) = { d = delta; None }
-		}
-		world.narrowPhase = narrowPhase
-
-		val d = 2.0
-		world.step(d)
-
-		assertEquals(d, narrowPhase.d)
 	}
 	
 	
@@ -292,7 +272,7 @@ class WorldTest {
 		b2.velocity = Vec2D(5, 5)
 
 		world.narrowPhase = new NarrowPhase {
-			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
+			def inspectCollision(b1: Body, b2: Body) = {
 				Some(Collision(1.0, Contact(b1, Vec2D(0, 0), Vec2D(0, -1), b2),
 						Contact(b2, Vec2D(0, 0), Vec2D(0, 1), b1)))
 			}
@@ -319,7 +299,7 @@ class WorldTest {
 		b2.velocity = Vec2D(1, 1)
 
 		world.narrowPhase = new NarrowPhase {
-			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
+			def inspectCollision(b1: Body, b2: Body) = {
 				Some(Collision(1.0, Contact(b1, Vec2D(0, 0), Vec2D(0, -1), b2),
 						Contact(b2, Vec2D(0, 0), Vec2D(0, 1), b1)))
 			}
@@ -346,7 +326,7 @@ class WorldTest {
 		b2.mass = Double.PositiveInfinity
 
 		world.narrowPhase = new NarrowPhase {
-			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
+			def inspectCollision(b1: Body, b2: Body) = {
 				Some(Collision(1.0, Contact(b1, Vec2D(0, 0), Vec2D(0, 1), b2),
 						Contact(b2, Vec2D(0, 0), Vec2D(0, -1), b1)))
 			}
@@ -435,7 +415,7 @@ class WorldTest {
 		world.broadPhase = broadPhase
 
 		val narrowPhase = new NarrowPhase {
-			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
+			def inspectCollision(b1: Body, b2: Body) = {
 				Some(Collision(0.5, Contact(b1, Vec2D(3, 0), Vec2D(1, 0), b2),
 						Contact(b2, Vec2D(3, 0), Vec2D(-1, 0), b1)))
 			}
@@ -477,7 +457,7 @@ class WorldTest {
 		world.broadPhase = broadPhase
 
 		val narrowPhase = new NarrowPhase {
-			def inspectCollision(delta: Double, b1: Body, b2: Body) = {
+			def inspectCollision(b1: Body, b2: Body) = {
 				Some(Collision(0.4766389925763854,
 						Contact(b1, Vec2D(3, 0), Vec2D(-0.8732041733361332, -0.4873545646327327), b2),
 						Contact(b2, Vec2D(3, 0), Vec2D(0.8732041733361332, 0.4873545646327327), b1)))

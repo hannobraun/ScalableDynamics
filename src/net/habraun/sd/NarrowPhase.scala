@@ -34,5 +34,5 @@ trait NarrowPhase {
 	 * collision. If the bodies do not collide, this method returns None.
 	 */
 
-	def inspectCollision(delta: Double, b1: Body, b2: Body): Option[Collision]
+	def inspectCollision(b1: Body, b2: Body): Option[Collision]
 }

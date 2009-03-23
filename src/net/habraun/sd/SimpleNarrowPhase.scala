@@ -44,7 +44,7 @@ class SimpleNarrowPhase extends NarrowPhase {
 	 * Handles circle-circle and circle-line segment collisions.
 	 */
 
-	def inspectCollision(delta: Double, b1: Body, b2: Body) = {
+	def inspectCollision(b1: Body, b2: Body) = {
 		val p1 = b1.position
 		val p2 = b2.position
 		val v1 = b1.position - b1.previousPosition

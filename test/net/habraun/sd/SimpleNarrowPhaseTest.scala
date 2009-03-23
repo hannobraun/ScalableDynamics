@@ -64,7 +64,7 @@ class SimpleNarrowPhaseTest {
 		val b2 = new Body
 		b2.shape = NoShape
 
-		assertEquals(None, narrowPhase.inspectCollision(0.0, b1, b2))
+		assertEquals(None, narrowPhase.inspectCollision(b1, b2))
 	}
 
 
@@ -78,7 +78,7 @@ class SimpleNarrowPhaseTest {
 		b2.position = Vec2D(0, 0.5)
 		b2.shape = NoShape
 
-		assertEquals(None, narrowPhase.inspectCollision(0.0, b1, b2))
+		assertEquals(None, narrowPhase.inspectCollision(b1, b2))
 	}
 
 
@@ -90,7 +90,7 @@ class SimpleNarrowPhaseTest {
 		b1.shape = LineSegment(Vec2D(0, 0), Vec2D(1, 1))
 		b2.shape = NoShape
 
-		assertEquals(None, narrowPhase.inspectCollision(0.0, b1, b2))
+		assertEquals(None, narrowPhase.inspectCollision(b1, b2))
 	}
 
 
@@ -102,7 +102,7 @@ class SimpleNarrowPhaseTest {
 		b1.shape = new Shape {}
 		b2.shape = Circle(1)
 
-		narrowPhase.inspectCollision(0.0, b1, b2)
+		narrowPhase.inspectCollision(b1, b2)
 	}
 
 
@@ -114,7 +114,7 @@ class SimpleNarrowPhaseTest {
 		b1.shape = Circle(1)
 		b2.shape = new Shape {}
 
-		narrowPhase.inspectCollision(0.0, b1, b2)
+		narrowPhase.inspectCollision(b1, b2)
 	}
 
 
@@ -126,7 +126,7 @@ class SimpleNarrowPhaseTest {
 		b1.shape = LineSegment(Vec2D(0, 0), Vec2D(1, 0))
 		b2.shape = new Shape {}
 
-		narrowPhase.inspectCollision(0.0, b1, b2)
+		narrowPhase.inspectCollision(b1, b2)
 	}
 
 
@@ -158,9 +158,7 @@ class SimpleNarrowPhaseTest {
 		b1.position = Vec2D(7, 7) // positions after movement, previous positions are saved
 		b2.position = Vec2D(10, 10)
 
-		val delta = 2.0
-
-		simpleNarrowPhase.inspectCollision(delta, b1, b2)
+		simpleNarrowPhase.inspectCollision(b1, b2)
 
 		assertEquals(b1.shape, test.c1)
 		assertEquals(b2.shape, test.c2)
@@ -186,7 +184,7 @@ class SimpleNarrowPhaseTest {
 		b1.shape = Circle(1)
 		b2.shape = Circle(1)
 
-		val collision = simpleNarrowPhase.inspectCollision(2.0, b1, b2)
+		val collision = simpleNarrowPhase.inspectCollision(b1, b2)
 
 		val expected = Collision(0.5, Contact(b1, Vec2D(5, 5), Vec2D(1, 0), b2),
 				Contact(b2, Vec2D(5, 5), Vec2D(-1, 0), b1))
@@ -210,7 +208,7 @@ class SimpleNarrowPhaseTest {
 		b1.shape = Circle(1)
 		b2.shape = Circle(1)
 
-		val collision = simpleNarrowPhase.inspectCollision(2.0, b1, b2)
+		val collision = simpleNarrowPhase.inspectCollision(b1, b2)
 
 		assertEquals(None, collision)
 	}
@@ -244,9 +242,7 @@ class SimpleNarrowPhaseTest {
 		b1.position = Vec2D(7, 7) // positions after movement, previous positions are saved
 		b2.position = Vec2D(10, 10)
 
-		val delta = 2.0
-
-		simpleNarrowPhase.inspectCollision(delta, b1, b2)
+		simpleNarrowPhase.inspectCollision(b1, b2)
 
 		assertEquals(b1.shape, test.c)
 		assertEquals(b2.shape, test.ls)
@@ -287,7 +283,7 @@ class SimpleNarrowPhaseTest {
 
 		val delta = 2.0
 
-		simpleNarrowPhase.inspectCollision(delta, b2, b1)
+		simpleNarrowPhase.inspectCollision(b2, b1)
 
 		assertEquals(b1.shape, test.c)
 		assertEquals(b2.shape, test.ls)
@@ -313,7 +309,7 @@ class SimpleNarrowPhaseTest {
 		b1.shape = Circle(1)
 		b2.shape = LineSegment(Vec2D(1, 1), Vec2D(2, 2))
 
-		val collision = simpleNarrowPhase.inspectCollision(2.0, b1, b2)
+		val collision = simpleNarrowPhase.inspectCollision(b1, b2)
 
 		val expected = Collision(0.5, Contact(b1, Vec2D(5, 5), Vec2D(1, 0), b2),
 				Contact(b2, Vec2D(5, 5), Vec2D(-1, 0), b1))
@@ -337,7 +333,7 @@ class SimpleNarrowPhaseTest {
 		b1.shape = Circle(1)
 		b2.shape = LineSegment(Vec2D(1, 1), Vec2D(2, 2))
 
-		val collision = simpleNarrowPhase.inspectCollision(2.0, b1, b2)
+		val collision = simpleNarrowPhase.inspectCollision(b1, b2)
 
 		assertEquals(None, collision)
 	}
@@ -353,6 +349,6 @@ class SimpleNarrowPhaseTest {
 		b2.position = Vec2D(0, -1)
 		b2.shape = LineSegment(Vec2D(0, 0), Vec2D(2, 2))
 
-		assertEquals(None, narrowPhase.inspectCollision(2.0, b1, b2))
+		assertEquals(None, narrowPhase.inspectCollision(b1, b2))
 	}
 }
