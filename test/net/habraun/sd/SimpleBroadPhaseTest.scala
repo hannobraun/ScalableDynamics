@@ -27,10 +27,11 @@ import org.junit.Assert._
 
 class SimpleBroadPhaseTest {
 
-	@Test
-	def verifyIsBroadPhase {
-		val broadPhase = new SimpleBroadPhase
-		assertTrue(broadPhase.isInstanceOf[BroadPhase])
+	var broadPhase: BroadPhase = null
+
+	@Before
+	def setup {
+		broadPhase = new SimpleBroadPhase
 	}
 
 
@@ -39,7 +40,7 @@ class SimpleBroadPhaseTest {
 	def buildPairsFromTwoBodies {
 		val b1 = new Body
 		val b2 = new Body
-		val broadPhase: BroadPhase = new SimpleBroadPhase
+
 		assertEquals((b1, b2)::Nil, broadPhase.detectPossibleCollisions(b1::b2::Nil))
 	}
 
@@ -50,9 +51,11 @@ class SimpleBroadPhaseTest {
 		val b1 = new Body
 		val b2 = new Body
 		val b3 = new Body
-		val broadPhase: BroadPhase = new SimpleBroadPhase
+
 		val expectedPairs = (b1, b2)::(b1, b3)::(b2, b3)::Nil
+
 		val actualPairs = broadPhase.detectPossibleCollisions(b1::b2::b3::Nil)
+		
 		assertEquals(expectedPairs, actualPairs)
 	}
 }
