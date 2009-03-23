@@ -40,6 +40,6 @@ case class Collision(t: Double, contact1: Contact, contact2: Contact) {
 	// Verify contacts match each other.
 	if (contact1.b != contact2.other || contact1.other != contact2.b || contact1.point != contact2.point
 			|| contact1.normal != -contact2.normal)
-		throw new IllegalArgumentException("Contacts do not match each other (contac1: " + contact1 + ","
+		throw new IllegalArgumentException("Contacts do not match each other (contact1: " + contact1 + ","
 				+ " contact2: " + contact2 + ").")
 }
