@@ -125,6 +125,9 @@ class World {
 
 			// Set new velocity.
 			body.velocity = constrainedVelocity
+
+			// Set new position.
+			body.position = body.position + (body.velocity * delta)
 		})
 
 		// Collision detection.
@@ -175,11 +178,5 @@ class World {
 			b1.position -= b1.velocity * delta * (1.0 - collision.t + 0.0001)
 			b2.position -= b2.velocity * delta * (1.0 - collision.t + 0.0001)
 		}
-
-		// Apply speed.
-		_bodies.foreach((body) => {
-			// Move bodies.
-			body.position = body.position + (body.velocity * delta)
-		})
 	}
 }
