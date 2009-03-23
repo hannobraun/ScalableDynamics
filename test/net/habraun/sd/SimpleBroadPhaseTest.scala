@@ -29,6 +29,8 @@ class SimpleBroadPhaseTest {
 
 	var broadPhase: BroadPhase = null
 
+
+	
 	@Before
 	def setup {
 		broadPhase = new SimpleBroadPhase
