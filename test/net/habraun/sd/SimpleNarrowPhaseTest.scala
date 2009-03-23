@@ -153,10 +153,10 @@ class SimpleNarrowPhaseTest {
 		val b2 = new Body
 		b1.shape = Circle(1)
 		b2.shape = Circle(2)
-		b1.position = Vec2D(1, 1)
+		b1.position = Vec2D(1, 1) // positions before movement
 		b2.position = Vec2D(2, 2)
-		b1.velocity = Vec2D(3, 3)
-		b2.velocity = Vec2D(4, 4)
+		b1.position = Vec2D(7, 7) // positions after movement, previous positions are saved
+		b2.position = Vec2D(10, 10)
 
 		val delta = 2.0
 
@@ -166,8 +166,8 @@ class SimpleNarrowPhaseTest {
 		assertEquals(b2.shape, test.c2)
 		assertEquals(b1.position, test.p1)
 		assertEquals(b2.position, test.p2)
-		assertEquals(b1.velocity * delta, test.v1)
-		assertEquals(b2.velocity * delta, test.v2)
+		assertEquals(b1.position - b1.previousPosition, test.v1)
+		assertEquals(b2.position - b2.previousPosition, test.v2)
 	}
 
 
@@ -239,10 +239,10 @@ class SimpleNarrowPhaseTest {
 		val b2 = new Body
 		b1.shape = Circle(1)
 		b2.shape = LineSegment(Vec2D(-1, -1), Vec2D(-2, -2))
-		b1.position = Vec2D(1, 1)
+		b1.position = Vec2D(1, 1) // positions before movement
 		b2.position = Vec2D(2, 2)
-		b1.velocity = Vec2D(3, 3)
-		b2.velocity = Vec2D(4, 4)
+		b1.position = Vec2D(7, 7) // positions after movement, previous positions are saved
+		b2.position = Vec2D(10, 10)
 
 		val delta = 2.0
 
@@ -252,8 +252,8 @@ class SimpleNarrowPhaseTest {
 		assertEquals(b2.shape, test.ls)
 		assertEquals(b1.position, test.pc)
 		assertEquals(b2.position, test.pls)
-		assertEquals(b1.velocity * delta, test.vc)
-		assertEquals(b2.velocity * delta, test.vls)
+		assertEquals(b1.position - b1.previousPosition, test.vc)
+		assertEquals(b2.position - b2.previousPosition, test.vls)
 	}
 
 
@@ -280,10 +280,10 @@ class SimpleNarrowPhaseTest {
 		val b2 = new Body
 		b1.shape = Circle(1)
 		b2.shape = LineSegment(Vec2D(-1, -1), Vec2D(-2, -2))
-		b1.position = Vec2D(1, 1)
+		b1.position = Vec2D(1, 1) // positions before movement
 		b2.position = Vec2D(2, 2)
-		b1.velocity = Vec2D(3, 3)
-		b2.velocity = Vec2D(4, 4)
+		b1.position = Vec2D(7, 7) // positions after movement, previous positions are saved
+		b2.position = Vec2D(10, 10)
 
 		val delta = 2.0
 
@@ -293,8 +293,8 @@ class SimpleNarrowPhaseTest {
 		assertEquals(b2.shape, test.ls)
 		assertEquals(b1.position, test.pc)
 		assertEquals(b2.position, test.pls)
-		assertEquals(b1.velocity * delta, test.vc)
-		assertEquals(b2.velocity * delta, test.vls)
+		assertEquals(b1.position - b1.previousPosition, test.vc)
+		assertEquals(b2.position - b2.previousPosition, test.vls)
 	}
 
 
