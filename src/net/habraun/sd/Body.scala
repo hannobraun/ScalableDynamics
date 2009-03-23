@@ -45,8 +45,20 @@ class Body {
 
 	def position_=(p: Vec2D) {
 		if (p == null) throw new NullPointerException
+		_previousPosition = _position
 		_position = p
 	}
+
+
+
+	/**
+	 * The previous position of the body, before the position was set.
+	 * This attribute is initialized with the value Vec2D(0, 0).
+	 */
+
+	private[this] var _previousPosition = Vec2D(0, 0)
+
+	def previousPosition = _previousPosition
 
 
 

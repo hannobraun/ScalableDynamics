@@ -57,6 +57,28 @@ class BodyTest {
 
 
 	@Test
+	def setPositionCheckPreviousPosition {
+		val previousPosition = Vec2D(5, 0)
+
+		val body = new Body
+		body.position = previousPosition
+		body.position = Vec2D(0, 5)
+
+		assertEquals(previousPosition, body.previousPosition)
+	}
+
+
+
+	@Test
+	def checkInitialPreviousPosition {
+		val body = new Body
+
+		assertEquals(body.position, body.previousPosition)
+	}
+
+
+
+	@Test
 	def checkInitialVelocity {
 		val body = new Body
 		assertEquals(Vec2D(0, 0), body.velocity)
