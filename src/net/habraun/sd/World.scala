@@ -93,6 +93,21 @@ class World {
 
 
 	/**
+	 * The constraint solver.
+	 */
+
+	private[this] var solve: ConstraintSolver = new ImpulseSolver
+
+	def constraintSolver = solve
+
+	def constraintSolver_=(solver: ConstraintSolver) = {
+		if (solver == null) throw new NullPointerException
+		solve = solver
+	}
+
+
+
+	/**
 	 * Adds a body to the world. The body will be simulated until it is removed.
 	 */
 	
@@ -140,37 +155,7 @@ class World {
 		// Despite the long explanation, what this does is actually pretty simple: We loop through the list
 		// of possible collisions. We execute the yield stuff only for actual collisions, not for None.
 		for ( possibleCollision <- possibleCollisions; collision <- possibleCollision ) yield {
-			// Get the bodies out of the contact, so we can access them easier.
-			val b1 = collision.contact1.b
-			val b2 = collision.contact2.b
-
-			// Compute the part of the velocities that points in the direction of the collision normals.
-			val v1 = b1.velocity.project(collision.contact1.normal)
-			val v2 = b2.velocity.project(collision.contact2.normal)
-
-			// Apply impulses along the collision normals.
-			val m1 = b1.mass
-			val m2 = b2.mass
-			if (m1 == Double.PositiveInfinity) {
-				val impulse = (v1 - v2) * 2 * m2
-				b2.applyImpulse(impulse)
-			}
-			else if (m2 == Double.PositiveInfinity) {
-				val impulse = (v2 - v1) * 2 * m1
-				b1.applyImpulse(impulse)
-			}
-			else {
-				val impulse = (v2 - v1) * 2 * m1 * m2 / (m1 + m2)
-				b1.applyImpulse(impulse)
-				b2.applyImpulse(-impulse)
-			}
-
-			// If the time of impact given by the collision is smaller than 1.0, the bodies would overlap
-			// after the movement has been carried out. We don't want that, we want the bodies to stop right
-			// at the point of impact. Let's set them back, so the regular movement will put them right where
-			// we want them.
-			b1.position -= b1.velocity * delta * (1.0 - collision.t + 0.0001)
-			b2.position -= b2.velocity * delta * (1.0 - collision.t + 0.0001)
+			solve(delta, collision)
 		}
 	}
 }

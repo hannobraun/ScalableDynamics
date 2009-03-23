@@ -32,6 +32,10 @@ import org.junit.Assert._
 
 class WorldTest {
 
+	// verify step order: integrate -> broad phase -> narrow phase -> constraint solving
+
+
+
 	@Test
 	def verifyInitialIntegrator {
 		val world = new World
@@ -131,6 +135,22 @@ class WorldTest {
 
 
 	@Test
+	def verifyInitialConstraintSolver {
+		val world = new World
+		assertTrue(world.constraintSolver.isInstanceOf[ImpulseSolver])
+	}
+
+
+
+	@Test { val expected = classOf[NullPointerException] }
+	def setConstraintSolverNullExpectException {
+		val world = new World
+		world.constraintSolver = null
+	}
+
+
+
+	@Test
 	def addBodyVerifyItIsPassedToBroadPhase {
 		val world = new World
 
@@ -174,90 +194,6 @@ class WorldTest {
 		world.step(2.0)
 
 		assertEquals((b1, b2)::(b3, b4)::Nil, narrowPhase.passedPairs)
-	}
-	
-	
-	
-	@Test
-	def verifyCollisionEffects {
-		val world = new World
-
-		val b1 = new Body
-		b1.position = Vec2D(0, 1)
-		b1.mass = 4
-		b1.velocity = Vec2D(-10, -10)
-		val b2 = new Body
-		b2.position = Vec2D(0, -1)
-		b2.mass = 8
-		b2.velocity = Vec2D(5, 5)
-
-		world.narrowPhase = new NarrowPhase {
-			def inspectCollision(b1: Body, b2: Body) = {
-				Some(Collision(1.0, Contact(b1, Vec2D(0, 0), Vec2D(0, -1), b2),
-						Contact(b2, Vec2D(0, 0), Vec2D(0, 1), b1)))
-			}
-		}
-
-		world.add(b1)
-		world.add(b2)
-		world.step(2.0)
-
-		assertEquals(Vec2D(0, 80), b1.appliedImpulse)
-		assertEquals(Vec2D(0, -80), b2.appliedImpulse)
-	}
-
-
-
-	@Test
-	def verifyCollisionEffectsWithBody1Static {
-		val world = new World
-
-		val b1 = new Body
-		b1.mass = Double.PositiveInfinity
-		val b2 = new Body
-		b2.mass = 5
-		b2.velocity = Vec2D(1, 1)
-
-		world.narrowPhase = new NarrowPhase {
-			def inspectCollision(b1: Body, b2: Body) = {
-				Some(Collision(1.0, Contact(b1, Vec2D(0, 0), Vec2D(0, -1), b2),
-						Contact(b2, Vec2D(0, 0), Vec2D(0, 1), b1)))
-			}
-		}
-
-		world.add(b1)
-		world.add(b2)
-		world.step(2.0)
-
-		assertEquals(Vec2D(0, 0), b1.appliedImpulse)
-		assertEquals(Vec2D(0, -10), b2.appliedImpulse)
-	}
-
-
-
-	@Test
-	def verifyCollisionEffectsWithBody2Static {
-		val world = new World
-
-		val b1 = new Body
-		b1.mass= 5
-		b1.velocity = Vec2D(1, 1)
-		val b2 = new Body
-		b2.mass = Double.PositiveInfinity
-
-		world.narrowPhase = new NarrowPhase {
-			def inspectCollision(b1: Body, b2: Body) = {
-				Some(Collision(1.0, Contact(b1, Vec2D(0, 0), Vec2D(0, 1), b2),
-						Contact(b2, Vec2D(0, 0), Vec2D(0, -1), b1)))
-			}
-		}
-
-		world.add(b1)
-		world.add(b2)
-		world.step(2.0)
-
-		assertEquals(Vec2D(0, -10), b1.appliedImpulse)
-		assertEquals(Vec2D(0, 0), b2.appliedImpulse)
 	}
 
 
@@ -312,86 +248,6 @@ class WorldTest {
 
 
 
-	@Test
-	def addBodiesThatWouldIntersectAfterMovementVerifyTheyDont {
-		val world = new World
-
-		val b1 = new Body
-		b1.shape = Circle(2)
-		b1.position = Vec2D(0, 0)
-		b1.velocity = Vec2D(1, 0)
-		val b2 = new Body
-		b2.shape = Circle(2)
-		b2.position = Vec2D(5, 0)
-		b2.velocity = Vec2D(0, 0)
-		world.add(b1)
-		world.add(b2)
-
-		val broadPhase = new BroadPhase {
-			def detectPossibleCollisions(bodies: List[Body]) = {
-				(b1, b2)::Nil
-			}
-		}
-		world.broadPhase = broadPhase
-
-		val narrowPhase = new NarrowPhase {
-			def inspectCollision(b1: Body, b2: Body) = {
-				Some(Collision(0.5, Contact(b1, Vec2D(3, 0), Vec2D(1, 0), b2),
-						Contact(b2, Vec2D(3, 0), Vec2D(-1, 0), b1)))
-			}
-		}
-		world.narrowPhase = narrowPhase
-
-		world.step(2.0)
-
-		val expectedPosition = Vec2D(1, 0)
-
-		assertEquals(expectedPosition.x, b1.position.x, 0.01)
-		assertEquals(expectedPosition.y, b1.position.y, 0.01)
-	}
-
-
-
-	@Test
-	def testForIntersectionAtHighPositionValues {
-		// This is a real-world example that led to a bug. That's where all the odd numbers come from.
-
-		val world = new World
-
-		val b1 = new Body
-		b1.shape = Circle(5)
-		b1.position = Vec2D(83.9699958296336, 488.77572653374307)
-		b1.velocity = Vec2D(-445.3620529718986, -50.442888201040574)
-		val b2 = new Body
-		b2.shape = Circle(30)
-		b2.position = Vec2D(50.0, 469.8163204364546)
-		b2.velocity = Vec2D(0.0, 0.0)
-		world.add(b1)
-		world.add(b2)
-
-		val broadPhase = new BroadPhase {
-			def detectPossibleCollisions(bodies: List[Body]) = {
-				(b1, b2)::Nil
-			}
-		}
-		world.broadPhase = broadPhase
-
-		val narrowPhase = new NarrowPhase {
-			def inspectCollision(b1: Body, b2: Body) = {
-				Some(Collision(0.4766389925763854,
-						Contact(b1, Vec2D(3, 0), Vec2D(-0.8732041733361332, -0.4873545646327327), b2),
-						Contact(b2, Vec2D(3, 0), Vec2D(0.8732041733361332, 0.4873545646327327), b1)))
-			}
-		}
-		world.narrowPhase = narrowPhase
-
-		world.step(0.02)
-
-		assertTrue((b2.position - b1.position).squaredLength >= 35.0 * 35.0)
-	}
-
-
-
 	@Test { val expected = classOf[IllegalArgumentException] }
 	def stepPassNegativeDelta {
 		val world = new World
@@ -414,5 +270,38 @@ class WorldTest {
 		val body = new Body
 		world.bodies.asInstanceOf[HashSet[Body]].addEntry(body)
 		assertFalse(world.bodies.exists(_ == body))
+	}
+
+
+
+	@Test
+	def verifyCollisionReturnedByNarrowPhaseIsPassedToSolver {
+		val world = new World
+
+		val b1 = new Body
+		val b2 = new Body
+		world.add(b1)
+		world.add(b2)
+
+		val collision = Collision(0.0, Contact(b1, Vec2D(1, 1), Vec2D(1, 0), b2),
+				Contact(b2, Vec2D(1, 1), Vec2D(-1, 0), b1))
+
+		world.narrowPhase = new NarrowPhase {
+			def inspectCollision(b1: Body, b2: Body) = {
+				Some(collision)
+			}
+		}
+
+		val solver = new ConstraintSolver {
+			var collision: Collision = null
+			def apply(t: Double, constraint: Collision) {
+				collision = constraint
+			}
+		}
+		world.constraintSolver = solver
+
+		world.step(2.0)
+
+		assertEquals(collision, solver.collision)
 	}
 }
