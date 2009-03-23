@@ -33,147 +33,67 @@ import org.junit.Assert._
 class WorldTest {
 
 	@Test
-	def addBodyStepExpectBodyMoved {
+	def verifyInitialIntegrator {
 		val world = new World
-		val body = new Body
-		body.velocity = Vec2D(1, 0)
-		world.add(body)
-		world.step(2.0)
-		assertEquals(Vec2D(2, 0), body.position)
+		assertTrue(world.integrator.isInstanceOf[EulerIntegrator])
+	}
+
+	
+
+	@Test { val expected = classOf[NullPointerException] }
+	def setIntegratorNullExpectException() {
+		val world = new World
+		world.integrator = null
 	}
 
 
 
 	@Test
-	def addAndRemoveBodyExpectBodyNotMoved {
+	def addBodyVerifyIsIntegrated {
+		val world = new World
+
+		val integrate = new Integrator {
+			var _t: Double = Double.NaN
+			var _body: Body = null
+			def apply(t: Double, body: Body) = {
+				_t = t
+				_body = body
+				body
+			}
+		}
+		world.integrator = integrate
+
+		val body = new Body
+		world.add(body)
+
+		val t = 2.0
+		world.step(t)
+
+		assertEquals(t, integrate._t, 0.0)
+		assertEquals(body, integrate._body)
+	}
+
+
+
+	@Test
+	def addAndRemoveBodyVerifyIsNotIntegrated {
 		val world = new World
 		val body = new Body
-		body.velocity = Vec2D(1, 0)
+
+		val integrate = new Integrator {
+			var integrated = false
+			def apply(t: Double, b: Body) = {
+				integrated = b == body
+				body
+			}
+		}
+		world.integrator = integrate
+
 		world.add(body)
 		world.remove(body)
 		world.step(2.0)
-		assertEquals(Vec2D(0, 0), body.position)
-	}
 
-
-
-	@Test
-	def addBodyApplyForceCheckVelocity {
-		val world = new World
-		val body = new Body
-		body.mass = 5
-		body.applyForce(Vec2D(5, 0))
-		world.add(body)
-		world.step(2.0)
-		assertEquals(Vec2D(2, 0), body.velocity)
-	}
-
-
-
-	@Test
-	def addBodyApplyForceStepTwiceCheckVelocity {
-		val world = new World
-		val body = new Body
-		body.mass = 5
-		body.applyForce(Vec2D(5, 0))
-		world.add(body)
-		world.step(2.0)
-		world.step(2.0)
-		assertEquals(Vec2D(2, 0), body.velocity)
-	}
-
-
-
-	@Test
-	def addBodyApplyForceStepCheckPosition {
-		val world = new World
-		val body = new Body
-		body.mass = 5
-		body.applyForce(Vec2D(5, 0))
-		world.add(body)
-		world.step(2.0)
-		assertEquals(Vec2D(4, 0), body.position)
-	}
-
-
-
-	@Test
-	def addBodyApplyImpulseCheckVelocity {
-		val world = new World
-		val body = new Body
-		body.mass = 5
-		body.velocity = Vec2D(3, 0)
-		body.applyImpulse(Vec2D(5, 0))
-		world.add(body)
-		world.step(2.0)
-		assertEquals(Vec2D(4, 0), body.velocity)
-	}
-
-
-
-	@Test
-	def addBodyApplyImpulseCheckVelocity2 {
-		val world = new World
-		val body = new Body
-		body.mass = 5
-		body.velocity = Vec2D(3, 0)
-		body.applyImpulse(Vec2D(5, 0))
-		world.add(body)
-		world.step(5.0)
-		assertEquals(Vec2D(4, 0), body.velocity)
-	}
-
-
-
-	@Test
-	def addBodyApplyImpulseCheckImpulse {
-		val world = new World
-		val body = new Body
-		body.applyImpulse(Vec2D(10, 10))
-		world.add(body)
-		world.step(2.0)
-		assertEquals(Vec2D(0, 0), body.appliedImpulse)
-	}
-
-
-
-	@Test
-	def applyImpulseToStaticBody {
-		val body = new Body
-		body.mass = Double.PositiveInfinity
-		body.applyImpulse(Vec2D(2, 0))
-
-		val world = new World
-		world.add(body)
-		world.step(2.0)
-
-		assertEquals(Vec2D(0, 0), body.velocity)
-	}
-
-
-
-	@Test
-	def addBodyDisallowXMovementStepCheckPosition {
-		val world = new World
-		val body = new Body
-		body.allowXMovement(false)
-		body.applyForce(Vec2D(1, 1))
-		world.add(body)
-		world.step(2.0)
-		assertEquals(Vec2D(0, 4), body.position)
-	}
-
-
-
-	@Test
-	def addBodyDisallowYMovementStepCheckPosition {
-		val world = new World
-		val body = new Body
-		body.allowYMovement(false)
-		body.applyForce(Vec2D(1, 1))
-		world.add(body)
-		world.step(2.0)
-		assertEquals(Vec2D(4, 0), body.position)
+		assertFalse(integrate.integrated)
 	}
 
 

@@ -43,6 +43,21 @@ class World {
 
 	def bodies: Iterable[Body] = _bodies.clone
 
+
+
+	/**
+	 * The integrator is used to integrate the bodies.
+	 */
+
+	private[this] var integrate: Integrator = new EulerIntegrator
+
+	def integrator = integrate
+
+	def integrator_=(i: Integrator) {
+		if (i == null) throw new NullPointerException("Integrator must not be null.")
+		integrate = i
+	}
+
 	
 
 	/**
@@ -106,29 +121,8 @@ class World {
 		// Check if delta is valid.
 		if (delta < 0.0) throw new IllegalArgumentException("Time delta must be 0 or greater.")
 
-		// Apply forces and impulses, make sure speed constraints are fulfilled.
-		_bodies.foreach((body) => {
-			var velocity = body.velocity
-
-			// Apply forces.
-			velocity += body.appliedForce / body.mass * delta
-			body.resetForce
-
-			// Apply impulses.
-			velocity += body.appliedImpulse / body.mass
-			body.resetImpulse
-
-			// Solve movement constraints.
-			val constrainedXVelocity = if (body.xMovementAllowed) velocity.x else 0.0
-			val constrainedYVelocity = if (body.yMovementAllowed) velocity.y else 0.0
-			val constrainedVelocity = Vec2D(constrainedXVelocity, constrainedYVelocity)
-
-			// Set new velocity.
-			body.velocity = constrainedVelocity
-
-			// Set new position.
-			body.position = body.position + (body.velocity * delta)
-		})
+		// Integrate bodies.
+		_bodies.foreach(integrate(delta, _))
 
 		// Collision detection.
 		val possibleCollisionPairs = broadPhase.detectPossibleCollisions(_bodies.toList)
