@@ -155,7 +155,7 @@ class World {
 		// (if if is an instance of Some) or no (if it is None) elements.
 		// Despite the long explanation, what this does is actually pretty simple: We loop through the list
 		// of possible collisions. We execute the yield stuff only for actual collisions, not for None.
-		for ( possibleCollision <- possibleCollisions; collision <- possibleCollision ) yield {
+		for ( possibleCollision <- possibleCollisions; collision <- possibleCollision ) {
 			solve(t, collision)
 		}
 	}
