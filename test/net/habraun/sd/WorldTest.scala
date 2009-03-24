@@ -32,7 +32,21 @@ import org.junit.Assert._
 
 class WorldTest {
 
-	// verify step order: integrate -> broad phase -> narrow phase -> constraint solving
+	@Test
+	def verifyBodyIterableIsAccessible {
+		val world = new World
+		assertTrue(world.bodies.isInstanceOf[Iterable[Body]])
+	}
+
+
+
+	@Test
+	def verifyBodyIterableCantChangeWorld {
+		val world = new World
+		val body = new Body
+		world.bodies.asInstanceOf[HashSet[Body]].addEntry(body)
+		assertFalse(world.bodies.exists(_ == body))
+	}
 
 
 
@@ -48,6 +62,62 @@ class WorldTest {
 	def setIntegratorNullExpectException() {
 		val world = new World
 		world.integrator = null
+	}
+
+
+
+	@Test
+	def verifyInitialBroadPhase {
+		val world = new World
+		assertTrue(world.broadPhase.isInstanceOf[SimpleBroadPhase])
+	}
+
+
+
+	@Test { val expected = classOf[NullPointerException] }
+	def setBroadPhaseNullExpectException {
+		val world = new World
+		world.broadPhase = null
+	}
+
+
+
+	@Test
+	def verifyInitialNarrowPhase {
+		val world = new World
+		assertTrue(world.narrowPhase.isInstanceOf[SimpleNarrowPhase])
+	}
+
+
+
+	@Test { val expected = classOf[NullPointerException] }
+	def setNarrowPhaseNullExpectException {
+		val world = new World
+		world.narrowPhase = null
+	}
+
+
+
+	@Test
+	def verifyInitialConstraintSolver {
+		val world = new World
+		assertTrue(world.constraintSolver.isInstanceOf[ImpulseSolver])
+	}
+
+
+
+	@Test { val expected = classOf[NullPointerException] }
+	def setConstraintSolverNullExpectException {
+		val world = new World
+		world.constraintSolver = null
+	}
+
+
+
+	@Test { val expected = classOf[IllegalArgumentException] }
+	def stepPassNegativeDelta {
+		val world = new World
+		world.step(-1.0)
 	}
 
 
@@ -98,54 +168,6 @@ class WorldTest {
 		world.step(2.0)
 
 		assertFalse(integrate.integrated)
-	}
-
-
-
-	@Test
-	def verifyInitialBroadPhase {
-		val world = new World
-		assertTrue(world.broadPhase.isInstanceOf[SimpleBroadPhase])
-	}
-
-
-
-	@Test
-	def verifyInitialNarrowPhase {
-		val world = new World
-		assertTrue(world.narrowPhase.isInstanceOf[SimpleNarrowPhase])
-	}
-
-
-
-	@Test { val expected = classOf[NullPointerException] }
-	def setBroadPhaseNullExpectException {
-		val world = new World
-		world.broadPhase = null
-	}
-
-
-
-	@Test { val expected = classOf[NullPointerException] }
-	def setNarrowPhaseNullExpectException {
-		val world = new World
-		world.narrowPhase = null
-	}
-
-
-
-	@Test
-	def verifyInitialConstraintSolver {
-		val world = new World
-		assertTrue(world.constraintSolver.isInstanceOf[ImpulseSolver])
-	}
-
-
-
-	@Test { val expected = classOf[NullPointerException] }
-	def setConstraintSolverNullExpectException {
-		val world = new World
-		world.constraintSolver = null
 	}
 
 
@@ -244,32 +266,6 @@ class WorldTest {
 		world.step(2.0)
 
 		assertEquals(Vec2D(2, 0), broadPhase.v)
-	}
-
-
-
-	@Test { val expected = classOf[IllegalArgumentException] }
-	def stepPassNegativeDelta {
-		val world = new World
-		world.step(-1.0)
-	}
-
-
-
-	@Test
-	def verifyBodyIterableIsAccessible {
-		val world = new World
-		assertTrue(world.bodies.isInstanceOf[Iterable[Body]])
-	}
-
-
-
-	@Test
-	def verifyBodyIterableCantChangeWorld {
-		val world = new World
-		val body = new Body
-		world.bodies.asInstanceOf[HashSet[Body]].addEntry(body)
-		assertFalse(world.bodies.exists(_ == body))
 	}
 
 
