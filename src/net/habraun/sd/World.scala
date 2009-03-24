@@ -130,14 +130,15 @@ class World {
 	/**
 	 * Steps the physics simulation.
 	 * All bodies are moved, according to their velocity and the forces that are applied to them.
+	 * The parameter t is the time delta for this simulation step.
 	 */
 	
-	def step(delta: Double) {
+	def step(t: Double) {
 		// Check if delta is valid.
-		if (delta < 0.0) throw new IllegalArgumentException("Time delta must be 0 or greater.")
+		if (t < 0.0) throw new IllegalArgumentException("Time delta must be 0 or greater.")
 
 		// Integrate bodies.
-		_bodies.foreach(integrate(delta, _))
+		_bodies.foreach(integrate(t, _))
 
 		// Collision detection.
 		val possibleCollisionPairs = broadPhase.detectPossibleCollisions(_bodies.toList)
@@ -155,7 +156,7 @@ class World {
 		// Despite the long explanation, what this does is actually pretty simple: We loop through the list
 		// of possible collisions. We execute the yield stuff only for actual collisions, not for None.
 		for ( possibleCollision <- possibleCollisions; collision <- possibleCollision ) yield {
-			solve(delta, collision)
+			solve(t, collision)
 		}
 	}
 }
