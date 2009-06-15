@@ -85,11 +85,13 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 			// None of the edge cases has occured, so we need to compute the time of contact.
 			val t = (-b - Math.sqrt(d)) / a
 			if (t <= 1.0) {
+				// Time of contact is within the timeframe we're checking.
 				val normal = (p2 - p1).normalize
 				val point = p1 + (v1 * t) + (normal * c1.radius)
 				Some(TestResult(t, point, normal))
 			}
 			else {
+				// Contact would occur, but only after the timeframe we're looking at.
 				None
 			}
 		}
