@@ -49,13 +49,13 @@ class World {
 	 * The integrator is used to integrate the bodies.
 	 */
 
-	private[this] var integrate: Integrator = new EulerIntegrator
+	private[this] var _integrator: Integrator = new EulerIntegrator
 
-	def integrator = integrate
+	def integrator = _integrator
 
-	def integrator_=(i: Integrator) {
-		if (i == null) throw new NullPointerException("Integrator must not be null.")
-		integrate = i
+	def integrator_=(newIntegrator: Integrator) {
+		if (newIntegrator == null) throw new NullPointerException("Integrator must not be null.")
+		_integrator = newIntegrator
 	}
 
 	
@@ -69,9 +69,9 @@ class World {
 
 	def broadPhase = _broadPhase
 
-	def broadPhase_=(bp: BroadPhase) = {
-		if (bp == null) throw new NullPointerException
-		_broadPhase = bp
+	def broadPhase_=(newBroadPhase: BroadPhase) = {
+		if (newBroadPhase == null) throw new NullPointerException("Broad phase must not be null.")
+		_broadPhase = newBroadPhase
 	}
 
 
@@ -85,9 +85,9 @@ class World {
 
 	def narrowPhase = _narrowPhase
 
-	def narrowPhase_=(np: NarrowPhase) = {
-		if (np == null) throw new NullPointerException
-		_narrowPhase = np
+	def narrowPhase_=(newNarrowPhase: NarrowPhase) = {
+		if (newNarrowPhase == null) throw new NullPointerException("Narrow phase must not be null.")
+		_narrowPhase = newNarrowPhase
 	}
 
 
@@ -96,13 +96,13 @@ class World {
 	 * The constraint solver.
 	 */
 
-	private[this] var solve: ConstraintSolver = new ImpulseSolver
+	private[this] var _constraintSolver: ConstraintSolver = new ImpulseSolver
 
-	def constraintSolver = solve
+	def constraintSolver = _constraintSolver
 
-	def constraintSolver_=(solver: ConstraintSolver) = {
-		if (solver == null) throw new NullPointerException
-		solve = solver
+	def constraintSolver_=(newContraintSolver: ConstraintSolver) = {
+		if (newContraintSolver == null) throw new NullPointerException("Constraint solver must not be null.")
+		_constraintSolver = newContraintSolver
 	}
 
 
@@ -130,15 +130,15 @@ class World {
 	/**
 	 * Steps the physics simulation.
 	 * All bodies are moved, according to their velocity and the forces that are applied to them.
-	 * The parameter t is the time delta for this simulation step.
+	 * The parameter dt is the time delta for this simulation step.
 	 */
 	
-	def step(t: Double) {
+	def step(dt: Double) {
 		// Check if delta is valid.
-		if (t < 0.0) throw new IllegalArgumentException("Time delta must be 0 or greater.")
+		if (dt < 0.0) throw new IllegalArgumentException("Time delta must be 0 or greater.")
 
 		// Integrate bodies.
-		_bodies.foreach(integrate(t, _))
+		_bodies.foreach(integrator(dt, _))
 
 		// Collision detection.
 		val possibleCollisionPairs = broadPhase(_bodies.toList)
@@ -156,7 +156,7 @@ class World {
 		// Despite the long explanation, what this does is actually pretty simple: We loop through the list
 		// of possible collisions. We execute the yield stuff only for actual collisions, not for None.
 		for ( possibleCollision <- possibleCollisions; collision <- possibleCollision ) {
-			solve(t, collision)
+			constraintSolver(dt, collision)
 		}
 	}
 }
