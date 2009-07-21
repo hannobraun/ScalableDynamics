@@ -199,7 +199,7 @@ class WorldTest {
 
 		val narrowPhase = new NarrowPhase {
 			var passedPairs: List[(Body, Body)] = Nil
-			def inspectCollision(b1: Body, b2: Body) = {
+			def apply(b1: Body, b2: Body) = {
 				passedPairs = passedPairs:::List((b1, b2))
 				None
 			}
@@ -270,7 +270,7 @@ class WorldTest {
 				Contact(b2, Vec2D(1, 1), Vec2D(-1, 0), b1))
 
 		world.narrowPhase = new NarrowPhase {
-			def inspectCollision(b1: Body, b2: Body) = {
+			def apply(b1: Body, b2: Body) = {
 				Some(collision)
 			}
 		}

@@ -27,12 +27,12 @@ package net.habraun.sd
  * collision by the broad phase.
  */
 
-trait NarrowPhase {
+trait NarrowPhase extends Function2[Body, Body, Option[Collision]] {
 
 	/**
 	 * Determines if the two bodies collide, and if they do, returns a Collision object that describes the
 	 * collision. If the bodies do not collide, this method returns None.
 	 */
 
-	def inspectCollision(b1: Body, b2: Body): Option[Collision]
+	def apply(b1: Body, b2: Body): Option[Collision]
 }
