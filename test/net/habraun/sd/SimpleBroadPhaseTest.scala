@@ -43,7 +43,7 @@ class SimpleBroadPhaseTest {
 		val b1 = new Body
 		val b2 = new Body
 
-		assertEquals((b1, b2)::Nil, broadPhase.detectPossibleCollisions(b1::b2::Nil))
+		assertEquals((b1, b2)::Nil, broadPhase(b1::b2::Nil))
 	}
 
 
@@ -56,7 +56,7 @@ class SimpleBroadPhaseTest {
 
 		val expectedPairs = (b1, b2)::(b1, b3)::(b2, b3)::Nil
 
-		val actualPairs = broadPhase.detectPossibleCollisions(b1::b2::b3::Nil)
+		val actualPairs = broadPhase(b1::b2::b3::Nil)
 		
 		assertEquals(expectedPairs, actualPairs)
 	}

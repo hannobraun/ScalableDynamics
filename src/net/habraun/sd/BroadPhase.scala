@@ -26,7 +26,7 @@ package net.habraun.sd
  * the number of body pairs the second phase (narrow phase) has to test.
  */
 
-trait BroadPhase {
+trait BroadPhase extends Function1[List[Body], List[(Body, Body)]] {
 
 	/**
 	 * Determines which of the given bodies could potentially collide.
@@ -34,5 +34,5 @@ trait BroadPhase {
 	 * must not contain duplicates.
 	 */
 
-	def detectPossibleCollisions(bodies: List[Body]): List[(Body, Body)]
+	def apply(bodies: List[Body]): List[(Body, Body)]
 }

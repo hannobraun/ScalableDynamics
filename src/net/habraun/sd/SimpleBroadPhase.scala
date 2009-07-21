@@ -32,7 +32,7 @@ class SimpleBroadPhase extends BroadPhase {
 	 * Returns all possible pairs of the given bodies.
 	 */
 
-	def detectPossibleCollisions(bodies: List[Body]) = {
+	def apply(bodies: List[Body]) = {
 		def buildPairs(list: List[Body], pairs: List[(Body, Body)]): List[(Body, Body)] = {
 			if (list.isEmpty)
 				pairs
