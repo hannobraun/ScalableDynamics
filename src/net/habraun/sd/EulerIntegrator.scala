@@ -24,6 +24,12 @@ import math._
 
 
 
+/**
+ * A simple integrator using Euler integration.
+ * Euler integration is simple, cheap and inaccurate. If accuracy is needed, another integration method
+ * should be used, especially since the inaccuracies add up over time.
+ */
+
 class EulerIntegrator extends Integrator {
 
 	def apply(t: Double, body: Body) = {
