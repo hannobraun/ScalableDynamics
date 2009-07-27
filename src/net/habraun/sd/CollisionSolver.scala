@@ -20,7 +20,7 @@ package net.habraun.sd
 
 
 
-trait ConstraintSolver extends Function2[Double, Collision, Unit] {
+trait CollisionSolver extends Function2[Double, Collision, Unit] {
 
 	def apply(t: Double, constraint: Collision): Unit
 }

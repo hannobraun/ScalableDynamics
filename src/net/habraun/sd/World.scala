@@ -96,13 +96,13 @@ class World {
 	 * The constraint solver.
 	 */
 
-	private[this] var _constraintSolver: ConstraintSolver = new ImpulseSolver
+	private[this] var _collisionSolver: CollisionSolver = new ImpulseSolver
 
-	def constraintSolver = _constraintSolver
+	def collisionSolver = _collisionSolver
 
-	def constraintSolver_=(newContraintSolver: ConstraintSolver) = {
-		if (newContraintSolver == null) throw new NullPointerException("Constraint solver must not be null.")
-		_constraintSolver = newContraintSolver
+	def collisionSolver_=(newCollisionSolver: CollisionSolver) = {
+		if (newCollisionSolver == null) throw new NullPointerException("Collision solver must not be null.")
+		_collisionSolver = newCollisionSolver
 	}
 
 
@@ -156,7 +156,7 @@ class World {
 		// Despite the long explanation, what this does is actually pretty simple: We loop through the list
 		// of possible collisions. We execute the yield stuff only for actual collisions, not for None.
 		for ( possibleCollision <- possibleCollisions; collision <- possibleCollision ) {
-			constraintSolver(dt, collision)
+			collisionSolver(dt, collision)
 		}
 	}
 }

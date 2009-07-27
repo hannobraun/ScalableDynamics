@@ -20,7 +20,7 @@ package net.habraun.sd
 
 
 
-class ImpulseSolver extends ConstraintSolver {
+class ImpulseSolver extends CollisionSolver {
 
 	def apply(t: Double, constraint: Collision) {
 		// Get the bodies out of the contact, so we can access them easier.

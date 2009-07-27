@@ -103,14 +103,14 @@ class WorldTest {
 
 	@Test
 	def verifyInitialConstraintSolver {
-		assertTrue(world.constraintSolver.isInstanceOf[ImpulseSolver])
+		assertTrue(world.collisionSolver.isInstanceOf[ImpulseSolver])
 	}
 
 
 
 	@Test { val expected = classOf[NullPointerException] }
 	def setConstraintSolverNullExpectException {
-		world.constraintSolver = null
+		world.collisionSolver = null
 	}
 
 
@@ -275,13 +275,13 @@ class WorldTest {
 			}
 		}
 
-		val solver = new ConstraintSolver {
+		val solver = new CollisionSolver {
 			var collision: Collision = null
 			def apply(t: Double, constraint: Collision) {
 				collision = constraint
 			}
 		}
-		world.constraintSolver = solver
+		world.collisionSolver = solver
 
 		world.step(2.0)
 

@@ -32,7 +32,7 @@ class ImpulseSolverTest {
 
 	val t = 2.0
 
-	var solve: ConstraintSolver = null
+	var solve: CollisionSolver = null
 
 
 
