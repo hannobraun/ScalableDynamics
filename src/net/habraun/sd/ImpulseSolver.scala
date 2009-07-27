@@ -20,6 +20,10 @@ package net.habraun.sd
 
 
 
+/**
+ * A simple collision solver that implements a physically correct elastic collision between two bodies.
+ */
+
 class ImpulseSolver extends CollisionSolver {
 
 	def apply(t: Double, constraint: Collision) {

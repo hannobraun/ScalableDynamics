@@ -20,6 +20,10 @@ package net.habraun.sd
 
 
 
+/**
+ * Computes the after effects of a collision and applies the necessary changes to the involved bodies.
+ */
+
 trait CollisionSolver extends Function2[Double, Collision, Unit] {
 
 	def apply(t: Double, constraint: Collision): Unit
