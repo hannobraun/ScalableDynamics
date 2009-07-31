@@ -7,5 +7,5 @@ SD is in early stages of development and still misses many basic features. The f
 * Linear movement
 * Applying forces and impulses to bodies
 * Supported body shapes: circles and line segment
-* Continious collision detection between all supported shapes
+* Continious collision detection between all supported shapes (except between line segments)
 
