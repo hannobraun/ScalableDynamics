@@ -22,24 +22,27 @@ package net.habraun.sd.math
 
 import Scalar._
 
-import org.junit._
-import org.junit.Assert._
+import org.specs._
+import org.specs.mock._
+import org.specs.runner._
 
 
 
-class ScalarTest {
-
-	@Test
-	def doubleShouldBeConvertedToScalarIfMultipliedWithVector {
-		val vec = 2.0 * Vec2D(1, 1)
-		assertEquals(Vec2D(2, 2), vec)
-	}
+class ScalarTest extends JUnit4(ScalarSpec)
 
 
 
-	@Test
-	def intShouldBeConvertedToScalarIfMultipliedWithVector {
-		val vec = 2 * Vec2D(1, 1)
-		assertEquals(Vec2D(2, 2), vec)
+object ScalarSpec extends Specification with Mockito {
+
+	"Scalar" should {
+		"implicitely convert Double to Scalar if the Double is mutliplied with a Vec2D." in {
+			val vec = 2.0 * Vec2D(1, 1)
+			vec must beEqualTo(Vec2D(2, 2))
+		}
+
+		"implicitely convert Int to Scalar if the Int is mutliplied with a Vec2D." in {
+			val vec = 2 * Vec2D(1, 1)
+			vec must beEqualTo(Vec2D(2, 2))
+		}
 	}
 }

@@ -20,115 +20,76 @@ package net.habraun.sd.math
 
 
 
-import org.junit._
-import org.junit.Assert._
+import org.specs._
+import org.specs.mock._
+import org.specs.runner._
 
 
 
-class Vec2DTest {
+class Vec2DTest extends JUnit4(Vec2DSpec)
 
-	@Test
-	def addition {
-		val vec1 = Vec2D(1, 0)
-		val vec2 = Vec2D(0, 1)
-		assertEquals(Vec2D(1, 1), vec1 + vec2)
+
+
+object Vec2DSpec extends Specification with Mockito {
+
+	"Vec2D" should {
+		"compute the sum of itself and another vector." in {
+			(Vec2D(1, 0) + Vec2D(0, 1)) must beEqualTo(Vec2D(1, 1))
+		}
+
+		"compute the difference of itself with another vector." in {
+			(Vec2D(5, 5) - Vec2D(4, 4)) must beEqualTo(Vec2D(1, 1))
+		}
+
+		"compute the scalar product." in {
+			(Vec2D(1, 1) * 2.0) must beEqualTo(Vec2D(2, 2))
+		}
+
+		"compute the quotient with a scalar." in {
+			(Vec2D(2, 2) / 2.0) must beEqualTo(Vec2D(1, 1))
+		}
+
+		"compute the dot product." in {
+			(Vec2D(1, 2) * Vec2D(2, 1)) must beEqualTo(4.0)
+		}
+
+		"compute the inverse of itself." in {
+			-Vec2D(1, 1) must beEqualTo(Vec2D(-1, -1))
+		}
+
+		"compute its length." in {
+			Vec2D(2, 0).length must beEqualTo(2.0)
+		}
+
+		"compute its length to the power of two." in {
+			Vec2D(2, 2).squaredLength must beEqualTo(8.0)
+		}
+
+		"compute the unit vector with the same direction." in {
+			Vec2D(2, 0).normalize must beEqualTo(Vec2D(1, 0))
+		}
+
+		"compute the orthogonal vector that is rotated counter-clockwise." in {
+			Vec2D(2, 1).orthogonal must beEqualTo(Vec2D(-1, 2))
+		}
+
+		"compute projection of itself on another vector." in {
+			Vec2D(5, 5).project(Vec2D(1, 0)) must beEqualTo(Vec2D(5, 0))
+		}
 	}
 
+	"Vec2D.unit" should {
+		"return true, if the vector is a unit vector." in {
+			Vec2D(1, 0).unit must beTrue
+		}
 
+		"return false, if the vector is not a unit vector." in {
+			Vec2D(2, 0).unit must beFalse
+		}
 
-	@Test
-	def substraction {
-		val vec1 = Vec2D(5, 5)
-		val vec2 = Vec2D(4, 4)
-		assertEquals(Vec2D(1, 1), vec1 - vec2)
-	}
-
-
-
-	@Test
-	def scalarMultiplication {
-		val vec = Vec2D(1, 1)
-		assertEquals(Vec2D(2, 2), vec * 2)
-	}
-
-
-
-	@Test
-	def scalarDivision {
-		val vec = Vec2D(2, 2)
-		assertEquals(Vec2D(1, 1), vec / 2.0)
-	}
-
-
-
-	@Test
-	def dotProduct {
-		val vec1 = Vec2D(1, 2)
-		val vec2 = Vec2D(2, 1)
-		assertEquals(4.0, vec1 * vec2, 0.0)
-	}
-
-
-
-	@Test
-	def inverse {
-		val vec = Vec2D(1, 1)
-		assertEquals(Vec2D(-1, -1), -vec)
-	}
-
-
-
-	@Test
-	def length {
-		val vec = Vec2D(2, 0)
-		assertEquals(2.0, vec.length, 0.0)
-	}
-
-
-
-	@Test
-	def squaredLength {
-		val vec = Vec2D(2, 2)
-		assertEquals(8.0, vec.squaredLength, 0.0)
-	}
-
-
-
-	@Test
-	def normalize {
-		val vec = Vec2D(2, 0)
-		assertEquals(Vec2D(1, 0), vec.normalize)
-	}
-
-
-
-	@Test
-	def orthogonal {
-		val vec = Vec2D(2, 1)
-		assertEquals(Vec2D(-1, 2), vec.orthogonal)
-	}
-
-
-
-	@Test
-	def project {
-		val vec1 = Vec2D(5, 5)
-		val vec2 = Vec2D(1, 0)
-		assertEquals(Vec2D(5, 0), vec1.project(vec2))
-	}
-
-
-
-	@Test
-	def isUnit {
-		val unit = Vec2D(1, 0)
-		val nonUnit = Vec2D(2, 0)
-		val unitWithTolerance1 = Vec2D(0.98, 0)
-		val unitWithTolerance2 = Vec2D(1.02, 0)
-
-		assertTrue(unit.unit)
-		assertFalse(nonUnit.unit)
-		assertTrue(unitWithTolerance1.unit)
-		assertTrue(unitWithTolerance2.unit)
+		"return true, if the vector's length is within a certain tolerance of 1." in {
+			Vec2D(0.98, 0).unit must beTrue
+			Vec2D(1.02, 0).unit must beTrue
+		}
 	}
 }
