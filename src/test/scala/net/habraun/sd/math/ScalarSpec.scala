@@ -23,7 +23,6 @@ package net.habraun.sd.math
 import Scalar._
 
 import org.specs._
-import org.specs.mock._
 import org.specs.runner._
 
 
@@ -32,7 +31,7 @@ class ScalarTest extends JUnit4(ScalarSpec)
 
 
 
-object ScalarSpec extends Specification with Mockito {
+object ScalarSpec extends Specification {
 
 	"Scalar" should {
 		"implicitely convert Double to Scalar if the Double is mutliplied with a Vec2D." in {

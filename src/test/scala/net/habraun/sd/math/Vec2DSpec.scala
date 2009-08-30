@@ -21,7 +21,6 @@ package net.habraun.sd.math
 
 
 import org.specs._
-import org.specs.mock._
 import org.specs.runner._
 
 
@@ -30,7 +29,7 @@ class Vec2DTest extends JUnit4(Vec2DSpec)
 
 
 
-object Vec2DSpec extends Specification with Mockito {
+object Vec2DSpec extends Specification {
 
 	"Vec2D" should {
 		"compute the sum of itself and another vector." in {
