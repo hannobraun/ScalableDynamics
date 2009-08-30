@@ -20,6 +20,10 @@ package net.habraun.sd.math
 
 
 
+import Vec2D._
+
+
+
 /**
  * A 2D vector.
  * Important: Vec2D is immutable. This means, all operations on the vector a new vector, leaving the old one
@@ -125,5 +129,15 @@ case class Vec2D(x: Double, y: Double) {
 	 * Returns true if the vector is a unit vector, false otherwise.
 	 */
 
-	def unit = squaredLength < 1.05 && squaredLength > 0.95
+	def unit = length <= (1 + unitTolerance) && length >= (1 - unitTolerance)
+}
+
+
+
+/**
+ * Companion object for Vec2D.
+ */
+
+object Vec2D {
+	val unitTolerance = 0.02
 }

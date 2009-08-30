@@ -87,9 +87,9 @@ object Vec2DSpec extends Specification with Mockito {
 			Vec2D(2, 0).unit must beFalse
 		}
 
-		"return true, if the vector's length is within a certain tolerance of 1." in {
-			Vec2D(0.98, 0).unit must beTrue
-			Vec2D(1.02, 0).unit must beTrue
+		"return true, if the vector's length is within a certain tolerance area around 1." in {
+			Vec2D(1 - Vec2D.unitTolerance, 0).unit must beTrue
+			Vec2D(1 + Vec2D.unitTolerance, 0).unit must beTrue
 		}
 	}
 }
