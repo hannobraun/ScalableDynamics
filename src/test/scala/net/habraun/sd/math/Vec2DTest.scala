@@ -74,7 +74,7 @@ object Vec2DSpec extends Specification with Mockito {
 		}
 
 		"compute projection of itself on another vector." in {
-			Vec2D(5, 5).project(Vec2D(1, 0)) must beEqualTo(Vec2D(5, 0))
+			Vec2D(5, 5).projectOn(Vec2D(1, 0)) must beEqualTo(Vec2D(5, 0))
 		}
 	}
 

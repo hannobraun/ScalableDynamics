@@ -32,8 +32,8 @@ class ImpulseSolver extends CollisionSolver {
 		val b2 = constraint.contact2.b
 
 		// Compute the part of the velocities that points in the direction of the collision normals.
-		val v1 = b1.velocity.project(constraint.contact1.normal)
-		val v2 = b2.velocity.project(constraint.contact2.normal)
+		val v1 = b1.velocity.projectOn(constraint.contact1.normal)
+		val v2 = b2.velocity.projectOn(constraint.contact2.normal)
 
 		// Apply impulses along the collision normals.
 		val m1 = b1.mass

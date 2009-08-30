@@ -117,7 +117,7 @@ case class Vec2D(x: Double, y: Double) {
 	 * Projects the vector onto the given vector.
 	 */
 
-	def project(vec: Vec2D) = vec * ((this * vec) / (vec * vec))
+	def projectOn(vec: Vec2D) = vec * ((this * vec) / (vec * vec))
 
 
 
