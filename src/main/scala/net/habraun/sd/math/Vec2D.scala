@@ -22,8 +22,8 @@ package net.habraun.sd.math
 
 /**
  * A 2D vector.
- * Important: Vec2D is immutable. This means, all operations that modify the vector return a new vector,
- * leaving the old one unchanged.
+ * Important: Vec2D is immutable. This means, all operations on the vector a new vector, leaving the old one
+ * unchanged.
  */
 
 case class Vec2D(x: Double, y: Double) {
