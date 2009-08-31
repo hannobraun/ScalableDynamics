@@ -5,9 +5,23 @@
 	<groupId>net.habraun</groupId>
 	<artifactId>ScalableDynamics</artifactId>
 	<version>0.3-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
 	<name>Scalable Dynamics</name>
 	<inceptionYear>2009</inceptionYear>
 	<description>A simple physics library for games.</description>
+	<url>http://habraun.net/</url>
+
+	<licenses>
+		<license>
+			<name>The Apache Software License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<url>http://github.com/hbraun/ScalableDynamics/tree/master</url>
+	</scm>
 
 	<properties>
 		<scala.version>2.7.3</scala.version>
