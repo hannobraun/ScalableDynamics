@@ -20,25 +20,25 @@ package net.habraun.sd.collision
 
 
 
-import org.junit._
-import org.junit.Assert._
+import org.specs._
+import org.specs.runner._
 
 
 
-class CircleTest {
-
-	@Test
-	def createCircleCheckRadius {
-		val radius = 1.0
-		val circle = new Circle(radius)
-		assertEquals(radius, circle.radius, 0.0)
-	}
+class CircleTest extends JUnit4(CircleSpec)
 
 
 
-	@Test
-	def createCircleVerifyIsShape {
-		val circle = new Circle(1.0)
-		assertTrue(circle.isInstanceOf[Shape])
+object CircleSpec extends Specification {
+
+	"Circle" should {
+		"have a radius." in {
+			val radius = 1.0
+			Circle(radius).radius must beEqualTo(radius)
+		}
+
+		"be a Shape." in {
+			Circle(1.0) must haveSuperClass[Shape]
+		}
 	}
 }
