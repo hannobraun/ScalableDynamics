@@ -20,8 +20,14 @@ package net.habraun.sd
 
 
 
-import collision._
-import math._
+import collision.Circle
+import collision.CircleCircleTest
+import collision.CircleLineSegmentTest
+import collision.ContinuousCircleCircleTest
+import collision.ContinuousCircleLineSegmentTest
+import collision.LineSegment
+import collision.NoShape
+import math.Vec2D
 
 
 

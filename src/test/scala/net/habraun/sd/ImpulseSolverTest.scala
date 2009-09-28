@@ -20,10 +20,11 @@ package net.habraun.sd
 
 
 
-import collision._
-import math._
+import collision.Circle
+import math.Vec2D
 
-import org.junit._
+import org.junit.Before
+import org.junit.Test
 import org.junit.Assert._
 
 

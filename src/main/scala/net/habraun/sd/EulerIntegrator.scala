@@ -20,7 +20,7 @@ package net.habraun.sd
 
 
 
-import math._
+import math.Vec2D
 
 
 

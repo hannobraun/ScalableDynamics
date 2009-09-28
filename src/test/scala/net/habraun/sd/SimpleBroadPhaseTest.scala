@@ -20,7 +20,8 @@ package net.habraun.sd
 
 
 
-import org.junit._
+import org.junit.Before
+import org.junit.Test
 import org.junit.Assert._
 
 

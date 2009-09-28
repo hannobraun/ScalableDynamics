@@ -20,10 +20,10 @@ package net.habraun.sd.collision
 
 
 
-import math._
+import math.Vec2D
 
-import org.specs._
-import org.specs.runner._
+import org.specs.Specification
+import org.specs.runner.JUnit4
 
 
 

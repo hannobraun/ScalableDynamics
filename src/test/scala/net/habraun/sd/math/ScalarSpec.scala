@@ -22,8 +22,8 @@ package net.habraun.sd.math
 
 import Scalar._
 
-import org.specs._
-import org.specs.runner._
+import org.specs.Specification
+import org.specs.runner.JUnit4
 
 
 

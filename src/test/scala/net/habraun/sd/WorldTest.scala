@@ -20,12 +20,13 @@ package net.habraun.sd
 
 
 
-import collision._
-import math._
+import math.Vec2D
 
-import scala.collection.mutable._
+import scala.collection.mutable.HashSet
 
-import org.junit._
+
+import org.junit.Before
+import org.junit.Test
 import org.junit.Assert._
 
 

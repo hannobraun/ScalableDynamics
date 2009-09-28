@@ -20,9 +20,9 @@ package net.habraun.sd
 
 
 
-import math._
+import math.Vec2D
 
-import scala.collection.mutable._
+import scala.collection.mutable.HashSet
 
 
 

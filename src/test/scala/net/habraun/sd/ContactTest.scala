@@ -20,9 +20,9 @@ package net.habraun.sd
 
 
 
-import math._
+import math.Vec2D
 
-import org.junit._
+import org.junit.Test
 import org.junit.Assert._
 
 
