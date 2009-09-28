@@ -27,6 +27,13 @@ object Scalar {
 
 
 
+/**
+ * Represents a scalar number.
+ * This class is not meant to be used directly, as Double is used to represent scalar values. The sole
+ * purpose of this class is to allow - in combination with the implicit conversions defined in the companion
+ * object - to write expressions like "2 * vec", in addition "vec * 2".
+ */
+
 class Scalar(value: Double) {
 
 	def * (vector: Vec2D) = vector * value
