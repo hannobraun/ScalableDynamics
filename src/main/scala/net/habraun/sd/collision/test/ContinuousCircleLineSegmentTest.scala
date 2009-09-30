@@ -38,7 +38,7 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 	 * invalid. It will always be (0, 0).
 	 */
 
-	def apply(c: Circle, ls: LineSegment, pc: Vec2D, pls: Vec2D, vc: Vec2D, vls: Vec2D):
+	def apply( c: Circle, ls: LineSegment, pc: Vec2D, pls: Vec2D, vc: Vec2D, vls: Vec2D ):
 			Option[TestResult] = {
 		// This algorithms does continious collision detection between a moving circle and a moving line
 		// segment. I got this from "Real-Time Collision Detection" by Christer Ericson, page 219-222.
@@ -49,23 +49,23 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 		// units of the normal, which basically means that the distance is negative if the normal points
 		// towards the origin, positive if the normal points away from the origin.
 		val lineNormal = ls.d.orthogonal.normalize
-		val lineDistance = (pls + ls.p) * lineNormal
+		val lineDistance = ( pls + ls.p ) * lineNormal
 
 		// Compute the distance between the line and the circle. The distance is positive if the line normal
 		// points towards the circle (the circle lies in front of the line), negative otherwise.
 		val distance = lineNormal * pc - lineDistance
 
 		// Check if the circle and the line are already intersecting.
-		if (Math.abs(distance) <= c.radius) {
+		if ( Math.abs( distance ) <= c.radius ) {
 			// Circle and line are already intersecting.
 
 			// The surface normal of the circle at the point of impact.
-			val normal = if (distance > 0) -lineNormal else lineNormal
+			val normal = if ( distance > 0 ) -lineNormal else lineNormal
 
 			// The point on the line that lies nearest to the circle center.
-			val lambda = (pc - pls - ls.p) * ls.d /	ls.d.squaredLength
-			if (lambda >= 0 && lambda <= ls.d.length) {
-				Some(TestResult(0.0, Vec2D(0, 0), normal))
+			val lambda = ( pc - pls - ls.p ) * ls.d / ls.d.squaredLength
+			if ( lambda >= 0 && lambda <= ls.d.length ) {
+				Some( TestResult( 0.0, Vec2D( 0, 0 ), normal ) )
 			}
 			else {
 				None
@@ -88,35 +88,35 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 			// points away from the circle) and it moves against the direction of the normal.
 			// The value can only be zero if the circle moves parallel to the line. The direction can't be
 			// zero because that has already been ruled out before.
-			if (direction * distance < 0.0) {
+			if ( direction * distance < 0.0 ) {
 				// The circle moves towards the line. What's left to do is compute the time of impact, check
 				// if it lies within the current timeframe and check if the point of impact lies on the line
 				// segment.
 
 				// For the following computation, we need the radius of the circle as a positive value if it
 				// lies in front of the plane, as a negative value otherwise.
-				val radius = if (distance > 0.0) c.radius else -c.radius
+				val radius = if ( distance > 0.0 ) c.radius else -c.radius
 
 				// Compute the time of impact.
-				val t = (radius - distance) / direction
+				val t = ( radius - distance ) / direction
 
 				// Check if the time is within the movement interval.
-				if (t >= 0.0 && t <= 1.0) {
+				if ( t >= 0.0 && t <= 1.0 ) {
 					// The time is within the movement interval, which  means the circle will hit the line.
 					// Compute the point of impact and the normals.
 
 					// The surface normal of the circle at the point of impact.
-					val normal = if (distance > 0) -lineNormal else lineNormal
+					val normal = if ( distance > 0 ) -lineNormal else lineNormal
 
 					// Point of impact.
-					val point = pc + (normal * c.radius) +	(vc * t)
+					val point = pc + ( normal * c.radius ) + ( vc * t )
 
 					// We now have the point of impact between the circle and the line. But does this point
 					// lie on the line segment?
-					val pt = (point.x - (pls.x + ls.p.x)) / ls.d.x
-					if (pt >= 0.0 && pt <= 1.0) {
+					val pt = ( point.x - ( pls.x + ls.p.x ) ) / ls.d.x
+					if ( pt >= 0.0 && pt <= 1.0 ) {
 						// Yes it does.
-						Some(TestResult(t, point, normal))
+						Some( TestResult( t, point, normal ) )
 					}
 					else {
 						// No, it doesn't. No collision.

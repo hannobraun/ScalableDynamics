@@ -45,7 +45,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 	 * reported. In that case, the collision point will always be (0, 0).
 	 */
 
-	def apply(c1: Circle, c2: Circle, p1: Vec2D, p2: Vec2D, v1: Vec2D, v2: Vec2D): Option[TestResult] = {
+	def apply( c1: Circle, c2: Circle, p1: Vec2D, p2: Vec2D, v1: Vec2D, v2: Vec2D ): Option[TestResult] = {
 		// This algorithms does continious collision detection between two moving circles. I got this from
 		// "Real-Time Collision Detection" by Christer Ericson, page 223/224.
 
@@ -57,39 +57,39 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 		// The following 3 variables are a, b and c from that equation.
 		val a = v * v
 		val b = v * s
-		val c = (s * s) - (r * r)
+		val c = ( s * s ) - ( r * r )
 
 		// The discriminant of the solution.
-		val d = (b * b) - (a * c)
+		val d = ( b * b ) - ( a * c )
 
 		// Check for several corner cases. If none of these occurs, we can compute t with the general
 		// formula.
-		if (c < 0.0) {
+		if ( c < 0.0 ) {
 			// Spheres are initially overlapping.
-			val normal = (p2 - p1).normalize
-			val point = Vec2D(0, 0)
-			Some(TestResult(0.0, point, normal))
+			val normal = ( p2 - p1 ).normalize
+			val point = Vec2D( 0, 0 )
+			Some( TestResult( 0.0, point, normal ) )
 		}
-		else if (a == 0) {
+		else if ( a == 0 ) {
 			// Spheres are not moving relative to each other.
 			None
 		}
-		else if (b >= 0.0) {
+		else if ( b >= 0.0 ) {
 			// Spheres are not moving towards each other.
 			None
 		}
-		else if (d < 0.0) {
+		else if ( d < 0.0 ) {
 			// Discriminant is negative, no real solution.
 			None
 		}
 		else {
 			// None of the edge cases has occured, so we need to compute the time of contact.
-			val t = (-b - Math.sqrt(d)) / a
-			if (t <= 1.0) {
+			val t = ( -b - Math.sqrt( d ) ) / a
+			if ( t <= 1.0 ) {
 				// Time of contact is within the timeframe we're checking.
-				val normal = (p2 - p1).normalize
-				val point = p1 + (v1 * t) + (normal * c1.radius)
-				Some(TestResult(t, point, normal))
+				val normal = ( p2 - p1 ).normalize
+				val point = p1 + ( v1 * t ) + ( normal * c1.radius )
+				Some( TestResult( t, point, normal ) )
 			}
 			else {
 				// Contact would occur, but only after the timeframe we're looking at.

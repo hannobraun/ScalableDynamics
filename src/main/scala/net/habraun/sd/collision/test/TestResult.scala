@@ -33,18 +33,18 @@ import math.Vec2D
  * * normal: The first shape's surface normal at the point of contact.
  */
 
-case class TestResult(t: Double, contact: Vec2D, normal: Vec2D) {
+case class TestResult( t: Double, contact: Vec2D, normal: Vec2D ) {
 	// Check if t is valid.
-	if (t < 0.0 || t > 1.0)
-		throw new IllegalArgumentException("The time must be between 0.0 and 1.0 (t: " + t + ").")
+	if ( t < 0.0 || t > 1.0 )
+		throw new IllegalArgumentException( "The time must be between 0.0 and 1.0 (t: " + t + ")." )
 
 	// Check if contact is valid.
-	if (contact == null)
-		throw new NullPointerException("Contact point must not be null.")
+	if ( contact == null )
+		throw new NullPointerException( "Contact point must not be null." )
 
 	// Check if normal is valid.
-	if (normal == null)
-		throw new NullPointerException("Normal must not be null.")
-	if (!normal.unit)
-		throw new IllegalArgumentException("Normal must be a unit vector (normal: " + normal + ").")
+	if ( normal == null )
+		throw new NullPointerException( "Normal must not be null." )
+	if ( !normal.unit )
+		throw new IllegalArgumentException( "Normal must be a unit vector (normal: " + normal + ")." )
 }
