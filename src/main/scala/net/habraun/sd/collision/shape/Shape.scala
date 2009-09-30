@@ -25,7 +25,7 @@ package net.habraun.sd.collision.shape
  * A body needs a shape in order to collide.
  */
 
-abstract class Shape
+trait Shape
 
 
 
