@@ -21,8 +21,8 @@ package net.habraun.sd.math
 
 
 object Scalar {
-	implicit def doubleToScalar(d: Double) = new Scalar(d)
-	implicit def intToScalar(i: Int) = new Scalar(i)
+	implicit def doubleToScalar( d: Double ) = new Scalar( d )
+	implicit def intToScalar( i: Int ) = new Scalar( i )
 }
 
 
@@ -34,7 +34,7 @@ object Scalar {
  * object - to write expressions like "2 * vec", in addition "vec * 2".
  */
 
-class Scalar(value: Double) {
+class Scalar( value: Double ) {
 
-	def * (vector: Vec2D) = vector * value
+	def * ( vector: Vec2D ) = vector * value
 }

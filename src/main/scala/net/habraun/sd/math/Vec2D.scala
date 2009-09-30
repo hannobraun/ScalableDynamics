@@ -30,13 +30,13 @@ import Vec2D._
  * unchanged.
  */
 
-case class Vec2D(x: Double, y: Double) {
+case class Vec2D( x: Double, y: Double ) {
 
 	/**
 	 * Adds another vector.
 	 */
 
-	def + (vector: Vec2D) = Vec2D(x + vector.x, y + vector.y)
+	def + ( vector: Vec2D ) = Vec2D( x + vector.x, y + vector.y )
 
 
 
@@ -44,7 +44,7 @@ case class Vec2D(x: Double, y: Double) {
 	 * Substracts another vector.
 	 */
 
-	def - (vector: Vec2D) = Vec2D(x - vector.x, y - vector.y)
+	def - ( vector: Vec2D ) = Vec2D( x - vector.x, y - vector.y )
 
 
 
@@ -52,7 +52,7 @@ case class Vec2D(x: Double, y: Double) {
 	 * Multiplies the vector with a scalar.
 	 */
 
-	def * (scalar: Double) = Vec2D(x * scalar, y * scalar)
+	def * ( scalar: Double ) = Vec2D( x * scalar, y * scalar )
 
 
 
@@ -60,7 +60,7 @@ case class Vec2D(x: Double, y: Double) {
 	 * Divides the vector with a scalar.
 	 */
 
-	def / (scalar: Double) = Vec2D(x / scalar, y / scalar)
+	def / ( scalar: Double ) = Vec2D( x / scalar, y / scalar )
 
 
 
@@ -68,7 +68,7 @@ case class Vec2D(x: Double, y: Double) {
 	 * Computes the dot product of this vector and another vector.
 	 */
 
-	def * (vector: Vec2D) = (x * vector.x) + (y * vector.y)
+	def * ( vector: Vec2D ) = ( x * vector.x ) + ( y * vector.y )
 
 
 
@@ -77,7 +77,7 @@ case class Vec2D(x: Double, y: Double) {
 	 * The inverse vector is the vector with the same length and opposite direction.
 	 */
 
-	def unary_- = Vec2D(x * -1, y * -1)
+	def unary_- = Vec2D( x * -1, y * -1 )
 
 
 
@@ -87,7 +87,7 @@ case class Vec2D(x: Double, y: Double) {
 	 * performance is critical, it is recommended to use squaredLength where applicable.
 	 */
 
-	def length = Math.sqrt((x * x) + (y * y))
+	def length = Math.sqrt( ( x * x ) + ( y * y ) )
 
 
 
@@ -97,7 +97,7 @@ case class Vec2D(x: Double, y: Double) {
 	 * applicable, as it is much cheaper.
 	 */
 
-	def squaredLength = (x * x) + (y * y)
+	def squaredLength = ( x * x ) + ( y * y )
 
 
 
@@ -113,7 +113,7 @@ case class Vec2D(x: Double, y: Double) {
 	 * Returns the orthogonal vector to this vector that is rotated by 90 degrees to the left.
 	 */
 
-	def orthogonal = Vec2D(-y, x)
+	def orthogonal = Vec2D( -y, x )
 
 
 
@@ -121,7 +121,7 @@ case class Vec2D(x: Double, y: Double) {
 	 * Projects the vector onto the given vector.
 	 */
 
-	def projectOn(vec: Vec2D) = vec * ((this * vec) / (vec * vec))
+	def projectOn( vec: Vec2D ) = vec * ( ( this * vec ) / ( vec * vec ) )
 
 
 
@@ -129,7 +129,7 @@ case class Vec2D(x: Double, y: Double) {
 	 * Returns true if the vector is a unit vector, false otherwise.
 	 */
 
-	def unit = length <= (1 + unitTolerance) && length >= (1 - unitTolerance)
+	def unit = length <= ( 1 + unitTolerance ) && length >= ( 1 - unitTolerance )
 }
 
 
