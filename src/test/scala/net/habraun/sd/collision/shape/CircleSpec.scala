@@ -25,7 +25,7 @@ import org.specs.runner.JUnit4
 
 
 
-class CircleTest extends JUnit4(CircleSpec)
+class CircleTest extends JUnit4( CircleSpec )
 
 
 
@@ -34,11 +34,11 @@ object CircleSpec extends Specification {
 	"Circle" should {
 		"have a radius." in {
 			val radius = 1.0
-			Circle(radius).radius must beEqualTo(radius)
+			Circle( radius ).radius must beEqualTo( radius )
 		}
 
 		"be a Shape." in {
-			Circle(1.0) must haveSuperClass[Shape]
+			Circle( 1.0 ) must haveSuperClass[Shape]
 		}
 	}
 }

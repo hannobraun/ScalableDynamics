@@ -24,4 +24,4 @@ package net.habraun.sd.collision.shape
  * Models a circle.
  */
 
-case class Circle(radius: Double) extends Shape
+case class Circle( radius: Double ) extends Shape
