@@ -16,11 +16,12 @@
 
 
 
-package net.habraun.sd.collision
+package net.habraun.sd.collision.test
 
 
 
 import math.Vec2D
+import shape.Circle
 
 import org.specs.Specification
 import org.specs.runner.JUnit4

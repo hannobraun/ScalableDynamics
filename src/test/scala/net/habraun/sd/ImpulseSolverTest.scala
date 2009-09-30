@@ -20,7 +20,7 @@ package net.habraun.sd
 
 
 
-import collision.Circle
+import collision.shape.Circle
 import math.Vec2D
 
 import org.junit.Before

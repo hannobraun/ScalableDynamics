@@ -16,12 +16,26 @@
 
 
 
-package net.habraun.sd.collision
+package net.habraun.sd.collision.test
+
+
+
+import math.Vec2D
+import shape.Circle
+import shape.LineSegment
 
 
 
 /**
- * Models a circle.
+ * The definition for collision tests for circle - line segment collisions. Circle - line segment tests take
+ * the following parameters:
+ * * c: The circle.
+ * * ls: The line segment.
+ * * pc: The position of the circle.
+ * * pls: The position of the line segment.
+ * * vc: The velocity of the circle.
+ * * vls: The velocity of the line segment.
  */
 
-case class Circle(radius: Double) extends Shape
+trait CircleLineSegmentTest
+		extends Function6[Circle, LineSegment, Vec2D, Vec2D, Vec2D, Vec2D, Option[TestResult]]

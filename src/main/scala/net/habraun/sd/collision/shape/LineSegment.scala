@@ -16,29 +16,23 @@
 
 
 
-package net.habraun.sd.collision
+package net.habraun.sd.collision.shape
 
 
 
-import org.specs.Specification
-import org.specs.runner.JUnit4
+import math.Vec2D
 
 
 
-class CircleTest extends JUnit4(CircleSpec)
+/**
+ * Models a line segment.
+ * A line segment is defined by the following attributes:
+ * * p: The position vector of the first point of the line segment.
+ * * d: The direction vector of the line segment. It points from the first point to the second point. Its
+ *      length is equal to the length of the line segment.
+ */
 
-
-
-object CircleSpec extends Specification {
-
-	"Circle" should {
-		"have a radius." in {
-			val radius = 1.0
-			Circle(radius).radius must beEqualTo(radius)
-		}
-
-		"be a Shape." in {
-			Circle(1.0) must haveSuperClass[Shape]
-		}
-	}
+case class LineSegment(p: Vec2D, d: Vec2D) extends Shape {
+	if (d == Vec2D(0, 0)) throw new IllegalArgumentException("Direction vector must not be 0.")
+	if (p == null || d == null) throw new NullPointerException
 }

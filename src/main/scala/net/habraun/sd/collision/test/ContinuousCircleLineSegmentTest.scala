@@ -16,11 +16,13 @@
 
 
 
-package net.habraun.sd.collision
+package net.habraun.sd.collision.test
 
 
 
 import math.Vec2D
+import shape.Circle
+import shape.LineSegment
 
 
 

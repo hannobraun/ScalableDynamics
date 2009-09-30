@@ -16,24 +16,29 @@
 
 
 
-package net.habraun.sd.collision
+package net.habraun.sd.collision.shape
 
 
 
-import math.Vec2D
+import org.specs.Specification
+import org.specs.runner.JUnit4
 
 
 
-/**
- * The definition for collision tests for circle - line segment collisions. Circle - line segment tests take
- * the following parameters:
- * * c: The circle.
- * * ls: The line segment.
- * * pc: The position of the circle.
- * * pls: The position of the line segment.
- * * vc: The velocity of the circle.
- * * vls: The velocity of the line segment.
- */
+class CircleTest extends JUnit4(CircleSpec)
 
-trait CircleLineSegmentTest
-		extends Function6[Circle, LineSegment, Vec2D, Vec2D, Vec2D, Vec2D, Option[TestResult]]
+
+
+object CircleSpec extends Specification {
+
+	"Circle" should {
+		"have a radius." in {
+			val radius = 1.0
+			Circle(radius).radius must beEqualTo(radius)
+		}
+
+		"be a Shape." in {
+			Circle(1.0) must haveSuperClass[Shape]
+		}
+	}
+}

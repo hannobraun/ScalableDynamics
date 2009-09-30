@@ -16,21 +16,12 @@
 
 
 
-package net.habraun.sd.collision
+package net.habraun.sd.collision.shape
 
 
 
 /**
- * Base class for all body shapes.
- * A body needs a shape in order to collide.
+ * Models a circle.
  */
 
-abstract class Shape
-
-
-
-/**
- * A special shape that denotes the absence of any shape. A body with NoShape as its shape will not collide.
- */
-
-object NoShape extends Shape
+case class Circle(radius: Double) extends Shape
