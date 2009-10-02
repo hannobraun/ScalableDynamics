@@ -33,12 +33,12 @@ import math.Vec2D
  * * other: The other body that b has contact to.
  */
 
-case class Contact(b: Body, point: Vec2D, normal: Vec2D, other: Body) {
+case class Contact( b: Body, point: Vec2D, normal: Vec2D, other: Body ) {
 	// Make sure the parameters are not null.
-	if (b == null || point == null || normal == null || other == null)
+	if ( b == null || point == null || normal == null || other == null )
 		throw new NullPointerException
 	
 	// Check if vectors are unit vectors.
-	if (normal.squaredLength < 0.95 || normal.squaredLength > 1.05)
-		throw new IllegalArgumentException("Normal must be a unit vectors (normal: " + normal + ").")
+	if ( normal.squaredLength < 0.95 || normal.squaredLength > 1.05 )
+		throw new IllegalArgumentException( "Normal must be a unit vectors (normal: " + normal + ")." )
 }
