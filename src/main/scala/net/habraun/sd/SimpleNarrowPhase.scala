@@ -50,7 +50,7 @@ class SimpleNarrowPhase extends NarrowPhase {
 	 * Handles circle-circle and circle-line segment collisions.
 	 */
 
-	def apply(b1: Body, b2: Body) = {
+	def apply( b1: Body, b2: Body ) = {
 		val p1 = b1.position
 		val p2 = b2.position
 		val v1 = b1.position - b1.previousPosition
@@ -60,29 +60,29 @@ class SimpleNarrowPhase extends NarrowPhase {
 			case s1: Circle =>
 				b2.shape match {
 					case s2: Circle =>
-						for (r <- testCircleCircle(s1, s2, p1, p2, v1, v2)) yield {
-							Collision(r.t, Contact(b1, r.contact, r.normal, b2),
-									Contact(b2, r.contact, -r.normal, b1))
+						for ( r <- testCircleCircle( s1, s2, p1, p2, v1, v2 ) ) yield {
+							Collision( r.t, Contact( b1, r.contact, r.normal, b2 ),
+									Contact( b2, r.contact, -r.normal, b1 ) )
 						}
 
 					case s2: LineSegment =>
-						for (r <- testCircleLineSegment(s1, s2, p1, p2, v1, v2)) yield {
-							Collision(r.t, Contact(b1, r.contact, r.normal, b2),
-									Contact(b2, r.contact, -r.normal, b1))
+						for ( r <- testCircleLineSegment( s1, s2, p1, p2, v1, v2 ) ) yield {
+							Collision( r.t, Contact( b1, r.contact, r.normal, b2 ),
+									Contact( b2, r.contact, -r.normal, b1 ) )
 						}
 
 					case NoShape =>
 						None
 
 					case _ =>
-						throw new IllegalArgumentException("Unsupported shape: " + b2.shape)
+						throw new IllegalArgumentException( "Unsupported shape: " + b2.shape )
 				}
 
 			case s1: LineSegment =>
 				b2.shape match {
 					case s2: Circle =>
-						for (r <- testCircleLineSegment(s2, s1, p2, p1, v2, v1)) yield {
-							Collision(r.t, Contact(b1, r.contact, r.normal, b2), null)
+						for ( r <- testCircleLineSegment( s2, s1, p2, p1, v2, v1 ) ) yield {
+							Collision( r.t, Contact( b1, r.contact, r.normal, b2 ), null )
 						}
 
 					case s2: LineSegment =>
@@ -92,14 +92,14 @@ class SimpleNarrowPhase extends NarrowPhase {
 						None
 
 					case _ =>
-						throw new IllegalArgumentException("Unsupported shape: " + b2.shape)
+						throw new IllegalArgumentException( "Unsupported shape: " + b2.shape )
 				}
 
 			case NoShape =>
 				None
 
 			case _ =>
-				throw new IllegalArgumentException("Unsupported shape: " + b1.shape)
+				throw new IllegalArgumentException( "Unsupported shape: " + b1.shape )
 		}
 	}
 }

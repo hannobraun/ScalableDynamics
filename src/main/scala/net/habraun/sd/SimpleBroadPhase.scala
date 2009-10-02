@@ -32,14 +32,14 @@ class SimpleBroadPhase extends BroadPhase {
 	 * Returns all possible pairs of the given bodies.
 	 */
 
-	def apply(bodies: List[Body]) = {
-		def buildPairs(list: List[Body], pairs: List[(Body, Body)]): List[(Body, Body)] = {
-			if (list.isEmpty)
+	def apply( bodies: List[Body] ) = {
+		def buildPairs( list: List[Body], pairs: List[( Body, Body )]): List[( Body, Body )] = {
+			if ( list.isEmpty )
 				pairs
 			else
-				buildPairs(list.tail, pairs:::list.tail.map((list.head, _)))
+				buildPairs( list.tail, pairs:::list.tail.map( ( list.head, _ ) ) )
 		}
 
-		buildPairs(bodies, Nil)
+		buildPairs( bodies, Nil )
 	}
 }
