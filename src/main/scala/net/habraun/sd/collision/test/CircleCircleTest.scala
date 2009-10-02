@@ -26,16 +26,23 @@ import shape.Circle
 
 
 /**
- * The definition for collision test functions for circle-circle collision. Circle-circle tests take the
- * following parameters:
- * * c1: The first circle.
- * * c2: The second circle.
- * * p1: Position of the first circle.
- * * p2: Position of the second circle.
- * * v1: Velocity of the first circle.
- * * c2: Velocity of the second circle.
- *
- * If the circles collide, Some(TestResult) is returned. If not, the function returns None.
+ * The definition for collision test functions for circle-circle collision.
  */
 
-trait CircleCircleTest extends Function6[Circle, Circle, Vec2D, Vec2D, Vec2D, Vec2D, Option[TestResult]]
+trait CircleCircleTest extends Function6[Circle, Circle, Vec2D, Vec2D, Vec2D, Vec2D, Option[TestResult]] {
+
+	/**
+	 * Circle-circle tests take the
+	 * following parameters:
+	 * * c1: The first circle.
+	 * * c2: The second circle.
+	 * * p1: Position of the first circle.
+	 * * p2: Position of the second circle.
+	 * * v1: Velocity of the first circle.
+	 * * v2: Velocity of the second circle.
+	 *
+	 * If the circles collide, Some(TestResult) is returned. If not, the function returns None.
+	 */
+
+	def apply( c1: Circle, c2: Circle, p1: Vec2D, p2: Vec2D, v1: Vec2D, v2: Vec2D ): Option[TestResult]
+}
