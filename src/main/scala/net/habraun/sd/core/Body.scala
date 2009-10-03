@@ -32,7 +32,7 @@ import math.Vec2D
  * anything useful.
  */
 
-class Body {
+trait Body {
 
 	/**
 	 * The body's position in the world, measured in meters.

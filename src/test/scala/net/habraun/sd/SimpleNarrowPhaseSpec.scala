@@ -66,9 +66,9 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 		"not show a collision for two NoShapeS." in {
 			val narrowPhase = new SimpleNarrowPhase
 
-			val b1 = new Body
+			val b1 = new Body {}
 			b1.shape = NoShape
-			val b2 = new Body
+			val b2 = new Body {}
 			b2.shape = NoShape
 
 			narrowPhase( b1, b2 ) must beEqualTo( None )
@@ -77,10 +77,10 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 		"not show a collision between a circle and a NoShape that lies in the circle." in {
 			val narrowPhase = new SimpleNarrowPhase
 
-			val b1 = new Body
+			val b1 = new Body {}
 			b1.position = Vec2D( 0, 0 )
 			b1.shape = Circle( 1 )
-			val b2 = new Body
+			val b2 = new Body {}
 			b2.position = Vec2D( 0, 0.5 )
 			b2.shape = NoShape
 
@@ -90,10 +90,10 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 		"not show a collision between a line segment and a NoShape that lies on the line segment." in {
 			val narrowPhase = new SimpleNarrowPhase
 
-			val b1 = new Body
+			val b1 = new Body {}
 			b1.position = Vec2D( 0, 0 )
 			b1.shape = LineSegment( Vec2D( 0, 0 ), Vec2D( 0, 1 ) )
-			val b2 = new Body
+			val b2 = new Body {}
 			b2.position = Vec2D( 0, 0.5 )
 			b2.shape = NoShape
 
@@ -103,9 +103,9 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 		"throw an exception if an unsupported shape and a circle is passed." in {
 			val narrowPhase = new SimpleNarrowPhase
 
-			val b1 = new Body
+			val b1 = new Body {}
 			b1.shape = new Shape {}
-			val b2 = new Body
+			val b2 = new Body {}
 			b2.shape = Circle( 1 )
 
 			narrowPhase( b1, b2 ) must throwAn[IllegalArgumentException]
@@ -114,9 +114,9 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 		"throw an exception if a circle and an unsupported shape." in {
 			val narrowPhase = new SimpleNarrowPhase
 
-			val b1 = new Body
+			val b1 = new Body {}
 			b1.shape = Circle( 1 )
-			val b2 = new Body
+			val b2 = new Body {}
 			b2.shape = new Shape {}
 
 			narrowPhase( b1, b2 ) must throwAn[IllegalArgumentException]
@@ -125,9 +125,9 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 		"throw an exception if a line segment and an unsupported shape." in {
 			val narrowPhase = new SimpleNarrowPhase
 
-			val b1 = new Body
+			val b1 = new Body {}
 			b1.shape = LineSegment( Vec2D( 0, 0 ), Vec2D( 1, 0 ) )
-			val b2 = new Body
+			val b2 = new Body {}
 			b2.shape = new Shape {}
 
 			narrowPhase( b1, b2 ) must throwAn[IllegalArgumentException]
@@ -138,11 +138,11 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			val circle1 = Circle( 1 )
 			val circle2 = Circle( 2 )
-			val b1 = new Body
+			val b1 = new Body {}
 			b1.shape = circle1
 			b1.position = Vec2D( 1, 1 ) // position before movement
 			b1.position = Vec2D( 7, 7 ) // position after movement, previous position is saved
-			val b2 = new Body
+			val b2 = new Body {}
 			b2.shape = circle2
 			b2.position = Vec2D( 2, 2 )
 			b2.position = Vec2D( 10, 10 )
@@ -163,11 +163,11 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			val circle = Circle( 1 )
 			val lineSegment = LineSegment( Vec2D( -1, -1 ), Vec2D( -2, -2 ) )
-			val b1 = new Body
+			val b1 = new Body {}
 			b1.shape = circle
 			b1.position = Vec2D( 1, 1 ) // position before movement
 			b1.position = Vec2D( 7, 7 ) // position after movement, previous position is saved
-			val b2 = new Body
+			val b2 = new Body {}
 			b2.shape = lineSegment
 			b2.position = Vec2D( 2, 2 )
 			b2.position = Vec2D( 10, 10 )
@@ -188,9 +188,9 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			val circle1 = Circle( 1 )
 			val circle2 = Circle( 2 )
-			val b1 = new Body
+			val b1 = new Body {}
 			b1.shape = circle1
-			val b2 = new Body
+			val b2 = new Body {}
 			b2.shape = circle2
 
 			val circleCircleTest = mock[CircleCircleTest]
@@ -210,9 +210,9 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			val circle = Circle( 1 )
 			val lineSegment = LineSegment( Vec2D( 1, 1 ), Vec2D( 2, 2 ) )
-			val b1 = new Body
+			val b1 = new Body {}
 			b1.shape = circle
-			val b2 = new Body
+			val b2 = new Body {}
 			b2.shape = lineSegment
 
 			val circleLineSegmentTest = mock[CircleLineSegmentTest]
@@ -232,9 +232,9 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			val circle1 = Circle( 1 )
 			val circle2 = Circle( 2 )
-			val b1 = new Body
+			val b1 = new Body {}
 			b1.shape = circle1
-			val b2 = new Body
+			val b2 = new Body {}
 			b2.shape = circle2
 
 			val circleCircleTest = mock[CircleCircleTest]
@@ -250,9 +250,9 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			val circle = Circle( 1 )
 			val lineSegment = LineSegment( Vec2D( 1, 1 ), Vec2D( 2, 2 ) )
-			val b1 = new Body
+			val b1 = new Body {}
 			b1.shape = circle
-			val b2 = new Body
+			val b2 = new Body {}
 			b2.shape = lineSegment
 
 			val circleLineSegmentTest = mock[CircleLineSegmentTest]
@@ -266,10 +266,10 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 		"return None if two line segments are passed." in {
 			val narrowPhase = new SimpleNarrowPhase
 
-			val b1 = new Body
+			val b1 = new Body {}
 			b1.position = Vec2D( 0, 1 )
 			b1.shape = LineSegment( Vec2D( 0, 0 ), Vec2D( 2, -2 ) )
-			val b2 = new Body
+			val b2 = new Body {}
 			b2.position = Vec2D( 0, -1 )
 			b2.shape = LineSegment( Vec2D( 0, 0 ), Vec2D( 2, 2 ) )
 

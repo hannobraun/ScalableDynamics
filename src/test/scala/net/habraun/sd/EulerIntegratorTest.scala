@@ -41,7 +41,7 @@ class EulerIntegratorTest {
 	@Before
 	def setup {
 		integrate = new EulerIntegrator
-		body = new Body
+		body = new Body {}
 	}
 
 

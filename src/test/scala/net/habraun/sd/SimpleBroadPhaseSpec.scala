@@ -37,8 +37,8 @@ object SimpleBroadPhaseSpec extends Specification {
 		"build a list containing only the one possible pair if it is given two bodies." in {
 			val broadPhase = new SimpleBroadPhase
 
-			val b1 = new Body
-			val b2 = new Body
+			val b1 = new Body {}
+			val b2 = new Body {}
 
 			broadPhase( b1::b2::Nil ) must beEqualTo( ( b1, b2 )::Nil )
 		}
@@ -46,9 +46,9 @@ object SimpleBroadPhaseSpec extends Specification {
 		"build a list of all three possible pairs if it is given three bodies." in {
 			val broadPhase = new SimpleBroadPhase
 
-			val b1 = new Body
-			val b2 = new Body
-			val b3 = new Body
+			val b1 = new Body {}
+			val b2 = new Body {}
+			val b3 = new Body {}
 
 			broadPhase( b1::b2::b3::Nil ) must beEqualTo( ( b1, b2 )::( b1, b3 )::( b2, b3 )::Nil )
 		}

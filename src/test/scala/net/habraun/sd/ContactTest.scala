@@ -32,10 +32,10 @@ class ContactTest {
 
 	@Test
 	def verifyHasAttributes {
-		val b = new Body
+		val b = new Body {}
 		val point = Vec2D(10, 10)
 		val normal = Vec2D(0, 1)
-		val other = new Body
+		val other = new Body {}
 		val contact = Contact(b, point, normal, other)
 		assertEquals(b, contact.b)
 		assertEquals(point, contact.point)
@@ -46,42 +46,42 @@ class ContactTest {
 
 	@Test { val expected = classOf[IllegalArgumentException] }
 	def createContactWithNonUnitNormalExpectException {
-		Contact(new Body, Vec2D(0, 0), Vec2D(1, 1), new Body)
+		Contact(new Body {}, Vec2D(0, 0), Vec2D(1, 1), new Body {})
 	}
 
 
 
 	@Test
 	def createContactWithSlightlyOffNonUnitNormalsExpectTolerance {
-		Contact(new Body, Vec2D(0, 0), Vec2D(1.02, 0), new Body)
-		Contact(new Body, Vec2D(0, 0), Vec2D(0.98, 0), new Body)
+		Contact(new Body {}, Vec2D(0, 0), Vec2D(1.02, 0), new Body {})
+		Contact(new Body {}, Vec2D(0, 0), Vec2D(0.98, 0), new Body {})
 	}
 
 
 
 	@Test { val expected = classOf[NullPointerException]}
 	def createContactSetBodyNull {
-		Contact(null, Vec2D(0, 0), Vec2D(1, 0), new Body)
+		Contact(null, Vec2D(0, 0), Vec2D(1, 0), new Body {})
 	}
 
 
 
 	@Test { val expected = classOf[NullPointerException]}
 	def createContactSetNormalNull {
-		Contact(new Body, Vec2D(0, 0), null, new Body)
+		Contact(new Body {}, Vec2D(0, 0), null, new Body {})
 	}
 
 
 
 	@Test { val expected = classOf[NullPointerException]}
 	def createContactSetPointNull {
-		Contact(new Body, null, Vec2D(1, 0), new Body)
+		Contact(new Body {}, null, Vec2D(1, 0), new Body {})
 	}
 
 
 
 	@Test { val expected = classOf[NullPointerException]}
 	def createContactSetOtherNull {
-		Contact(new Body, Vec2D(0, 0), Vec2D(1, 0), null)
+		Contact(new Body {}, Vec2D(0, 0), Vec2D(1, 0), null)
 	}
 }

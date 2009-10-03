@@ -54,7 +54,7 @@ class WorldTest {
 
 	@Test
 	def verifyBodyIterableCantChangeWorld {
-		val body = new Body
+		val body = new Body {}
 		world.bodies.asInstanceOf[HashSet[Body]].addEntry(body)
 		assertFalse(world.bodies.exists(_ == body))
 	}
@@ -137,7 +137,7 @@ class WorldTest {
 		}
 		world.integrator = integrate
 
-		val body = new Body
+		val body = new Body {}
 		world.add(body)
 
 		val t = 2.0
@@ -151,7 +151,7 @@ class WorldTest {
 
 	@Test
 	def addAndRemoveBodyVerifyIsNotIntegrated {
-		val body = new Body
+		val body = new Body {}
 
 		val integrate = new Integrator {
 			var integrated = false
@@ -179,7 +179,7 @@ class WorldTest {
 		}
 		world.broadPhase = broadPhase
 
-		val body = new Body
+		val body = new Body {}
 		world.add(body)
 		world.step(2.0)
 
@@ -190,10 +190,10 @@ class WorldTest {
 
 	@Test
 	def addBroadPhaseReturningBodyPairsVerifyTheyArePassedToNarrowPhase {
-		val b1 = new Body
-		val b2 = new Body
-		val b3 = new Body
-		val b4 = new Body
+		val b1 = new Body {}
+		val b2 = new Body {}
+		val b3 = new Body {}
+		val b4 = new Body {}
 
 		world.broadPhase = new BroadPhase {
 			def apply(bodies: List[Body]) = (b1, b2)::(b3, b4)::Nil
@@ -226,7 +226,7 @@ class WorldTest {
 		}
 		world.broadPhase = broadPhase
 
-		val body = new Body
+		val body = new Body {}
 		body.mass = 5
 		body.applyForce(Vec2D(10, 0))
 		world.add(body)
@@ -249,7 +249,7 @@ class WorldTest {
 		}
 		world.broadPhase = broadPhase
 
-		val body = new Body
+		val body = new Body {}
 		body.mass = 5
 		body.applyImpulse(Vec2D(10, 0))
 		world.add(body)
@@ -263,8 +263,8 @@ class WorldTest {
 
 	@Test
 	def verifyCollisionReturnedByNarrowPhaseIsPassedToSolver {
-		val b1 = new Body
-		val b2 = new Body
+		val b1 = new Body {}
+		val b2 = new Body {}
 		world.add(b1)
 		world.add(b2)
 
