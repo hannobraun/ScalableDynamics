@@ -38,5 +38,5 @@ trait BroadPhase extends Function1[List[Shape], List[( Shape, Shape )]] {
 	 * must not contain duplicates.
 	 */
 
-	def apply(shapes: List[Shape]): List[( Shape, Shape )]
+	def apply( shapes: List[Shape] ): List[( Shape, Shape )]
 }
