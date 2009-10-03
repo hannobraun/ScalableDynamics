@@ -20,6 +20,10 @@ package net.habraun.sd
 
 
 
+import collision.phase.Collision
+
+
+
 /**
  * Computes the after effects of a collision and applies the necessary changes to the involved bodies.
  */

@@ -20,6 +20,10 @@ package net.habraun.sd
 
 
 
+import collision.phase.Collision
+
+
+
 /**
  * A simple collision solver that implements a physically correct elastic collision between two bodies.
  */
