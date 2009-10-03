@@ -30,11 +30,3 @@ import core.Body
  */
 
 trait Shape extends Body
-
-
-
-/**
- * A special shape that denotes the absence of any shape. A body with NoShape as its shape will not collide.
- */
-
-object NoShape extends Shape
