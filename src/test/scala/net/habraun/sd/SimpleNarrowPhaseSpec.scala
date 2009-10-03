@@ -22,7 +22,6 @@ package net.habraun.sd
 
 import collision.shape.Circle
 import collision.shape.LineSegment
-import collision.shape.NoShape
 import collision.shape.Shape
 import collision.test.CircleCircleTest
 import collision.test.CircleLineSegmentTest
@@ -61,30 +60,6 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val narrowPhase = new SimpleNarrowPhase
 
 			narrowPhase.testCircleLineSegment must haveClass[ContinuousCircleLineSegmentTest]
-		}
-
-		"not show a collision for two NoShapeS." in {
-			val narrowPhase = new SimpleNarrowPhase
-
-			narrowPhase( NoShape, NoShape ) must beEqualTo( None )
-		}
-
-		"not show a collision between a circle and a NoShape." in {
-			val narrowPhase = new SimpleNarrowPhase
-
-			val s = Circle( 1 )
-			s.position = Vec2D( 0, 0 )
-
-			narrowPhase( s, NoShape ) must beEqualTo( None )
-		}
-
-		"not show a collision between a line segment and a NoShape that lies on the line segment." in {
-			val narrowPhase = new SimpleNarrowPhase
-
-			val s = LineSegment( Vec2D( 0, 0 ), Vec2D( 0, 1 ) )
-			s.position = Vec2D( 0, 0 )
-
-			narrowPhase( s, NoShape ) must beEqualTo( None )
 		}
 
 		"throw an exception if an unsupported shape and a circle is passed." in {

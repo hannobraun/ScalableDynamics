@@ -22,7 +22,6 @@ package net.habraun.sd
 
 import collision.shape.Circle
 import collision.shape.LineSegment
-import collision.shape.NoShape
 import collision.shape.Shape
 import collision.test.CircleCircleTest
 import collision.test.CircleLineSegmentTest
@@ -72,9 +71,6 @@ class SimpleNarrowPhase extends NarrowPhase {
 									Contact( lineSegment, r.contact, -r.normal, circle1 ) )
 						}
 
-					case NoShape =>
-						None
-
 					case _ =>
 						throw new IllegalArgumentException( "Unsupported shape: " + s2 )
 				}
@@ -89,15 +85,9 @@ class SimpleNarrowPhase extends NarrowPhase {
 					case lineSegment2: LineSegment =>
 						None
 
-					case NoShape =>
-						None
-
 					case _ =>
 						throw new IllegalArgumentException( "Unsupported shape: " + s2 )
 				}
-
-			case NoShape =>
-				None
 
 			case _ =>
 				throw new IllegalArgumentException( "Unsupported shape: " + s1 )
