@@ -64,23 +64,6 @@ trait Body {
 
 
 	/**
-	 * The body's shape.
-	 * The shape is needed for collision detection.
-	 * Must not be null.
-	 */
-
-	private[this] var _shape: Shape = NoShape
-
-	def shape = _shape
-
-	def shape_=( s: Shape ) {
-		if ( s == null ) throw new NullPointerException
-		_shape = s
-	}
-
-
-
-	/**
 	 * The body's velocity, measured in meters per second.
 	 * Velocity vectors with a size greater than the maximum velocity will be shortened, retaining their
 	 * direction.

@@ -107,11 +107,9 @@ class ImpulseSolverTest {
 	@Test
 	def addBodiesThatWouldIntersectAfterMovementVerifyTheyDont {
 		val b1 = new Body {}
-		b1.shape = Circle(2)
 		b1.position = Vec2D(2, 0)
 		b1.velocity = Vec2D(1, 0)
 		val b2 = new Body {}
-		b2.shape = Circle(2)
 		b2.position = Vec2D(5, 0)
 		b2.velocity = Vec2D(0, 0)
 		val collision = Collision(0.5, Contact(b1, Vec2D(3, 0), Vec2D(1, 0), b2),
@@ -131,11 +129,9 @@ class ImpulseSolverTest {
 	def testForIntersectionAtHighPositionValues {
 		// This is a real-world example that led to a bug. That's where all the odd numbers come from.
 		val b1 = new Body {}
-		b1.shape = Circle(5)
 		b1.position = Vec2D(-806.75411, 387.8899501)
 		b1.velocity = Vec2D(-445.3620529718986, -50.442888201040574)
 		val b2 = new Body {}
-		b2.shape = Circle(30)
 		b2.position = Vec2D(50.0, 469.8163204364546)
 		b2.velocity = Vec2D(0.0, 0.0)
 		val collision = Collision(0.4766389925763854,

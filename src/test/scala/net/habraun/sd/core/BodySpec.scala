@@ -236,29 +236,6 @@ object BodySpec extends Specification {
 		}
 	}
 
-	"Body's shape code" should {
-		"have no initial shape." in {
-			val body = new Body {}
-
-			body.shape must beEqualTo( NoShape )
-		}
-
-		"have shape assignable." in {
-			val body = new Body {}
-
-			val shape = new Shape {}
-			body.shape = shape
-
-			body.shape must beEqualTo( shape )
-		}
-
-		"throw an exception if null is assigned to shape." in {
-			val body = new Body {}
-
-			( body.shape = null ) must throwA[NullPointerException]
-		}
-	}
-
 	"Body's movement constraint code" should {
 		"allow x movement initially." in {
 			val body = new Body {}
