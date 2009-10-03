@@ -23,11 +23,11 @@ package net.habraun.sd
 import collision.shape.Circle
 import collision.shape.LineSegment
 import collision.shape.NoShape
+import collision.shape.Shape
 import collision.test.CircleCircleTest
 import collision.test.CircleLineSegmentTest
 import collision.test.ContinuousCircleCircleTest
 import collision.test.ContinuousCircleLineSegmentTest
-import core.Body
 import math.Vec2D
 
 
@@ -51,56 +51,56 @@ class SimpleNarrowPhase extends NarrowPhase {
 	 * Handles circle-circle and circle-line segment collisions.
 	 */
 
-	def apply( b1: Body, b2: Body ) = {
-		val p1 = b1.position
-		val p2 = b2.position
-		val v1 = b1.position - b1.previousPosition
-		val v2 = b2.position - b2.previousPosition
+	def apply( s1: Shape, s2: Shape ) = {
+		val p1 = s1.position
+		val p2 = s2.position
+		val v1 = s1.position - s1.previousPosition
+		val v2 = s2.position - s2.previousPosition
 
-		b1.shape match {
-			case s1: Circle =>
-				b2.shape match {
-					case s2: Circle =>
-						for ( r <- testCircleCircle( s1, s2, p1, p2, v1, v2 ) ) yield {
-							Collision( r.t, Contact( b1, r.contact, r.normal, b2 ),
-									Contact( b2, r.contact, -r.normal, b1 ) )
+		s1 match {
+			case circle1: Circle =>
+				s2 match {
+					case circle2: Circle =>
+						for ( r <- testCircleCircle( circle1, circle2, p1, p2, v1, v2 ) ) yield {
+							Collision( r.t, Contact( circle1, r.contact, r.normal, circle2 ),
+									Contact( circle2, r.contact, -r.normal, circle1 ) )
 						}
 
-					case s2: LineSegment =>
-						for ( r <- testCircleLineSegment( s1, s2, p1, p2, v1, v2 ) ) yield {
-							Collision( r.t, Contact( b1, r.contact, r.normal, b2 ),
-									Contact( b2, r.contact, -r.normal, b1 ) )
+					case lineSegment: LineSegment =>
+						for ( r <- testCircleLineSegment( circle1, lineSegment, p1, p2, v1, v2 ) ) yield {
+							Collision( r.t, Contact( circle1, r.contact, r.normal, lineSegment ),
+									Contact( lineSegment, r.contact, -r.normal, circle1 ) )
 						}
 
 					case NoShape =>
 						None
 
 					case _ =>
-						throw new IllegalArgumentException( "Unsupported shape: " + b2.shape )
+						throw new IllegalArgumentException( "Unsupported shape: " + s2 )
 				}
 
-			case s1: LineSegment =>
-				b2.shape match {
-					case s2: Circle =>
-						for ( r <- testCircleLineSegment( s2, s1, p2, p1, v2, v1 ) ) yield {
-							Collision( r.t, Contact( b1, r.contact, r.normal, b2 ), null )
+			case lineSegment1: LineSegment =>
+				s2 match {
+					case circle: Circle =>
+						for ( r <- testCircleLineSegment( circle, lineSegment1, p2, p1, v2, v1 ) ) yield {
+							Collision( r.t, Contact( lineSegment1, r.contact, r.normal, circle ), null )
 						}
 
-					case s2: LineSegment =>
+					case lineSegment2: LineSegment =>
 						None
 
 					case NoShape =>
 						None
 
 					case _ =>
-						throw new IllegalArgumentException( "Unsupported shape: " + b2.shape )
+						throw new IllegalArgumentException( "Unsupported shape: " + s2 )
 				}
 
 			case NoShape =>
 				None
 
 			case _ =>
-				throw new IllegalArgumentException( "Unsupported shape: " + b1.shape )
+				throw new IllegalArgumentException( "Unsupported shape: " + s1 )
 		}
 	}
 }

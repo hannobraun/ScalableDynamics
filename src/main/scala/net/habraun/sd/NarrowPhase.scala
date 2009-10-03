@@ -20,23 +20,23 @@ package net.habraun.sd
 
 
 
-import core.Body
+import collision.shape.Shape
 
 
 
 /**
  * The narrow phase is the second of two phases of collision detection.
- * It determines if two bodies collide, and if they do, the properties of that collision. This operation is
- * potentially expensive, so the narrow phase only tests bodies that were deemed likely candidates for
- * collision by the broad phase.
+ * It determines if two shapes collide, and if they do, the properties of that collision. This operation is
+ * potentially expensive, so a narrow phase should only test shapes that were deemed likely candidates for
+ * collision by a broad phase.
  */
 
-trait NarrowPhase extends Function2[Body, Body, Option[Collision]] {
+trait NarrowPhase extends Function2[Shape, Shape, Option[Collision]] {
 
 	/**
-	 * Determines if the two bodies collide, and if they do, returns a Collision object that describes the
-	 * collision. If the bodies do not collide, this method returns None.
+	 * Determines if the two shapes collide, and if they do, returns a Collision object that describes the
+	 * collision. If the shapes do not collide, this method returns None.
 	 */
 
-	def apply(b1: Body, b2: Body): Option[Collision]
+	def apply( s1: Shape, s2: Shape ): Option[Collision]
 }

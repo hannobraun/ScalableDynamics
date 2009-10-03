@@ -20,6 +20,7 @@ package net.habraun.sd
 
 
 
+import collision.shape.Shape
 import core.Body
 import math.Vec2D
 
@@ -144,7 +145,12 @@ class World {
 		// Collision detection.
 		val possibleCollisionPairs = broadPhase(_bodies.toList)
 		val possibleCollisions = possibleCollisionPairs.map((pair) => {
-			narrowPhase(pair._1, pair._2)
+			if ( pair._1.isInstanceOf[Shape] && pair._2.isInstanceOf[Shape] ) {
+				narrowPhase( pair._1.asInstanceOf[Shape], pair._2.asInstanceOf[Shape] )
+			}
+			else {
+				None
+			}
 		})
 
 		// Compute collision effects.

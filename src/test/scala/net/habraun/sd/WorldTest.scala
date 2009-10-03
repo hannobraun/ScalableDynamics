@@ -20,6 +20,7 @@ package net.habraun.sd
 
 
 
+import collision.shape.Shape
 import core.Body
 import math.Vec2D
 
@@ -179,7 +180,7 @@ class WorldTest {
 		}
 		world.broadPhase = broadPhase
 
-		val body = new Body {}
+		val body = new Body with Shape {}
 		world.add(body)
 		world.step(2.0)
 
@@ -190,10 +191,10 @@ class WorldTest {
 
 	@Test
 	def addBroadPhaseReturningBodyPairsVerifyTheyArePassedToNarrowPhase {
-		val b1 = new Body {}
-		val b2 = new Body {}
-		val b3 = new Body {}
-		val b4 = new Body {}
+		val b1 = new Body with Shape {}
+		val b2 = new Body with Shape {}
+		val b3 = new Body with Shape {}
+		val b4 = new Body with Shape {}
 
 		world.broadPhase = new BroadPhase {
 			def apply(bodies: List[Body]) = (b1, b2)::(b3, b4)::Nil
@@ -201,7 +202,7 @@ class WorldTest {
 
 		val narrowPhase = new NarrowPhase {
 			var passedPairs: List[(Body, Body)] = Nil
-			def apply(b1: Body, b2: Body) = {
+			def apply(b1: Shape, b2: Shape) = {
 				passedPairs = passedPairs:::List((b1, b2))
 				None
 			}
@@ -226,7 +227,7 @@ class WorldTest {
 		}
 		world.broadPhase = broadPhase
 
-		val body = new Body {}
+		val body = new Body with Shape {}
 		body.mass = 5
 		body.applyForce(Vec2D(10, 0))
 		world.add(body)
@@ -249,7 +250,7 @@ class WorldTest {
 		}
 		world.broadPhase = broadPhase
 
-		val body = new Body {}
+		val body = new Body with Shape {}
 		body.mass = 5
 		body.applyImpulse(Vec2D(10, 0))
 		world.add(body)
@@ -263,8 +264,8 @@ class WorldTest {
 
 	@Test
 	def verifyCollisionReturnedByNarrowPhaseIsPassedToSolver {
-		val b1 = new Body {}
-		val b2 = new Body {}
+		val b1 = new Body with Shape {}
+		val b2 = new Body with Shape {}
 		world.add(b1)
 		world.add(b2)
 
@@ -272,7 +273,7 @@ class WorldTest {
 				Contact(b2, Vec2D(1, 1), Vec2D(-1, 0), b1))
 
 		world.narrowPhase = new NarrowPhase {
-			def apply(b1: Body, b2: Body) = {
+			def apply(b1: Shape, b2: Shape) = {
 				Some(collision)
 			}
 		}
