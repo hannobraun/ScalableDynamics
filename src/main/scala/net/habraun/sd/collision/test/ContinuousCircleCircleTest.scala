@@ -36,16 +36,18 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 	 * Parameters:
 	 * * c1: The first circle.
 	 * * c2: The second circle.
-	 * * p1: Position of the first circle.
-	 * * p2: Position of the second circle.
-	 * * v1: Movement of the first circle.
-	 * * v2: Movement of the second circle.
 	 *
 	 * Attention: If the circles already overlap at the beginning of the movement, no valid contact point is
 	 * reported. In that case, the collision point will always be (0, 0).
 	 */
 
-	def apply( c1: Circle, c2: Circle, p1: Vec2D, p2: Vec2D, v1: Vec2D, v2: Vec2D ): Option[TestResult] = {
+	def apply( c1: Circle, c2: Circle ): Option[TestResult] = {
+		// Extract position and velocity from the circles.
+		val p1 = c1.previousPosition
+		val p2 = c2.previousPosition
+		val v1 = c1.position - c1.previousPosition
+		val v2 = c2.position - c2.previousPosition
+
 		// This algorithms does continious collision detection between two moving circles. I got this from
 		// "Real-Time Collision Detection" by Christer Ericson, page 223/224.
 

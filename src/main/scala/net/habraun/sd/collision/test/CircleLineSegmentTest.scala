@@ -31,20 +31,16 @@ import shape.LineSegment
  */
 
 trait CircleLineSegmentTest
-		extends Function6[Circle, LineSegment, Vec2D, Vec2D, Vec2D, Vec2D, Option[TestResult]] {
+		extends Function2[Circle, LineSegment, Option[TestResult]] {
 
 	/**
 	 *  Circle - line segment tests take the following parameters:
 	 * * c: The circle.
 	 * * ls: The line segment.
-	 * * pc: The position of the circle.
-	 * * pls: The position of the line segment.
-	 * * vc: The velocity of the circle.
-	 * * vls: The velocity of the line segment.
 	 *
 	 * If the circle and line segment collide, Some(TestResult) is returned. If not, the function returns
 	 * None.
 	 */
 
-	def apply( c: Circle, ls: LineSegment, pc: Vec2D, pls: Vec2D, vc: Vec2D, vls: Vec2D ): Option[TestResult]
+	def apply( c: Circle, ls: LineSegment ): Option[TestResult]
 }

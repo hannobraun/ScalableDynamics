@@ -24,6 +24,7 @@ import math.Vec2D
 import shape.Circle
 
 import org.specs.Specification
+import org.specs.mock.Mockito
 import org.specs.runner.JUnit4
 
 
@@ -32,127 +33,142 @@ class ContinuousCircleCircleTestTest extends JUnit4( ContinuousCircleCircleTestS
 
 
 
-object ContinuousCircleCircleTestSpec extends Specification {
+object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 
 	"ContinuousCircleCircleTest" should {
 		"handle non-moving, non-colliding circles." in {
 			val test = new ContinuousCircleCircleTest
+
+			val c1 = mock[Circle]
+			val c2 = mock[Circle]
+			c1.radius returns 1
+			c2.radius returns 1
+			c1.previousPosition returns Vec2D( 0, 0 )
+			c2.previousPosition returns Vec2D( 3, 0 )
+			c1.position returns Vec2D( 0, 0 )
+			c2.position returns Vec2D( 3, 0 )
 			
-			val c1 = Circle( 1 )
-			val c2 = Circle( 1 )
-			val p1 = Vec2D( 0, 0 )
-			val p2 = Vec2D( 3, 0 )
-			val v1 = Vec2D( 0, 0 )
-			val v2 = Vec2D( 0, 0 )
-			
-			test( c1, c2, p1, p2, v1, v2 ) must be( None )
+			test( c1, c2 ) must beEqualTo( None )
 		}
 
 		"handle non-moving, colliding circles." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = Circle( 2 )
-			val c2 = Circle( 2 )
-			val p1 = Vec2D( 0, 0 )
-			val p2 = Vec2D( 3, 0 )
-			val v1 = Vec2D( 0, 0 )
-			val v2 = Vec2D( 0, 0 )
+			val c1 = mock[Circle]
+			val c2 = mock[Circle]
+			c1.radius returns 2
+			c2.radius returns 2
+			c1.previousPosition returns Vec2D( 0, 0 )
+			c2.previousPosition returns Vec2D( 3, 0 )
+			c1.position returns Vec2D( 0, 0 )
+			c2.position returns Vec2D( 3, 0 )
 
-			test( c1, c2, p1, p2, v1, v2 ) must
-					beEqualTo( Some( TestResult( 0.0, Vec2D( 0, 0 ), Vec2D( 1, 0 ) ) ) )
+			test( c1, c2 ) must beEqualTo( Some( TestResult( 0.0, Vec2D( 0, 0 ), Vec2D( 1, 0 ) ) ) )
 		}
 
 		"handle one circle moving and colliding." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = Circle( 1 )
-			val c2 = Circle( 1 )
-			val p1 = Vec2D( -1, 0 )
-			val p2 = Vec2D( 2, 0 )
-			val v1 = Vec2D( 2, 0 )
-			val v2 = Vec2D( 0, 0 )
+			val c1 = mock[Circle]
+			val c2 = mock[Circle]
+			c1.radius returns 1
+			c2.radius returns 1
+			c1.previousPosition returns Vec2D( -1, 0 )
+			c2.previousPosition returns Vec2D( 2, 0 )
+			c1.position returns Vec2D( 1, 0 )
+			c2.position returns Vec2D( 2, 0 )
 
-			test( c1, c2, p1, p2, v1, v2 ) must
-					beEqualTo( Some( TestResult( 0.5, Vec2D( 1, 0 ), Vec2D( 1, 0 ) ) ) )
+			test( c1, c2 ) must beEqualTo( Some( TestResult( 0.5, Vec2D( 1, 0 ), Vec2D( 1, 0 ) ) ) )
 		}
 
 		"handle one circle moving and not colliding." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = Circle( 1 )
-			val c2 = Circle( 1 )
-			val p1 = Vec2D( -3, 0 )
-			val p2 = Vec2D( 2, 0 )
-			val v1 = Vec2D( 2, 0 )
-			val v2 = Vec2D( 0, 0 )
+			val c1 = mock[Circle]
+			val c2 = mock[Circle]
+			c1.radius returns 1
+			c2.radius returns 1
+			c1.previousPosition returns Vec2D( -3, 0 )
+			c2.previousPosition returns Vec2D( 2, 0 )
+			c1.position returns Vec2D( -1, 0 )
+			c2.position returns Vec2D( 2, 0 )
 
-			test( c1, c2, p1, p2, v1, v2 ) must be( None )
+			test( c1, c2 ) must be( None )
 		}
 
 		"handle both circles moving and colliding." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = Circle( 1 )
-			val c2 = Circle( 1 )
-			val p1 = Vec2D( -3, 0 )
-			val p2 = Vec2D( 1, 0 )
-			val v1 = Vec2D( 2, 0 )
-			val v2 = Vec2D( -2, 0 )
+			val c1 = mock[Circle]
+			val c2 = mock[Circle]
+			c1.radius returns 1
+			c2.radius returns 1
+			c1.previousPosition returns Vec2D( -3, 0 )
+			c2.previousPosition returns Vec2D( 1, 0 )
+			c1.position returns Vec2D( -1, 0 )
+			c2.position returns Vec2D( -1, 0 )
 
-			test( c1, c2, p1, p2, v1, v2 ) must
-					beEqualTo( Some( TestResult( 0.5, Vec2D( -1, 0 ), Vec2D( 1, 0 ) ) ) )
+			test( c1, c2 ) must beEqualTo( Some( TestResult( 0.5, Vec2D( -1, 0 ), Vec2D( 1, 0 ) ) ) )
 		}
 
 		"handle both circles moving towards each other, but stopping before collision." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = Circle( 1 )
-			val c2 = Circle( 1 )
-			val p1 = Vec2D( -3, 0 )
-			val p2 = Vec2D( 4, 0 )
-			val v1 = Vec2D( 2, 0 )
-			val v2 = Vec2D( -2, 0 )
+			val c1 = mock[Circle]
+			val c2 = mock[Circle]
+			c1.radius returns 1
+			c2.radius returns 1
+			c1.previousPosition returns Vec2D( -3, 0 )
+			c2.previousPosition returns Vec2D( 4, 0 )
+			c1.position returns Vec2D( -1, 0 )
+			c2.position returns Vec2D( 2, 0 )
 
-			test( c1, c2, p1, p2, v1, v2 ) must be( None )
+			test( c1, c2 ) must beEqualTo( None )
 		}
 
 		"handle both circles not moving towards each other." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = Circle( 1 )
-			val c2 = Circle( 1 )
-			val p1 = Vec2D( -2, 0 )
-			val p2 = Vec2D( 2, 0 )
-			val v1 = Vec2D( -2, 0 )
-			val v2 = Vec2D( 2, 0 )
+			val c1 = mock[Circle]
+			val c2 = mock[Circle]
+			c1.radius returns 1
+			c2.radius returns 1
+			c1.previousPosition returns Vec2D( -2, 0 )
+			c2.previousPosition returns Vec2D( 2, 0 )
+			c1.position returns Vec2D( -4, 0 )
+			c2.position returns Vec2D( 4, 0 )
 
-			test( c1, c2, p1, p2, v1, v2 ) must be( None )
+			test( c1, c2 ) must beEqualTo( None )
 		}
 
 		"handle both circles moving and occupying the same space at different times." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = Circle( 1 )
-			val c2 = Circle( 1 )
-			val p1 = Vec2D( 0, 0 )
-			val p2 = Vec2D( 5, 0 )
-			val v1 = Vec2D( 0, 5 )
-			val v2 = Vec2D( -5, 0 )
+			val c1 = mock[Circle]
+			val c2 = mock[Circle]
+			c1.radius returns 1
+			c2.radius returns 1
+			c1.previousPosition returns Vec2D( 0, 0 )
+			c2.previousPosition returns Vec2D( 5, 0 )
+			c1.position returns Vec2D( 0, 5 )
+			c2.position returns Vec2D( 0, 0 )
 
-			test( c1, c2, p1, p2, v1, v2 ) must be( None )
+			test( c1, c2 ) must beEqualTo( None )
 		}
 
 		"handle both circles moving on parallel courses with no intersection." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = Circle( 1 )
-			val c2 = Circle( 1 )
-			val p1 = Vec2D( 0, 0 )
-			val p2 = Vec2D( 3, 0 )
-			val v1 = Vec2D( 0, 5 )
-			val v2 = Vec2D( 0, 3 )
+			val c1 = mock[Circle]
+			val c2 = mock[Circle]
+			c1.radius returns 1
+			c2.radius returns 1
+			c1.previousPosition returns Vec2D( 0, 0 )
+			c2.previousPosition returns Vec2D( 3, 0 )
+			c1.position returns Vec2D( 0, 5 )
+			c2.position returns Vec2D( 3, 3 )
 
-			test( c1, c2, p1, p2, v1, v2 ) must be( None )
+			test( c1, c2 ) must beEqualTo( None )
 		}
 	}
 }

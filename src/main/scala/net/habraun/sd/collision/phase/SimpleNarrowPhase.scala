@@ -51,22 +51,17 @@ class SimpleNarrowPhase extends NarrowPhase {
 	 */
 
 	def apply( s1: Shape, s2: Shape ) = {
-		val p1 = s1.position
-		val p2 = s2.position
-		val v1 = s1.position - s1.previousPosition
-		val v2 = s2.position - s2.previousPosition
-
 		s1 match {
 			case circle1: Circle =>
 				s2 match {
 					case circle2: Circle =>
-						for ( r <- testCircleCircle( circle1, circle2, p1, p2, v1, v2 ) ) yield {
+						for ( r <- testCircleCircle( circle1, circle2 ) ) yield {
 							Collision( r.t, Contact( circle1, r.contact, r.normal, circle2 ),
 									Contact( circle2, r.contact, -r.normal, circle1 ) )
 						}
 
 					case lineSegment: LineSegment =>
-						for ( r <- testCircleLineSegment( circle1, lineSegment, p1, p2, v1, v2 ) ) yield {
+						for ( r <- testCircleLineSegment( circle1, lineSegment ) ) yield {
 							Collision( r.t, Contact( circle1, r.contact, r.normal, lineSegment ),
 									Contact( lineSegment, r.contact, -r.normal, circle1 ) )
 						}
@@ -78,7 +73,7 @@ class SimpleNarrowPhase extends NarrowPhase {
 			case lineSegment1: LineSegment =>
 				s2 match {
 					case circle: Circle =>
-						for ( r <- testCircleLineSegment( circle, lineSegment1, p2, p1, v2, v1 ) ) yield {
+						for ( r <- testCircleLineSegment( circle, lineSegment1 ) ) yield {
 							Collision( r.t, Contact( lineSegment1, r.contact, r.normal, circle ), null )
 						}
 

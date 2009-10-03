@@ -38,8 +38,13 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 	 * invalid. It will always be (0, 0).
 	 */
 
-	def apply( c: Circle, ls: LineSegment, pc: Vec2D, pls: Vec2D, vc: Vec2D, vls: Vec2D ):
-			Option[TestResult] = {
+	def apply( c: Circle, ls: LineSegment ): Option[TestResult] = {
+		// Extract position and velocity from the shapes.
+		val pc = c.previousPosition
+		val pls = ls.previousPosition
+		val vc = c.position - c.previousPosition
+		val vls = ls.position - ls.previousPosition
+
 		// This algorithms does continious collision detection between a moving circle and a moving line
 		// segment. I got this from "Real-Time Collision Detection" by Christer Ericson, page 219-222.
 

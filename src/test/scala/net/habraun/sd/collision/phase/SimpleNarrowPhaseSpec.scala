@@ -93,13 +93,11 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			val circleCircleTest = mock[CircleCircleTest]
 			narrowPhase.testCircleCircle = circleCircleTest
-			circleCircleTest( s1, s2, s1.position, s2.position, s1.position -
-					s1.previousPosition, s2.position - s2.previousPosition ) returns None
+			circleCircleTest( s1, s2 ) returns None
 
 			narrowPhase( s1, s2 )
 
-			circleCircleTest( s1, s2, s1.position, s2.position, s1.position -
-					s1.previousPosition, s2.position - s2.previousPosition ) was called
+			circleCircleTest( s1, s2 ) was called
 		}
 
 		"pass the parameters to the circle-line segment test if a circle and a line segment are passed." in {
@@ -114,13 +112,11 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			val circleLineSegmentTest = mock[CircleLineSegmentTest]
 			narrowPhase.testCircleLineSegment = circleLineSegmentTest
-			circleLineSegmentTest( s1, s2, s1.position, s2.position, s1.position -
-					s1.previousPosition, s2.position - s2.previousPosition ) returns None
+			circleLineSegmentTest( s1, s2 ) returns None
 
 			narrowPhase( s1, s2 )
 
-			circleLineSegmentTest( s1, s2, s1.position, s2.position, s1.position -
-					s1.previousPosition, s2.position - s2.previousPosition ) was called
+			circleLineSegmentTest( s1, s2 ) was called
 		}
 
 		"construct a correct Collision instance from the circle-circle test result." in {
@@ -130,8 +126,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val s2 = Circle( 2 )
 
 			val circleCircleTest = mock[CircleCircleTest]
-			circleCircleTest( s1, s2, s1.position, s2.position, s1.position - s1.previousPosition,
-					s2.position - s2.previousPosition ) returns
+			circleCircleTest( s1, s2 ) returns
 					Some( TestResult( 0.5, Vec2D( 5, 5 ), Vec2D( 1, 0 ) ) )
 			narrowPhase.testCircleCircle = circleCircleTest
 
@@ -148,8 +143,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val s2 = LineSegment( Vec2D( 1, 1 ), Vec2D( 2, 2 ) )
 
 			val circleLineSegmentTest = mock[CircleLineSegmentTest]
-			circleLineSegmentTest( s1, s2, s1.position, s2.position,
-					s1.position - s1.previousPosition, s2.position - s2.previousPosition ) returns
+			circleLineSegmentTest( s1, s2 ) returns
 					Some( TestResult( 0.5, Vec2D( 5, 5 ), Vec2D( 1, 0 ) ) )
 			narrowPhase.testCircleLineSegment = circleLineSegmentTest
 
@@ -166,8 +160,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val s2 = Circle( 2 )
 
 			val circleCircleTest = mock[CircleCircleTest]
-			circleCircleTest( s1, s2, s1.position, s2.position, s1.position - s1.previousPosition,
-					s2.position - s2.previousPosition ) returns None
+			circleCircleTest( s1, s2 ) returns None
 			narrowPhase.testCircleCircle = circleCircleTest
 
 			narrowPhase( s1, s2 ) must beEqualTo( None )
@@ -180,8 +173,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val s2 = LineSegment( Vec2D( 1, 1 ), Vec2D( 2, 2 ) )
 
 			val circleLineSegmentTest = mock[CircleLineSegmentTest]
-			circleLineSegmentTest( s1, s2, s1.position, s2.position,
-					s1.position - s1.previousPosition, s2.position - s2.previousPosition ) returns None
+			circleLineSegmentTest( s1, s2 ) returns None
 			narrowPhase.testCircleLineSegment = circleLineSegmentTest
 
 			narrowPhase( s1, s2 ) must beEqualTo( None )
