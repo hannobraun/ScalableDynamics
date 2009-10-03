@@ -24,4 +24,15 @@ package net.habraun.sd.collision.shape
  * Models a circle.
  */
 
-case class Circle( radius: Double ) extends Shape
+trait Circle extends Shape {
+
+	/**
+	 * The radius of the circle.
+	 */
+
+	private var _radius = 1.0
+
+	def radius = _radius
+
+	def radius_=( newRadius: Double ) = _radius = newRadius
+}

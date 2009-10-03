@@ -32,13 +32,25 @@ class CircleTest extends JUnit4( CircleSpec )
 object CircleSpec extends Specification {
 
 	"Circle" should {
-		"have a radius." in {
-			val radius = 1.0
-			Circle( radius ).radius must beEqualTo( radius )
+		"be a Shape." in {
+			val circle = new Circle {}
+			
+			circle must haveSuperClass[Shape]
 		}
 
-		"be a Shape." in {
-			Circle( 1.0 ) must haveSuperClass[Shape]
+		"have an initial radius of 1.0." in {
+			val circle = new Circle {}
+
+			circle.radius must beEqualTo( 1.0 )
+		}
+
+		"have its radius assignable." in {
+			val circle = new Circle {}
+
+			val radius = 1.0
+			circle.radius = radius
+
+			circle.radius must beEqualTo( radius )
 		}
 	}
 }
