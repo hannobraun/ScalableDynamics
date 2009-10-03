@@ -20,23 +20,23 @@ package net.habraun.sd
 
 
 
-import core.Body
+import collision.shape.Shape
 import math.Vec2D
 
 
 
 /**
- * Models a contact of one body to another.
+ * Models a contact of one shape with another.
  * A contact has the following attributes:
- * * b: The body that has contact to another.
+ * * s: The shape that is in contact with another.
  * * point: The position vector of the point of contact.
  * * normal: The surface normal of b at the point of contact. This is a unit vector.
- * * other: The other body that b has contact to.
+ * * other: The other shape that s is in contact to.
  */
 
-case class Contact( b: Body, point: Vec2D, normal: Vec2D, other: Body ) {
+case class Contact( s: Shape, point: Vec2D, normal: Vec2D, other: Shape ) {
 	// Make sure the parameters are not null.
-	if ( b == null || point == null || normal == null || other == null )
+	if ( s == null || point == null || normal == null || other == null )
 		throw new NullPointerException
 	
 	// Check if vectors are unit vectors.

@@ -20,7 +20,7 @@ package net.habraun.sd
 
 
 
-import core.Body
+import collision.shape.Shape
 import math.Vec2D
 
 import org.junit.Test
@@ -32,12 +32,12 @@ class CollisionTest {
 
 	@Test
 	def verifyHasAttributes {
-		val b1 = new Body {}
-		val b2 = new Body {}
+		val s1 = new Shape {}
+		val s2 = new Shape {}
 
 		val t = 0.5
-		val contact1 = Contact(b1, Vec2D(5, 5), Vec2D(1, 0),  b2)
-		val contact2 = Contact(b2, Vec2D(5, 5), Vec2D(-1, 0), b1)
+		val contact1 = Contact(s1, Vec2D(5, 5), Vec2D(1, 0),  s2)
+		val contact2 = Contact(s2, Vec2D(5, 5), Vec2D(-1, 0), s1)
 
 		val collision = Collision(t, contact1, contact2)
 		
@@ -50,7 +50,7 @@ class CollisionTest {
 
 	@Test { val expected = classOf[IllegalArgumentException] }
 	def createCollisionWithInvalidTime {
-		val contact = Contact(new Body {}, Vec2D(5, 5), Vec2D(1, 0), new Body {})
+		val contact = Contact(new Shape {}, Vec2D(5, 5), Vec2D(1, 0), new Shape {})
 		Collision(1.1, contact, contact)
 	}
 
@@ -58,7 +58,7 @@ class CollisionTest {
 
 	@Test { val expected = classOf[IllegalArgumentException] }
 	def createCollisionWithInvalidTime2 {
-		val contact = Contact(new Body {}, Vec2D(5, 5), Vec2D(1, 0), new Body {})
+		val contact = Contact(new Shape {}, Vec2D(5, 5), Vec2D(1, 0), new Shape {})
 		Collision(-1.0, contact, contact)
 	}
 
@@ -66,24 +66,24 @@ class CollisionTest {
 
 	@Test { val expected = classOf[NullPointerException] }
 	def createCollisionWithNullContact1 {
-		Collision(0.5, null, Contact(new Body {}, Vec2D(5, 5), Vec2D(1, 0), new Body {}))
+		Collision(0.5, null, Contact(new Shape {}, Vec2D(5, 5), Vec2D(1, 0), new Shape {}))
 	}
 
 
 
 	@Test { val expected = classOf[NullPointerException] }
 	def createCollisionWithNullContact2 {
-		Collision(0.5, Contact(new Body {}, Vec2D(5, 5), Vec2D(1, 0), new Body {}), null)
+		Collision(0.5, Contact(new Shape {}, Vec2D(5, 5), Vec2D(1, 0), new Shape {}), null)
 	}
 
 
 
 	@Test { val expected = classOf[IllegalArgumentException] }
 	def verifyContactBodiesMatch1 {
-		val b1 = new Body {}
-		val b2 = new Body {}
-		val contact1 = Contact(b1, Vec2D(5, 5), Vec2D(1, 0), b2)
-		val contact2 = Contact(b2, Vec2D(5, 5), Vec2D(-1, 0), new Body {})
+		val s1 = new Shape {}
+		val s2 = new Shape {}
+		val contact1 = Contact(s1, Vec2D(5, 5), Vec2D(1, 0), s2)
+		val contact2 = Contact(s2, Vec2D(5, 5), Vec2D(-1, 0), new Shape {})
 		Collision(0.5, contact1, contact2)
 	}
 
@@ -91,10 +91,10 @@ class CollisionTest {
 
 	@Test { val expected = classOf[IllegalArgumentException] }
 	def verifyContactBodiesMatch2 {
-		val b1 = new Body {}
-		val b2 = new Body {}
-		val contact1 = Contact(b1, Vec2D(5, 5), Vec2D(1, 0), b2)
-		val contact2 = Contact(new Body {}, Vec2D(5, 5), Vec2D(-1, 0), b1)
+		val s1 = new Shape {}
+		val s2 = new Shape {}
+		val contact1 = Contact(s1, Vec2D(5, 5), Vec2D(1, 0), s2)
+		val contact2 = Contact(new Shape {}, Vec2D(5, 5), Vec2D(-1, 0), s1)
 		Collision(0.5, contact1, contact2)
 	}
 
@@ -102,10 +102,10 @@ class CollisionTest {
 
 	@Test { val expected = classOf[IllegalArgumentException] }
 	def verifyContactPointsMatch {
-		val b1 = new Body {}
-		val b2 = new Body {}
-		val contact1 = Contact(b1, Vec2D(5, 5), Vec2D(1, 0), b2)
-		val contact2 = Contact(b2, Vec2D(6, 6), Vec2D(-1, 0), b1)
+		val s1 = new Shape {}
+		val s2 = new Shape {}
+		val contact1 = Contact(s1, Vec2D(5, 5), Vec2D(1, 0), s2)
+		val contact2 = Contact(s2, Vec2D(6, 6), Vec2D(-1, 0), s1)
 		Collision(0.5, contact1, contact2)
 	}
 
@@ -113,10 +113,10 @@ class CollisionTest {
 
 	@Test { val expected = classOf[IllegalArgumentException] }
 	def verifyContactNormalsMatch {
-		val b1 = new Body {}
-		val b2 = new Body {}
-		val contact1 = Contact(b1, Vec2D(5, 5), Vec2D(1, 0), b2)
-		val contact2 = Contact(b2, Vec2D(5, 5), Vec2D(0, -1), b1)
+		val s1 = new Shape {}
+		val s2 = new Shape {}
+		val contact1 = Contact(s1, Vec2D(5, 5), Vec2D(1, 0), s2)
+		val contact2 = Contact(s2, Vec2D(5, 5), Vec2D(0, -1), s1)
 		Collision(0.5, contact1, contact2)
 	}
 }
