@@ -40,12 +40,12 @@ class Body {
 	 * Must not be null.
 	 */
 
-	private[this] var _position = Vec2D(0, 0)
+	private[this] var _position = Vec2D( 0, 0 )
 
 	def position = _position
 
-	def position_=(p: Vec2D) {
-		if (p == null) throw new NullPointerException
+	def position_=( p: Vec2D ) {
+		if ( p == null ) throw new NullPointerException
 		_previousPosition = _position
 		_position = p
 	}
@@ -57,7 +57,7 @@ class Body {
 	 * This attribute is initialized with the value Vec2D(0, 0).
 	 */
 
-	private[this] var _previousPosition = Vec2D(0, 0)
+	private[this] var _previousPosition = Vec2D( 0, 0 )
 
 	def previousPosition = _previousPosition
 
@@ -73,8 +73,8 @@ class Body {
 
 	def shape = _shape
 
-	def shape_=(s: Shape) {
-		if (s == null) throw new NullPointerException
+	def shape_=( s: Shape ) {
+		if ( s == null ) throw new NullPointerException
 		_shape = s
 	}
 
@@ -88,18 +88,18 @@ class Body {
 	 * Must not be null.
 	 */
 	
-	private[this] var _velocity = Vec2D(0, 0)
+	private[this] var _velocity = Vec2D( 0, 0 )
 
 	def velocity = _velocity
 
-	def velocity_=(v: Vec2D) {
-		if (v == null) throw new NullPointerException
+	def velocity_=( v: Vec2D ) {
+		if ( v == null ) throw new NullPointerException
 
 		// Check if the new velocity is greater than the maximum velocity.
-		if (v * v > maxVelocity * maxVelocity) {
+		if ( v * v > maxVelocity * maxVelocity ) {
 			// It is. Set the velocity to the maximum velocity while retaining the direction of the new
 			// velocity.
-			_velocity = v * (maxVelocity / Math.sqrt(v * v))
+			_velocity = v * ( maxVelocity / Math.sqrt( v * v ) )
 		}
 		else {
 			// It is not, which means we can safely set the velocity to the new velocity.
@@ -120,8 +120,8 @@ class Body {
 
 	def mass = _mass
 
-	def mass_=(m: Double) {
-		if (m <= 0) throw new IllegalArgumentException
+	def mass_=( m: Double ) {
+		if ( m <= 0 ) throw new IllegalArgumentException
 		_mass = m
 	}
 
@@ -135,16 +135,16 @@ class Body {
 	 * A force must never be null.
 	 */
 
-	private[this] var _appliedForce = Vec2D(0, 0)
+	private[this] var _appliedForce = Vec2D( 0, 0 )
 
 	def appliedForce = _appliedForce
 
-	def applyForce(f: Vec2D) {
+	def applyForce( f: Vec2D ) {
 		_appliedForce += f
 	}
 
 	def resetForce {
-		_appliedForce = Vec2D(0, 0)
+		_appliedForce = Vec2D( 0, 0 )
 	}
 
 
@@ -157,16 +157,16 @@ class Body {
 	 * An impulse must never be null.
 	 */
 
-	private[this] var _appliedImpulse = Vec2D(0, 0)
+	private[this] var _appliedImpulse = Vec2D( 0, 0 )
 
 	def appliedImpulse = _appliedImpulse
 
-	def applyImpulse(impulse: Vec2D) {
+	def applyImpulse( impulse: Vec2D ) {
 		_appliedImpulse += impulse
 	}
 
 	def resetImpulse {
-		_appliedImpulse = Vec2D(0, 0)
+		_appliedImpulse = Vec2D( 0, 0 )
 	}
 
 
@@ -181,8 +181,8 @@ class Body {
 
 	def maxVelocity = _maxVelocity
 
-	def maxVelocity_=(mv: Double) {
-		if (mv < 0) throw new IllegalArgumentException
+	def maxVelocity_=( mv: Double ) {
+		if ( mv < 0 ) throw new IllegalArgumentException
 		_maxVelocity = mv
 	}
 
@@ -200,7 +200,7 @@ class Body {
 
 	def yMovementAllowed = _yMovementAllowed
 
-	def allowXMovement(allowed: Boolean) = _xMovementAllowed = allowed
+	def allowXMovement( allowed: Boolean ) = _xMovementAllowed = allowed
 
-	def allowYMovement(allowed: Boolean) = _yMovementAllowed = allowed
+	def allowYMovement( allowed: Boolean ) = _yMovementAllowed = allowed
 }
