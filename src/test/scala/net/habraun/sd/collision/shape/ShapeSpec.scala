@@ -22,19 +22,20 @@ package net.habraun.sd.collision.shape
 
 import core.Body
 
-
-
-/**
- * Base class for all body shapes.
- * A body needs a shape in order to collide.
- */
-
-trait Shape extends Body
+import org.specs.Specification
+import org.specs.runner.JUnit4
 
 
 
-/**
- * A special shape that denotes the absence of any shape. A body with NoShape as its shape will not collide.
- */
+class ShapeTest extends JUnit4( ShapeSpec )
 
-object NoShape extends Shape
+
+
+object ShapeSpec extends Specification {
+
+	"Shape should extend Body." in {
+		val shape = new Shape {}
+
+		shape must haveSuperClass[Body]
+	}
+}
