@@ -20,7 +20,6 @@ package net.habraun.sd
 
 
 
-import collision.shape.Circle
 import core.Body
 import math.Vec2D
 

@@ -20,8 +20,6 @@ package net.habraun.sd.core
 
 
 
-import collision.shape.NoShape
-import collision.shape.Shape
 import math.Vec2D
 
 
