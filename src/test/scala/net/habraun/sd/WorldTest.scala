@@ -54,16 +54,12 @@ class WorldTest {
 
 	@Test
 	def verifyBodyIterableIsAccessible {
-		assertTrue(world.bodies.isInstanceOf[Iterable[Body]])
-	}
-
-
-
-	@Test
-	def verifyBodyIterableCantChangeWorld {
+		val world = new World[Body]
+		
 		val body = new Body {}
-		world.bodies.asInstanceOf[HashSet[Body]].addEntry(body)
-		assertFalse(world.bodies.exists(_ == body))
+		world.add( body )
+		
+		assertTrue( world.bodies.contains( body ) )
 	}
 
 

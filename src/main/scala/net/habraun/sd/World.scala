@@ -39,15 +39,7 @@ import scala.collection.mutable.HashSet
 
 class World[B <: Body] {
 
-	private[this] val _bodies = new HashSet[B]
-
-
-
-	/**
-	 * Returns a copy of the body set as an Iterable.
-	 */
-
-	def bodies: Iterable[B] = _bodies.clone
+	val bodies = new HashSet[B]
 
 
 
@@ -118,7 +110,7 @@ class World[B <: Body] {
 	 */
 	
 	def add(body: B) {
-		_bodies.addEntry(body)
+		bodies.addEntry(body)
 	}
 
 
@@ -128,7 +120,7 @@ class World[B <: Body] {
 	 */
 
 	def remove(body: B) {
-		_bodies.removeEntry(body)
+		bodies.removeEntry(body)
 	}
 	
 
@@ -144,10 +136,10 @@ class World[B <: Body] {
 		if (dt < 0.0) throw new IllegalArgumentException("Time delta must be 0 or greater.")
 
 		// Integrate bodies.
-		_bodies.foreach(integrator(dt, _))
+		bodies.foreach(integrator(dt, _))
 
 		// Filter all shapes from the body set.
-		val shapes = _bodies.map( {
+		val shapes = bodies.map( {
 			_ match {
 				case s: Shape =>
 					Some( s )
