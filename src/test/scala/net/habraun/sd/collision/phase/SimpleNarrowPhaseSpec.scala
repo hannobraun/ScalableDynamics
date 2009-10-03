@@ -81,7 +81,9 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 		"throw an exception if a line segment and an unsupported shape." in {
 			val narrowPhase = new SimpleNarrowPhase
 
-			narrowPhase( LineSegment( Vec2D( 0, 0 ), Vec2D( 1, 0 ) ), new Shape {} ) must
+			val lineSegment = new LineSegment {}
+
+			narrowPhase( lineSegment, new Shape {} ) must
 					throwAn[IllegalArgumentException]
 		}
 
@@ -113,7 +115,9 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			s1.radius = 1
 			s1.position = Vec2D( 1, 1 ) // position before movement
 			s1.position = Vec2D( 7, 7 ) // position after movement, previous position is saved
-			val s2 =  LineSegment( Vec2D( -1, -1 ), Vec2D( -2, -2 ) )
+			val s2 = new LineSegment {}
+			s2.p = Vec2D( -1, -1 )
+			s2.d = Vec2D( -2, -2 )
 			s2.position = Vec2D( 2, 2 )
 			s2.position = Vec2D( 10, 10 )
 
@@ -149,8 +153,10 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val narrowPhase = new SimpleNarrowPhase
 
 			val s1 = new Circle {}
-			val s2 = LineSegment( Vec2D( 1, 1 ), Vec2D( 2, 2 ) )
+			val s2 = new LineSegment {}
 			s1.radius = 1
+			s2.p = Vec2D( 1, 1 )
+			s2.d = Vec2D( 2, 2 )
 
 			val circleLineSegmentTest = mock[CircleLineSegmentTest]
 			circleLineSegmentTest( s1, s2 ) returns
@@ -182,8 +188,10 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val narrowPhase = new SimpleNarrowPhase
 
 			val s1 = new Circle {}
-			val s2 = LineSegment( Vec2D( 1, 1 ), Vec2D( 2, 2 ) )
+			val s2 = new LineSegment {}
 			s1.radius = 1
+			s2.p = Vec2D( 1, 1 )
+			s2.d = Vec2D( 2, 2 )
 
 			val circleLineSegmentTest = mock[CircleLineSegmentTest]
 			circleLineSegmentTest( s1, s2 ) returns None
@@ -195,10 +203,14 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 		"return None if two line segments are passed." in {
 			val narrowPhase = new SimpleNarrowPhase
 
-			val s1 = LineSegment( Vec2D( 0, 0 ), Vec2D( 2, -2 ) )
+			val s1 = new LineSegment {}
+			val s2 = new LineSegment {}
 			s1.position = Vec2D( 0, 1 )
-			val s2 = LineSegment( Vec2D( 0, 0 ), Vec2D( 2, 2 ) )
 			s2.position = Vec2D( 0, -1 )
+			s1.p = Vec2D( 0, 0 )
+			s2.p = Vec2D( 0, 0 )
+			s1.d = Vec2D( 2, -2 )
+			s2.d = Vec2D( 2, 2 )
 
 			narrowPhase( s1, s2 ) must beEqualTo( None )
 		}

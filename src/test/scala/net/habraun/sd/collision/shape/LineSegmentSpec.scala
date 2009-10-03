@@ -35,26 +35,41 @@ object LineSegmentSpec extends Specification {
 
 	"LineSegment" should {
 		"be a shape." in {
-			LineSegment( Vec2D( 0, 0 ), Vec2D( 10, 10 ) ) must haveSuperClass[Shape]
+			val lineSegment = new LineSegment {}
+
+			lineSegment must haveSuperClass[Shape]
 		}
 
-		"return its attributes." in {
+		"have the correct initial values for its attributes." in {
+			val lineSegment = new LineSegment {}
+
+			lineSegment.p must beEqualTo( Vec2D( 0, 0 ) )
+			lineSegment.d must beEqualTo( Vec2D( 1, 0 ) )
+		}
+
+		"have its attributes assignable." in {
+			val lineSegment = new LineSegment {}
+
 			val p = Vec2D( 5, 5 )
 			val d = Vec2D( 2, 1 )
-			
-			val segment = LineSegment( p, d )
+			lineSegment.p = p
+			lineSegment.d = d
 
-			segment.p must beEqualTo( p )
-			segment.d must beEqualTo( d )
+			lineSegment.p must beEqualTo( p )
+			lineSegment.d must beEqualTo( d )
 		}
 
 		"throw an exception if the direction vector is zero." in {
-			LineSegment( Vec2D( 2, 2 ), Vec2D( 0, 0 ) ) must throwA[IllegalArgumentException]
+			val lineSegment = new LineSegment {}
+			
+			( lineSegment.d = Vec2D( 0, 0 ) ) must throwAn[IllegalArgumentException]
 		}
 
-		"throw an exception if null is passed as an argument." in {
-			LineSegment( null, Vec2D( 1, 1 ) ) must throwA[NullPointerException]
-			LineSegment( Vec2D( 0, 0 ), null ) must throwA[NullPointerException]
+		"throw an exception if null is assigned to an attribute." in {
+			val lineSegment = new LineSegment {}
+
+			( lineSegment.p = null ) must throwA[NullPointerException]
+			( lineSegment.d = null ) must throwA[NullPointerException]
 		}
 	}
 }

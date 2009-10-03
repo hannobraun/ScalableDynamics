@@ -32,7 +32,40 @@ import math.Vec2D
  *      length is equal to the length of the line segment.
  */
 
-case class LineSegment( p: Vec2D, d: Vec2D ) extends Shape {
-	if ( d == Vec2D( 0, 0 ) ) throw new IllegalArgumentException( "Direction vector must not be 0." )
-	if ( p == null || d == null ) throw new NullPointerException
+trait LineSegment extends Shape {
+
+	/**
+	 * The line segment's posistion vector.
+	 */
+
+	private var _p = Vec2D( 0, 0 )
+
+	def p = _p
+
+	def p_=( newP: Vec2D ) {
+		if ( newP == null )
+			throw new NullPointerException
+
+		_p = newP
+	}
+
+
+
+	/**
+	 * The line segment's direction vector.
+	 */
+
+	private var _d = Vec2D( 1, 0 )
+
+	def d = _d
+
+	def d_=( newD: Vec2D ) {
+		if ( newD == null )
+			throw new NullPointerException
+
+		if ( newD == Vec2D( 0, 0 ) )
+			throw new IllegalArgumentException( "Direction vector must not be zero." )
+
+		_d = newD
+	}
 }
