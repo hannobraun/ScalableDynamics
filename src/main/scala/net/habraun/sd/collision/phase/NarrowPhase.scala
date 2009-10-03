@@ -20,7 +20,7 @@ package net.habraun.sd.collision.phase
 
 
 
-import collision.shape.Shape
+import shape.Shape
 
 
 

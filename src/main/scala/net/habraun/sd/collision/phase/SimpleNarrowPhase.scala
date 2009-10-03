@@ -20,14 +20,14 @@ package net.habraun.sd.collision.phase
 
 
 
-import collision.shape.Circle
-import collision.shape.LineSegment
-import collision.shape.Shape
-import collision.test.CircleCircleTest
-import collision.test.CircleLineSegmentTest
-import collision.test.ContinuousCircleCircleTest
-import collision.test.ContinuousCircleLineSegmentTest
 import math.Vec2D
+import shape.Circle
+import shape.LineSegment
+import shape.Shape
+import test.CircleCircleTest
+import test.CircleLineSegmentTest
+import test.ContinuousCircleCircleTest
+import test.ContinuousCircleLineSegmentTest
 
 
 

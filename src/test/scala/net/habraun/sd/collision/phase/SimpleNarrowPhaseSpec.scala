@@ -20,16 +20,16 @@ package net.habraun.sd.collision.phase
 
 
 
-import collision.shape.Circle
-import collision.shape.LineSegment
-import collision.shape.Shape
-import collision.test.CircleCircleTest
-import collision.test.CircleLineSegmentTest
-import collision.test.ContinuousCircleCircleTest
-import collision.test.ContinuousCircleLineSegmentTest
-import collision.test.TestResult
 import core.Body
 import math.Vec2D
+import shape.Circle
+import shape.LineSegment
+import shape.Shape
+import test.CircleCircleTest
+import test.CircleLineSegmentTest
+import test.ContinuousCircleCircleTest
+import test.ContinuousCircleLineSegmentTest
+import test.TestResult
 
 import org.specs.Specification
 import org.specs.mock.Mockito
