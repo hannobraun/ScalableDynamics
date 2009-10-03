@@ -20,7 +20,7 @@ package net.habraun.sd
 
 
 
-import core.Body
+import collision.shape.Shape
 
 import org.specs.Specification
 import org.specs.runner.JUnit4
@@ -37,20 +37,20 @@ object SimpleBroadPhaseSpec extends Specification {
 		"build a list containing only the one possible pair if it is given two bodies." in {
 			val broadPhase = new SimpleBroadPhase
 
-			val b1 = new Body {}
-			val b2 = new Body {}
+			val s1 = new Shape {}
+			val s2 = new Shape {}
 
-			broadPhase( b1::b2::Nil ) must beEqualTo( ( b1, b2 )::Nil )
+			broadPhase( s1::s2::Nil ) must beEqualTo( ( s1, s2 )::Nil )
 		}
 
 		"build a list of all three possible pairs if it is given three bodies." in {
 			val broadPhase = new SimpleBroadPhase
 
-			val b1 = new Body {}
-			val b2 = new Body {}
-			val b3 = new Body {}
+			val s1 = new Shape {}
+			val s2 = new Shape {}
+			val s3 = new Shape {}
 
-			broadPhase( b1::b2::b3::Nil ) must beEqualTo( ( b1, b2 )::( b1, b3 )::( b2, b3 )::Nil )
+			broadPhase( s1::s2::s3::Nil ) must beEqualTo( ( s1, s2 )::( s1, s3 )::( s2, s3 )::Nil )
 		}
 	}
 }

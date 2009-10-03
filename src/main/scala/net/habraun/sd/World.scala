@@ -142,15 +142,20 @@ class World {
 		// Integrate bodies.
 		_bodies.foreach(integrator(dt, _))
 
+		// Filter all shapes from the body set.
+		val shapes = _bodies.map( {
+			_ match {
+				case s: Shape =>
+					Some( s )
+				case _ =>
+					None
+			}
+		} ).filter( _ != None ).map( _ match { case Some( s ) => s } )
+
 		// Collision detection.
-		val possibleCollisionPairs = broadPhase(_bodies.toList)
+		val possibleCollisionPairs = broadPhase( shapes.toList )
 		val possibleCollisions = possibleCollisionPairs.map((pair) => {
-			if ( pair._1.isInstanceOf[Shape] && pair._2.isInstanceOf[Shape] ) {
-				narrowPhase( pair._1.asInstanceOf[Shape], pair._2.asInstanceOf[Shape] )
-			}
-			else {
-				None
-			}
+			narrowPhase( pair._1, pair._2 )
 		})
 
 		// Compute collision effects.

@@ -20,17 +20,17 @@ package net.habraun.sd
 
 
 
-import core.Body
+import collision.shape.Shape
 
 
 
 /**
  * The broad phase is the first of two phases of collision detection.
- * It is responsible for doing a rough and cheap test, determining what bodies _could_ collide, thus reducing
- * the number of body pairs the second phase (narrow phase) has to test.
+ * It is responsible for doing a rough and cheap test, determining which shapes _could_ collide, thus
+ * reducing the number of shape pairs the second phase (narrow phase) has to test.
  */
 
-trait BroadPhase extends Function1[List[Body], List[(Body, Body)]] {
+trait BroadPhase extends Function1[List[Shape], List[( Shape, Shape )]] {
 
 	/**
 	 * Determines which of the given bodies could potentially collide.
@@ -38,5 +38,5 @@ trait BroadPhase extends Function1[List[Body], List[(Body, Body)]] {
 	 * must not contain duplicates.
 	 */
 
-	def apply(bodies: List[Body]): List[(Body, Body)]
+	def apply(shapes: List[Shape]): List[( Shape, Shape )]
 }
