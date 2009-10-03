@@ -37,9 +37,9 @@ import scala.collection.mutable.HashSet
  * World is basically a container for objects, whose attributes it updates every simulation step.
  */
 
-class World {
+class World[B <: Body] {
 
-	private[this] val _bodies = new HashSet[Body]
+	private[this] val _bodies = new HashSet[B]
 
 
 
@@ -47,7 +47,7 @@ class World {
 	 * Returns a copy of the body set as an Iterable.
 	 */
 
-	def bodies: Iterable[Body] = _bodies.clone
+	def bodies: Iterable[B] = _bodies.clone
 
 
 
@@ -117,7 +117,7 @@ class World {
 	 * Adds a body to the world. The body will be simulated until it is removed.
 	 */
 	
-	def add(body: Body) {
+	def add(body: B) {
 		_bodies.addEntry(body)
 	}
 
@@ -127,7 +127,7 @@ class World {
 	 * Removes the body from the world. The body will no longer be simulated.
 	 */
 
-	def remove(body: Body) {
+	def remove(body: B) {
 		_bodies.removeEntry(body)
 	}
 	

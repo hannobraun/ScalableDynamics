@@ -41,7 +41,7 @@ import org.junit.Assert._
 
 class WorldTest {
 
-	var world: World = null
+	var world: World[Body] = null
 
 
 
