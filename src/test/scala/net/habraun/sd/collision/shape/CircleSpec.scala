@@ -52,5 +52,17 @@ object CircleSpec extends Specification {
 
 			circle.radius must beEqualTo( radius )
 		}
+
+		"throw an exceptio nif zero is assigned to radius." in {
+			val circle = new Circle {}
+
+			( circle.radius = 0.0 ) must throwAn[IllegalArgumentException]
+		}
+
+		"throw an exception if a negative radius is assigned." in {
+			val circle = new Circle {}
+
+			( circle.radius = -1.0 ) must throwAn[IllegalArgumentException]
+		}
 	}
 }
