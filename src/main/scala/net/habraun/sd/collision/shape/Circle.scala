@@ -34,7 +34,7 @@ trait Circle extends Shape {
 
 	def radius = _radius
 
-	def radius_=( newRadius: Double ) = {
+	def radius_=( newRadius: Double ) {
 		if ( newRadius <= 0.0 ) {
 			throw new IllegalArgumentException( "Radius must not be zero or smaller. Radius: " + newRadius )
 		}
