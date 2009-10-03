@@ -20,6 +20,10 @@ package net.habraun.sd
 
 
 
+import core.Body
+
+
+
 /**
  * The narrow phase is the second of two phases of collision detection.
  * It determines if two bodies collide, and if they do, the properties of that collision. This operation is

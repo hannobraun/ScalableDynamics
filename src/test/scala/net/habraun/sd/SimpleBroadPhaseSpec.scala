@@ -20,6 +20,8 @@ package net.habraun.sd
 
 
 
+import core.Body
+
 import org.specs.Specification
 import org.specs.runner.JUnit4
 

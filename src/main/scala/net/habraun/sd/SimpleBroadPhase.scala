@@ -20,6 +20,10 @@ package net.habraun.sd
 
 
 
+import core.Body
+
+
+
 /**
  * SimpleBroadPhase is the simplest possible implementation of a broad phase. It just compiles all possible
  * pairs of the bodies it is given and returns those.

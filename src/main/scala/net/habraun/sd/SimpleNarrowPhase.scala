@@ -27,6 +27,7 @@ import collision.test.CircleCircleTest
 import collision.test.CircleLineSegmentTest
 import collision.test.ContinuousCircleCircleTest
 import collision.test.ContinuousCircleLineSegmentTest
+import core.Body
 import math.Vec2D
 
 

@@ -20,6 +20,10 @@ package net.habraun.sd
 
 
 
+import core.Body
+
+
+
 /**
  * The broad phase is the first of two phases of collision detection.
  * It is responsible for doing a rough and cheap test, determining what bodies _could_ collide, thus reducing

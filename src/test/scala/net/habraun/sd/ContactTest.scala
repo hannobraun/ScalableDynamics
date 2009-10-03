@@ -20,6 +20,7 @@ package net.habraun.sd
 
 
 
+import core.Body
 import math.Vec2D
 
 import org.junit.Test

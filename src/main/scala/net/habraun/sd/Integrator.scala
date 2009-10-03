@@ -20,6 +20,10 @@ package net.habraun.sd
 
 
 
+import core.Body
+
+
+
 /**
  * Integrates a body's position and velocity.
  */
