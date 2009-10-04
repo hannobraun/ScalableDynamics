@@ -30,5 +30,5 @@ import collision.phase.Collision
 
 trait CollisionSolver extends Function2[Double, Collision, Unit] {
 
-	def apply(t: Double, constraint: Collision): Unit
+	def apply( t: Double, constraint: Collision ): Unit
 }

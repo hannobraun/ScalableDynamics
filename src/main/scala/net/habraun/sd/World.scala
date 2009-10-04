@@ -51,8 +51,10 @@ class World[B <: Body] {
 
 	def integrator = _integrator
 
-	def integrator_=(newIntegrator: Integrator) {
-		if (newIntegrator == null) throw new NullPointerException("Integrator must not be null.")
+	def integrator_=( newIntegrator: Integrator ) {
+		if ( newIntegrator == null )
+			throw new NullPointerException( "Integrator must not be null." )
+
 		_integrator = newIntegrator
 	}
 
@@ -67,8 +69,10 @@ class World[B <: Body] {
 
 	def broadPhase = _broadPhase
 
-	def broadPhase_=(newBroadPhase: BroadPhase) = {
-		if (newBroadPhase == null) throw new NullPointerException("Broad phase must not be null.")
+	def broadPhase_=( newBroadPhase: BroadPhase ) = {
+		if ( newBroadPhase == null )
+			throw new NullPointerException( "Broad phase must not be null." )
+
 		_broadPhase = newBroadPhase
 	}
 
@@ -83,8 +87,10 @@ class World[B <: Body] {
 
 	def narrowPhase = _narrowPhase
 
-	def narrowPhase_=(newNarrowPhase: NarrowPhase) = {
-		if (newNarrowPhase == null) throw new NullPointerException("Narrow phase must not be null.")
+	def narrowPhase_=( newNarrowPhase: NarrowPhase ) = {
+		if ( newNarrowPhase == null )
+			throw new NullPointerException( "Narrow phase must not be null." )
+
 		_narrowPhase = newNarrowPhase
 	}
 
@@ -98,8 +104,10 @@ class World[B <: Body] {
 
 	def collisionSolver = _collisionSolver
 
-	def collisionSolver_=(newCollisionSolver: CollisionSolver) = {
-		if (newCollisionSolver == null) throw new NullPointerException("Collision solver must not be null.")
+	def collisionSolver_=( newCollisionSolver: CollisionSolver ) = {
+		if ( newCollisionSolver == null )
+			throw new NullPointerException( "Collision solver must not be null." )
+
 		_collisionSolver = newCollisionSolver
 	}
 
@@ -109,8 +117,8 @@ class World[B <: Body] {
 	 * Adds a body to the world. The body will be simulated until it is removed.
 	 */
 	
-	def add(body: B) {
-		bodies.addEntry(body)
+	def add( body: B ) {
+		bodies.addEntry( body )
 	}
 
 
@@ -119,8 +127,8 @@ class World[B <: Body] {
 	 * Removes the body from the world. The body will no longer be simulated.
 	 */
 
-	def remove(body: B) {
-		bodies.removeEntry(body)
+	def remove( body: B ) {
+		bodies.removeEntry( body )
 	}
 	
 
@@ -131,12 +139,13 @@ class World[B <: Body] {
 	 * The parameter dt is the time delta for this simulation step.
 	 */
 	
-	def step(dt: Double) {
+	def step( dt: Double ) {
 		// Check if delta is valid.
-		if (dt < 0.0) throw new IllegalArgumentException("Time delta must be 0 or greater.")
+		if ( dt < 0.0 )
+			throw new IllegalArgumentException( "Time delta must be 0 or greater." )
 
 		// Integrate bodies.
-		bodies.foreach(integrator(dt, _))
+		bodies.foreach( integrator( dt, _ ) )
 
 		// Filter all shapes from the body set.
 		val shapes = bodies.map( {
@@ -150,9 +159,9 @@ class World[B <: Body] {
 
 		// Collision detection.
 		val possibleCollisionPairs = broadPhase( shapes.toList )
-		val possibleCollisions = possibleCollisionPairs.map((pair) => {
+		val possibleCollisions = possibleCollisionPairs.map( ( pair ) => {
 			narrowPhase( pair._1, pair._2 )
-		})
+		} )
 
 		// Compute collision effects.
 		// This is a tricky construction. The "possibleCollision <- collision" part is like an outer for loop
@@ -164,7 +173,7 @@ class World[B <: Body] {
 		// Despite the long explanation, what this does is actually pretty simple: We loop through the list
 		// of possible collisions. We execute the yield stuff only for actual collisions, not for None.
 		for ( possibleCollision <- possibleCollisions; collision <- possibleCollision ) {
-			collisionSolver(dt, collision)
+			collisionSolver( dt, collision )
 		}
 	}
 }

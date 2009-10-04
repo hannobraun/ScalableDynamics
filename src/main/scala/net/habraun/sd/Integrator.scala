@@ -38,5 +38,5 @@ trait Integrator extends Function2[Double, Body, Body] {
 	 * The function returns the body it integrated.
 	 */
 
-	def apply(t: Double, body: Body): Body
+	def apply( t: Double, body: Body ): Body
 }

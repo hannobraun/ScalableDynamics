@@ -30,37 +30,37 @@ import collision.phase.Collision
 
 class ImpulseSolver extends CollisionSolver {
 
-	def apply(t: Double, constraint: Collision) {
+	def apply( t: Double, constraint: Collision ) {
 		// Get the bodies out of the contact, so we can access them easier.
 		val b1 = constraint.contact1.s
 		val b2 = constraint.contact2.s
 
 		// Compute the part of the velocities that points in the direction of the collision normals.
-		val v1 = b1.velocity.projectOn(constraint.contact1.normal)
-		val v2 = b2.velocity.projectOn(constraint.contact2.normal)
+		val v1 = b1.velocity.projectOn( constraint.contact1.normal )
+		val v2 = b2.velocity.projectOn( constraint.contact2.normal )
 
 		// Apply impulses along the collision normals.
 		val m1 = b1.mass
 		val m2 = b2.mass
-		if (m1 == Double.PositiveInfinity) {
-			val impulse = (v1 - v2) * 2 * m2
-			b2.applyImpulse(impulse)
+		if ( m1 == Double.PositiveInfinity ) {
+			val impulse = ( v1 - v2 ) * 2 * m2
+			b2.applyImpulse( impulse )
 		}
-		else if (m2 == Double.PositiveInfinity) {
-			val impulse = (v2 - v1) * 2 * m1
-			b1.applyImpulse(impulse)
+		else if ( m2 == Double.PositiveInfinity ) {
+			val impulse = ( v2 - v1 ) * 2 * m1
+			b1.applyImpulse( impulse )
 		}
 		else {
-			val impulse = (v2 - v1) * 2 * m1 * m2 / (m1 + m2)
-			b1.applyImpulse(impulse)
-			b2.applyImpulse(-impulse)
+			val impulse = ( v2 - v1 ) * 2 * m1 * m2 / ( m1 + m2 )
+			b1.applyImpulse( impulse )
+			b2.applyImpulse( -impulse )
 		}
 
 		// If the time of impact given by the collision is smaller than 1.0, the bodies would overlap
 		// after the movement has been carried out. We don't want that, we want the bodies to stop right
 		// at the point of impact. Let's set them back, so the regular movement will put them right where
 		// we want them.
-		b1.position -= b1.velocity * t * (1.0 - constraint.t + 0.0001)
-		b2.position -= b2.velocity * t * (1.0 - constraint.t + 0.0001)
+		b1.position -= b1.velocity * t * ( 1.0 - constraint.t + 0.0001 )
+		b2.position -= b2.velocity * t * ( 1.0 - constraint.t + 0.0001 )
 	}
 }
