@@ -25,8 +25,9 @@ import core.Body
 
 
 /**
- * Base class for all body shapes.
- * A body needs a shape in order to collide.
+ * Base trait for all shapes.
+ * A body needs a shape in order to collide. To add a shape to a body, just mix a concrete Shape into the
+ * body.
  */
 
 trait Shape extends Body
