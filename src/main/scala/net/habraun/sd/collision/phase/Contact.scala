@@ -39,7 +39,7 @@ case class Contact( s: Shape, point: Vec2D, normal: Vec2D, other: Shape ) {
 	if ( s == null || point == null || normal == null || other == null )
 		throw new NullPointerException
 	
-	// Check if vectors are unit vectors.
-	if ( normal.squaredLength < 0.95 || normal.squaredLength > 1.05 )
+	// Check if the normal vector is a unit vector.
+	if ( !normal.unit )
 		throw new IllegalArgumentException( "Normal must be a unit vectors (normal: " + normal + ")." )
 }
