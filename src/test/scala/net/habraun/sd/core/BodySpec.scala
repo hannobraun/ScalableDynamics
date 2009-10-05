@@ -203,34 +203,4 @@ object BodySpec extends Specification {
 			body.appliedImpulse must beEqualTo( Vec2D( 0, 0 ) )
 		}
 	}
-
-	"Body's movement constraint code" should {
-		"allow x movement initially." in {
-			val body = new Body {}
-
-			body.xMovementAllowed must beTrue
-		}
-
-		"allow y movement initially." in {
-			val body = new Body {}
-
-			body.yMovementAllowed must beTrue
-		}
-
-		"make it possible to disallow x movement." in {
-			val body = new Body {}
-
-			body.allowXMovement( false )
-
-			body.xMovementAllowed must beFalse
-		}
-
-		"make it possible to disallow y movement." in {
-			val body = new Body {}
-
-			body.allowYMovement( false )
-
-			body.yMovementAllowed must beFalse
-		}
-	}
 }
