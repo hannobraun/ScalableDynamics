@@ -25,7 +25,7 @@ import org.specs.runner.JUnit4
 
 
 
-class StepPhaseTest extends JUnit4( WorldPhaseSpec )
+class StepPhaseTest extends JUnit4( StepPhaseSpec )
 
 
 
