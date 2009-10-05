@@ -25,10 +25,10 @@ class VelocityConstraintSolver {
 	def solve( constraints: Iterable[VelocityConstraint] ) {
 		for ( constraint <- constraints ) {
 			// Check if the actual velocity is greater than the maximum velocity.
-			if ( constraint.velocity.squaredLength > constraint.maximumVelocity * constraint.maximumVelocity ) {
+			if ( constraint.velocity.squaredLength > constraint.maxVelocity * constraint.maxVelocity ) {
 				// It is. Set the velocity to the maximum velocity while retaining the direction of the new
 				// velocity.
-				constraint.velocity = constraint.velocity * ( constraint.maximumVelocity / Math.sqrt(
+				constraint.velocity = constraint.velocity * ( constraint.maxVelocity / Math.sqrt(
 						constraint.velocity * constraint.velocity ) )
 			}
 		}

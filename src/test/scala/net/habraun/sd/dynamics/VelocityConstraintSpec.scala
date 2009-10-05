@@ -44,21 +44,21 @@ object VelocityConstraintSpec extends Specification {
 			val constraint = new VelocityConstraint {}
 
 			val maxVelocity = 5
-			constraint.maximumVelocity = maxVelocity
+			constraint.maxVelocity = maxVelocity
 
-			constraint.maximumVelocity must beEqualTo( maxVelocity )
+			constraint.maxVelocity must beEqualTo( maxVelocity )
 		}
 
 		"have an initial maximum velocity of Double.PositiveInfinity." in{
 			val constraint = new VelocityConstraint {}
 
-			constraint.maximumVelocity must beEqualTo( Double.PositiveInfinity )
+			constraint.maxVelocity must beEqualTo( Double.PositiveInfinity )
 		}
 
 		"must throw an exception if a negative value is assigned to maximumVelocity." in {
 			val constraint = new VelocityConstraint {}
 
-			( constraint.maximumVelocity = -1 ) must throwAn[IllegalArgumentException]
+			( constraint.maxVelocity = -1 ) must throwAn[IllegalArgumentException]
 		}
 	}
 }

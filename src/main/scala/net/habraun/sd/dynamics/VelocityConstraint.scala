@@ -26,14 +26,14 @@ import core.Body
 
 trait VelocityConstraint extends Body {
 
-	private var _maximumVelocity = Double.PositiveInfinity
+	private var _maxVelocity = Double.PositiveInfinity
 
-	def maximumVelocity = _maximumVelocity
+	def maxVelocity = _maxVelocity
 
-	def maximumVelocity_=( newMaxVelocity: Double ) {
+	def maxVelocity_=( newMaxVelocity: Double ) {
 		if ( newMaxVelocity < 0 )
 			throw new IllegalArgumentException( "Maximum velocity must be 0 or larger." )
 		
-		_maximumVelocity = newMaxVelocity
+		_maxVelocity = newMaxVelocity
 	}
 }

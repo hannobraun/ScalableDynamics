@@ -43,7 +43,7 @@ object VelocityConstraintSolverSpec extends Specification {
 			val velocity = Vec2D( 3, 0 )
 			val body = new Body with VelocityConstraint {}
 			body.velocity = velocity
-			body.maximumVelocity = 5
+			body.maxVelocity = 5
 			solver.solve( HashSet( body ) )
 
 			body.velocity must beEqualTo( velocity )
@@ -54,7 +54,7 @@ object VelocityConstraintSolverSpec extends Specification {
 
 			val body = new Body with VelocityConstraint {}
 			body.velocity = Vec2D( 6, 0 )
-			body.maximumVelocity = 5
+			body.maxVelocity = 5
 			solver.solve( HashSet( body ) )
 
 			body.velocity must beEqualTo( Vec2D( 5, 0 ) )
