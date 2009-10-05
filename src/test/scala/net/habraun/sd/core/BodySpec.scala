@@ -93,36 +93,6 @@ object BodySpec extends Specification {
 
 			( body.velocity = null ) must throwA[NullPointerException]
 		}
-
-		"have an infinite maximum velocity initially." in {
-			val body = new Body {}
-
-			body.maxVelocity must beEqualTo( Double.PositiveInfinity )
-		}
-
-		"have the maxmimum velocity assigneable." in {
-			val body = new Body {}
-
-			val maxVelocity = 10.0
-			body.maxVelocity = maxVelocity
-
-			 body.maxVelocity must beEqualTo( maxVelocity )
-		}
-
-		"throw an exception if the maximum velocity is set to a negative value." in {
-			val body = new Body {}
-
-			( body.maxVelocity = -1.0 ) must throwAn[IllegalArgumentException]
-		}
-
-		"consider the maximum velocity if a velocity is assigned." in {
-			val body = new Body {}
-
-			body.maxVelocity = 10
-			body.velocity = Vec2D( 15, 0 )
-
-			body.velocity must beEqualTo( Vec2D( 10, 0 ) )
-		}
 	}
 
 	"Body's mass code" should {

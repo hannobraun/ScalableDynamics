@@ -76,16 +76,8 @@ trait Body {
 	def velocity_=( v: Vec2D ) {
 		if ( v == null ) throw new NullPointerException
 
-		// Check if the new velocity is greater than the maximum velocity.
-		if ( v * v > maxVelocity * maxVelocity ) {
-			// It is. Set the velocity to the maximum velocity while retaining the direction of the new
-			// velocity.
-			_velocity = v * ( maxVelocity / Math.sqrt( v * v ) )
-		}
-		else {
-			// It is not, which means we can safely set the velocity to the new velocity.
-			_velocity = v
-		}
+		// It is not, which means we can safely set the velocity to the new velocity.
+		_velocity = v
 	}
 
 
@@ -148,23 +140,6 @@ trait Body {
 
 	def resetImpulse {
 		_appliedImpulse = Vec2D( 0, 0 )
-	}
-
-
-
-	/**
-	 * Sets the maximum velocity for this body.
-	 * After creation, a body has a maximum velocity of Double.PositiveInfinity.
-	 * The maximum velocity must never be negative.
-	 */
-	
-	private[this] var _maxVelocity = Double.PositiveInfinity
-
-	def maxVelocity = _maxVelocity
-
-	def maxVelocity_=( mv: Double ) {
-		if ( mv < 0 ) throw new IllegalArgumentException
-		_maxVelocity = mv
 	}
 
 
