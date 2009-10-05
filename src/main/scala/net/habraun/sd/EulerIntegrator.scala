@@ -34,23 +34,13 @@ import math.Vec2D
 class EulerIntegrator extends Integrator {
 
 	def apply( t: Double, body: Body ) = {
-		var velocity = body.velocity
-
 		// Apply forces.
-		velocity += body.appliedForce / body.mass * t
+		body.velocity += body.appliedForce / body.mass * t
 		body.resetForce
 
 		// Apply impulses.
-		velocity += body.appliedImpulse / body.mass
+		body.velocity += body.appliedImpulse / body.mass
 		body.resetImpulse
-
-		// Solve movement constraints.
-		val constrainedXVelocity = if ( body.xMovementAllowed ) velocity.x else 0.0
-		val constrainedYVelocity = if ( body.yMovementAllowed ) velocity.y else 0.0
-		val constrainedVelocity = Vec2D( constrainedXVelocity, constrainedYVelocity )
-
-		// Set new velocity.
-		body.velocity = constrainedVelocity
 
 		// Set new position.
 		body.position = body.position + ( body.velocity * t )

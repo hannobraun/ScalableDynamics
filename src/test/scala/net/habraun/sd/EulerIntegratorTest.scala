@@ -124,24 +124,4 @@ class EulerIntegratorTest {
 		body = integrate(t, body)
 		assertEquals(Vec2D(0, 0), body.velocity)
 	}
-
-
-
-	@Test
-	def disallowXMovementIntegrateCheckPosition {
-		body.allowXMovement(false)
-		body.applyForce(Vec2D(1, 1))
-		body = integrate(t, body)
-		assertEquals(Vec2D(0, 4), body.position)
-	}
-
-
-
-	@Test
-	def disallowYMovementIntegrateCheckPosition {
-		body.allowYMovement(false)
-		body.applyForce(Vec2D(1, 1))
-		body = integrate(t, body)
-		assertEquals(Vec2D(4, 0), body.position)
-	}
 }
