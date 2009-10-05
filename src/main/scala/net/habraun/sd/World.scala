@@ -26,6 +26,8 @@ import collision.phase.SimpleBroadPhase
 import collision.phase.SimpleNarrowPhase
 import collision.shape.Shape
 import core.Body
+import dynamics.PositionConstraint
+import dynamics.PositionConstraintSolver
 import dynamics.VelocityConstraint
 import dynamics.VelocityConstraintSolver
 import math.Vec2D
@@ -67,6 +69,14 @@ class World[B <: Body] {
 	 */
 
 	var velocityConstraintSolver = new VelocityConstraintSolver
+
+
+
+	/**
+	 * Position constraint solver.
+	 */
+
+	var positionConstraintSolver = new PositionConstraintSolver
 
 	
 
@@ -159,6 +169,9 @@ class World[B <: Body] {
 
 		// Solve velocity constraints.
 		velocityConstraintSolver.filterAndStep( dt, bodies )
+
+		// Solve position constraints.
+		positionConstraintSolver.filterAndStep( dt, bodies )
 
 		// Filter all shapes from the body set.
 		val shapes = bodies.map( {
