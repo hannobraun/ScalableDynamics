@@ -28,6 +28,7 @@ import collision.phase.SimpleBroadPhase
 import collision.phase.SimpleNarrowPhase
 import collision.shape.Shape
 import core.Body
+import dynamics.VelocityConstraintSolver
 import math.Vec2D
 
 import scala.collection.mutable.HashSet
@@ -74,6 +75,13 @@ class WorldTest {
 	@Test { val expected = classOf[NullPointerException] }
 	def setIntegratorNullExpectException() {
 		world.integrator = null
+	}
+
+
+
+	@Test
+	def verifyInitialVelocityConstraintSolver {
+		assertTrue( world.velocityConstraintSolver.isInstanceOf[VelocityConstraintSolver] )
 	}
 
 

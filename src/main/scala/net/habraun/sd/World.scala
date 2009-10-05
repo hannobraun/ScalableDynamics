@@ -26,6 +26,8 @@ import collision.phase.SimpleBroadPhase
 import collision.phase.SimpleNarrowPhase
 import collision.shape.Shape
 import core.Body
+import dynamics.VelocityConstraint
+import dynamics.VelocityConstraintSolver
 import math.Vec2D
 
 import scala.collection.mutable.HashSet
@@ -57,6 +59,14 @@ class World[B <: Body] {
 
 		_integrator = newIntegrator
 	}
+
+
+
+	/**
+	 * Velocity constraint solver.
+	 */
+
+	var velocityConstraintSolver = new VelocityConstraintSolver
 
 	
 
@@ -146,6 +156,19 @@ class World[B <: Body] {
 
 		// Integrate bodies.
 		bodies.foreach( integrator( dt, _ ) )
+
+		// Filter all VelocityConstraintS from the body set.
+		val velocityConstraints = bodies.map( {
+			_ match {
+				case s: VelocityConstraint =>
+					Some( s )
+				case _ =>
+					None
+			}
+		} ).filter( _ != None ).map( _ match { case Some( s ) => s } )
+
+		// Solve velocity constraints.
+		velocityConstraintSolver.solve( velocityConstraints )
 
 		// Filter all shapes from the body set.
 		val shapes = bodies.map( {
