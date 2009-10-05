@@ -157,18 +157,8 @@ class World[B <: Body] {
 		// Integrate bodies.
 		bodies.foreach( integrator( dt, _ ) )
 
-		// Filter all VelocityConstraintS from the body set.
-		val velocityConstraints = bodies.map( {
-			_ match {
-				case s: VelocityConstraint =>
-					Some( s )
-				case _ =>
-					None
-			}
-		} ).filter( _ != None ).map( _ match { case Some( s ) => s } )
-
 		// Solve velocity constraints.
-		velocityConstraintSolver.solve( velocityConstraints )
+		velocityConstraintSolver.filterAndStep( dt, bodies )
 
 		// Filter all shapes from the body set.
 		val shapes = bodies.map( {
