@@ -22,7 +22,7 @@ package net.habraun.sd.dynamics
 
 class VelocityConstraintSolver {
 
-	def solve( constraints: Set[VelocityConstraint] ) {
+	def solve( constraints: Iterable[VelocityConstraint] ) {
 		for ( constraint <- constraints ) {
 			// Check if the actual velocity is greater than the maximum velocity.
 			if ( constraint.velocity.squaredLength > constraint.maximumVelocity * constraint.maximumVelocity ) {
