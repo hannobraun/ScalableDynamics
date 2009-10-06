@@ -20,6 +20,10 @@ package net.habraun.sd.collision.phase
 
 
 
+import shape.Contact
+
+
+
 /**
  * Models a collision between two shapes.
  * A collision has the following attributes:

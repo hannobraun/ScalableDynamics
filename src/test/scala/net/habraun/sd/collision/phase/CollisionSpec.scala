@@ -21,6 +21,7 @@ package net.habraun.sd.collision.phase
 
 
 import math.Vec2D
+import shape.Contact
 import shape.Shape
 
 import org.specs.Specification

@@ -16,12 +16,11 @@
 
 
 
-package net.habraun.sd.collision.phase
+package net.habraun.sd.collision.shape
 
 
 
 import math.Vec2D
-import shape.Shape
 
 import org.specs.Specification
 import org.specs.runner.JUnit4

@@ -22,6 +22,7 @@ package net.habraun.sd.collision.phase
 
 import math.Vec2D
 import shape.Circle
+import shape.Contact
 import shape.LineSegment
 import shape.Shape
 import test.CircleCircleTest
