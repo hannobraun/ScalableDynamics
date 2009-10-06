@@ -21,6 +21,7 @@ package net.habraun.sd.collision.shape
 
 
 import core.Body
+import math.Vec2D
 
 import org.specs.Specification
 import org.specs.runner.JUnit4
@@ -33,9 +34,42 @@ class ShapeTest extends JUnit4( ShapeSpec )
 
 object ShapeSpec extends Specification {
 
-	"Shape should extend Body." in {
-		val shape = new Shape {}
+	"Shape" should {
+		"extend Body." in {
+			val shape = new Shape {}
 
-		shape must haveSuperClass[Body]
+			shape must haveSuperClass[Body]
+		}
+
+		"have no contacts initially." in {
+			val shape = new Shape {}
+
+			shape.contacts must beEqualTo( Nil )
+		}
+
+		"add contacts to the contact list." in {
+			val shape = new Shape {}
+
+			val contact = Contact( new Shape {}, Vec2D( 1, 0 ), Vec2D( 0, 1 ), new Shape {} )
+			shape.addContact( contact )
+
+			shape.contacts must beEqualTo( contact::Nil )
+		}
+
+		"throw an exception if a null contact is added." in {
+			val shape = new Shape {}
+
+			shape.addContact( null ) must throwA[NullPointerException]
+		}
+
+		"should clear the list of added contacts." in {
+			val shape = new Shape {}
+
+			val contact = Contact( new Shape {}, Vec2D( 1, 0 ), Vec2D( 0, 1 ), new Shape {} )
+			shape.addContact( contact )
+			shape.clearContacts
+
+			shape.contacts must beEqualTo( Nil )
+		}
 	}
 }

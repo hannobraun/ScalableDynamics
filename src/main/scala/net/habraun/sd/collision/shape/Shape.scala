@@ -30,4 +30,25 @@ import core.Body
  * body.
  */
 
-trait Shape extends Body
+trait Shape extends Body {
+
+	/**
+	 * The shape's list of contacts. Contacts are usually added when collisions are checked. They may be
+	 * referred to later, when collision reaction is computed.
+	 */
+
+	private var _contacts: List[Contact] = Nil
+
+	def contacts = _contacts
+
+	def addContact( contact: Contact ) {
+		if ( contact == null )
+			throw new NullPointerException
+
+		_contacts = contact::_contacts
+	}
+
+	def clearContacts {
+		_contacts = Nil
+	}
+}
