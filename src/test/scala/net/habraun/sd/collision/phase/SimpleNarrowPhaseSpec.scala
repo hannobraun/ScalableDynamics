@@ -192,6 +192,26 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			narrowPhase( s1, s2 ) must beEqualTo( Some( expected ) )
 		}
 
+		"construct a correct Collision instance from the line segment - circle test result." in {
+			val narrowPhase = new SimpleNarrowPhase
+
+			val s1 = new LineSegment {}
+			val s2 = new Circle {}
+			s1.p = Vec2D( 1, 1 )
+			s1.d = Vec2D( 2, 2 )
+			s2.radius = 1
+
+			val circleLineSegmentTest = mock[CircleLineSegmentTest]
+			circleLineSegmentTest( s2, s1 ) returns
+					Some( TestResult( 0.5, Vec2D( 5, 5 ), Vec2D( 1, 0 ) ) )
+			narrowPhase.testCircleLineSegment = circleLineSegmentTest
+
+			val expected = Collision( 0.5, Contact( s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 ),
+				Contact( s2, Vec2D( 5, 5 ), Vec2D( -1, 0 ), s1 ) )
+
+			narrowPhase( s1, s2 ) must beEqualTo( Some( expected ) )
+		}
+
 		"return None if the circle-circle test result is None." in {
 			val narrowPhase = new SimpleNarrowPhase
 

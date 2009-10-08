@@ -75,7 +75,8 @@ class SimpleNarrowPhase extends NarrowPhase {
 				s2 match {
 					case circle: Circle =>
 						for ( r <- testCircleLineSegment( circle, lineSegment1 ) ) yield {
-							Collision( r.t, Contact( lineSegment1, r.contact, r.normal, circle ), null )
+							Collision( r.t, Contact( lineSegment1, r.contact, r.normal, circle ),
+									Contact( circle, r.contact, -r.normal, lineSegment1 ) )
 						}
 
 					case lineSegment2: LineSegment =>
