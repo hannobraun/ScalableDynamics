@@ -131,6 +131,28 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			circleLineSegmentTest( s1, s2 ) was called
 		}
 
+		"pass the parameters to the circle-line segment test if a line segment and a circle are passed." in {
+			val narrowPhase = new SimpleNarrowPhase
+
+			val s1 = new LineSegment {}
+			s1.p = Vec2D( -1, -1 )
+			s1.d = Vec2D( -2, -2 )
+			s1.position = Vec2D( 2, 2 )
+			s1.position = Vec2D( 10, 10 )
+			val s2 = new Circle {}
+			s2.radius = 1
+			s2.position = Vec2D( 1, 1 ) // position before movement
+			s2.position = Vec2D( 7, 7 ) // position after movement, previous position is saved
+
+			val circleLineSegmentTest = mock[CircleLineSegmentTest]
+			narrowPhase.testCircleLineSegment = circleLineSegmentTest
+			circleLineSegmentTest( s2, s1 ) returns None
+
+			narrowPhase( s1, s2 )
+
+			circleLineSegmentTest( s2, s1 ) was called
+		}
+
 		"construct a correct Collision instance from the circle-circle test result." in {
 			val narrowPhase = new SimpleNarrowPhase
 
