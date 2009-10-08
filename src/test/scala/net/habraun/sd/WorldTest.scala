@@ -185,8 +185,8 @@ class WorldTest {
 	@Test
 	def addBodyVerifyItIsPassedToBroadPhase {
 		val broadPhase = new BroadPhase {
-			var passedBodies: List[Shape] = null
-			def apply(shapes: List[Shape]) = { passedBodies = shapes; Nil }
+			var passedBodies: Iterable[Shape] = null
+			def apply(shapes: Iterable[Shape]) = { passedBodies = shapes; Nil }
 		}
 		world.broadPhase = broadPhase
 
@@ -207,7 +207,7 @@ class WorldTest {
 		val b4 = new Body with Shape {}
 
 		world.broadPhase = new BroadPhase {
-			def apply(shapes: List[Shape]) = (b1, b2)::(b3, b4)::Nil
+			def apply(shapes: Iterable[Shape]) = (b1, b2)::(b3, b4)::Nil
 		}
 
 		val narrowPhase = new NarrowPhase {
@@ -230,8 +230,8 @@ class WorldTest {
 	def verifyForceIsAppliedBeforeCollisionDetection {
 		val broadPhase = new BroadPhase {
 			var v: Vec2D = null
-			def apply(shapes: List[Shape]) = {
-				v = shapes(0).velocity
+			def apply(shapes: Iterable[Shape]) = {
+				v = shapes.toList(0).velocity
 				Nil
 			}
 		}
@@ -253,8 +253,8 @@ class WorldTest {
 	def verifyImpulseIsAppliedBeforeCollisionDetection {
 		val broadPhase = new BroadPhase {
 			var v: Vec2D = null
-			def apply(shapes: List[Shape]) = {
-				v = shapes(0).velocity
+			def apply(shapes: Iterable[Shape]) = {
+				v = shapes.toList(0).velocity
 				Nil
 			}
 		}

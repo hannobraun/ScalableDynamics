@@ -36,7 +36,7 @@ class SimpleBroadPhase extends BroadPhase {
 	 * Returns all possible pairs of the given bodies.
 	 */
 
-	def apply( shapes: List[Shape] ) = {
+	def apply( shapes: Iterable[Shape] ) = {
 		def buildPairs( list: List[Shape], pairs: List[( Shape, Shape )]): List[( Shape, Shape )] = {
 			if ( list.isEmpty )
 				pairs
@@ -44,6 +44,6 @@ class SimpleBroadPhase extends BroadPhase {
 				buildPairs( list.tail, pairs:::list.tail.map( ( list.head, _ ) ) )
 		}
 
-		buildPairs( shapes, Nil )
+		buildPairs( shapes.toList, Nil )
 	}
 }

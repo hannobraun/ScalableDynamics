@@ -30,7 +30,7 @@ import shape.Shape
  * reducing the number of shape pairs the second phase (narrow phase) has to test.
  */
 
-trait BroadPhase extends Function1[List[Shape], List[( Shape, Shape )]] {
+trait BroadPhase extends Function1[Iterable[Shape], Iterable[( Shape, Shape )]] {
 
 	/**
 	 * Determines which of the given bodies could potentially collide.
@@ -38,5 +38,5 @@ trait BroadPhase extends Function1[List[Shape], List[( Shape, Shape )]] {
 	 * must not contain duplicates.
 	 */
 
-	def apply( shapes: List[Shape] ): List[( Shape, Shape )]
+	def apply( shapes: Iterable[Shape] ): Iterable[( Shape, Shape )]
 }
