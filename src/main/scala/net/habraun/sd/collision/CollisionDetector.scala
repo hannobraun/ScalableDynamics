@@ -31,7 +31,7 @@ class CollisionDetector( broadPhase: BroadPhase, narrowPhase: NarrowPhase ) exte
 
 	def step( dt: Double, shapes: Iterable[Shape] ) {
 		// Broad phase. Checks all shapes in a performant way and returns a list of possible collisions.
-		val possiblyCollidingPairs = broadPhase( shapes.toList )
+		val possiblyCollidingPairs = broadPhase( shapes )
 
 		// Narrow Phase. Performs a detailed and possibly performance-heavy collision check for a pair of
 		// shapes.
