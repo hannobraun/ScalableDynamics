@@ -63,7 +63,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			narrowPhase.testCircleLineSegment must haveClass[ContinuousCircleLineSegmentTest]
 		}
 
-		"throw an exception if an unsupported shape and a circle is passed." in {
+		"throw an exception if an unsupported shape and a circle are passed." in {
 			val narrowPhase = new SimpleNarrowPhase
 
 			val circle = new Circle {}
@@ -71,7 +71,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			narrowPhase( new Shape {}, circle ) must throwAn[IllegalArgumentException]
 		}
 
-		"throw an exception if a circle and an unsupported shape." in {
+		"throw an exception if a circle and an unsupported shape are passed." in {
 			val narrowPhase = new SimpleNarrowPhase
 
 			val circle = new Circle {}
@@ -79,7 +79,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			narrowPhase( circle, new Shape {} ) must throwAn[IllegalArgumentException]
 		}
 
-		"throw an exception if a line segment and an unsupported shape." in {
+		"throw an exception if a line segment and an unsupported shape are passed." in {
 			val narrowPhase = new SimpleNarrowPhase
 
 			val lineSegment = new LineSegment {}
