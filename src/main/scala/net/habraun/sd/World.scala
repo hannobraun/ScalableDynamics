@@ -48,6 +48,15 @@ class World[B <: Body] {
 
 
 	/**
+	 * Step phases.
+	 */
+
+	var velocityConstraintSolver = new VelocityConstraintSolver
+	var positionConstraintSolver = new PositionConstraintSolver
+
+
+
+	/**
 	 * The integrator is used to integrate the bodies.
 	 */
 
@@ -61,22 +70,6 @@ class World[B <: Body] {
 
 		_integrator = newIntegrator
 	}
-
-
-
-	/**
-	 * Velocity constraint solver.
-	 */
-
-	var velocityConstraintSolver = new VelocityConstraintSolver
-
-
-
-	/**
-	 * Position constraint solver.
-	 */
-
-	var positionConstraintSolver = new PositionConstraintSolver
 
 	
 
@@ -167,10 +160,8 @@ class World[B <: Body] {
 		// Integrate bodies.
 		bodies.foreach( integrator( dt, _ ) )
 
-		// Solve velocity constraints.
+		// Execute step phases.
 		velocityConstraintSolver.filterAndStep( dt, bodies )
-
-		// Solve position constraints.
 		positionConstraintSolver.filterAndStep( dt, bodies )
 
 		// Filter all shapes from the body set.
