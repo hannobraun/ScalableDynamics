@@ -20,7 +20,7 @@
 	</licenses>
 
 	<scm>
-		<url>http://github.com/hbraun/ScalableDynamics/tree/master</url>
+		<url>http://github.com/hbraun/ScalableDynamics</url>
 	</scm>
 
 	<properties>
