@@ -83,6 +83,22 @@ trait Body {
 
 
 	/**
+	 * The body's current acceleration.
+	 */
+
+	private[this] var _acceleration = Vec2D( 0, 0 )
+
+	def acceleration = _acceleration
+
+	def acceleration_=( a: Vec2D ) {
+		if ( a == null ) throw new NullPointerException
+		
+		_acceleration = a
+	}
+
+
+
+	/**
 	 * The body's mass, measured in kilograms.
 	 * After creation, a body has an initial mass of 1. The mass must never be negative or zero.
 	 * A mass of Double.PositiveInfinity indicates that a body is static. Static bodies don't move. Forces

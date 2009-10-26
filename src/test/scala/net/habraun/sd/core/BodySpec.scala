@@ -93,6 +93,27 @@ object BodySpec extends Specification {
 
 			( body.velocity = null ) must throwA[NullPointerException]
 		}
+
+		"have an initial acceleration of (0, 0)." in {
+			val body = new Body {}
+
+			body.acceleration must beEqualTo( Vec2D( 0, 0 ) )
+		}
+
+		"have its acceleration assignable." in {
+			val body = new Body {}
+
+			val acceleration = new Vec2D( 10, 10 )
+			body.acceleration = acceleration
+
+			body.acceleration must beEqualTo( acceleration )
+		}
+
+		"throw an exception if null is assigned to acceleration." in {
+			val body = new Body {}
+
+			( body.acceleration = null ) must throwA[ NullPointerException ]
+		}
 	}
 
 	"Body's mass code" should {
