@@ -52,5 +52,5 @@ case class Contact( s: Shape, point: Vec2D, normal: Vec2D, other: Shape ) {
 	 * * inverse.other == this.s
 	 */
 
-	def inverse = Contact( other, point, -normal, s )
+	def unary_- = Contact( other, point, -normal, s )
 }

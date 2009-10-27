@@ -67,7 +67,7 @@ object ContactSpec extends Specification {
 
 		"create an inverse Contact." in {
 			val contact = Contact( new Shape {}, Vec2D( 10, 10 ), Vec2D( 0, 1 ), new Shape {} )
-			val inverse = contact.inverse
+			val inverse = -contact
 
 			inverse.s must beEqualTo( contact.other )
 			inverse.point must beEqualTo( contact.point )
