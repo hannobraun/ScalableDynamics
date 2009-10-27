@@ -36,11 +36,11 @@ object ContactSpec extends Specification {
 	"Contact" should {
 		"make all its attributes accessible." in {
 			val s = new Shape {}
-			val point = Vec2D(10, 10)
-			val normal = Vec2D(0, 1)
+			val point = Vec2D( 10, 10 )
+			val normal = Vec2D( 0, 1 )
 			val other = new Shape {}
 
-			val contact = Contact(s, point, normal, other)
+			val contact = Contact( s, point, normal, other )
 
 			contact.s must beEqualTo( s )
 			contact.point must beEqualTo( point )
@@ -50,7 +50,7 @@ object ContactSpec extends Specification {
 
 		"throw an exception if normal is not a unit vector." in {
 			Contact( new Shape {}, Vec2D( 0, 0 ), Vec2D( 1, 1 ), new Shape {} ) must
-					throwAn[IllegalArgumentException]
+					throwAn[ IllegalArgumentException ]
 		}
 
 		"not throw an exception if normal is only slightly off from being a unit vector." in {
@@ -58,20 +58,11 @@ object ContactSpec extends Specification {
 			Contact( new Shape {}, Vec2D( 0, 0 ), Vec2D( 0.98, 0 ), new Shape {} )
 		}
 
-		"throw an exception if s is null." in {
-			Contact( null, Vec2D( 0, 0 ), Vec2D( 1, 0 ), new Shape {} ) must throwA[NullPointerException]
-		}
-
-		"throw an exception if point is null." in {
-			Contact( new Shape {}, null, Vec2D( 1, 0 ), new Shape {} ) must throwA[NullPointerException]
-		}
-
-		"throw an exception if normal is null." in {
-			Contact( new Shape {}, Vec2D( 0, 0 ), null, new Shape {} ) must throwA[NullPointerException]
-		}
-
-		"throw an exception if other is null." in {
-			Contact( new Shape {}, Vec2D( 0, 0 ), Vec2D( 1, 0 ), null ) must throwA[NullPointerException]
+		"throw an exception if a parameter is is null." in {
+			Contact( null, Vec2D( 0, 0 ), Vec2D( 1, 0 ), new Shape {} ) must throwA[ NullPointerException ]
+			Contact( new Shape {}, null, Vec2D( 1, 0 ), new Shape {} ) must throwA[ NullPointerException ]
+			Contact( new Shape {}, Vec2D( 0, 0 ), null, new Shape {} ) must throwA[ NullPointerException ]
+			Contact( new Shape {}, Vec2D( 0, 0 ), Vec2D( 1, 0 ), null ) must throwA[ NullPointerException ]
 		}
 	}
 }
