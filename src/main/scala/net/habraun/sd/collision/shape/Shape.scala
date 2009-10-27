@@ -22,6 +22,8 @@ package net.habraun.sd.collision.shape
 
 import core.Body
 
+import scala.collection.mutable.HashSet
+
 
 
 /**
@@ -37,7 +39,7 @@ trait Shape extends Body {
 	 * referred to later, when collision reaction is computed.
 	 */
 
-	private var _contacts: List[Contact] = Nil
+	private var _contacts = HashSet[ Contact ]()
 
 	def contacts = _contacts
 
@@ -45,10 +47,13 @@ trait Shape extends Body {
 		if ( contact == null )
 			throw new NullPointerException
 
-		_contacts = contact::_contacts
+		_contacts += contact
 	}
 
-	def clearContacts {
-		_contacts = Nil
+	def removeContact( contact: Contact ) {
+		if ( !contacts.contains( contact ) )
+			throw new IllegalArgumentException( "Contact " + contact + " is not in contact set." )
+
+		_contacts -= contact
 	}
 }

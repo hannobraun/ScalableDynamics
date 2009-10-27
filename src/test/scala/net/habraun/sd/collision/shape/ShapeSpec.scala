@@ -23,6 +23,8 @@ package net.habraun.sd.collision.shape
 import core.Body
 import math.Vec2D
 
+import scala.collection.mutable.HashSet
+
 import org.specs.Specification
 import org.specs.runner.JUnit4
 
@@ -38,38 +40,46 @@ object ShapeSpec extends Specification {
 		"extend Body." in {
 			val shape = new Shape {}
 
-			shape must haveSuperClass[Body]
+			shape must haveSuperClass[ Body ]
 		}
 
 		"have no contacts initially." in {
 			val shape = new Shape {}
 
-			shape.contacts must beEqualTo( Nil )
+			shape.contacts must beEqualTo( HashSet[ Contact ]() )
 		}
 
-		"add contacts to the contact list." in {
+		"add contacts to the contact set." in {
 			val shape = new Shape {}
 
 			val contact = Contact( new Shape {}, Vec2D( 1, 0 ), Vec2D( 0, 1 ), new Shape {} )
 			shape.addContact( contact )
 
-			shape.contacts must beEqualTo( contact::Nil )
+			shape.contacts must beEqualTo( HashSet( contact ) )
 		}
 
 		"throw an exception if a null contact is added." in {
 			val shape = new Shape {}
 
-			shape.addContact( null ) must throwA[NullPointerException]
+			shape.addContact( null ) must throwA[ NullPointerException ]
 		}
 
-		"should clear the list of added contacts." in {
+		"remove a contact from the contact set." in {
 			val shape = new Shape {}
 
 			val contact = Contact( new Shape {}, Vec2D( 1, 0 ), Vec2D( 0, 1 ), new Shape {} )
 			shape.addContact( contact )
-			shape.clearContacts
+			shape.removeContact( contact )
 
-			shape.contacts must beEqualTo( Nil )
+			shape.contacts must beEqualTo( HashSet[ Contact ]() )
+		}
+
+		"should throw an exception if a to-be-removed contact has not been added." in {
+			val shape = new Shape {}
+
+			val contact = Contact( new Shape {}, Vec2D( 1, 0 ), Vec2D( 0, 1 ), new Shape {} )
+
+			shape.removeContact( contact ) must throwAn[ IllegalArgumentException ]
 		}
 	}
 }
