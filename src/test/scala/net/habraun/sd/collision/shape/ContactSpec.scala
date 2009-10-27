@@ -34,7 +34,7 @@ class ContactTest extends JUnit4( ContactSpec )
 object ContactSpec extends Specification {
 
 	"Contact" should {
-		"make all its attributes accesible." in {
+		"make all its attributes accessible." in {
 			val s = new Shape {}
 			val point = Vec2D(10, 10)
 			val normal = Vec2D(0, 1)
