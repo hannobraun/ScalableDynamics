@@ -64,5 +64,15 @@ object ContactSpec extends Specification {
 			Contact( new Shape {}, Vec2D( 0, 0 ), null, new Shape {} ) must throwA[ NullPointerException ]
 			Contact( new Shape {}, Vec2D( 0, 0 ), Vec2D( 1, 0 ), null ) must throwA[ NullPointerException ]
 		}
+
+		"create an inverse Contact." in {
+			val contact = Contact( new Shape {}, Vec2D( 10, 10 ), Vec2D( 0, 1 ), new Shape {} )
+			val inverse = contact.inverse
+
+			inverse.s must beEqualTo( contact.other )
+			inverse.point must beEqualTo( contact.point )
+			inverse.normal must beEqualTo( -contact.normal )
+			inverse.other must beEqualTo( contact.s )
+		}
 	}
 }

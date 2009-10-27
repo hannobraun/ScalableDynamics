@@ -41,4 +41,16 @@ case class Contact( s: Shape, point: Vec2D, normal: Vec2D, other: Shape ) {
 	// Check if the normal vector is a unit vector.
 	if ( !normal.unit )
 		throw new IllegalArgumentException( "Normal must be a unit vectors (normal: " + normal + ")." )
+
+
+
+	/**
+	 * Returns an inverse contact, which has the following attributes:
+	 * * inverse.s == this.other
+	 * * inverse.point == this.point
+	 * * inverse.normal == -this.normal
+	 * * inverse.other == this.s
+	 */
+
+	def inverse = Contact( other, point, -normal, s )
 }
