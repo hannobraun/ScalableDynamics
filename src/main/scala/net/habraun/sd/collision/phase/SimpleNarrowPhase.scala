@@ -57,14 +57,14 @@ class SimpleNarrowPhase extends NarrowPhase {
 				s2 match {
 					case circle2: Circle =>
 						for ( r <- testCircleCircle( circle1, circle2 ) ) yield {
-							Collision( r.t, Contact( circle1, r.contact, r.normal, circle2 ),
-									Contact( circle2, r.contact, -r.normal, circle1 ) )
+							val contact = Contact( circle1, r.contact, r.normal, circle2 )
+							Collision( r.t, contact, -contact )
 						}
 
 					case lineSegment: LineSegment =>
 						for ( r <- testCircleLineSegment( circle1, lineSegment ) ) yield {
-							Collision( r.t, Contact( circle1, r.contact, r.normal, lineSegment ),
-									Contact( lineSegment, r.contact, -r.normal, circle1 ) )
+							val contact = Contact( circle1, r.contact, r.normal, lineSegment )
+							Collision( r.t, contact, -contact )
 						}
 
 					case _ =>
@@ -75,8 +75,8 @@ class SimpleNarrowPhase extends NarrowPhase {
 				s2 match {
 					case circle: Circle =>
 						for ( r <- testCircleLineSegment( circle, lineSegment1 ) ) yield {
-							Collision( r.t, Contact( lineSegment1, r.contact, r.normal, circle ),
-									Contact( circle, r.contact, -r.normal, lineSegment1 ) )
+							val contact = Contact( lineSegment1, r.contact, r.normal, circle )
+							Collision( r.t, contact, -contact )
 						}
 
 					case lineSegment2: LineSegment =>
