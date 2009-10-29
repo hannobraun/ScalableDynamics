@@ -36,14 +36,16 @@ import test.ContinuousCircleLineSegmentTest
  * A narrow phase implementation that uses the collision tests from the sd.collision package by default.
  */
 
-class SimpleNarrowPhase extends NarrowPhase {
+class SimpleNarrowPhase( testCircleCircle: CircleCircleTest, testCircleLineSegment: CircleLineSegmentTest)
+		extends NarrowPhase {
 
 	/**
-	 * The tests this narrow phase uses can be set here.
+	 * Default constructor that provides default test implementations.
 	 */
 
-	var testCircleCircle: CircleCircleTest = new ContinuousCircleCircleTest
-	var testCircleLineSegment: CircleLineSegmentTest = new ContinuousCircleLineSegmentTest
+	def this() {
+		this( new ContinuousCircleCircleTest, new ContinuousCircleLineSegmentTest )
+	}
 
 
 
