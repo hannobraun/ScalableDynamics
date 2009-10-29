@@ -138,10 +138,6 @@ class World[B <: Body] {
 	 */
 	
 	def step( dt: Double ) {
-		// Check if delta is valid.
-		if ( dt < 0.0 )
-			throw new IllegalArgumentException( "Time delta must be 0 or greater." )
-
 		// Execute step phases.
 		integrator.filterAndStep( dt, bodies )
 		velocityConstraintSolver.filterAndStep( dt, bodies )

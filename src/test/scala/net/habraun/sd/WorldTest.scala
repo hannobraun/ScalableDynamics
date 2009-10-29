@@ -114,13 +114,6 @@ class WorldTest {
 
 
 
-	@Test { val expected = classOf[IllegalArgumentException] }
-	def stepPassNegativeDelta {
-		world.step(-1.0)
-	}
-
-
-
 	@Test
 	def addBodyVerifyItIsPassedToBroadPhase {
 		val broadPhase = new BroadPhase {
