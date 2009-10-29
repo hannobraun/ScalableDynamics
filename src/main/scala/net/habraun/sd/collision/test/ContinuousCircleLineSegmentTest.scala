@@ -70,7 +70,7 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 			// The point on the line that lies nearest to the circle center.
 			val lambda = ( pc - pls - ls.p ) * ls.d / ls.d.squaredLength
 			if ( lambda >= 0 && lambda <= ls.d.length ) {
-				Some( TestResult( 0.0, Vec2D( 0, 0 ), normal ) )
+				Some( TestResult( 0.0, Vec2D( 0, 0 ), normal, 0 ) )
 			}
 			else {
 				None
@@ -121,7 +121,7 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 					val pt = ( point.x - ( pls.x + ls.p.x ) ) / ls.d.x
 					if ( pt >= 0.0 && pt <= 1.0 ) {
 						// Yes it does.
-						Some( TestResult( t, point, normal ) )
+						Some( TestResult( t, point, normal, 0 ) )
 					}
 					else {
 						// No, it doesn't. No collision.

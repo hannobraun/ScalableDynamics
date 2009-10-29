@@ -33,7 +33,7 @@ import math.Vec2D
  * * normal: The first shape's surface normal at the point of contact.
  */
 
-case class TestResult( t: Double, contact: Vec2D, normal: Vec2D ) {
+case class TestResult( t: Double, contact: Vec2D, normal: Vec2D, depth: Double ) {
 	// Check if t is valid.
 	if ( t < 0.0 || t > 1.0 )
 		throw new IllegalArgumentException( "The time must be between 0.0 and 1.0 (t: " + t + ")." )
