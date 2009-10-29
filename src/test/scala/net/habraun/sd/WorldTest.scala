@@ -66,20 +66,6 @@ class WorldTest {
 
 
 	@Test
-	def verifyInitialIntegrator {
-		assertTrue(world.integrator.isInstanceOf[EulerIntegrator])
-	}
-
-	
-
-	@Test { val expected = classOf[NullPointerException] }
-	def setIntegratorNullExpectException() {
-		world.integrator = null
-	}
-
-
-
-	@Test
 	def verifyInitialVelocityConstraintSolver {
 		assertTrue( world.velocityConstraintSolver.isInstanceOf[VelocityConstraintSolver] )
 	}
@@ -136,53 +122,6 @@ class WorldTest {
 
 
 	@Test
-	def addBodyVerifyIsIntegrated {
-		val integrate = new Integrator {
-			var _t: Double = Double.NaN
-			var _body: Body = null
-			def apply(t: Double, body: Body) = {
-				_t = t
-				_body = body
-				body
-			}
-		}
-		world.integrator = integrate
-
-		val body = new Body {}
-		world.add(body)
-
-		val t = 2.0
-		world.step(t)
-
-		assertEquals(t, integrate._t, 0.0)
-		assertEquals(body, integrate._body)
-	}
-
-
-
-	@Test
-	def addAndRemoveBodyVerifyIsNotIntegrated {
-		val body = new Body {}
-
-		val integrate = new Integrator {
-			var integrated = false
-			def apply(t: Double, b: Body) = {
-				integrated = b == body
-				body
-			}
-		}
-		world.integrator = integrate
-
-		world.add(body)
-		world.remove(body)
-		world.step(2.0)
-
-		assertFalse(integrate.integrated)
-	}
-
-
-
-	@Test
 	def addBodyVerifyItIsPassedToBroadPhase {
 		val broadPhase = new BroadPhase {
 			var passedBodies: Iterable[Shape] = null
@@ -222,52 +161,6 @@ class WorldTest {
 		world.step(2.0)
 
 		assertEquals((b1, b2)::(b3, b4)::Nil, narrowPhase.passedPairs)
-	}
-
-
-
-	@Test
-	def verifyForceIsAppliedBeforeCollisionDetection {
-		val broadPhase = new BroadPhase {
-			var v: Vec2D = null
-			def apply(shapes: Iterable[Shape]) = {
-				v = shapes.toList(0).velocity
-				Nil
-			}
-		}
-		world.broadPhase = broadPhase
-
-		val body = new Body with Shape {}
-		body.mass = 5
-		body.applyForce(Vec2D(10, 0))
-		world.add(body)
-
-		world.step(2.0)
-
-		assertEquals(Vec2D(4, 0), broadPhase.v)
-	}
-
-
-
-	@Test
-	def verifyImpulseIsAppliedBeforeCollisionDetection {
-		val broadPhase = new BroadPhase {
-			var v: Vec2D = null
-			def apply(shapes: Iterable[Shape]) = {
-				v = shapes.toList(0).velocity
-				Nil
-			}
-		}
-		world.broadPhase = broadPhase
-
-		val body = new Body with Shape {}
-		body.mass = 5
-		body.applyImpulse(Vec2D(10, 0))
-		world.add(body)
-
-		world.step(2.0)
-
-		assertEquals(Vec2D(2, 0), broadPhase.v)
 	}
 
 

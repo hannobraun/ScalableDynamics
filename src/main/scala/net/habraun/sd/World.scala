@@ -30,6 +30,7 @@ import dynamics.PositionConstraint
 import dynamics.PositionConstraintSolver
 import dynamics.VelocityConstraint
 import dynamics.VelocityConstraintSolver
+import dynamics.VerletIntegrator
 import math.Vec2D
 
 import scala.collection.mutable.HashSet
@@ -51,25 +52,9 @@ class World[B <: Body] {
 	 * Step phases.
 	 */
 
+	var integrator = new VerletIntegrator
 	var velocityConstraintSolver = new VelocityConstraintSolver
 	var positionConstraintSolver = new PositionConstraintSolver
-
-
-
-	/**
-	 * The integrator is used to integrate the bodies.
-	 */
-
-	private[this] var _integrator: Integrator = new EulerIntegrator
-
-	def integrator = _integrator
-
-	def integrator_=( newIntegrator: Integrator ) {
-		if ( newIntegrator == null )
-			throw new NullPointerException( "Integrator must not be null." )
-
-		_integrator = newIntegrator
-	}
 
 	
 
@@ -157,10 +142,8 @@ class World[B <: Body] {
 		if ( dt < 0.0 )
 			throw new IllegalArgumentException( "Time delta must be 0 or greater." )
 
-		// Integrate bodies.
-		bodies.foreach( integrator( dt, _ ) )
-
 		// Execute step phases.
+		integrator.filterAndStep( dt, bodies )
 		velocityConstraintSolver.filterAndStep( dt, bodies )
 		positionConstraintSolver.filterAndStep( dt, bodies )
 
