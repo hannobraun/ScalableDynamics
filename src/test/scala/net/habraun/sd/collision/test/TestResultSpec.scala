@@ -38,31 +38,29 @@ object TheTestResultSpec extends Specification {
 			val t = 0.5
 			val contact = Vec2D( 5, 5 )
 			val normal = Vec2D( 1, 0 )
-			val depth = 2
 
-			val result = TestResult( t, contact, normal, depth )
+			val result = TestResult( t, contact, normal )
 
 			result.t must beEqualTo( t )
 			result.contact must beEqualTo( contact )
 			result.normal must beEqualTo( normal )
-			result.depth must beEqualTo( depth )
 		}
 
 		"throw an exception if a negative contact time is passed." in {
-			TestResult( -1.0, Vec2D( 5, 5 ), Vec2D( 1, 0 ), 2 ) must throwA[ IllegalArgumentException ]
+			TestResult( -1.0, Vec2D( 5, 5 ), Vec2D( 1, 0 ) ) must throwA[IllegalArgumentException]
 		}
 
 		"throw an exception if a contact time greater than 1.0 is passed." in {
-			TestResult( 1.1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), 2 ) must throwA[ IllegalArgumentException ]
+			TestResult( 1.1, Vec2D( 5, 5 ), Vec2D( 1, 0 ) ) must throwA[IllegalArgumentException]
 		}
 
 		"throw an exception if the passed normal is not actually a normal." in {
-			TestResult( 0.5, Vec2D( 5, 5 ), Vec2D( 1, 1 ), 2 ) must throwA[ IllegalArgumentException ]
+			TestResult( 0.5, Vec2D( 5, 5 ), Vec2D( 1, 1 ) ) must throwA[IllegalArgumentException]
 		}
 
 		"throw an exception if null is passed as a parameter." in {
-			TestResult( 0.5, null, Vec2D( 1, 0 ), 2 ) must throwA[ NullPointerException ]
-			TestResult( 0.5, Vec2D( 5, 5 ), null, 2 ) must throwA[ NullPointerException ]
+			TestResult( 0.5, null, Vec2D( 1, 0 ) ) must throwA[NullPointerException]
+			TestResult( 0.5, Vec2D( 5, 5 ), null ) must throwA[NullPointerException]
 		}
 	}
 }
