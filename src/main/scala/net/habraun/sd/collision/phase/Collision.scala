@@ -44,8 +44,7 @@ case class Collision( t: Double, contact1: Contact, contact2: Contact ) {
 		throw new NullPointerException( "Contact must not be null." )
 
 	// Verify contacts match each other.
-	if ( contact1.s != contact2.other || contact1.other != contact2.s || contact1.point != contact2.point
-			|| contact1.normal != -contact2.normal )
+	if ( -contact1 != contact2 )
 		throw new IllegalArgumentException( "Contacts do not match each other (contact1: " + contact1 + ","
 				+ " contact2: " + contact2 + ")." )
 }
