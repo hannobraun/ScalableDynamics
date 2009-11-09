@@ -95,11 +95,17 @@ object CollisionDetectorSpec extends Specification with Mockito {
 			val narrowPhase = mock[NarrowPhase]
 			val detector = new CollisionDetector( broadPhase, narrowPhase )
 
+			val t = 0.5
 			val shape1 = mock[Shape]
 			val shape2 = mock[Shape]
 			val shapes = shape1::shape2::Nil
-			val contact1 = Contact(shape1, Vec2D( 4, 4 ), Vec2D( 1, 0), shape2 )
-			val contact2 = Contact(shape2, Vec2D( 4, 4 ), Vec2D( -1, 0), shape1 )
+			val contact1 = mock[ Contact ]
+			val contact2 = mock[ Contact ]
+
+			-contact1 returns contact2
+			-contact2 returns contact1
+			contact1.s returns shape1
+			contact2.s returns shape2
 
 			broadPhase( shapes ) returns ( shape1, shape2 )::Nil
 			narrowPhase( shape1, shape2 ) returns Some( Collision( 0.5, contact1, contact2 ) )

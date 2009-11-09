@@ -26,6 +26,7 @@ import math.Vec2D
 import scala.collection.mutable.HashSet
 
 import org.specs.Specification
+import org.specs.mock.Mockito
 import org.specs.runner.JUnit4
 
 
@@ -34,7 +35,7 @@ class ShapeTest extends JUnit4( ShapeSpec )
 
 
 
-object ShapeSpec extends Specification {
+object ShapeSpec extends Specification with Mockito {
 
 	"Shape" should {
 		"extend Body." in {
@@ -52,7 +53,8 @@ object ShapeSpec extends Specification {
 		"add contacts to the contact set." in {
 			val shape = new Shape {}
 
-			val contact = Contact( new Shape {}, Vec2D( 1, 0 ), Vec2D( 0, 1 ), new Shape {} )
+			val contact = mock[ Contact ]
+
 			shape.addContact( contact )
 
 			shape.contacts must beEqualTo( HashSet( contact ) )
@@ -66,8 +68,8 @@ object ShapeSpec extends Specification {
 
 		"remove a contact from the contact set." in {
 			val shape = new Shape {}
+			val contact = mock[ Contact ]
 
-			val contact = Contact( new Shape {}, Vec2D( 1, 0 ), Vec2D( 0, 1 ), new Shape {} )
 			shape.addContact( contact )
 			shape.removeContact( contact )
 
@@ -76,8 +78,8 @@ object ShapeSpec extends Specification {
 
 		"should throw an exception if a to-be-removed contact has not been added." in {
 			val shape = new Shape {}
-
-			val contact = Contact( new Shape {}, Vec2D( 1, 0 ), Vec2D( 0, 1 ), new Shape {} )
+			
+			val contact = mock[ Contact ]
 
 			shape.removeContact( contact ) must throwAn[ IllegalArgumentException ]
 		}

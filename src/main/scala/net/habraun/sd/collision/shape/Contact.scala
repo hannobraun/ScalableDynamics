@@ -33,7 +33,7 @@ import math.Vec2D
  * * other: The other shape that s is in contact to.
  */
 
-case class Contact( s: Shape, point: Vec2D, normal: Vec2D, other: Shape ) {
+case class Contact( t: Double, s: Shape, point: Vec2D, normal: Vec2D, other: Shape ) {
 	// Make sure the parameters are not null.
 	if ( s == null || point == null || normal == null || other == null )
 		throw new NullPointerException
@@ -52,5 +52,5 @@ case class Contact( s: Shape, point: Vec2D, normal: Vec2D, other: Shape ) {
 	 * * inverse.other == this.s
 	 */
 
-	def unary_- = Contact( other, point, -normal, s )
+	def unary_- = Contact( t, other, point, -normal, s )
 }

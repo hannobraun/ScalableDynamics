@@ -147,15 +147,16 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val circleLineSegmentTest = mock[ CircleLineSegmentTest ]
 			val narrowPhase = new SimpleNarrowPhase( circleCircleTest, circleLineSegmentTest)
 
+			val t = 0.5
 			val s1 = new Circle {}
 			val s2 = new Circle {}
 			s1.radius = 1
 			s2.radius = 2
+			val contact = Contact( t, s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 )
 
-			circleCircleTest( s1, s2 ) returns Some( TestResult( 0.5, Vec2D( 5, 5 ), Vec2D( 1, 0 ) ) )
+			circleCircleTest( s1, s2 ) returns Some( TestResult( t, Vec2D( 5, 5 ), Vec2D( 1, 0 ) ) )
 
-			val expected = Collision( 0.5, Contact( s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 ),
-					Contact( s2, Vec2D( 5, 5 ), Vec2D( -1, 0 ), s1 ) )
+			val expected = Collision( t, contact, -contact )
 
 			narrowPhase( s1, s2 ) must beEqualTo( Some( expected ) )
 		}
@@ -165,17 +166,18 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val circleLineSegmentTest = mock[ CircleLineSegmentTest ]
 			val narrowPhase = new SimpleNarrowPhase( circleCircleTest, circleLineSegmentTest)
 
+			val t = 0.5
 			val s1 = new Circle {}
 			val s2 = new LineSegment {}
 			s1.radius = 1
 			s2.p = Vec2D( 1, 1 )
 			s2.d = Vec2D( 2, 2 )
+			val contact = Contact( t, s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 )
 
 			circleLineSegmentTest( s1, s2 ) returns
-					Some( TestResult( 0.5, Vec2D( 5, 5 ), Vec2D( 1, 0 ) ) )
+					Some( TestResult( t, Vec2D( 5, 5 ), Vec2D( 1, 0 ) ) )
 
-			val expected = Collision( 0.5, Contact( s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 ),
-				Contact( s2, Vec2D( 5, 5 ), Vec2D( -1, 0 ), s1 ) )
+			val expected = Collision( 0.5, contact, -contact)
 
 			narrowPhase( s1, s2 ) must beEqualTo( Some( expected ) )
 		}
@@ -185,17 +187,18 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val circleLineSegmentTest = mock[ CircleLineSegmentTest ]
 			val narrowPhase = new SimpleNarrowPhase( circleCircleTest, circleLineSegmentTest)
 
+			val t = 0.5
 			val s1 = new LineSegment {}
 			val s2 = new Circle {}
 			s1.p = Vec2D( 1, 1 )
 			s1.d = Vec2D( 2, 2 )
 			s2.radius = 1
+			val contact = Contact( t, s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 )
 
 			circleLineSegmentTest( s2, s1 ) returns
-					Some( TestResult( 0.5, Vec2D( 5, 5 ), Vec2D( 1, 0 ) ) )
+					Some( TestResult( t, Vec2D( 5, 5 ), Vec2D( 1, 0 ) ) )
 
-			val expected = Collision( 0.5, Contact( s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 ),
-				Contact( s2, Vec2D( 5, 5 ), Vec2D( -1, 0 ), s1 ) )
+			val expected = Collision( 0.5, contact, -contact)
 
 			narrowPhase( s1, s2 ) must beEqualTo( Some( expected ) )
 		}

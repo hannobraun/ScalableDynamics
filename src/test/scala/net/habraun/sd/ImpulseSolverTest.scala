@@ -57,8 +57,8 @@ class ImpulseSolverTest {
 		b2.position = Vec2D(10, 9)
 		b2.mass = 8
 		b2.velocity = Vec2D(5, 5)
-		val collision = Collision(1.0, Contact(b1, Vec2D(0, 0), Vec2D(0, -1), b2),
-				Contact(b2, Vec2D(0, 0), Vec2D(0, 1), b1))
+		val collision = Collision(1.0, Contact( 1.0, b1, Vec2D(0, 0), Vec2D(0, -1), b2),
+				Contact( 1.0, b2, Vec2D(0, 0), Vec2D(0, 1), b1))
 
 		solve(t, collision)
 
@@ -76,8 +76,8 @@ class ImpulseSolverTest {
 		b2.mass = 5
 		b2.position = Vec2D(2, 2)
 		b2.velocity = Vec2D(1, 1)
-		val collision = Collision(1.0, Contact(b1, Vec2D(0, 0), Vec2D(0, -1), b2),
-				Contact(b2, Vec2D(0, 0), Vec2D(0, 1), b1))
+		val collision = Collision(1.0, Contact( 1.0, b1, Vec2D(0, 0), Vec2D(0, -1), b2),
+				Contact( 1.0, b2, Vec2D(0, 0), Vec2D(0, 1), b1))
 
 		solve(t, collision)
 
@@ -95,8 +95,8 @@ class ImpulseSolverTest {
 		b1.velocity = Vec2D(1, 1)
 		val b2 = new Body with Shape {}
 		b2.mass = Double.PositiveInfinity
-		val collision = Collision(1.0, Contact(b1, Vec2D(0, 0), Vec2D(0, 1), b2),
-				Contact(b2, Vec2D(0, 0), Vec2D(0, -1), b1))
+		val collision = Collision(1.0, Contact( 1.0, b1, Vec2D(0, 0), Vec2D(0, 1), b2),
+				Contact( 1.0, b2, Vec2D(0, 0), Vec2D(0, -1), b1))
 
 		solve(t, collision)
 
@@ -114,8 +114,8 @@ class ImpulseSolverTest {
 		val b2 = new Body with Shape {}
 		b2.position = Vec2D(5, 0)
 		b2.velocity = Vec2D(0, 0)
-		val collision = Collision(0.5, Contact(b1, Vec2D(3, 0), Vec2D(1, 0), b2),
-				Contact(b2, Vec2D(3, 0), Vec2D(-1, 0), b1))
+		val collision = Collision(0.5, Contact( 1.0, b1, Vec2D(3, 0), Vec2D(1, 0), b2),
+				Contact( 1.0, b2, Vec2D(3, 0), Vec2D(-1, 0), b1))
 		
 		solve(t, collision)
 
@@ -137,8 +137,8 @@ class ImpulseSolverTest {
 		b2.position = Vec2D(50.0, 469.8163204364546)
 		b2.velocity = Vec2D(0.0, 0.0)
 		val collision = Collision(0.4766389925763854,
-						Contact(b1, Vec2D(3, 0), Vec2D(-0.8732041733361332, -0.4873545646327327), b2),
-						Contact(b2, Vec2D(3, 0), Vec2D(0.8732041733361332, 0.4873545646327327), b1))
+						Contact(0.4766389925763854, b1, Vec2D(3, 0), Vec2D(-0.8732041733361332, -0.4873545646327327), b2),
+						Contact(0.4766389925763854, b2, Vec2D(3, 0), Vec2D(0.8732041733361332, 0.4873545646327327), b1))
 
 		solve(t, collision)
 
