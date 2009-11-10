@@ -58,9 +58,8 @@ class SimpleNarrowPhase( testCircleCircle: CircleCircleTest, testCircleLineSegme
 			case circle1: Circle =>
 				s2 match {
 					case circle2: Circle =>
-						for ( r <- testCircleCircle( circle1, circle2 ) ) yield {
-							val contact = Contact( r.t, circle1, r.contact, r.normal, circle2 )
-							Collision( r.t, contact, -contact )
+						for ( contact <- testCircleCircle( circle1, circle2 ) ) yield {
+							Collision( contact.t, contact, -contact )
 						}
 
 					case lineSegment: LineSegment =>

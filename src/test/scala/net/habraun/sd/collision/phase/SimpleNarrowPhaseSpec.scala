@@ -154,7 +154,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			s2.radius = 2
 			val contact = Contact( t, s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 )
 
-			circleCircleTest( s1, s2 ) returns Some( TestResult( t, Vec2D( 5, 5 ), Vec2D( 1, 0 ) ) )
+			circleCircleTest( s1, s2 ) returns Some( contact )
 
 			val expected = Collision( t, contact, -contact )
 

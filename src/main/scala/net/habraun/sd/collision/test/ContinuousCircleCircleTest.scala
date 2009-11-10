@@ -22,6 +22,7 @@ package net.habraun.sd.collision.test
 
 import math.Vec2D
 import shape.Circle
+import shape.Contact
 
 
 
@@ -41,7 +42,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 	 * reported. In that case, the collision point will always be (0, 0).
 	 */
 
-	def apply( c1: Circle, c2: Circle ): Option[TestResult] = {
+	def apply( c1: Circle, c2: Circle ): Option[ Contact ] = {
 		// Extract position and velocity from the circles.
 		val p1 = c1.previousPosition
 		val p2 = c2.previousPosition
@@ -70,7 +71,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 			// Spheres are initially overlapping.
 			val normal = ( p2 - p1 ).normalize
 			val point = Vec2D( 0, 0 )
-			Some( TestResult( 0.0, point, normal ) )
+			Some( Contact( 0.0, c1, point, normal, c2 ) )
 		}
 		else if ( a == 0 ) {
 			// Spheres are not moving relative to each other.
@@ -91,7 +92,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 				// Time of contact is within the timeframe we're checking.
 				val normal = ( p2 - p1 ).normalize
 				val point = p1 + ( v1 * t ) + ( normal * c1.radius )
-				Some( TestResult( t, point, normal ) )
+				Some( Contact( t, c1, point, normal, c2 ) )
 			}
 			else {
 				// Contact would occur, but only after the timeframe we're looking at.

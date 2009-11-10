@@ -22,6 +22,7 @@ package net.habraun.sd.collision.test
 
 import math.Vec2D
 import shape.Circle
+import shape.Contact
 
 
 
@@ -29,7 +30,7 @@ import shape.Circle
  * The definition for collision test functions for circle-circle collision.
  */
 
-trait CircleCircleTest extends Function2[Circle, Circle, Option[TestResult]] {
+trait CircleCircleTest extends Function2[ Circle, Circle, Option[ Contact ] ] {
 
 	/**
 	 * Circle-circle tests take the
@@ -40,5 +41,5 @@ trait CircleCircleTest extends Function2[Circle, Circle, Option[TestResult]] {
 	 * If the circles collide, Some(TestResult) is returned. If not, the function returns None.
 	 */
 
-	def apply( c1: Circle, c2: Circle ): Option[TestResult]
+	def apply( c1: Circle, c2: Circle ): Option[ Contact ]
 }
