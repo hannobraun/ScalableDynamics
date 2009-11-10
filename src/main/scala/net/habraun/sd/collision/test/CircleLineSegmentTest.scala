@@ -22,6 +22,7 @@ package net.habraun.sd.collision.test
 
 import math.Vec2D
 import shape.Circle
+import shape.Contact
 import shape.LineSegment
 
 
@@ -30,8 +31,7 @@ import shape.LineSegment
  * The definition for collision tests for circle - line segment collisions.
  */
 
-trait CircleLineSegmentTest
-		extends Function2[Circle, LineSegment, Option[TestResult]] {
+trait CircleLineSegmentTest	extends Function2[ Circle, LineSegment, Option[ Contact ] ] {
 
 	/**
 	 *  Circle - line segment tests take the following parameters:
@@ -42,5 +42,5 @@ trait CircleLineSegmentTest
 	 * None.
 	 */
 
-	def apply( c: Circle, ls: LineSegment ): Option[TestResult]
+	def apply( c: Circle, ls: LineSegment ): Option[ Contact ]
 }

@@ -22,6 +22,7 @@ package net.habraun.sd.collision.test
 
 import math.Vec2D
 import shape.Circle
+import shape.Contact
 import shape.LineSegment
 
 
@@ -38,7 +39,7 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 	 * invalid. It will always be (0, 0).
 	 */
 
-	def apply( c: Circle, ls: LineSegment ): Option[TestResult] = {
+	def apply( c: Circle, ls: LineSegment ): Option[ Contact ] = {
 		// Extract position and velocity from the shapes.
 		val pc = c.previousPosition
 		val pls = ls.previousPosition
@@ -70,7 +71,7 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 			// The point on the line that lies nearest to the circle center.
 			val lambda = ( pc - pls - ls.p ) * ls.d / ls.d.squaredLength
 			if ( lambda >= 0 && lambda <= ls.d.length ) {
-				Some( TestResult( 0.0, Vec2D( 0, 0 ), normal ) )
+				Some( Contact( 0.0, c, Vec2D( 0, 0 ), normal, ls ) )
 			}
 			else {
 				None
@@ -121,7 +122,7 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 					val pt = ( point.x - ( pls.x + ls.p.x ) ) / ls.d.x
 					if ( pt >= 0.0 && pt <= 1.0 ) {
 						// Yes it does.
-						Some( TestResult( t, point, normal ) )
+						Some( Contact( t, c, point, normal, ls ) )
 					}
 					else {
 						// No, it doesn't. No collision.
