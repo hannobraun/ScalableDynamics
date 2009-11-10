@@ -28,8 +28,6 @@ import shape.LineSegment
 import shape.Shape
 import test.CircleCircleTest
 import test.CircleLineSegmentTest
-import test.ContinuousCircleCircleTest
-import test.ContinuousCircleLineSegmentTest
 
 import org.specs.Specification
 import org.specs.mock.Mockito
