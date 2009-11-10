@@ -22,6 +22,7 @@ package net.habraun.sd.collision.test
 
 import math.Vec2D
 import shape.Circle
+import shape.Contact
 
 import org.specs.Specification
 import org.specs.mock.Mockito
@@ -39,8 +40,8 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		"handle non-moving, non-colliding circles." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = mock[Circle]
-			val c2 = mock[Circle]
+			val c1 = mock[ Circle ]
+			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
 			c1.previousPosition returns Vec2D( 0, 0 )
@@ -54,8 +55,8 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		"handle non-moving, colliding circles." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = mock[Circle]
-			val c2 = mock[Circle]
+			val c1 = mock[ Circle ]
+			val c2 = mock[ Circle ]
 			c1.radius returns 2
 			c2.radius returns 2
 			c1.previousPosition returns Vec2D( 0, 0 )
@@ -69,8 +70,8 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		"handle one circle moving and colliding." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = mock[Circle]
-			val c2 = mock[Circle]
+			val c1 = mock[ Circle ]
+			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
 			c1.previousPosition returns Vec2D( -1, 0 )
@@ -84,8 +85,8 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		"handle one circle moving and not colliding." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = mock[Circle]
-			val c2 = mock[Circle]
+			val c1 = mock[ Circle ]
+			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
 			c1.previousPosition returns Vec2D( -3, 0 )
@@ -99,8 +100,8 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		"handle both circles moving and colliding." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = mock[Circle]
-			val c2 = mock[Circle]
+			val c1 = mock[ Circle ]
+			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
 			c1.previousPosition returns Vec2D( -3, 0 )
@@ -114,8 +115,8 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		"handle both circles moving towards each other, but stopping before collision." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = mock[Circle]
-			val c2 = mock[Circle]
+			val c1 = mock[ Circle ]
+			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
 			c1.previousPosition returns Vec2D( -3, 0 )
@@ -129,8 +130,8 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		"handle both circles not moving towards each other." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = mock[Circle]
-			val c2 = mock[Circle]
+			val c1 = mock[ Circle ]
+			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
 			c1.previousPosition returns Vec2D( -2, 0 )
@@ -144,8 +145,8 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		"handle both circles moving and occupying the same space at different times." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = mock[Circle]
-			val c2 = mock[Circle]
+			val c1 = mock[ Circle ]
+			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
 			c1.previousPosition returns Vec2D( 0, 0 )
@@ -159,8 +160,8 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		"handle both circles moving on parallel courses with no intersection." in {
 			val test = new ContinuousCircleCircleTest
 
-			val c1 = mock[Circle]
-			val c2 = mock[Circle]
+			val c1 = mock[ Circle ]
+			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
 			c1.previousPosition returns Vec2D( 0, 0 )
