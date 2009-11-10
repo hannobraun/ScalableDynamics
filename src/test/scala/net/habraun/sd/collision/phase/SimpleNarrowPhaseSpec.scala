@@ -193,7 +193,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			circleLineSegmentTest( s2, s1 ) returns Some( contact )
 
-			val expected = Collision( 0.5, contact, -contact)
+			val expected = Collision( 0.5, -contact, contact)
 
 			narrowPhase( s1, s2 ) must beEqualTo( Some( expected ) )
 		}
