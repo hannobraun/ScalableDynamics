@@ -30,7 +30,6 @@ import test.CircleCircleTest
 import test.CircleLineSegmentTest
 import test.ContinuousCircleCircleTest
 import test.ContinuousCircleLineSegmentTest
-import test.TestResult
 
 import org.specs.Specification
 import org.specs.mock.Mockito
