@@ -149,7 +149,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val s2 = new Circle {}
 			s1.radius = 1
 			s2.radius = 2
-			val contact = Contact( t, s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 )
+			val contact = Contact( s1, s2, Vec2D( 5, 5 ), Vec2D( 1, 0 ), t )
 
 			circleCircleTest( s1, s2 ) returns Some( contact )
 
@@ -169,7 +169,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			s1.radius = 1
 			s2.p = Vec2D( 1, 1 )
 			s2.d = Vec2D( 2, 2 )
-			val contact = Contact( t, s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 )
+			val contact = Contact( s1, s2, Vec2D( 5, 5 ), Vec2D( 1, 0 ), t )
 
 			circleLineSegmentTest( s1, s2 ) returns Some( contact )
 
@@ -189,7 +189,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			s1.p = Vec2D( 1, 1 )
 			s1.d = Vec2D( 2, 2 )
 			s2.radius = 1
-			val contact = Contact( t, s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 )
+			val contact = Contact( s1, s2, Vec2D( 5, 5 ), Vec2D( 1, 0 ), t )
 
 			circleLineSegmentTest( s2, s1 ) returns Some( contact )
 

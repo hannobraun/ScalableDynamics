@@ -165,8 +165,8 @@ class WorldTest {
 		world.add(b1)
 		world.add(b2)
 
-		val collision = Collision(0.0, Contact(0.0, b1, Vec2D(1, 1), Vec2D(1, 0), b2),
-				Contact(0.0, b2, Vec2D(1, 1), Vec2D(-1, 0), b1))
+		val collision = Collision(0.0, Contact( b1, b2, Vec2D(1, 1), Vec2D(1, 0), 0.0 ),
+				Contact( b2, b1, Vec2D(1, 1), Vec2D(-1, 0), 0.0 ))
 
 		world.narrowPhase = new NarrowPhase {
 			def apply(b1: Shape, b2: Shape) = {

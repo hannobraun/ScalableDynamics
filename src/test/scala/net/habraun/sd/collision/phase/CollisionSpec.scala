@@ -40,7 +40,7 @@ object CollisionSpec extends Specification {
 			val s1 = new Shape {}
 			val s2 = new Shape {}
 			val t = 0.5
-			val contact = Contact( t, s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ),  s2 )
+			val contact = Contact( s1, s2, Vec2D( 5, 5 ), Vec2D( 1, 0 ), t )
 
 			val collision = Collision( t, contact, -contact )
 
@@ -51,27 +51,27 @@ object CollisionSpec extends Specification {
 
 		"throw an exception if t is bigger than 1.0." in {
 			val t = 1.1
-			val contact = Contact( t, new Shape {}, Vec2D( 5, 5 ), Vec2D( 1, 0 ), new Shape {} )
+			val contact = Contact( new Shape {}, new Shape {}, Vec2D( 5, 5 ), Vec2D( 1, 0 ), t )
 
 			Collision( t, contact, -contact ) must throwAn[IllegalArgumentException]
 		}
 
 		"throw an exception if t is smaller than 0.0." in {
 			val t = -1.0
-			val contact = Contact( t, new Shape {}, Vec2D( 5, 5 ), Vec2D( 1, 0 ), new Shape {} )
+			val contact = Contact( new Shape {}, new Shape {}, Vec2D( 5, 5 ), Vec2D( 1, 0 ), t )
 
 			Collision( t, contact, -contact ) must throwAn[IllegalArgumentException]
 		}
 
 		"throw an exception if contact1 is null." in {
 			val t = 0.5
-			Collision( t, null, Contact( t, new Shape {}, Vec2D( 5, 5 ), Vec2D( 1, 0 ), new Shape {} ) ) must
+			Collision( t, null, Contact( new Shape {}, new Shape {}, Vec2D( 5, 5 ), Vec2D( 1, 0 ), t ) ) must
 					throwA[NullPointerException]
 		}
 
 		"throw an exception if contact2 is null." in {
 			val t = 0.5
-			Collision( t, Contact( t, new Shape {}, Vec2D( 5, 5 ), Vec2D( 1, 0 ), new Shape {} ), null ) must
+			Collision( t, Contact( new Shape {}, new Shape {}, Vec2D( 5, 5 ), Vec2D( 1, 0 ), t ), null ) must
 					throwA[NullPointerException]
 		}
 
@@ -79,8 +79,8 @@ object CollisionSpec extends Specification {
 			val t = 0.5
 			val s1 = new Shape {}
 			val s2 = new Shape {}
-			val contact1 = Contact( t, s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 )
-			val contact2 = Contact( t, s2, Vec2D( 5, 5 ), Vec2D( -1, 0 ), new Shape {} )
+			val contact1 = Contact( s1, s2, Vec2D( 5, 5 ), Vec2D( 1, 0 ), t )
+			val contact2 = Contact( s2, new Shape {}, Vec2D( 5, 5 ), Vec2D( -1, 0 ), t )
 
 			Collision( t, contact1, contact2 ) must throwAn[IllegalArgumentException]
 		}
@@ -89,8 +89,8 @@ object CollisionSpec extends Specification {
 			val t = 0.5
 			val s1 = new Shape {}
 			val s2 = new Shape {}
-			val contact1 = Contact( t, s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 )
-			val contact2 = Contact( t, new Shape {}, Vec2D( 5, 5 ), Vec2D( -1, 0 ), s1 )
+			val contact1 = Contact( s1, s2, Vec2D( 5, 5 ), Vec2D( 1, 0 ), t )
+			val contact2 = Contact( new Shape {}, s1, Vec2D( 5, 5 ), Vec2D( -1, 0 ), t )
 
 			Collision( t, contact1, contact2 ) must throwAn[IllegalArgumentException]
 		}
@@ -99,8 +99,8 @@ object CollisionSpec extends Specification {
 			val t = 0.5
 			val s1 = new Shape {}
 			val s2 = new Shape {}
-			val contact1 = Contact( t, s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 )
-			val contact2 = Contact( t, s2, Vec2D( 6, 6 ), Vec2D( -1, 0 ), s1 )
+			val contact1 = Contact( s1, s2, Vec2D( 5, 5 ), Vec2D( 1, 0 ), t )
+			val contact2 = Contact( s2, s1, Vec2D( 6, 6 ), Vec2D( -1, 0 ), t )
 
 			Collision( t, contact1, contact2 ) must throwAn[IllegalArgumentException]
 		}
@@ -109,8 +109,8 @@ object CollisionSpec extends Specification {
 			val t = 0.5
 			val s1 = new Shape {}
 			val s2 = new Shape {}
-			val contact1 = Contact( t, s1, Vec2D( 5, 5 ), Vec2D( 1, 0 ), s2 )
-			val contact2 = Contact( t, s2, Vec2D( 5, 5 ), Vec2D( 0, -1 ), s1 )
+			val contact1 = Contact( s1, s2, Vec2D( 5, 5 ), Vec2D( 1, 0 ), t )
+			val contact2 = Contact( s2, s1, Vec2D( 5, 5 ), Vec2D( 0, -1 ), t )
 
 			Collision( t, contact1, contact2 ) must throwAn[IllegalArgumentException]
 		}

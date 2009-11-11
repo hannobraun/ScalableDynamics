@@ -71,7 +71,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 			// Spheres are initially overlapping.
 			val normal = ( p2 - p1 ).normalize
 			val point = Vec2D( 0, 0 )
-			Some( Contact( 0.0, c1, point, normal, c2 ) )
+			Some( Contact( c1, c2, point, normal, 0.0 ) )
 		}
 		else if ( a == 0 ) {
 			// Spheres are not moving relative to each other.
@@ -92,7 +92,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 				// Time of contact is within the timeframe we're checking.
 				val normal = ( p2 - p1 ).normalize
 				val point = p1 + ( v1 * t ) + ( normal * c1.radius )
-				Some( Contact( t, c1, point, normal, c2 ) )
+				Some( Contact( c1, c2, point, normal, t ) )
 			}
 			else {
 				// Contact would occur, but only after the timeframe we're looking at.
