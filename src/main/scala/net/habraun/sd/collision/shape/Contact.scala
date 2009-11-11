@@ -47,9 +47,10 @@ case class Contact( s: Shape, other: Shape, point: Vec2D, normal: Vec2D, t: Doub
 	/**
 	 * Returns an inverse contact, which has the following attributes:
 	 * * inverse.s == this.other
-	 * * inverse.point == this.point
-	 * * inverse.normal == -this.normal
 	 * * inverse.other == this.s
+	 * * inverse.point == this.point
+	 * * inverse.normal == -( this.normal )
+	 * * inverse.t == this.t
 	 */
 
 	def unary_- = Contact( other, s, point, -normal, t )
