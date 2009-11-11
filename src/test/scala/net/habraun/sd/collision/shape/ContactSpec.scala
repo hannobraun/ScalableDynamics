@@ -79,7 +79,7 @@ object ContactSpec extends Specification {
 			inverse.s must beEqualTo( contact.other )
 			inverse.other must beEqualTo( contact.s )
 			inverse.point must beEqualTo( contact.point )
-			inverse.normal must beEqualTo( -contact.normal )
+			inverse.normal must beEqualTo( -( contact.normal ) )
 		}
 	}
 }
