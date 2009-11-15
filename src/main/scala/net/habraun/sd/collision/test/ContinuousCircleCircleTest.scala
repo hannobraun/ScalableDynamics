@@ -66,7 +66,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 		val d = ( b * b ) - ( a * c )
 
 		// Check for several corner cases. If none of these occurs, we can compute t with the general formula.
-		if ( c < 0.0 ) {
+		if ( c <= 0.0 ) {
 			// Spheres are initially overlapping.
 			val normal = s.normalize // the direction of the normal is given by the vector between the sphere centers
 			val point = Vec2D( 0, 0 )
