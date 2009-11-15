@@ -52,7 +52,7 @@ object ElasticCollisionReactionSpec extends Specification {
 			b1.velocity = Vec2D( 5, 5 )
 			b2.velocity = Vec2D( -4, -4 )
 
-			val contact = Contact( b1, b2, Vec2D( 0, 0 ), Vec2D( 1, 0 ), 0.5 )
+			val contact = Contact( b1, b2, Vec2D( 0, 0 ), Vec2D( 1, 0 ), 1, 0.5 )
 
 			b1.addContact( contact )
 			b2.addContact( -contact )
@@ -73,7 +73,7 @@ object ElasticCollisionReactionSpec extends Specification {
 			b1.velocity = Vec2D( 2, 3 )
 			b2.velocity = Vec2D( -3, -3 )
 
-			val contact = Contact( b1, b2, Vec2D( 0, 0 ), Vec2D( 1, 0 ), 0.5 )
+			val contact = Contact( b1, b2, Vec2D( 0, 0 ), Vec2D( 1, 0 ), 1, 0.5 )
 
 			b1.addContact( contact )
 			b2.addContact( -contact )
@@ -94,7 +94,7 @@ object ElasticCollisionReactionSpec extends Specification {
 			b1.velocity = Vec2D( 3, 3 )
 			b2.velocity = Vec2D( 0, 0 )
 
-			val contact = Contact( b1, b2, Vec2D( 0, 0 ), Vec2D( 1, 0 ), 0.5 )
+			val contact = Contact( b1, b2, Vec2D( 0, 0 ), Vec2D( 1, 0 ), 1, 0.5 )
 
 			b1.addContact( contact )
 			b2.addContact( -contact )

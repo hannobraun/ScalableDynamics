@@ -67,7 +67,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 			ls.position returns Vec2D( 0, 0.5 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0, 0 ), Vec2D( 0, 1 ), 0.0 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0, 0 ), Vec2D( 0, 1 ), 0, 0.0 ) ) )
 		}
 
 		"handle the circle being on the line described by the vectors, but not on the line-segment." in {
@@ -163,7 +163,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 2, 2 )
 			ls.position returns Vec2D( 0, 2 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 2, 2 ), Vec2D( 0, 1 ), 0.5 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 2, 2 ), Vec2D( 0, 1 ), 0, 0.5 ) ) )
 		}
 
 		"handle the line segment moving and not colliding." in {
@@ -195,7 +195,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 2, 0 )
 			ls.position returns Vec2D( 0, 0 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 2, 1 ), Vec2D( 0, 1 ), 0.5 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 2, 1 ), Vec2D( 0, 1 ), 0, 0.5 ) ) )
 		}
 
 		"handle both bodies moving and not colliding." in {
@@ -227,7 +227,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 2, 1 )
 			ls.position returns Vec2D( 0, 0 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 2, 1 ), Vec2D( 0, 1 ), 0.5 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 2, 1 ), Vec2D( 0, 1 ), 0, 0.5 ) ) )
 		}
 	}
 }
