@@ -28,9 +28,11 @@ import math.Vec2D
  * Models a contact of one shape with another.
  * A contact has the following attributes:
  * * s: The shape that is in contact with another.
+ * * other: The other shape that s is in contact to.
  * * point: The position vector of the point of contact.
  * * normal: The surface normal of b at the point of contact. This is a unit vector.
- * * other: The other shape that s is in contact to.
+ * * depth: The penetration depth at the end of the movement.
+ * * t: A value between 0.0 and 1.0 (inclusive), which indicates at which point of the movement the contact occured.
  */
 
 case class Contact( s: Shape, other: Shape, point: Vec2D, normal: Vec2D, depth: Double, t: Double ) {
