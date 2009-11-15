@@ -40,7 +40,7 @@ case class Contact( s: Shape, other: Shape, point: Vec2D, normal: Vec2D, depth: 
 	
 	// Check if the normal vector is a unit vector.
 	if ( !normal.unit )
-		throw new IllegalArgumentException( "Normal must be a unit vectors (normal: " + normal + ")." )
+		throw new IllegalArgumentException( "Normal must be a unit vector (normal: " + normal + ")." )
 
 
 
