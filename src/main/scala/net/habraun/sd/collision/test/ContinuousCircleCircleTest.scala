@@ -50,7 +50,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 		// This algorithm does continuous collision detection between two moving circles. I got this from "Real-Time Collision Detection"
 		// by Christer Ericson, page 223/224.
 
-		val s = p2 - p1 // vector between sphere centers
+		val s = p2 - p1 // vector between circle centers
 		val r = c1.radius + c2.radius // the sum of both radii
 		val v = v2 - v1 // relative movement between the circles.
 
@@ -65,12 +65,12 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 
 		// Check for several corner cases. If none of these occurs, we can compute t with the general formula.
 		if ( c <= 0.0 ) {
-			// Spheres are initially overlapping. Test if the circle centers are also overlapping.
+			// Circles are initially overlapping. Test if the circle centers are also overlapping.
 			if ( s != Vec2D( 0, 0 ) ) {
-				// Sphere centers are now overlapping.
+				// Circle centers are now overlapping.
 
-				val normal = s.normalize // the direction of the normal is given by the vector between the sphere centers
-				val depth = r - s.length // penetration depth is the sum of the radii minus the distance between the sphere centers
+				val normal = s.normalize // the direction of the normal is given by the vector between the circle centers
+				val depth = r - s.length // penetration depth is the sum of the radii minus the distance between the circle centers
 
 				// If the circles just touch, the contact point is where they touch. If they overlap, the point is on the line between
 				// their centers, in the middle of the intersection. We can compute this point by going to the center of one circle, moving
@@ -80,7 +80,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 				Some( Contact( c1, c2, point, normal, depth, 0.0 ) )
 			}
 			else {
-				// The sphere centers are overlapping.
+				// The circle centers are overlapping.
 
 				// The contact normal is undefined, but the way Contact is currently defined, we need to put something here. Collision
 				// reaction code should just check if the circle centers overlap.
@@ -93,7 +93,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 				val bigRadius = if ( c1.radius > c2.radius ) c1.radius else c2.radius
 				val depth = smallRadius + bigRadius
 
-				// Just like the normal, the contact point is undefined. I'll use the center of the spheres here, mainly because I can't
+				// Just like the normal, the contact point is undefined. I'll use the center of the circle here, mainly because I can't
 				// think of anything sensible.
 				val point = p1
 
@@ -101,11 +101,11 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 			}
 		}
 		else if ( a == 0 ) {
-			// Spheres are not moving relative to each other.
+			// Circles are not moving relative to each other.
 			None
 		}
 		else if ( b >= 0.0 ) {
-			// Spheres are not moving towards each other.
+			// Circles are not moving towards each other.
 			None
 		}
 		else if ( d < 0.0 ) {

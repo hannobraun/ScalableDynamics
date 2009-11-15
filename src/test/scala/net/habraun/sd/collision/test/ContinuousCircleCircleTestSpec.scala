@@ -127,7 +127,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			test( c1, c2 ) must beEqualTo( Some(  Contact( c1, c2, Vec2D( 2, 0 ), Vec2D( 1, 0 ), 0, 1.0 ) ) )
 		}
 
-		"handle spheres whose centers pass each other during the movement." in {
+		"handle circles whose centers pass each other during the movement." in {
 			val test = new ContinuousCircleCircleTest
 
 			val c1 = mock[ Circle ]
@@ -142,7 +142,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			test( c1, c2 ) must beEqualTo( Some( Contact( c1, c2, Vec2D( -1, 0 ), Vec2D( 1, 0 ), 3, 0.25 ) ) )
 		}
 
-		"handle colliding spheres with their centers moving not directly towards each other." in {
+		"handle colliding circles with their centers moving not directly towards each other." in {
 			val test = new ContinuousCircleCircleTest
 
 			val c1 = mock[ Circle ]
@@ -157,7 +157,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			test( c1, c2 ) must beEqualTo( Some(  Contact( c1, c2, Vec2D( 1, 1 ), Vec2D( 0, -1 ), 0, 1.0 ) ) )
 		}
 
-		"handle spheres with their centers moving not directly towards each other that are colliding in the middle of the movement." in {
+		"handle circles with their centers moving not directly towards each other that are colliding in the middle of the movement." in {
 			val test = new ContinuousCircleCircleTest
 
 			val c1 = mock[ Circle ]
