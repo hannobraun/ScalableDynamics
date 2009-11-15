@@ -65,17 +65,40 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 
 		// Check for several corner cases. If none of these occurs, we can compute t with the general formula.
 		if ( c <= 0.0 ) {
-			// Spheres are initially overlapping.
+			// Spheres are initially overlapping. Test if the circle centers are also overlapping.
+			if ( s != Vec2D( 0, 0 ) ) {
+				// Sphere centers are now overlapping.
 
-			val normal = s.normalize // the direction of the normal is given by the vector between the sphere centers
-			val depth = r - s.length // penetration depth is the sum of the radii minus the distance between the sphere centers
+				val normal = s.normalize // the direction of the normal is given by the vector between the sphere centers
+				val depth = r - s.length // penetration depth is the sum of the radii minus the distance between the sphere centers
 
-			// If the circles just touch, the contact point is where they touch. If they overlap, the point is on the line between their
-			// centers, in the middle of the intersection. We can compute this point by going to the center of one circle, moving along the
-			// normal to its radius and going back for half the depth.
-			val point = p1 + normal * ( c1.radius -  depth / 2 )
+				// If the circles just touch, the contact point is where they touch. If they overlap, the point is on the line between
+				// their centers, in the middle of the intersection. We can compute this point by going to the center of one circle, moving
+				// along the normal to its radius and going back for half the depth.
+				val point = p1 + normal * ( c1.radius -  depth / 2 )
 
-			Some( Contact( c1, c2, point, normal, depth, 0.0 ) )
+				Some( Contact( c1, c2, point, normal, depth, 0.0 ) )
+			}
+			else {
+				// The sphere centers are overlapping.
+
+				// The contact normal is undefined, but the way Contact is currently defined, we need to put something here. Collision
+				// reaction code should just check if the circle centers overlap.
+				val normal = Vec2D( 1, 0 )
+
+				// Penetration depth is ambigious in this case, but the main goal of having a Contact is to use it to resolve any
+				// contstraints. In this sense, let's assume the smaller circle has penetrated the bigger one from any direction. This
+				// would put the depth at 2 times the smaller radius plus big minus small (note: this term has been simplified below).
+				val smallRadius = if ( c1.radius < c2.radius ) c1.radius else c2.radius
+				val bigRadius = if ( c1.radius > c2.radius ) c1.radius else c2.radius
+				val depth = smallRadius + bigRadius
+
+				// Just like the normal, the contact point is undefined. I'll use the center of the spheres here, mainly because I can't
+				// think of anything sensible.
+				val point = p1
+
+				Some( Contact( c1, c2, point, normal, depth, 0.0 ) )
+			}
 		}
 		else if ( a == 0 ) {
 			// Spheres are not moving relative to each other.

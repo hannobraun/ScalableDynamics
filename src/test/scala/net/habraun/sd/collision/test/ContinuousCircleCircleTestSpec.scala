@@ -261,5 +261,20 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 
 			test( c1, c2 ) must beEqualTo( None )
 		}
+
+		"handle two circles whose centers overlap at the beginning of the movement." in {
+			val test = new ContinuousCircleCircleTest
+
+			val c1 = mock[ Circle ]
+			val c2 = mock[ Circle ]
+			c1.radius returns 1
+			c2.radius returns 2
+			c1.previousPosition returns Vec2D( 3, 0 )
+			c2.previousPosition returns Vec2D( 3, 0 )
+			c1.position returns Vec2D( 3, 0 )
+			c2.position returns Vec2D( 3, 0 )
+
+			test( c1, c2 ) must beEqualTo( Some( Contact( c1, c2, Vec2D( 3, 0 ), Vec2D( 1, 0 ), 3, 0.0 ) ) )
+		}
 	}
 }
