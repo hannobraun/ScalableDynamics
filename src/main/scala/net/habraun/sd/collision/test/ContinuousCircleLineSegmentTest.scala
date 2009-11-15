@@ -61,9 +61,9 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 		// points towards the circle (the circle lies in front of the line), negative otherwise.
 		val distance = lineNormal * pc - lineDistance
 
-		// Check if the circle and the line are already intersecting.
+		// Check if the circle and the line are initially intersecting.
 		if ( Math.abs( distance ) <= c.radius ) {
-			// Circle and line are already intersecting.
+			// Circle and line are initially intersecting.
 
 			// The surface normal of the circle at the point of impact.
 			val normal = if ( distance > 0 ) -lineNormal else lineNormal
