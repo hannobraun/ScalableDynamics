@@ -38,9 +38,6 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 	 * Parameters:
 	 * * c1: The first circle.
 	 * * c2: The second circle.
-	 *
-	 * Attention: If the circles already overlap at the beginning of the movement, no valid contact point is
-	 * reported. In that case, the collision point will always be (0, 0).
 	 */
 
 	def apply( c1: Circle, c2: Circle ): Option[ Contact ] = {
