@@ -20,6 +20,7 @@ package net.habraun.sd.collision.test
 
 
 
+import math.Scalar._
 import math.Vec2D
 import shape.Circle
 import shape.Contact
@@ -89,10 +90,20 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 			// None of the edge cases has occured, so we need to compute the time of contact.
 			val t = ( -b - Math.sqrt( d ) ) / a
 			if ( t <= 1.0 ) {
-				// Time of contact is within the timeframe we're checking.
-				val normal = s.normalize // the direction of the normal is given by the vector between the sphere centers
+				// Time of contact is within the timeframe we're checking. Let's compute the other attributes of the contact.
+
+				// The contact normal always points from c1's center to c2's center at the time of impact.
+				val normal = ( p2 + ( v * t ) - p1 ).normalize
+
+				// The point of contact can be computed by looking at the position of circle 1 at the time of impact and go along the
+				// contact normal (which points to the center of circle 2).
 				val point = p1 + ( v1 * t ) + ( normal * c1.radius )
-				val depth = r - s.length + v.length
+
+				// The depth is computed by taking the time that is left after the contact is made and looking how much relative movement
+				// there is left, in the direction of the contact normal.
+				val depth = ( 1.0 - t ) * v.projectOn( normal ).length
+
+				// All attributes have been computed, let's create the Contact.
 				Some( Contact( c1, c2, point, normal, depth, t ) )
 			}
 			else {
