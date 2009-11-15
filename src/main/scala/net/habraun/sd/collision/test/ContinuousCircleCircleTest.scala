@@ -92,7 +92,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 				// Time of contact is within the timeframe we're checking.
 				val normal = s.normalize // the direction of the normal is given by the vector between the sphere centers
 				val point = p1 + ( v1 * t ) + ( normal * c1.radius )
-				val depth = r - ( c2.position - c1.position ).length
+				val depth = r - s.length + v.length
 				Some( Contact( c1, c2, point, normal, depth, t ) )
 			}
 			else {
