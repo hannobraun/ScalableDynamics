@@ -49,8 +49,8 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 		val v1 = c1.position - c1.previousPosition
 		val v2 = c2.position - c2.previousPosition
 
-		// This algorithms does continious collision detection between two moving circles. I got this from
-		// "Real-Time Collision Detection" by Christer Ericson, page 223/224.
+		// This algorithms does continious collision detection between two moving circles. I got this from "Real-Time Collision Detection"
+		// by Christer Ericson, page 223/224.
 
 		val s = p2 - p1 // vector between sphere centers
 		val r = c1.radius + c2.radius // the sum of both radii
@@ -65,11 +65,10 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 		// The discriminant of the solution.
 		val d = ( b * b ) - ( a * c )
 
-		// Check for several corner cases. If none of these occurs, we can compute t with the general
-		// formula.
+		// Check for several corner cases. If none of these occurs, we can compute t with the general formula.
 		if ( c < 0.0 ) {
 			// Spheres are initially overlapping.
-			val normal = ( p2 - p1 ).normalize
+			val normal = s.normalize // the direction of the normal is given by the vector between the sphere centers
 			val point = Vec2D( 0, 0 )
 			val depth = r - s.length // penetration depth is the sum of the radii minus the distance between the sphere centers
 			Some( Contact( c1, c2, point, normal, depth, 0.0 ) )
@@ -91,7 +90,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 			val t = ( -b - Math.sqrt( d ) ) / a
 			if ( t <= 1.0 ) {
 				// Time of contact is within the timeframe we're checking.
-				val normal = ( p2 - p1 ).normalize
+				val normal = s.normalize // the direction of the normal is given by the vector between the sphere centers
 				val point = p1 + ( v1 * t ) + ( normal * c1.radius )
 				val depth = r - ( c2.position - c1.position ).length
 				Some( Contact( c1, c2, point, normal, depth, t ) )
