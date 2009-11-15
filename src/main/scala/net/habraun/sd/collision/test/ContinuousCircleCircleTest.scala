@@ -69,9 +69,15 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 		// Check for several corner cases. If none of these occurs, we can compute t with the general formula.
 		if ( c <= 0.0 ) {
 			// Spheres are initially overlapping.
+
 			val normal = s.normalize // the direction of the normal is given by the vector between the sphere centers
-			val point = Vec2D( 0, 0 )
 			val depth = r - s.length // penetration depth is the sum of the radii minus the distance between the sphere centers
+
+			// If the circles just touch, the contact point is where they touch. If they overlap, the point is on the line between their
+			// centers, in the middle of the intersection. We can compute this point by going to the center of one circle, moving along the
+			// normal to its radius and going back for half the depth.
+			val point = p1 + normal * ( c1.radius -  depth / 2 )
+
 			Some( Contact( c1, c2, point, normal, depth, 0.0 ) )
 		}
 		else if ( a == 0 ) {
