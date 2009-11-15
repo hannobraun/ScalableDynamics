@@ -49,7 +49,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 		val v1 = c1.position - c1.previousPosition
 		val v2 = c2.position - c2.previousPosition
 
-		// This algorithms does continious collision detection between two moving circles. I got this from "Real-Time Collision Detection"
+		// This algorithm does continuous collision detection between two moving circles. I got this from "Real-Time Collision Detection"
 		// by Christer Ericson, page 223/224.
 
 		val s = p2 - p1 // vector between sphere centers
