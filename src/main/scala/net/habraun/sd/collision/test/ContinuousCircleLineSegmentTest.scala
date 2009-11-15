@@ -79,12 +79,12 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 		}
 		else {
 			// Compute the relative velocity between the two bodies. No matter which of the two bodies
-			// actually moves, we will model this as a moving sphere and a stationary line segment.
+			// actually moves, we will model this as a moving circle and a stationary line segment.
 			val v = vc - vls
 
 			// Compute the direction of the circle's movement relative to the line normal. A positive value
 			// denotes movment in the direction of the line normal, a negative value the opposite.
-			// A value of zero means, that the sphere moves parallel to the line.
+			// A value of zero means, that the circle moves parallel to the line.
 			val direction = lineNormal * v
 
 			// Check if the circle moves towards the line. This is the case if the direction multiplied with
