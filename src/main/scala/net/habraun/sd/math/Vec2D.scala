@@ -130,6 +130,33 @@ case class Vec2D( x: Double, y: Double ) {
 	 */
 
 	def unit = length <= ( 1 + unitTolerance ) && length >= ( 1 - unitTolerance )
+
+
+
+	/**
+	 * Computes if the vector is linearly independent from another.
+	 */
+
+	def isLinearlyIndependentFrom( other: Vec2D ) = {
+		if ( other.x == 0 && other.y == 0 ) {
+			false
+		}
+		else if ( other.x != 0 && other.y != 0 ) {
+			val fx = x / other.x
+			val fy = y / other.y
+
+			fx != fy
+		}
+		else if ( other.x == 0 ) {
+			x != 0
+		}
+		else if ( other.y == 0 ) {
+			y != 0
+		}
+		else {
+			true
+		}
+	}
 }
 
 

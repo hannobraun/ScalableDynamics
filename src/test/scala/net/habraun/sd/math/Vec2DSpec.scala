@@ -91,4 +91,30 @@ object Vec2DSpec extends Specification {
 			Vec2D( 1 + Vec2D.unitTolerance, 0 ).unit must beTrue
 		}
 	}
+
+	"Vec2D.isLinearlyIndependentFrom" should {
+		"return true if the vector is linearly independent from the other vector." in {
+			Vec2D( 1, 1 ).isLinearlyIndependentFrom( Vec2D( 2, 1 ) ) must beTrue
+		}
+
+		"return false if the vector is linearly dependent on the other vector." in {
+			Vec2D( 1, 1 ).isLinearlyIndependentFrom( Vec2D( 2, 2 ) ) must beFalse
+		}
+
+		"be able to handle components being zero if the vectors are linearly independent." in {
+			Vec2D( 1, 1 ).isLinearlyIndependentFrom( Vec2D( 2, 0 ) ) must beTrue
+			Vec2D( 1, 1 ).isLinearlyIndependentFrom( Vec2D( 0, 2 ) ) must beTrue
+		}
+
+		"be able to handle components being zero if the vectors are linearly dependent." in {
+			Vec2D( 1, 0 ).isLinearlyIndependentFrom( Vec2D( 2, 0 ) ) must beFalse
+			Vec2D( 0, 1 ).isLinearlyIndependentFrom( Vec2D( 0, 2 ) ) must beFalse
+		}
+
+		"be able to handle one or both of the vectors being the zero vector."in {
+			Vec2D( 1, 1 ).isLinearlyIndependentFrom( Vec2D( 0, 0 ) ) must beFalse
+			Vec2D( 0, 0 ).isLinearlyIndependentFrom( Vec2D( 2, 2 ) ) must beFalse
+			Vec2D( 0, 0 ).isLinearlyIndependentFrom( Vec2D( 0, 0 ) ) must beFalse
+		}
+	}
 }
