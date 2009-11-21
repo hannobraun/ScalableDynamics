@@ -138,7 +138,7 @@ case class Vec2D( x: Double, y: Double ) {
 	 */
 
 	def isLinearlyIndependentFrom( other: Vec2D ) = {
-		if ( other.x == 0 && other.y == 0 ) {
+		if ( other == ZeroVector ) {
 			false
 		}
 		else if ( other.x != 0 && other.y != 0 ) {
@@ -169,7 +169,7 @@ case class Vec2D( x: Double, y: Double ) {
 		if ( this.isLinearlyIndependentFrom( other ) ) {
 			throw new IllegalArgumentException( "Vectors must be linearly dependent." )
 		}
-		else if ( this.x == 0 && this.y == 0 ) {
+		else if ( this == ZeroVector ) {
 			throw new IllegalArgumentException( "The vector must not be the zero vector." )
 		}
 		if ( x == 0 ) {
