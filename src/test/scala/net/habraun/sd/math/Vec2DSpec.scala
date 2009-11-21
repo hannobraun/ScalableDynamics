@@ -117,4 +117,24 @@ object Vec2DSpec extends Specification {
 			Vec2D( 0, 0 ).isLinearlyIndependentFrom( Vec2D( 0, 0 ) ) must beFalse
 		}
 	}
+
+	"Vec2D.computeFactorFor" should {
+		"return the factor for two linearly dependent vectors." in {
+			Vec2D( 1, 1 ).computeFactorFor( Vec2D( 2, 2 ) ) must beEqualTo( 2 )
+			Vec2D( 2, 2 ).computeFactorFor( Vec2D( 1, 1 ) ) must beEqualTo( 0.5 )
+		}
+
+		"throw an IllegalArgumentException if the vectors are not linearly dependent." in {
+			Vec2D( 1, 2 ).computeFactorFor( Vec2D( 2, 1 ) ) must throwAn[ IllegalArgumentException ]
+		}
+
+		"throw an IllegalArgumentException if the first vector is the zero vector." in {
+			Vec2D( 0, 0 ).computeFactorFor( Vec2D( 1, 1 ) ) must throwAn[ IllegalArgumentException ]
+		}
+
+		"be able to handle a component of the first vector being zero." in {
+			Vec2D( 0, 1 ).computeFactorFor( Vec2D( 0, 2 ) ) must beEqualTo( 2 )
+			Vec2D( 1, 0 ).computeFactorFor( Vec2D( 2, 0 ) ) must beEqualTo( 2 )
+		}
+	}
 }

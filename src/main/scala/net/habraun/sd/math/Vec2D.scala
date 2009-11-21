@@ -157,6 +157,28 @@ case class Vec2D( x: Double, y: Double ) {
 			true
 		}
 	}
+
+
+
+	/**
+	 * Computes the factor that this vecot must be multiplied with in order to get the other vector. This works only on linearly dependent
+	 * vectors.
+	 */
+
+	def computeFactorFor( other: Vec2D ) = {
+		if ( this.isLinearlyIndependentFrom( other ) ) {
+			throw new IllegalArgumentException( "Vectors must be linearly dependent." )
+		}
+		else if ( this.x == 0 && this.y == 0 ) {
+			throw new IllegalArgumentException( "The vector must not be the zero vector." )
+		}
+		if ( x == 0 ) {
+			other.y / y
+		}
+		else {
+			other.x / x
+		}
+	}
 }
 
 
