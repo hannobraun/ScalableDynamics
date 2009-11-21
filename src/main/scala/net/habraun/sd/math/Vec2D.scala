@@ -190,3 +190,11 @@ case class Vec2D( x: Double, y: Double ) {
 object Vec2D {
 	val unitTolerance = 0.02
 }
+
+
+
+/**
+ * The zero vector.
+ */
+
+object ZeroVector extends Vec2D( 0, 0 )

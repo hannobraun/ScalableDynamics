@@ -137,4 +137,8 @@ object Vec2DSpec extends Specification {
 			Vec2D( 1, 0 ).computeFactorFor( Vec2D( 2, 0 ) ) must beEqualTo( 2 )
 		}
 	}
+
+	"ZeroVector should be the zero vector." in {
+		ZeroVector must beEqualTo( Vec2D( 0, 0 ) )
+	}
 }
