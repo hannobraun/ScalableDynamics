@@ -103,7 +103,6 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val s1 = new Circle {}
 			val s2 = new LineSegment {}
 			s1.radius = 1
-			s2.p = Vec2D( -1, -1 )
 			s2.d = Vec2D( -2, -2 )
 			s1.position = Vec2D( 1, 1 ) // position before movement
 			s2.position = Vec2D( 2, 2 )
@@ -124,7 +123,6 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			val s1 = new LineSegment {}
 			val s2 = new Circle {}
-			s1.p = Vec2D( -1, -1 )
 			s1.d = Vec2D( -2, -2 )
 			s2.radius = 1
 			s1.position = Vec2D( 2, 2 ) // position before movement
@@ -167,7 +165,6 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val s1 = new Circle {}
 			val s2 = new LineSegment {}
 			s1.radius = 1
-			s2.p = Vec2D( 1, 1 )
 			s2.d = Vec2D( 2, 2 )
 			val contact = Contact( s1, s2, Vec2D( 5, 5 ), Vec2D( 1, 0 ), 1, t )
 
@@ -186,7 +183,6 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val t = 0.5
 			val s1 = new LineSegment {}
 			val s2 = new Circle {}
-			s1.p = Vec2D( 1, 1 )
 			s1.d = Vec2D( 2, 2 )
 			s2.radius = 1
 			val contact = Contact( s1, s2, Vec2D( 5, 5 ), Vec2D( 1, 0 ), 1, t )
@@ -221,7 +217,6 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val s1 = new Circle {}
 			val s2 = new LineSegment {}
 			s1.radius = 1
-			s2.p = Vec2D( 1, 1 )
 			s2.d = Vec2D( 2, 2 )
 
 			circleLineSegmentTest( s1, s2 ) returns None
@@ -238,8 +233,6 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val s2 = new LineSegment {}
 			s1.position = Vec2D( 0, 1 )
 			s2.position = Vec2D( 0, -1 )
-			s1.p = Vec2D( 0, 0 )
-			s2.p = Vec2D( 0, 0 )
 			s1.d = Vec2D( 2, -2 )
 			s2.d = Vec2D( 2, 2 )
 

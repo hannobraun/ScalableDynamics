@@ -47,10 +47,9 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.p returns Vec2D( -1, 0 )
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( 0, 2 )
-			ls.position returns Vec2D( 0, 2 )
+			ls.previousPosition returns Vec2D( -1, 2 )
+			ls.position returns Vec2D( -1, 2 )
 
 			test( c, ls ) must beEqualTo( None )
 		}
@@ -64,10 +63,9 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 			
 			val ls = mock[ LineSegment ]
-			ls.p returns Vec2D( -1, 0 )
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( 0, 0.5 )
-			ls.position returns Vec2D( 0, 0.5 )
+			ls.previousPosition returns Vec2D( -1, 0.5 )
+			ls.position returns Vec2D( -1, 0.5 )
 
 			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0, 0 ), Vec2D( 0, 1 ), 0, 0.0 ) ) )
 		}
@@ -81,7 +79,6 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.p returns Vec2D( 0, 0 )
 			ls.d returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 0, 2 )
 			ls.position returns Vec2D( 0, 2 )
@@ -98,7 +95,6 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 2, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.p returns Vec2D( 0, 0 )
 			ls.d returns Vec2D( 5, 0 )
 			ls.previousPosition returns Vec2D( 0, 2 )
 			ls.position returns Vec2D( 0, 2 )
@@ -115,7 +111,6 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, -2 )
 
 			val ls = mock[ LineSegment ]
-			ls.p returns Vec2D( 0, 0 )
 			ls.d returns Vec2D( 5, 0 )
 			ls.previousPosition returns Vec2D( 0, 2 )
 			ls.position returns Vec2D( 0, 2 )
@@ -132,7 +127,6 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, -3 )
 
 			val ls = mock[ LineSegment ]
-			ls.p returns Vec2D( 0, 0 )
 			ls.d returns Vec2D( 5, 0 )
 			ls.previousPosition returns Vec2D( 0, 2 )
 			ls.position returns Vec2D( 0, 2 )
@@ -149,7 +143,6 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( -2, 2 )
 
 			val ls = mock[ LineSegment ]
-			ls.p returns Vec2D( 0, 0 )
 			ls.d returns Vec2D( 5, 0 )
 			ls.previousPosition returns Vec2D( 0, 2 )
 			ls.position returns Vec2D( 0, 2 )
@@ -166,7 +159,6 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 2, 2 )
 
 			val ls = mock[ LineSegment ]
-			ls.p returns Vec2D( 0, 0 )
 			ls.d returns Vec2D( 5, 0 )
 			ls.previousPosition returns Vec2D( 0, 2 )
 			ls.position returns Vec2D( 0, 2 )
@@ -183,7 +175,6 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.p returns Vec2D( 0, 0 )
 			ls.d returns Vec2D( 5, 0 )
 			ls.previousPosition returns Vec2D( 0, 2 )
 			ls.position returns Vec2D( 0, 4 )
@@ -200,7 +191,6 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 2, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.p returns Vec2D( 0, 0 )
 			ls.d returns Vec2D( 5, 0 )
 			ls.previousPosition returns Vec2D( 0, 2 )
 			ls.position returns Vec2D( 0, 0 )
@@ -217,7 +207,6 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 2, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.p returns Vec2D( 0, 0 )
 			ls.d returns Vec2D( 5, 0 )
 			ls.previousPosition returns Vec2D( 0, 2 )
 			ls.position returns Vec2D( -2, 2 )
@@ -234,7 +223,6 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 2, 1 )
 
 			val ls = mock[LineSegment]
-			ls.p returns Vec2D( 0, 0 )
 			ls.d returns Vec2D( 5, 0 )
 			ls.previousPosition returns Vec2D( 0, 2 )
 			ls.position returns Vec2D( 0, 0 )

@@ -55,7 +55,7 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 		// units of the normal, which basically means that the distance is negative if the normal points
 		// towards the origin, positive if the normal points away from the origin.
 		val lineNormal = ls.d.orthogonal.normalize
-		val lineDistance = ( pls + ls.p ) * lineNormal
+		val lineDistance = pls * lineNormal
 
 		// Compute the distance between the line and the circle. The distance is positive if the line normal
 		// points towards the circle (the circle lies in front of the line), negative otherwise.
@@ -69,7 +69,7 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 			val normal = if ( distance > 0 ) -lineNormal else lineNormal
 
 			// The point on the line that lies nearest to the circle center.
-			val lambda = ( pc - pls - ls.p ) * ls.d / ls.d.squaredLength
+			val lambda = ( pc - pls ) * ls.d / ls.d.squaredLength
 			if ( lambda >= 0 && lambda <= ls.d.length ) {
 				Some( Contact( c, ls, Vec2D( 0, 0 ), normal, 0, 0.0 ) )
 			}
@@ -119,7 +119,7 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 
 					// We now have the point of impact between the circle and the line. But does this point
 					// lie on the line segment?
-					val pt = ( point.x - ( pls.x + ls.p.x ) ) / ls.d.x
+					val pt = ( point.x - pls.x ) / ls.d.x
 					if ( pt >= 0.0 && pt <= 1.0 ) {
 						// Yes it does.
 						Some( Contact( c, ls, point, normal, 0, t ) )

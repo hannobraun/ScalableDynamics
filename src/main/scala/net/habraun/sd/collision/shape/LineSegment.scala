@@ -35,23 +35,6 @@ import math.Vec2D
 trait LineSegment extends Shape {
 
 	/**
-	 * The line segment's posistion vector.
-	 */
-
-	private var _p = Vec2D( 0, 0 )
-
-	def p = _p
-
-	def p_=( newP: Vec2D ) {
-		if ( newP == null )
-			throw new NullPointerException
-
-		_p = newP
-	}
-
-
-
-	/**
 	 * The line segment's direction vector.
 	 */
 
