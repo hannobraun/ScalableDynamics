@@ -37,7 +37,7 @@ object LineSegmentSpec extends Specification {
 		"be a shape." in {
 			val lineSegment = new LineSegment {}
 
-			lineSegment must haveSuperClass[Shape]
+			lineSegment must haveSuperClass[ Shape ]
 		}
 
 		"have the correct initial values for its attributes." in {
@@ -62,14 +62,14 @@ object LineSegmentSpec extends Specification {
 		"throw an exception if the direction vector is zero." in {
 			val lineSegment = new LineSegment {}
 			
-			( lineSegment.d = Vec2D( 0, 0 ) ) must throwAn[IllegalArgumentException]
+			( lineSegment.d = Vec2D( 0, 0 ) ) must throwAn[ IllegalArgumentException ]
 		}
 
 		"throw an exception if null is assigned to an attribute." in {
 			val lineSegment = new LineSegment {}
 
-			( lineSegment.p = null ) must throwA[NullPointerException]
-			( lineSegment.d = null ) must throwA[NullPointerException]
+			( lineSegment.p = null ) must throwA[ NullPointerException ]
+			( lineSegment.d = null ) must throwA[ NullPointerException ]
 		}
 	}
 }
