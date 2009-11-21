@@ -141,4 +141,9 @@ object Vec2DSpec extends Specification {
 	"ZeroVector should be the zero vector." in {
 		ZeroVector must beEqualTo( Vec2D( 0, 0 ) )
 	}
+
+	"InvalidVector should be a vector with both components being Double.NaN." in {
+		InvalidVector.x must beEqualTo( Double.NaN )
+		InvalidVector.y must beEqualTo( Double.NaN )
+	}
 }

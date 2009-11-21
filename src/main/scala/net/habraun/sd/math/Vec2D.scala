@@ -198,3 +198,11 @@ object Vec2D {
  */
 
 object ZeroVector extends Vec2D( 0, 0 )
+
+
+
+/**
+ * The invalid vector, a vector whose components are Double.NaN.
+ */
+
+object InvalidVector extends Vec2D( Double.NaN, Double.NaN )
