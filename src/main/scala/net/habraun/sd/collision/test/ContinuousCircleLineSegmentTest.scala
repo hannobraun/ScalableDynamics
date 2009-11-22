@@ -20,7 +20,9 @@ package net.habraun.sd.collision.test
 
 
 
+import math.Scalar._
 import math.Vec2D
+import math.ZeroVector
 import shape.Circle
 import shape.Contact
 import shape.LineSegment
@@ -35,107 +37,144 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 
 	/**
 	 * Performs continuous collision detection between a circle and a line segment.
-	 * Attention: If the circle and the line segment overlap initially, the reported contact point is
-	 * invalid. It will always be (0, 0).
 	 */
 
-	def apply( c: Circle, ls: LineSegment ): Option[ Contact ] = {
-		// Extract position and velocity from the shapes.
-		val pc = c.previousPosition
-		val pls = ls.previousPosition
-		val vc = c.position - c.previousPosition
-		val vls = ls.position - ls.previousPosition
+	def apply( circle: Circle, lineSegment: LineSegment ): Option[ Contact ] = {
 
-		// This algorithms does continious collision detection between a moving circle and a moving line
-		// segment. I got this from "Real-Time Collision Detection" by Christer Ericson, page 219-222.
+		// As a first step, we compute the position vector of the point on the line segment with the smallest distance to the circle
+		// center. In other words, of all points that lie on the line segment, we compute the nearest to the circle center.
+		// To do this, we first need to compute a few values to help us.
 
-		// For this algorithm, we need the normal and the distance from the origin, which together define the
-		// line on which the line segments lies.
-		// The normal is one of two possible line normals. The distance is the distance from the origin in
-		// units of the normal, which basically means that the distance is negative if the normal points
-		// towards the origin, positive if the normal points away from the origin.
-		val lineNormal = ls.d.orthogonal.normalize
-		val lineDistance = pls * lineNormal
+		// Let's save the shape attributes into short variables, so we have them handy for the long equations.
+		val pc = circle.previousPosition
+		val r = circle.radius
+		val pls = lineSegment.previousPosition
+		val dls = lineSegment.d
 
-		// Compute the distance between the line and the circle. The distance is positive if the line normal
-		// points towards the circle (the circle lies in front of the line), negative otherwise.
-		val distance = lineNormal * pc - lineDistance
+		// We'll also need the relative velocity between the two shapes. We always treat the circle as moving and the line segment as
+		// standing still.
+		val vc = ( circle.position - circle.previousPosition )
+		val vls = ( lineSegment.position - lineSegment.previousPosition )
+		val v =  vc - vls
 
-		// Check if the circle and the line are initially intersecting.
-		if ( Math.abs( distance ) <= c.radius ) {
-			// Circle and line are initially intersecting.
+		// The vector that points from the line segment position to the circle center.
+		val lsPosToCPos = pc - pls
 
-			// The surface normal of the circle at the point of impact.
-			val normal = if ( distance > 0 ) -lineNormal else lineNormal
+		// The vector that points from the line segment position to the nearest point between the circle center and the line defined by the
+		// line segment.
+		val lsPosToNearestPointOnLine = lsPosToCPos.projectOn( dls )
 
-			// The point on the line that lies nearest to the circle center.
-			val lambda = ( pc - pls ) * ls.d / ls.d.squaredLength
-			if ( lambda >= 0 && lambda <= ls.d.length ) {
-				Some( Contact( c, ls, Vec2D( 0, 0 ), normal, 0, 0.0 ) )
-			}
-			else {
-				None
-			}
+		// The factor that needs to applied to the line segment's direction in order to get the vector that points from the beginning of
+		// the line segment to the nearest point between the line defined by the segment and the circle center.
+		val f = dls.computeFactorFor( lsPosToNearestPointOnLine )
+
+		// Since the line segment and the factor define a point on a line, we can just trim that point to the line segment.
+		val nearestPointOnSegment = trimPointToLineSegment( pls, dls, f )
+
+		// The next step is to determine if the circle and the line segment overlap initially. To do this, we first need to compute the
+		// vector that points from the circle center to the nearest point on the segment and its length (the distance between the circle
+		// center and the segment).
+		val circleCenterToNearestPointOnLs = nearestPointOnSegment - pc
+		val lsDistanceToCircleCenter = ( circleCenterToNearestPointOnLs ).length
+
+		// Do they overlap initially?
+		if ( lsDistanceToCircleCenter <= r ) {
+			// Yes they do. We define the point of contact as the nearest point we computed before. The rest is pretty obvious from there
+			// on.
+			val point = nearestPointOnSegment
+			val normal = circleCenterToNearestPointOnLs.normalize
+			val depth = circle.radius - lsDistanceToCircleCenter
+			val t = 0.0
+
+			Some ( Contact( circle, lineSegment, point, normal, depth, t ) )
+		}
+		else if ( v == ZeroVector ) {
+			// They don't overlap initially and they also don't move.
+			None
 		}
 		else {
-			// Compute the relative velocity between the two bodies. No matter which of the two bodies
-			// actually moves, we will model this as a moving circle and a stationary line segment.
-			val v = vc - vls
+			// They don't overlap initially, but they move! This makes things interesting, since we now have to determine if the shapes
+			// come in contact during the movement.
+			// For doing that, we represent the relative movement of the circle center as a line segment and check if there's a point where
+			// the distance of that virtual line segment and the actual one equals the circle radius.
 
-			// Compute the direction of the circle's movement relative to the line normal. A positive value
-			// denotes movment in the direction of the line normal, a negative value the opposite.
-			// A value of zero means, that the circle moves parallel to the line.
-			val direction = lineNormal * v
+			// Before we can start that computation, we need the distance vector. The distance vector is the vector that is orthogonal to
+			// the line defined by the line segment and points from the point where the circle would touch the line to the center of the
+			// line segment.
+			val dist = {
+				val lineOrthogonal = dls.orthogonal.normalize * r
+				if ( lineOrthogonal * ( pc - pls ) >= 0 ) lineOrthogonal else -lineOrthogonal
+			}
 
-			// Check if the circle moves towards the line. This is the case if the direction multiplied with
-			// the distance between the line and the circle is negative.
-			// If both are positive, the circle lies in front of the circle (line normal points towards it)
-			// and moves in the direction of the normal. If both are negative, it lies behind theline (normal
-			// points away from the circle) and it moves against the direction of the normal.
-			// The value can only be zero if the circle moves parallel to the line. The direction can't be
-			// zero because that has already been ruled out before.
-			if ( direction * distance < 0.0 ) {
-				// The circle moves towards the line. What's left to do is compute the time of impact, check
-				// if it lies within the current timeframe and check if the point of impact lies on the line
-				// segment.
+			// The variables that describe where circle center is when it touches the line (t) and where the circle touches the line (s)
+			// can be computed from the equation "pls + s * ls.d + d = pc + t * v".
+			val s = ( v.x * ( pls.y - pc.y + dist.y ) - v.y * ( pls.x - pc.x + dist.x ) ) / ( dls.x * v.y - v.x * dls.y )
+			val t = ( dls.x * ( pc.y - pls.y - dist.y ) - dls.y * ( pc.x - pls.x - dist.x ) ) / ( v.x * dls.y - dls.x * v.y )
 
-				// For the following computation, we need the radius of the circle as a positive value if it
-				// lies in front of the plane, as a negative value otherwise.
-				val radius = if ( distance > 0.0 ) c.radius else -c.radius
+			// Let's take a close look at the variables we computed.
+			if ( t < 0  || t > 1 ) {
+				// If t is not between 0 and 1 (inclusive) the circle won't touch the line within the timeframe we're looking at. If it
+				// won't touch the line, it also won't touch the line segment that lies on it.
+				None
+			}
+			else if ( s < 0 || s > 1 ) {
+				// If s is not between zero and one (inclusive), the circle won't touch the line where the line segment lies. However, it
+				// may still touch the line segment at one of its endpoints, if it moves further.
+				val p = if ( s < 0 ) pls else pls + dls
 
-				// Compute the time of impact.
-				val t = ( radius - distance ) / direction
-
-				// Check if the time is within the movement interval.
-				if ( t >= 0.0 && t <= 1.0 ) {
-					// The time is within the movement interval, which  means the circle will hit the line.
-					// Compute the point of impact and the normals.
-
-					// The surface normal of the circle at the point of impact.
-					val normal = if ( distance > 0 ) -lineNormal else lineNormal
-
-					// Point of impact.
-					val point = pc + ( normal * c.radius ) + ( vc * t )
-
-					// We now have the point of impact between the circle and the line. But does this point
-					// lie on the line segment?
-					val pt = ( point.x - pls.x ) / ls.d.x
-					if ( pt >= 0.0 && pt <= 1.0 ) {
-						// Yes it does.
-						Some( Contact( c, ls, point, normal, 0, t ) )
-					}
-					else {
-						// No, it doesn't. No collision.
-						None
-					}
+				// The time of contact can be computed using a quadratic euqation.
+				val a = v.x * v.x + v.y * v.y
+				val b = 2 * v.x * pc.x + 2 * v.y * pc.y - 2 * v.x * p.x - 2 * v.y * p.y
+				val c = pc.x * pc.x + pc.y * pc.y + p.x * p.x + p.y * p.y - 2 * pc.x * p.x - 2 * pc.y * p.y - r * r
+				val d = b * b - 4 * a * c
+				if (  d < 0 ) {
+					// No real solution.
+					None
 				}
 				else {
-					None
+					// One or two real solution. Doesn't matter, we're only interested in the earlier time anyway.
+					val tls = ( -b - Math.sqrt( d ) ) / ( 2 * a )
+					val normal = ( p + tls * vls - ( pc + tls * vc ) ).normalize
+					val point = pc + tls * vc + normal * r
+
+					Some( Contact( circle, lineSegment, point, normal, 0, tls ) )
 				}
 			}
 			else {
-				None
+				// The cirlce touches the line segment within the observed timeframe.
+				val point = pc + vc * t - dist
+				val normal = -dist.normalize
+				val depth = ( v.projectOn( normal ) * ( 1.0 - t ) ).length
+
+				Some( Contact( circle, lineSegment, point, normal, depth, t ) )
 			}
+		}
+	}
+
+
+
+	/**
+	 * Given a position vector p and a direction vector d, which define a line and a line segment, and a Double s, which define a point p
+	 * on the line according to the equation "p(s) = p + s * d", this method will return the position vector of the point on the line
+	 * segment that is closest to p.
+	 */
+
+	private def trimPointToLineSegment( p: Vec2D, d: Vec2D, s: Double ) = {
+		// Examine s.
+		if ( s < 0 ) {
+			// s is smaller than zero, which means the nearest point on the line lies in front of the line segment. This makes the
+			// beginning of the line segment the nearest point on the segment.
+			p
+		}
+		else if ( s > 1 ) {
+			// s is larger than one, which means the nearest point on the line lies behind the line segment. This makes the end of the line
+			// segment the nearest point on the segment.
+			p + d
+		}
+		else {
+			// s is in between zero and one (inclusive), which means the nearest point on the line lies on the line segment itself. The
+			// position vector is easily computed.
+			p + s * d
 		}
 	}
 }
