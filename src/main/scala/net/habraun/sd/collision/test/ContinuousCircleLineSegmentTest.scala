@@ -92,6 +92,41 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 			// They don't overlap initially and they also don't move.
 			None
 		}
+		else if ( !v.isLinearlyIndependentFrom( dls ) ) {
+			// They move, but the relative movement is parallel to the line segment.
+
+			// Check which endpoint is the nearest to the initial position of the circle center.
+			val ep1 = pls
+			val ep2 = pls + dls
+			val ep = if ( ( pc - ep1 ).squaredLength < ( pc - ep2 ).squaredLength ) ep1 else ep2
+
+			// Compute the t for the moment the distance from the nearest endpoint is equal to the radius.
+			val a = v.x * v.x + v.y * v.y
+			val b = 2 * pc.x * v.x + 2 * pc.y * v.y - 2 * v.x * ep.x - 2 * v.y * ep.y
+			val c = pc.x * pc.x + pc.y * pc.y + ep.x * ep.x + ep.y * ep.y - 2 * pc.x * ep.x - 2 * pc.y * ep.y - r * r
+			val x = solveQuadraticEquation( a, b, c )
+			if ( x == Nil ) {
+				// No real solution.
+				None
+			}
+			else {
+				// One or two real solutions. Doesn't matter, we're only interested in the earlier time anyway.
+				val t = x( 0 )
+
+				if ( t >= 0 && t <= 1.0 ) {
+
+					val normal = ( ep + t * vls - ( pc + t * vc ) ).normalize
+					val point = pc + t * vc + normal * r
+					val depth = ( ( 1.0 - t ) * v ).length
+
+					Some( Contact( circle, lineSegment, point, normal, depth, t ) )
+				}
+				else {
+					// No collision within the observed timeframe.
+					None
+				}
+			}
+		}
 		else {
 			// They don't overlap initially, but they move! This makes things interesting, since we now have to determine if the shapes
 			// come in contact during the movement.
@@ -126,14 +161,14 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 				val a = v.x * v.x + v.y * v.y
 				val b = 2 * v.x * pc.x + 2 * v.y * pc.y - 2 * v.x * p.x - 2 * v.y * p.y
 				val c = pc.x * pc.x + pc.y * pc.y + p.x * p.x + p.y * p.y - 2 * pc.x * p.x - 2 * pc.y * p.y - r * r
-				val d = b * b - 4 * a * c
-				if (  d < 0 ) {
+				val x = solveQuadraticEquation( a, b, c )
+				if (  x == Nil ) {
 					// No real solution.
 					None
 				}
 				else {
 					// One or two real solution. Doesn't matter, we're only interested in the earlier time anyway.
-					val tls = ( -b - Math.sqrt( d ) ) / ( 2 * a )
+					val tls = x( 0 )
 					val normal = ( p + tls * vls - ( pc + tls * vc ) ).normalize
 					val point = pc + tls * vc + normal * r
 
@@ -175,6 +210,21 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 			// s is in between zero and one (inclusive), which means the nearest point on the line lies on the line segment itself. The
 			// position vector is easily computed.
 			p + s * d
+		}
+	}
+
+
+
+	private def solveQuadraticEquation( a: Double, b: Double, c: Double ) = {
+		val d = b * b - 4 * a * c
+		if ( d < 0 ) {
+			// No real solution.
+			Nil
+		}
+		else {
+			// Normally we would have to check if there's one or two real solutions, but since all the code using this method only cares
+			// for the smaller solution, let's just return this one.
+			List( ( -b - Math.sqrt( d ) ) / ( 2 * a ) )
 		}
 	}
 }
