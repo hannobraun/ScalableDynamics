@@ -42,14 +42,14 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( 0, 2 )
-			ls.position returns Vec2D( 0, 2 )
+			ls.previousPosition returns Vec2D( 0, 3 )
+			ls.position returns Vec2D( 0, 3 )
 
 			test( c, ls ) must beEqualTo( None )
 		}
@@ -58,16 +58,16 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( -1, 0.5 )
-			ls.position returns Vec2D( -1, 0.5 )
+			ls.d returns Vec2D( 4, 0 )
+			ls.previousPosition returns Vec2D( -2, 1.5 )
+			ls.position returns Vec2D( -2, 1.5 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0, 0.5 ), Vec2D( 0, 1 ), 0.5, 0.0 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0, 1.5 ), Vec2D( 0, 1 ), 0.5, 0.0 ) ) )
 		}
 
 		"handle the beginning of the line segment piercing the circle initially." in {
@@ -77,16 +77,16 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( 0.5, 0 )
-			ls.position returns Vec2D( 0.5, 0 )
+			ls.previousPosition returns Vec2D( 1.5, 0 )
+			ls.position returns Vec2D( 1.5, 0 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0.5, 0 ), Vec2D( 1, 0 ), 0.5, 0.0 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 1.5, 0 ), Vec2D( 1, 0 ), 0.5, 0.0 ) ) )
 		}
 
 		"handle the end of the line segment piercing the circle initially." in {
@@ -96,62 +96,62 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( -2.5, 0 )
-			ls.position returns Vec2D( -2.5, 0 )
+			ls.previousPosition returns Vec2D( -3.5, 0 )
+			ls.position returns Vec2D( -3.5, 0 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( -0.5, 0 ), Vec2D( -1, 0 ), 0.5, 0.0 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( -1.5, 0 ), Vec2D( -1, 0 ), 0.5, 0.0 ) ) )
 		}
 
 		"handle the beginning of the line segment touching the circle initially." in {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( 1, 0 )
-			ls.position returns Vec2D( 1, 0 )
+			ls.previousPosition returns Vec2D( 2, 0 )
+			ls.position returns Vec2D( 2, 0 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 1, 0 ), Vec2D( 1, 0 ), 0, 0.0 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 2, 0 ), Vec2D( 1, 0 ), 0, 0.0 ) ) )
 		}
 
 		"handle the end of the line segment touching the circle initially." in {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( -3, 0 )
-			ls.position returns Vec2D( -3, 0 )
+			ls.previousPosition returns Vec2D( -4, 0 )
+			ls.position returns Vec2D( -4, 0 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( -1, 0 ), Vec2D( -1, 0 ), 0, 0.0 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( -2, 0 ), Vec2D( -1, 0 ), 0, 0.0 ) ) )
 		}
 
 		"handle the circle being on the line described by the vectors, but not on the line segment." in {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( -3, 0.5 )
-			ls.position returns Vec2D( -3, 0.5 )
+			ls.previousPosition returns Vec2D( -4, 0.5 )
+			ls.position returns Vec2D( -4, 0.5 )
 
 			test( c, ls ) must beEqualTo( None )
 		}
@@ -160,14 +160,14 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 2, 0 )
 
 			val ls = mock[ LineSegment ]
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( 0, 2 )
-			ls.position returns Vec2D( 0, 2 )
+			ls.previousPosition returns Vec2D( 0, 3 )
+			ls.position returns Vec2D( 0, 3 )
 
 			test( c, ls ) must beEqualTo( None )
 		}
@@ -176,30 +176,30 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 2, 0 )
 
 			val ls = mock[ LineSegment ]
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( 2, 0 )
-			ls.position returns Vec2D( 2, 0 )
+			ls.previousPosition returns Vec2D( 3, 0 )
+			ls.position returns Vec2D( 3, 0 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 2, 0 ), Vec2D( 1, 0 ), 1, 0.5 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 3, 0 ), Vec2D( 1, 0 ), 1, 0.5 ) ) )
 		}
 
 		"handle the circle moving away from the line segment and not colliding." in {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 0, -2 )
 
 			val ls = mock[ LineSegment ]
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( 0, 2 )
-			ls.position returns Vec2D( 0, 2 )
+			ls.previousPosition returns Vec2D( 0, 3 )
+			ls.position returns Vec2D( 0, 3 )
 
 			test( c, ls ) must beEqualTo( None )
 		}
@@ -208,14 +208,14 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, -2 )
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( 0, 2 )
-			ls.position returns Vec2D( 0, 2 )
+			ls.previousPosition returns Vec2D( 0, 3 )
+			ls.position returns Vec2D( 0, 3 )
 
 			test( c, ls ) must beEqualTo( None )
 		}
@@ -224,7 +224,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( -3, 0 )
 			c.position returns Vec2D( -3, 4 )
 
@@ -240,48 +240,48 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 0, 2 )
 
 			val ls = mock[ LineSegment ]
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( 0, 2 )
-			ls.position returns Vec2D( 0, 2 )
+			ls.previousPosition returns Vec2D( 0, 3 )
+			ls.position returns Vec2D( 0, 3 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0, 2 ), Vec2D( 0, 1 ), 1, 0.5 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0, 3 ), Vec2D( 0, 1 ), 1, 0.5 ) ) )
 		}
 
 		"handle the circle moving against the y axis and colliding with the line segment." in {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 4 )
 			c.position returns Vec2D( 0, 2 )
 
 			val ls = mock[ LineSegment ]
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( 0, 2 )
-			ls.position returns Vec2D( 0, 2 )
+			ls.previousPosition returns Vec2D( 0, 1 )
+			ls.position returns Vec2D( 0, 1 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0, 2 ), Vec2D( 0, -1 ), 1, 0.5 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0, 1 ), Vec2D( 0, -1 ), 1, 0.5 ) ) )
 		}
 
 		"handle the circle moving and colliding with the line segment, the line segment pointing the same way as the y-axis." in {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 2, 0 )
 
 			val ls = mock[ LineSegment ]
 			ls.d returns Vec2D( 0, 2 )
-			ls.previousPosition returns Vec2D( 2, 0 )
-			ls.position returns Vec2D( 2, 0 )
+			ls.previousPosition returns Vec2D( 3, 0 )
+			ls.position returns Vec2D( 3, 0 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 2, 0 ), Vec2D( 1, 0 ), 1, 0.5 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 3, 0 ), Vec2D( 1, 0 ), 1, 0.5 ) ) )
 		}
 
 		"handle the circle moving and touching the beginning of the line segment during the movement." in {
@@ -332,22 +332,6 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( -1, 1 ), Vec2D( -1, 0 ), 0, 0.5 ) ) )
 		}
 
-		"handle a circle with a radius not equal to 1 moving and touching a line segment." in {
-			val test = new ContinuousCircleLineSegmentTest
-
-			val c = mock[ Circle ]
-			c.radius returns 2
-			c.previousPosition returns Vec2D( 1, 0 )
-			c.position returns Vec2D( 1, 2 )
-
-			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 2 )
-			ls.previousPosition returns Vec2D( -3, -1 )
-			ls.position returns Vec2D( -3, -1 )
-
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( -1, 1 ), Vec2D( -1, 0 ), 0, 0.5 ) ) )
-		}
-
 		"handle the line segment moving and touching the circle with its end." in {
 			val test = new ContinuousCircleLineSegmentTest
 
@@ -368,7 +352,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( -3, 0 )
 			c.position returns Vec2D( -3, 0 )
 
@@ -384,23 +368,23 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( 0, 2 )
+			ls.previousPosition returns Vec2D( 0, 4 )
 			ls.position returns Vec2D( 0, 0 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0, 1 ), Vec2D( 0, 1 ), 1, 0.5 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0, 2 ), Vec2D( 0, 1 ), 2, 0.5 ) ) )
 		}
 
 		"handle both shapes moving and not colliding." in {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[ Circle ]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( -3, 0 )
 			c.position returns Vec2D( -3, 4 )
 
@@ -416,16 +400,16 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			val test = new ContinuousCircleLineSegmentTest
 
 			val c = mock[Circle]
-			c.radius returns 1
+			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 0, 2 )
 
 			val ls = mock[LineSegment]
 			ls.d returns Vec2D( 2, 0 )
-			ls.previousPosition returns Vec2D( 0, 3 )
-			ls.position returns Vec2D( 0, 1 )
+			ls.previousPosition returns Vec2D( 0, 4 )
+			ls.position returns Vec2D( 0, 2 )
 
-			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0, 2 ), Vec2D( 0, 1 ), 2, 0.5 ) ) )
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0, 3 ), Vec2D( 0, 1 ), 2, 0.5 ) ) )
 		}
 	}
 }
