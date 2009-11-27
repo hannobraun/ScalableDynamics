@@ -142,7 +142,7 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 			}
 
 			// The variables that describe where circle center is when it touches the line (t) and where the circle touches the line (s)
-			// can be computed from the equation "pls + s * ls.d + d = pc + t * v".
+			// can be computed from the equation "pls + s * ls.d + dist = pc + t * v".
 			val s = ( v.x * ( pls.y - pc.y + dist.y ) - v.y * ( pls.x - pc.x + dist.x ) ) / ( dls.x * v.y - v.x * dls.y )
 			val t = ( dls.x * ( pc.y - pls.y - dist.y ) - dls.y * ( pc.x - pls.x - dist.x ) ) / ( v.x * dls.y - dls.x * v.y )
 
