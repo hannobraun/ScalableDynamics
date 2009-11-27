@@ -41,6 +41,14 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 
 	def apply( circle: Circle, lineSegment: LineSegment ): Option[ Contact ] = {
 
+		// This algorithm performs collision detection between moving circles and line segments. I assembled this algorithm by shamelessly
+		// stealing parts of several algorithms from Christer Ericson's book "Real-Time Collision Detection" and combining them to solve
+		// the problem at hand. The following parts of the book where integral in creating this algorithm:
+		// * A first attempt at implementing this test was based on "Intersecting Moving Sphere Against Plane", pages 219-222. Some parts
+		//   made their way into this current version.
+		// * The second attempt was mainly based on "Closest Poins of Two Line Segments", pages 148-151.
+		// * "Closest Point on Line Segment to Point", pages 127-130 may have also had some influence.
+
 		// Let's save the shape attributes into short variables, so we have them handy for the long equations.
 		val pc = circle.previousPosition
 		val rc = circle.radius
@@ -140,28 +148,42 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 			// For doing that, we represent the relative movement of the circle center as a line segment and check if there's a point where
 			// the distance of that virtual line segment and the actual one equals the circle radius.
 
-			// Before we can start that computation, we need the distance vector. The distance vector is the vector that is orthogonal to
-			// the line defined by the line segment and points from the point where the circle would touch the line to the center of the
-			// line segment.
+			// Let's compute the distance between the line that's defined by the line segment and the circle center. We'll need it for the
+			// computation ahead.
+			val circleCenterDistanceFromLine = {
+				// We need a normal and a distance from the origin, which together define the line on which the line segments lies.
+				// The normal is one of two possible line normals. The distance is the distance from the origin in units of the normal, which
+				// basically means that the distance is negative if the normal points towards the origin, positive if the normal points away
+				// from the origin.
+				val lineNormal = dls.orthogonal.normalize
+				val lineDistanceFromOrigin = pls * lineNormal
+
+				Math.abs( lineNormal * pc - lineDistanceFromOrigin )
+			}
+
+			// Now we'll compute the distance vector, which is orthogonal to the line defined by the line segment and points from the point
+			// where the circle would touch the line to the center of the line segment. If the circle is already touching the line, the
+			// distance vector will just point from the closest point on the line to the circle center.
 			val dist = {
-				val lineOrthogonal = dls.orthogonal.normalize * rc
+				val length = Math.min( rc, Math.abs( circleCenterDistanceFromLine ) )
+				val lineOrthogonal = dls.orthogonal.normalize * length
 				if ( lineOrthogonal * ( pc - pls ) >= 0 ) lineOrthogonal else -lineOrthogonal
 			}
 
-			// The variables that describe where circle center is when it touches the line (t) and where the circle touches the line (s)
-			// can be computed from the equation "pls + s * ls.d + dist = pc + t * v".
+			// The variables that describe where circle center is when it touches the line (t) and where the circle touches the line
+			// (s) can be computed from the equation "pls + s * ls.d + dist = pc + t * v".
 			val s = ( v.x * ( pls.y - pc.y + dist.y ) - v.y * ( pls.x - pc.x + dist.x ) ) / ( dls.x * v.y - v.x * dls.y )
 			val t = ( dls.x * ( pc.y - pls.y - dist.y ) - dls.y * ( pc.x - pls.x - dist.x ) ) / ( v.x * dls.y - dls.x * v.y )
 
-			// Let's take a close look at the variables we computed.
+			// Let's take a closer look at the variables we computed.
 			if ( t < 0  || t > 1 ) {
 				// If t is not between 0 and 1 (inclusive) the circle won't touch the line within the timeframe we're looking at. If it
 				// won't touch the line, it also won't touch the line segment that lies on it.
 				None
 			}
 			else if ( s < 0 || s > 1 ) {
-				// If s is not between zero and one (inclusive), the circle won't touch the line where the line segment lies. However, it
-				// may still touch the line segment at one of its endpoints, if it moves further.
+				// If s is not between zero and one (inclusive), the circle won't touch the line where the line segment lies. However,
+				// it may still touch the line segment at one of its endpoints, if it moves further.
 				val p = if ( s < 0 ) pls else pls + dls
 
 				// The time of contact can be computed using a quadratic euqation.
@@ -190,6 +212,7 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 
 				Some( Contact( circle, lineSegment, point, normal, depth, t ) )
 			}
+
 		}
 	}
 

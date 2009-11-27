@@ -411,5 +411,21 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 
 			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 0, 3 ), Vec2D( 0, 1 ), 2, 0.5 ) ) )
 		}
+
+		"handle the circle intersecting to the line initially, moving on a non-parallel course and touching the line segment." in {
+			val test = new ContinuousCircleLineSegmentTest
+
+			val c = mock[Circle]
+			c.radius returns 2
+			c.previousPosition returns Vec2D( 0, 0 )
+			c.position returns Vec2D( 0, 2 )
+
+			val ls = mock[LineSegment]
+			ls.d returns Vec2D( 2, 0 )
+			ls.previousPosition returns Vec2D( 2, 1 )
+			ls.position returns Vec2D( 2, 1 )
+
+			test( c, ls ) must beEqualTo( Some( Contact( c, ls, Vec2D( 2, 1 ), Vec2D( 1, 0 ), 0, 0.5 ) ) )
+		}
 	}
 }
