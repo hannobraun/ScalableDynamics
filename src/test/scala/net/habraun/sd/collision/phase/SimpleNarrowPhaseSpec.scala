@@ -137,7 +137,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			circleLineSegmentTest( s2, s1 ) was called
 		}
 
-		"construct a correct Collision instance from the circle-circle test result." in {
+		"pass on the Contact returned by the circle-circle test." in {
 			val circleCircleTest = mock[ CircleCircleTest ]
 			val circleLineSegmentTest = mock[ CircleLineSegmentTest ]
 			val narrowPhase = new SimpleNarrowPhase( circleCircleTest, circleLineSegmentTest)
@@ -151,12 +151,10 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			circleCircleTest( s1, s2 ) returns Some( contact )
 
-			val expected = Collision( t, contact, -contact )
-
-			narrowPhase( s1, s2 ) must beEqualTo( Some( expected ) )
+			narrowPhase( s1, s2 ) must beEqualTo( Some( contact ) )
 		}
 
-		"construct a correct Collision instance from the cirlce - line segment test result." in {
+		"pass on the Contact returned by the cirlce - line segment test." in {
 			val circleCircleTest = mock[ CircleCircleTest ]
 			val circleLineSegmentTest = mock[ CircleLineSegmentTest ]
 			val narrowPhase = new SimpleNarrowPhase( circleCircleTest, circleLineSegmentTest)
@@ -170,12 +168,10 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			circleLineSegmentTest( s1, s2 ) returns Some( contact )
 
-			val expected = Collision( 0.5, contact, -contact)
-
-			narrowPhase( s1, s2 ) must beEqualTo( Some( expected ) )
+			narrowPhase( s1, s2 ) must beEqualTo( Some( contact ) )
 		}
 
-		"construct a correct Collision instance from the line segment - circle test result." in {
+		"pass on the inverse of the Contact returned by the cirlce - line segment test." in {
 			val circleCircleTest = mock[ CircleCircleTest ]
 			val circleLineSegmentTest = mock[ CircleLineSegmentTest ]
 			val narrowPhase = new SimpleNarrowPhase( circleCircleTest, circleLineSegmentTest)
@@ -189,9 +185,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			circleLineSegmentTest( s2, s1 ) returns Some( contact )
 
-			val expected = Collision( 0.5, -contact, contact)
-
-			narrowPhase( s1, s2 ) must beEqualTo( Some( expected ) )
+			narrowPhase( s1, s2 ) must beEqualTo( Some( -contact ) )
 		}
 
 		"return None if the circle-circle test result is None." in {

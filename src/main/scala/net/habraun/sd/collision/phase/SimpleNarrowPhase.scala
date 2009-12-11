@@ -36,8 +36,7 @@ import test.ContinuousCircleLineSegmentTest
  * A narrow phase implementation that uses the collision tests from the sd.collision package by default.
  */
 
-class SimpleNarrowPhase( testCircleCircle: CircleCircleTest, testCircleLineSegment: CircleLineSegmentTest)
-		extends NarrowPhase {
+class SimpleNarrowPhase( testCircleCircle: CircleCircleTest, testCircleLineSegment: CircleLineSegmentTest) extends NarrowPhase {
 
 	/**
 	 * Default constructor that provides default test implementations.
@@ -58,14 +57,10 @@ class SimpleNarrowPhase( testCircleCircle: CircleCircleTest, testCircleLineSegme
 			case circle1: Circle =>
 				s2 match {
 					case circle2: Circle =>
-						for ( contact <- testCircleCircle( circle1, circle2 ) ) yield {
-							Collision( contact.t, contact, -contact )
-						}
+						testCircleCircle( circle1, circle2 )
 
 					case lineSegment: LineSegment =>
-						for ( contact <- testCircleLineSegment( circle1, lineSegment ) ) yield {
-							Collision( contact.t, contact, -contact )
-						}
+						testCircleLineSegment( circle1, lineSegment )
 
 					case _ =>
 						throw new IllegalArgumentException( "Unsupported shape: " + s2 )
@@ -75,7 +70,7 @@ class SimpleNarrowPhase( testCircleCircle: CircleCircleTest, testCircleLineSegme
 				s2 match {
 					case circle: Circle =>
 						for ( contact <- testCircleLineSegment( circle, lineSegment1 ) ) yield {
-							Collision( contact.t, -contact, contact )
+							-contact
 						}
 
 					case lineSegment2: LineSegment =>

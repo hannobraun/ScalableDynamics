@@ -35,14 +35,14 @@ class CollisionDetector( broadPhase: BroadPhase, narrowPhase: NarrowPhase ) exte
 
 		// Narrow Phase. Performs a detailed and possibly performance-heavy collision check for a pair of
 		// shapes.
-		val possibleCollisions = for ( possibleCollision <- possiblyCollidingPairs ) yield {
-			narrowPhase( possibleCollision._1, possibleCollision._2 )
+		val possibleContacts = for ( possibleContact <- possiblyCollidingPairs ) yield {
+			narrowPhase( possibleContact._1, possibleContact._2 )
 		}
 
 		// Add all detected contacts to the shapes they belong to.
-		for ( possibleCollision <- possibleCollisions; collision <- possibleCollision ) {
-			collision.contact1.s.addContact( collision.contact1 )
-			collision.contact2.s.addContact( collision.contact2 )
+		for ( possibleContact <- possibleContacts; contact <- possibleContact ) {
+			contact.s.addContact( contact )
+			contact.other.addContact( -contact )
 		}
 	}
 }

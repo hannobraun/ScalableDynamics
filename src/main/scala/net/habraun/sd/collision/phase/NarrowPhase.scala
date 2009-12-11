@@ -20,6 +20,7 @@ package net.habraun.sd.collision.phase
 
 
 
+import shape.Contact
 import shape.Shape
 
 
@@ -31,12 +32,12 @@ import shape.Shape
  * collision by a broad phase.
  */
 
-trait NarrowPhase extends Function2[Shape, Shape, Option[Collision]] {
+trait NarrowPhase extends Function2[ Shape, Shape, Option[ Contact ] ] {
 
 	/**
 	 * Determines if the two shapes collide, and if they do, returns a Collision object that describes the
 	 * collision. If the shapes do not collide, this method returns None.
 	 */
 
-	def apply( s1: Shape, s2: Shape ): Option[Collision]
+	def apply( s1: Shape, s2: Shape ): Option[ Contact ]
 }

@@ -105,10 +105,12 @@ object CollisionDetectorSpec extends Specification with Mockito {
 			-contact1 returns contact2
 			-contact2 returns contact1
 			contact1.s returns shape1
+			contact1.other returns shape2
 			contact2.s returns shape2
+			contact2.other returns shape1
 
 			broadPhase( shapes ) returns ( shape1, shape2 )::Nil
-			narrowPhase( shape1, shape2 ) returns Some( Collision( 0.5, contact1, contact2 ) )
+			narrowPhase( shape1, shape2 ) returns Some( contact1 )
 
 			detector.filterAndStep( 0.0, shapes )
 
