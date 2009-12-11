@@ -23,7 +23,6 @@ package net.habraun.sd.collision
 import core.StepPhase
 import math.Vec2D
 import phase.BroadPhase
-import phase.Collision
 import phase.NarrowPhase
 import shape.Contact
 import shape.Shape
