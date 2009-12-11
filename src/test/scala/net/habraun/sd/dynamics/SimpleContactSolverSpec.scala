@@ -39,13 +39,13 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 
 	"SimpleContactSolver" should {
 		"be a StepPhase." in {
-			val solver = new SimpleContactSolver
+			val solver = new SimpleContactSolver( 0 )
 			
 			solver must haveSuperClass[ StepPhase[ Shape ] ]
 		}
 
 		"remove the contact from two touching shapes and otherwise not change their position." in {
-			val solver = new SimpleContactSolver
+			val solver = new SimpleContactSolver( 0 )
 
 
 			val pos1 = Vec2D( 2, 2 )
@@ -70,7 +70,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 		}
 
 		"move two intersecting shapes of equal mass equally far along the normal, so they don't intersect anymore." in {
-			val solver = new SimpleContactSolver
+			val solver = new SimpleContactSolver( 0 )
 
 			val s1 = new Shape {}
 			s1.position = Vec2D( 2, 0 )
@@ -90,7 +90,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 		}
 
 		"move an intersecting shape by an amount proportional to its mass ratio to to the other shape." in {
-			val solver = new SimpleContactSolver
+			val solver = new SimpleContactSolver( 0 )
 
 			val s1 = new Shape {}
 			s1.position = Vec2D( 4, 0 )
@@ -110,7 +110,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 		}
 
 		"not move the first shape at all, if it has infinite mass." in {
-			val solver = new SimpleContactSolver
+			val solver = new SimpleContactSolver( 0 )
 
 			val pos1 = Vec2D( 2, 0 )
 
@@ -132,7 +132,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 		}
 
 		"not move the second shape at all, if it has infinite mass." in {
-			val solver = new SimpleContactSolver
+			val solver = new SimpleContactSolver( 0 )
 
 			val pos2 = Vec2D( 3, 0 )
 
@@ -154,7 +154,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 		}
 
 		"not move the shapes at all, if both have inifinte mass." in {
-			val solver = new SimpleContactSolver
+			val solver = new SimpleContactSolver( 0 )
 
 			val pos1 = Vec2D( 2, 0 )
 			val pos2 = Vec2D( 3, 0 )
@@ -174,6 +174,26 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 
 			s1.position must beEqualTo( pos1 )
 			s2.position must beEqualTo( pos2 )
+		}
+
+		"apply an additional tolerance value when moving shapes." in {
+			val solver = new SimpleContactSolver( 0.5 )
+
+			val s1 = new Shape {}
+			s1.position = Vec2D( 2, 0 )
+			s1.mass = 2
+			val s2 = new Shape {}
+			s2.position = Vec2D( 3, 0 )
+			s2.mass = 2
+
+			val contact = Contact( s1, s2, Vec2D( 2.5, 0 ), Vec2D( 1, 0 ), 2, 0.0 )
+			s1.addContact( contact )
+			s2.addContact( -contact )
+
+			solver.filterAndStep( 0.0, List( s1, s2 ) )
+
+			s1.position must beEqualTo( Vec2D( 0.5, 0 ) )
+			s2.position must beEqualTo( Vec2D( 4.5, 0 ) )
 		}
 	}
 }
