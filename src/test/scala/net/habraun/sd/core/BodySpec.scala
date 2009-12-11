@@ -184,44 +184,5 @@ object BodySpec extends Specification {
 
 			body.appliedForce must beEqualTo( Vec2D( 0, 0 ) )
 		}
-
-		"have no applied impulses initially." in {
-			val body = new Body {}
-
-			body.appliedImpulse must beEqualTo( Vec2D( 0, 0 ) )
-		}
-
-		"remember an applied impulse." in {
-			val body = new Body {}
-
-			val impulse = Vec2D( 10, 10 )
-			body.applyImpulse( impulse )
-
-			body.appliedImpulse must beEqualTo( impulse )
-		}
-
-		"add up multiple applied impulses." in {
-			val body = new Body {}
-
-			body.applyImpulse( Vec2D( 2, 1 ) )
-			body.applyImpulse( Vec2D( 1, 2 ) )
-
-			body.appliedImpulse must beEqualTo( Vec2D( 3, 3 ) )
-		}
-
-		"throw an exception if an applied impulse is null." in {
-			val body = new Body {}
-
-			body.applyImpulse( null ) must throwA[NullPointerException]
-		}
-
-		"reset all applied impulses if resetImpulse is called." in {
-			val body = new Body {}
-
-			body.applyImpulse( Vec2D( 10, 10 ) )
-			body.resetImpulse
-
-			body.appliedImpulse must beEqualTo( Vec2D( 0, 0 ) )
-		}
 	}
 }
