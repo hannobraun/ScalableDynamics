@@ -54,15 +54,6 @@ object PositionConstraintSpec extends Specification {
 			constraint.minY = minY
 			constraint.maxY = maxY
 
-
-			val xConstraint = Some( 0.0 )
-			val yConstraint = Some( 0.0 )
-			constraint.xConstraint = xConstraint
-			constraint.yConstraint = yConstraint
-
-			constraint.xConstraint must beEqualTo( xConstraint )
-			constraint.yConstraint must beEqualTo( yConstraint )
-
 			constraint.minX must beEqualTo( minX )
 			constraint.maxX must beEqualTo( maxX )
 			constraint.minY must beEqualTo( minY )
@@ -71,9 +62,6 @@ object PositionConstraintSpec extends Specification {
 
 		"set xConstraint and yConstraint initially to None." in {
 			val constraint = new PositionConstraint {}
-
-			constraint.xConstraint must beEqualTo( None )
-			constraint.yConstraint must beEqualTo( None )
 
 			constraint.minX must beEqualTo( None )
 			constraint.maxX must beEqualTo( None )
