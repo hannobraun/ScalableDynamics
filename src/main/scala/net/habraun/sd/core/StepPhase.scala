@@ -28,7 +28,7 @@ import scala.reflect.Manifest
  * A single phase of the iteration step that is executed by World.
  */
 
-trait StepPhase[B <: Body] {
+trait StepPhase[ B <: Body ] {
 
 	/**
 	 * A concrete iteration step phase must implement this method. It will be called during each step and the
@@ -40,7 +40,7 @@ trait StepPhase[B <: Body] {
 	 *                   step method.
 	 */
 
-	def step( dt: Double, filteredBodies: Iterable[B] )
+	def step( dt: Double, filteredBodies: Iterable[ B ] )
 
 
 
@@ -49,9 +49,9 @@ trait StepPhase[B <: Body] {
 	 * of the step phase and passes the filtered bodies to step.
 	 */
 
-	def filterAndStep( dt: Double, bodies: Iterable[Body] )( implicit m: Manifest[B] ) {
+	def filterAndStep( dt: Double, bodies: Iterable[Body] )( implicit m: Manifest[ B ] ) {
 		val filtered = bodies.filter( ( body ) => m.erasure.isAssignableFrom( body.getClass ) )
-		val result = filtered.map( ( body ) => body.asInstanceOf[B] )
+		val result = filtered.map( ( body ) => body.asInstanceOf[ B ] )
 
 		step ( dt, result )
 	}
