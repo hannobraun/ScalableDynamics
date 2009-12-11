@@ -55,15 +55,20 @@ class ElasticCollisionReaction extends StepPhase[ Shape ] {
 			s1.velocity -= v1
 			s2.velocity -= v2
 
-			if ( m2 != Double.PositiveInfinity )
-			s1.velocity += v2 * m2 / m1
-			else
-			s1.velocity -= v1
+			if ( m2 != Double.PositiveInfinity ) {
+				s1.velocity += v2 * m2 / m1
+			}
+			else {
+				s1.velocity -= v1
+			}
+			
 
-			if ( m1 != Double.PositiveInfinity )
-			s2.velocity += v1 * m1 / m2
-			else
-			s2.velocity -= v2
+			if ( m1 != Double.PositiveInfinity ) {
+				s2.velocity += v1 * m1 / m2
+			}
+			else {
+				s2.velocity -= v2
+			}
 
 			contacts.removeEntry( contact )
 			contacts.removeEntry( -contact )
