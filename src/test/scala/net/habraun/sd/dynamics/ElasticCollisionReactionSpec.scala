@@ -104,5 +104,21 @@ object ElasticCollisionReactionSpec extends Specification {
 			b1.velocity must beEqualTo( Vec2D( -3, 3 ) )
 			b2.velocity must beEqualTo( Vec2D( 0, 0 ) )
 		}
+
+		"must not remove the contacts from the shapes." in {
+			val reaction = new ElasticCollisionReaction
+
+			val s1 = new Shape {}
+			val s2 = new Shape {}
+
+			val contact = Contact( s1, s2, Vec2D( 0, 0 ), Vec2D( 1, 0 ), 1, 0.0 )
+			s1.addContact( contact )
+			s2.addContact( -contact )
+
+			reaction.filterAndStep( 0.0, List( s1, s2 ) )
+
+			s1.contacts must beEqualTo( Set( contact ) )
+			s2.contacts must beEqualTo( Set( -contact ) )
+		}
 	}
 }

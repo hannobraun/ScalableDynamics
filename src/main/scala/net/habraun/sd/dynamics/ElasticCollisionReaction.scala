@@ -21,7 +21,10 @@ package net.habraun.sd.dynamics
 
 
 import core.StepPhase
+import collision.shape.Contact
 import collision.shape.Shape
+
+import scala.collection.mutable.HashSet
 
 
 
@@ -32,33 +35,38 @@ import collision.shape.Shape
 class ElasticCollisionReaction extends StepPhase[ Shape ] {
 
 	def step( dt: Double, shapes: Iterable[ Shape ] ) {
+		val contacts = new HashSet[ Contact ]
 		for ( shape <- shapes ) {
 			for ( contact <- shape.contacts ) {
-				val s1 = contact.s
-				val s2 = contact.other
-
-				val v1 = s1.velocity.projectOn( contact.normal )
-				val v2 = s2.velocity.projectOn( contact.normal )
-
-				val m1 = s1.mass
-				val m2 = s2.mass
-
-				s1.velocity -= v1
-				s2.velocity -= v2
-
-				if ( m2 != Double.PositiveInfinity )
-					s1.velocity += v2 * m2 / m1
-				else
-					s1.velocity -= v1
-
-				if ( m1 != Double.PositiveInfinity )
-					s2.velocity += v1 * m1 / m2
-				else
-					s2.velocity -= v2
-
-				s1.removeContact( contact )
-				s2.removeContact( -contact )
+				contacts.addEntry( contact )
 			}
+		}
+
+		for ( contact <- contacts ) {
+			val s1 = contact.s
+			val s2 = contact.other
+
+			val v1 = s1.velocity.projectOn( contact.normal )
+			val v2 = s2.velocity.projectOn( contact.normal )
+
+			val m1 = s1.mass
+			val m2 = s2.mass
+
+			s1.velocity -= v1
+			s2.velocity -= v2
+
+			if ( m2 != Double.PositiveInfinity )
+			s1.velocity += v2 * m2 / m1
+			else
+			s1.velocity -= v1
+
+			if ( m1 != Double.PositiveInfinity )
+			s2.velocity += v1 * m1 / m2
+			else
+			s2.velocity -= v2
+
+			contacts.removeEntry( contact )
+			contacts.removeEntry( -contact )
 		}
 	}
 }
