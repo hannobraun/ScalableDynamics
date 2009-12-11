@@ -96,9 +96,9 @@ class World[B <: Body] {
 		// Execute step phases.
 		integrator.filterAndStep( dt, bodies )
 		velocityConstraintSolver.filterAndStep( dt, bodies )
-		positionConstraintSolver.filterAndStep( dt, bodies )
 		collisionDetector.filterAndStep( dt, bodies )
 		collisionReactor.filterAndStep( dt, bodies )
 		contactSolver.filterAndStep( dt, bodies )
+		positionConstraintSolver.filterAndStep( dt, bodies )
 	}
 }
