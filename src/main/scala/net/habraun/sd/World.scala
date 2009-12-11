@@ -45,9 +45,9 @@ import scala.collection.mutable.HashSet
  * World is basically a container for objects, whose attributes it updates every simulation step.
  */
 
-class World[B <: Body] {
+class World[ B <: Body ] {
 
-	val bodies = new HashSet[B]
+	val bodies = new HashSet[ B ]
 
 
 
