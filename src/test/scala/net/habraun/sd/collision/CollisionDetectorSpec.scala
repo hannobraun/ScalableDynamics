@@ -42,27 +42,27 @@ object CollisionDetectorSpec extends Specification with Mockito {
 
 	"CollisionDetector" should {
 		"take the collision phases as parameters." in {
-			val broadPhase = mock[BroadPhase]
-			val narrowPhase = mock[NarrowPhase]
+			val broadPhase = mock[ BroadPhase ]
+			val narrowPhase = mock[ NarrowPhase ]
 
 			new CollisionDetector( broadPhase, narrowPhase )
 		}
 
 		"be a StepPhase." in {
-			val broadPhase = mock[BroadPhase]
-			val narrowPhase = mock[NarrowPhase]
+			val broadPhase = mock[ BroadPhase ]
+			val narrowPhase = mock[ NarrowPhase ]
 			val detector = new CollisionDetector( broadPhase, narrowPhase )
 
-			detector must haveSuperClass[StepPhase[Shape]]
+			detector must haveSuperClass[ StepPhase[ Shape ] ]
 		}
 
 		"pass a list of all objects to the broad phase." in {
-			val broadPhase = mock[BroadPhase]
-			val narrowPhase = mock[NarrowPhase]
+			val broadPhase = mock[ BroadPhase ]
+			val narrowPhase = mock[ NarrowPhase ]
 			val detector = new CollisionDetector( broadPhase, narrowPhase )
 			
-			val shape1 = mock[Shape]
-			val shape2 = mock[Shape]
+			val shape1 = mock[ Shape ]
+			val shape2 = mock[ Shape ]
 			val shapes = shape1::shape2::Nil
 
 			broadPhase( shape1::shape2::Nil ) returns Nil
@@ -73,12 +73,12 @@ object CollisionDetectorSpec extends Specification with Mockito {
 		}
 
 		"pass the pairs returned by the broad phase to the narrow phase." in {
-			val broadPhase = mock[BroadPhase]
-			val narrowPhase = mock[NarrowPhase]
+			val broadPhase = mock[ BroadPhase ]
+			val narrowPhase = mock[ NarrowPhase ]
 			val detector = new CollisionDetector( broadPhase, narrowPhase )
 
-			val shape1 = mock[Shape]
-			val shape2 = mock[Shape]
+			val shape1 = mock[ Shape ]
+			val shape2 = mock[ Shape ]
 			val shapes = shape1::shape2::Nil
 
 			broadPhase( shapes ) returns ( shape1, shape2 )::Nil
@@ -90,13 +90,13 @@ object CollisionDetectorSpec extends Specification with Mockito {
 		}
 
 		"add the contacts returned by the narrow phase to the shape." in {
-			val broadPhase = mock[BroadPhase]
-			val narrowPhase = mock[NarrowPhase]
+			val broadPhase = mock[ BroadPhase ]
+			val narrowPhase = mock[ NarrowPhase ]
 			val detector = new CollisionDetector( broadPhase, narrowPhase )
 
 			val t = 0.5
-			val shape1 = mock[Shape]
-			val shape2 = mock[Shape]
+			val shape1 = mock[ Shape ]
+			val shape2 = mock[ Shape ]
 			val shapes = shape1::shape2::Nil
 			val contact1 = mock[ Contact ]
 			val contact2 = mock[ Contact ]
