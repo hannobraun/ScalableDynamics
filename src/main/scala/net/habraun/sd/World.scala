@@ -64,27 +64,6 @@ class World[B <: Body] {
 	var collisionReactor = new ElasticCollisionReaction
 	var contactSolver  = new SimpleContactSolver
 
-	
-
-	
-
-
-
-	/**
-	 * The constraint solver.
-	 */
-
-	private[this] var _collisionSolver: CollisionSolver = new ImpulseSolver
-
-	def collisionSolver = _collisionSolver
-
-	def collisionSolver_=( newCollisionSolver: CollisionSolver ) = {
-		if ( newCollisionSolver == null )
-			throw new NullPointerException( "Collision solver must not be null." )
-
-		_collisionSolver = newCollisionSolver
-	}
-
 
 
 	/**

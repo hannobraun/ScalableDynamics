@@ -69,18 +69,4 @@ class WorldTest {
 	def verifyInitialVelocityConstraintSolver {
 		assertTrue( world.velocityConstraintSolver.isInstanceOf[VelocityConstraintSolver] )
 	}
-
-
-
-	@Test
-	def verifyInitialConstraintSolver {
-		assertTrue(world.collisionSolver.isInstanceOf[ImpulseSolver])
-	}
-
-
-
-	@Test { val expected = classOf[NullPointerException] }
-	def setConstraintSolverNullExpectException {
-		world.collisionSolver = null
-	}
 }
