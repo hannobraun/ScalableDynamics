@@ -25,23 +25,34 @@ import math.Vec2D
 
 
 
-class PositionConstraintSolver extends StepPhase[PositionConstraint] {
+class PositionConstraintSolver extends StepPhase[ PositionConstraint ] {
 
-	def step( dt: Double, constraints: Iterable[PositionConstraint] ) {
+	def step( dt: Double, constraints: Iterable[ PositionConstraint ] ) {
 		for ( constraint <- constraints ) {
-			// Check if the x component is constrained, determine the new x component of the position.
-			val xComponent = constraint.xConstraint match {
-				case Some( x ) => x
-				case None => constraint.position.x
+			val initialX = constraint.position.x
+			val initialY = constraint.position.y
+
+			val xAfterMin = constraint.minX match {
+				case Some( minX ) => Math.max( initialX, minX )
+				case None => initialX
 			}
 
-			// Check if the y component is constrained, determine the new y component of the position.
-			val yComponent = constraint.yConstraint match {
-				case Some( y ) => y
-				case None => constraint.position.y
+			val yAfterMin = constraint.minY match {
+				case Some( minY ) => Math.max( initialY, minY )
+				case None => initialY
 			}
 
-			constraint.position = Vec2D( xComponent, yComponent )
+			val xAfterMax = constraint.maxX match {
+				case Some( maxX ) => Math.min( xAfterMin, maxX )
+				case None => xAfterMin
+			}
+
+			val yAfterMax = constraint.maxY match {
+				case Some( maxY ) => Math.min( yAfterMin, maxY )
+				case None => yAfterMin
+			}
+
+			constraint.position = Vec2D( xAfterMax, yAfterMax )
 		}
 	}
 }

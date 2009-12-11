@@ -42,28 +42,52 @@ object PositionConstraintSolverSpec extends Specification {
 			solver must haveSuperClass[StepPhase[PositionConstraint]]
 		}
 
-		"reset the x component of the position vector if a x constraint is set." in {
+		"set the x component of the position vector to minX, if it is below minX." in {
 			val solver = new PositionConstraintSolver
 
 			val body = new Body with PositionConstraint {}
-			body.position = Vec2D( 2, 2 )
-			body.xConstraint = Some( 1.0 )
+			body.position = Vec2D( 1, 2 )
+			body.minX = Some( 2 )
 
 			solver.filterAndStep( 0.0, body::Nil )
 
-			body.position must beEqualTo( Vec2D( 1, 2 ) )
+			body.position must beEqualTo( Vec2D( 2, 2 ) )
 		}
 
-		"reset the y component of the position vector if a y constraint is set." in {
+		"set the y component of the position vector to minY, if it is below minY." in {
 			val solver = new PositionConstraintSolver
 
 			val body = new Body with PositionConstraint {}
-			body.position = Vec2D( 2, 2 )
-			body.yConstraint = Some( 1.0 )
+			body.position = Vec2D( 2, 1 )
+			body.minY = Some( 2 )
 
 			solver.filterAndStep( 0.0, body::Nil )
 
-			body.position must beEqualTo( Vec2D( 2, 1 ) )
+			body.position must beEqualTo( Vec2D( 2, 2 ) )
+		}
+
+		"set the x component of the position vector to maxX, if it is above maxX." in {
+			val solver = new PositionConstraintSolver
+
+			val body = new Body with PositionConstraint {}
+			body.position = Vec2D( 3, 2 )
+			body.maxX = Some( 2 )
+
+			solver.filterAndStep( 0.0, body::Nil )
+
+			body.position must beEqualTo( Vec2D( 2, 2 ) )
+		}
+
+		"set the y component of the position vector to maxY, if it is above maxY." in {
+			val solver = new PositionConstraintSolver
+
+			val body = new Body with PositionConstraint {}
+			body.position = Vec2D( 2, 3 )
+			body.maxY = Some( 2 )
+
+			solver.filterAndStep( 0.0, body::Nil )
+
+			body.position must beEqualTo( Vec2D( 2, 2 ) )
 		}
 	}
 }
