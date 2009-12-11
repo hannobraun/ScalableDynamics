@@ -26,6 +26,11 @@ import core.Body
 
 trait PositionConstraint extends Body {
 
+	var minX: Option[ Double ] = None
+	var maxX: Option[ Double ] = None
+	var minY: Option[ Double ] = None
+	var maxY: Option[ Double ] = None
+
 	var xConstraint: Option[Double] = None
 	var yConstraint: Option[Double] = None
 }

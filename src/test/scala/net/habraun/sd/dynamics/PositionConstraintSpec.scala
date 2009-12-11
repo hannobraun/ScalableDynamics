@@ -39,11 +39,21 @@ object PositionConstraintSpec extends Specification {
 		"extend Body." in {
 			val constraint = new PositionConstraint {}
 
-			constraint must haveSuperClass[Body]
+			constraint must haveSuperClass[ Body ]
 		}
 
 		"have xConstraint and yConstraint attributes." in {
 			val constraint = new PositionConstraint {}
+
+			val minX = Some( 0.0 )
+			val maxX = Some( 0.0 )
+			val minY = Some( 0.0 )
+			val maxY = Some( 0.0 )
+			constraint.minX = minX
+			constraint.maxX = maxX
+			constraint.minY = minY
+			constraint.maxY = maxY
+
 
 			val xConstraint = Some( 0.0 )
 			val yConstraint = Some( 0.0 )
@@ -52,6 +62,11 @@ object PositionConstraintSpec extends Specification {
 
 			constraint.xConstraint must beEqualTo( xConstraint )
 			constraint.yConstraint must beEqualTo( yConstraint )
+
+			constraint.minX must beEqualTo( minX )
+			constraint.maxX must beEqualTo( maxX )
+			constraint.minY must beEqualTo( minY )
+			constraint.maxY must beEqualTo( maxY )
 		}
 
 		"set xConstraint and yConstraint initially to None." in {
@@ -59,6 +74,11 @@ object PositionConstraintSpec extends Specification {
 
 			constraint.xConstraint must beEqualTo( None )
 			constraint.yConstraint must beEqualTo( None )
+
+			constraint.minX must beEqualTo( None )
+			constraint.maxX must beEqualTo( None )
+			constraint.minY must beEqualTo( None )
+			constraint.maxY must beEqualTo( None )
 		}
 	}
 }
