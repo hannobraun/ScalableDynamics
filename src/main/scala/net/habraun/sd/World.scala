@@ -20,14 +20,17 @@ package net.habraun.sd
 
 
 
+import collision.CollisionDetector
 import collision.phase.BroadPhase
 import collision.phase.NarrowPhase
 import collision.phase.SimpleBroadPhase
 import collision.phase.SimpleNarrowPhase
 import collision.shape.Shape
 import core.Body
+import dynamics.ElasticCollisionReaction
 import dynamics.PositionConstraint
 import dynamics.PositionConstraintSolver
+import dynamics.SimpleContactSolver
 import dynamics.VelocityConstraint
 import dynamics.VelocityConstraintSolver
 import dynamics.VerletIntegrator
@@ -55,42 +58,15 @@ class World[B <: Body] {
 	var integrator = new VerletIntegrator
 	var velocityConstraintSolver = new VelocityConstraintSolver
 	var positionConstraintSolver = new PositionConstraintSolver
+	var broadPhase = new SimpleBroadPhase
+	var narrowPhase = new SimpleNarrowPhase
+	var collisionDetector = new CollisionDetector( broadPhase, narrowPhase )
+	var collisionReactor = new ElasticCollisionReaction
+	var contactSolver  = new SimpleContactSolver
 
 	
 
-	/**
-	 * The broad phase is used for detecting which bodys can possible collide.
-	 * This is done to cut down the time spent on doing detailed collision checks.
-	 */
-
-	private[this] var _broadPhase: BroadPhase = new SimpleBroadPhase
-
-	def broadPhase = _broadPhase
-
-	def broadPhase_=( newBroadPhase: BroadPhase ) = {
-		if ( newBroadPhase == null )
-			throw new NullPointerException( "Broad phase must not be null." )
-
-		_broadPhase = newBroadPhase
-	}
-
-
-
-	/**
-	 * The narrow phase is used to perform detailed (and possibly expensive) collision testing on body pairs
-	 * that made it through the broad phase.
-	 */
-
-	private[this] var _narrowPhase: NarrowPhase = new SimpleNarrowPhase
-
-	def narrowPhase = _narrowPhase
-
-	def narrowPhase_=( newNarrowPhase: NarrowPhase ) = {
-		if ( newNarrowPhase == null )
-			throw new NullPointerException( "Narrow phase must not be null." )
-
-		_narrowPhase = newNarrowPhase
-	}
+	
 
 
 
@@ -142,34 +118,8 @@ class World[B <: Body] {
 		integrator.filterAndStep( dt, bodies )
 		velocityConstraintSolver.filterAndStep( dt, bodies )
 		positionConstraintSolver.filterAndStep( dt, bodies )
-
-		// Filter all shapes from the body set.
-		val shapes = bodies.map( {
-			_ match {
-				case s: Shape =>
-					Some( s )
-				case _ =>
-					None
-			}
-		} ).filter( _ != None ).map( _ match { case Some( s ) => s } )
-
-		// Collision detection.
-		val possibleCollisionPairs = broadPhase( shapes.toList )
-		val possibleCollisions = possibleCollisionPairs.map( ( pair ) => {
-			narrowPhase( pair._1, pair._2 )
-		} )
-
-		// Compute collision effects.
-		// This is a tricky construction. The "possibleCollision <- collision" part is like an outer for loop
-		// that iterates through all collisions. Collisions is a list of Option[Collision], this means,
-		// during each iteration possibleCollision is either Some(collision) or None.
-		// The "collision <- possibleCollision" part is technically an inner loop that iterates through the
-		// Option[Collision]. This works because because Option is like a collection that contains either one
-		// (if if is an instance of Some) or no (if it is None) elements.
-		// Despite the long explanation, what this does is actually pretty simple: We loop through the list
-		// of possible collisions. We execute the yield stuff only for actual collisions, not for None.
-		for ( possibleCollision <- possibleCollisions; collision <- possibleCollision ) {
-			collisionSolver( dt, collision )
-		}
+		collisionDetector.filterAndStep( dt, bodies )
+		collisionReactor.filterAndStep( dt, bodies )
+		contactSolver.filterAndStep( dt, bodies )
 	}
 }
