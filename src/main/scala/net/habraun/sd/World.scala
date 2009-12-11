@@ -25,16 +25,12 @@ import collision.phase.BroadPhase
 import collision.phase.NarrowPhase
 import collision.phase.SimpleBroadPhase
 import collision.phase.SimpleNarrowPhase
-import collision.shape.Shape
 import core.Body
 import dynamics.ElasticCollisionReaction
-import dynamics.PositionConstraint
 import dynamics.PositionConstraintSolver
 import dynamics.SimpleContactSolver
-import dynamics.VelocityConstraint
 import dynamics.VelocityConstraintSolver
 import dynamics.VerletIntegrator
-import math.Vec2D
 
 import scala.collection.mutable.HashSet
 
