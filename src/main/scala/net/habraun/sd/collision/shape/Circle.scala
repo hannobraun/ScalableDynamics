@@ -22,7 +22,7 @@ package net.habraun.sd.collision.shape
 
 /**
  * A circle, a shape that can be mixed into a body.
- * When you instantiate a circle, you can change its radius by overriding it.
+ * The default value of a circle's radius is 1.0. When you instantiate a Circle you can change its radius by overriding it.
  *
  * Overriding with a constant value works like this:
  * val circle = new Circle {
