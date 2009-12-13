@@ -399,12 +399,12 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		"handle both shapes moving and colliding." in {
 			val test = new ContinuousCircleLineSegmentTest
 
-			val c = mock[Circle]
+			val c = mock[ Circle ]
 			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 0, 2 )
 
-			val ls = mock[LineSegment]
+			val ls = mock[ LineSegment ]
 			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 0, 4 )
 			ls.position returns Vec2D( 0, 2 )
@@ -415,12 +415,12 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		"handle the circle intersecting to the line initially, moving on a non-parallel course and touching the line segment." in {
 			val test = new ContinuousCircleLineSegmentTest
 
-			val c = mock[Circle]
+			val c = mock[ Circle ]
 			c.radius returns 2
 			c.previousPosition returns Vec2D( 0, 0 )
 			c.position returns Vec2D( 0, 2 )
 
-			val ls = mock[LineSegment]
+			val ls = mock[ LineSegment ]
 			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 2, 1 )
 			ls.position returns Vec2D( 2, 1 )
