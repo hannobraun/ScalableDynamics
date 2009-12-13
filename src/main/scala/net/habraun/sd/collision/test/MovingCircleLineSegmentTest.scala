@@ -33,7 +33,7 @@ import shape.LineSegment
  * An implementation of the circle - line segment test that performs continuous collision detection.
  */
 
-class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
+class MovingCircleLineSegmentTest extends CircleLineSegmentTest {
 
 	/**
 	 * Performs continuous collision detection between a circle and a line segment.

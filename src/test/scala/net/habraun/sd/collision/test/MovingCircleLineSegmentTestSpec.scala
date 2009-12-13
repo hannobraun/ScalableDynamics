@@ -31,15 +31,15 @@ import org.specs.runner.JUnit4
 
 
 
-class ContinuousCircleLineSegmentTestTest extends JUnit4( ContinuousCircleLineSegmentTestSpec )
+class MovingCircleLineSegmentTestTest extends JUnit4( MovingCircleLineSegmentTestSpec )
 
 
 
-object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
+object MovingCircleLineSegmentTestSpec extends Specification with Mockito {
 
-	"ContinuousCircleLineSegmentTest" should {
+	"MovingCircleLineSegmentTest" should {
 		"handle two non-moving, non-intersecting shapes." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -55,7 +55,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the line segment piercing through the circle (both ends being out of the cirlce) initially." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -74,7 +74,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			// Important: This example is set up, so that the nearest point to the circle center that lies on the line defined by the
 			// segment lies outside the segment.
 
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -93,7 +93,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			// Important: This example is set up, so that the nearest point to the circle center that lies on the line defined by the
 			// segment lies outside the segment.
 
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -109,7 +109,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the beginning of the line segment touching the circle initially." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -125,7 +125,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the end of the line segment touching the circle initially." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -141,7 +141,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the circle being on the line described by the vectors, but not on the line segment." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -157,7 +157,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the circle moving on a parallel to the line segment and not colliding." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -173,7 +173,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the circle moving on a parallel to the line segment and colliding." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -189,7 +189,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the circle moving away from the line segment and not colliding." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -205,7 +205,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the circle moving to, but not reaching the line segment." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -221,7 +221,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the circle moving and missing the line segment." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -237,7 +237,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the circle moving and colliding with the line segment." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -253,7 +253,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the circle moving against the y axis and colliding with the line segment." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -269,7 +269,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the circle moving and colliding with the line segment, the line segment pointing the same way as the y-axis." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -285,7 +285,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the circle moving and touching the beginning of the line segment during the movement." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -301,7 +301,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the circle moving and touching the end of the line segment during the movement." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -317,7 +317,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the circle moving and touching the end of the line segment with the line segment not being parallel to any axis." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -333,7 +333,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the line segment moving and touching the circle with its end." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -349,7 +349,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the line segment moving and missing the circle." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -365,7 +365,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the line segment moving and colliding with the circle." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -381,7 +381,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle both shapes moving and not colliding." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -397,7 +397,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle both shapes moving and colliding." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
@@ -413,7 +413,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 		}
 
 		"handle the circle intersecting to the line initially, moving on a non-parallel course and touching the line segment." in {
-			val test = new ContinuousCircleLineSegmentTest
+			val test = new MovingCircleLineSegmentTest
 
 			val c = mock[ Circle ]
 			c.radius returns 2
