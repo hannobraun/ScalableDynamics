@@ -46,25 +46,16 @@ object LineSegmentSpec extends Specification {
 			lineSegment.direction must beEqualTo( Vector2( 1, 0 ) )
 		}
 
-		"allow reassigment of its direction." in {
-			val lineSegment = new LineSegment {}
-
-			val direction = Vector2( 2, 1 )
-			lineSegment.direction = direction
-
-			lineSegment.direction must beEqualTo( direction )
+		"allow overriding the direction with a constant value." in {
+			new LineSegment {
+				override val direction = Vector2( 0, 2 )
+			}
 		}
 
-		"throw an exception if the direction vector is zero." in {
-			val lineSegment = new LineSegment {}
-			
-			( lineSegment.direction = Vector2( 0, 0 ) ) must throwAn[ IllegalArgumentException ]
-		}
-
-		"throw an exception if null is assigned to its direction." in {
-			val lineSegment = new LineSegment {}
-
-			( lineSegment.direction = null ) must throwA[ NullPointerException ]
+		"allow overriding the direction with a dynamic value." in {
+			new LineSegment {
+				override def direction = Vector2( 0, 2 )
+			}
 		}
 	}
 }

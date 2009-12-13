@@ -26,9 +26,26 @@ import math.Vector2
 
 /**
  * Models a line segment.
- * A line segment is defined by the following attributes:
- * * direction: The direction vector of the line segment. It points from the first point to the second point. Its length is equal to the
- *              length of the line segment.
+ * A line segment has a direction attribute, which points from the first endpoint to the second endpoint. Its length is thus equal to the
+ * length of the line segment.
+ * The default value for direction is Vector2( 1, 0 ).
+ *
+ * When you instantiate a LineSegment, you can change its direction by overriding it.
+ *
+ * Overriding with a constant value works like this:
+ * new LineSegment {
+ *     override val direction = Vector2( 0, 2 )
+ * }
+ *
+ * If you need to change the radius later, you can do it like this:
+ * new LineSegment {
+ *     override var direction = Vector2( 0, 2 )
+ * }
+ *
+ * You can even set a dynamic value that depends on outside influences:
+ * new LineSegment {
+ *     override def direction = /insert fancy computation here\
+ * }
  */
 
 trait LineSegment extends Shape {
@@ -37,17 +54,5 @@ trait LineSegment extends Shape {
 	 * The line segment's direction vector.
 	 */
 
-	private var _direction = Vector2( 1, 0 )
-
-	def direction = _direction
-
-	def direction_=( newDirection: Vector2 ) {
-		if ( newDirection == null )
-			throw new NullPointerException
-
-		if ( newDirection == Vector2( 0, 0 ) )
-			throw new IllegalArgumentException( "Direction vector must not be zero." )
-
-		_direction = newDirection
-	}
+	def direction = Vector2( 1, 0 )
 }
