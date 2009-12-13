@@ -36,5 +36,5 @@ object Scalar {
 
 class Scalar( value: Double ) {
 
-	def * ( vector: Vec2D ) = vector * value
+	def * ( vector: Vector2 ) = vector * value
 }

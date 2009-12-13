@@ -20,7 +20,7 @@ package net.habraun.sd.collision.phase
 
 
 
-import math.Vec2D
+import math.Vector2
 import shape.Circle
 import shape.Contact
 import shape.LineSegment

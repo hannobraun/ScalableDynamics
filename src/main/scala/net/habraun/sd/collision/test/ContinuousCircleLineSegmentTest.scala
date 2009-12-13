@@ -21,7 +21,7 @@ package net.habraun.sd.collision.test
 
 
 import math.Scalar._
-import math.Vec2D
+import math.Vector2
 import math.ZeroVector
 import shape.Circle
 import shape.Contact
@@ -224,7 +224,7 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 	 * segment that is closest to p.
 	 */
 
-	private def trimPointToLineSegment( p: Vec2D, d: Vec2D, s: Double ) = {
+	private def trimPointToLineSegment( p: Vector2, d: Vector2, s: Double ) = {
 		// Examine s.
 		if ( s < 0 ) {
 			// s is smaller than zero, which means the nearest point on the line lies in front of the line segment. This makes the

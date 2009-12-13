@@ -23,7 +23,7 @@ package net.habraun.sd.dynamics
 import collision.shape.Contact
 import collision.shape.Shape
 import core.StepPhase
-import math.Vec2D
+import math.Vector2
 
 import org.specs.Specification
 import org.specs.runner.JUnit4
@@ -49,18 +49,18 @@ object ElasticCollisionReactionSpec extends Specification {
 			val b2 = new Shape {}
 			b1.mass = 2
 			b2.mass = 2
-			b1.velocity = Vec2D( 5, 5 )
-			b2.velocity = Vec2D( -4, -4 )
+			b1.velocity = Vector2( 5, 5 )
+			b2.velocity = Vector2( -4, -4 )
 
-			val contact = Contact( b1, b2, Vec2D( 0, 0 ), Vec2D( 1, 0 ), 1, 0.5 )
+			val contact = Contact( b1, b2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 )
 
 			b1.addContact( contact )
 			b2.addContact( -contact )
 
 			reaction.filterAndStep( 0.5, List( b1, b2 ) )
 
-			b1.velocity must beEqualTo( Vec2D( -4, 5 ) )
-			b2.velocity must beEqualTo( Vec2D( 5, -4 ) )
+			b1.velocity must beEqualTo( Vector2( -4, 5 ) )
+			b2.velocity must beEqualTo( Vector2( 5, -4 ) )
 		}
 
 		"take the mass ratio into account when switching velocities of different masses." in {
@@ -70,18 +70,18 @@ object ElasticCollisionReactionSpec extends Specification {
 			val b2 = new Shape {}
 			b1.mass = 6
 			b2.mass = 2
-			b1.velocity = Vec2D( 2, 3 )
-			b2.velocity = Vec2D( -3, -3 )
+			b1.velocity = Vector2( 2, 3 )
+			b2.velocity = Vector2( -3, -3 )
 
-			val contact = Contact( b1, b2, Vec2D( 0, 0 ), Vec2D( 1, 0 ), 1, 0.5 )
+			val contact = Contact( b1, b2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 )
 
 			b1.addContact( contact )
 			b2.addContact( -contact )
 
 			reaction.filterAndStep( 0.5, List( b1, b2 ) )
 
-			b1.velocity must beEqualTo( Vec2D( -1, 3 ) )
-			b2.velocity must beEqualTo( Vec2D( 6, -3 ) )
+			b1.velocity must beEqualTo( Vector2( -1, 3 ) )
+			b2.velocity must beEqualTo( Vector2( 6, -3 ) )
 		}
 
 		"reflect a body off another body with infinite mass." in {
@@ -91,18 +91,18 @@ object ElasticCollisionReactionSpec extends Specification {
 			val b2 = new Shape {}
 			b1.mass = 2
 			b2.mass = Double.PositiveInfinity
-			b1.velocity = Vec2D( 3, 3 )
-			b2.velocity = Vec2D( 0, 0 )
+			b1.velocity = Vector2( 3, 3 )
+			b2.velocity = Vector2( 0, 0 )
 
-			val contact = Contact( b1, b2, Vec2D( 0, 0 ), Vec2D( 1, 0 ), 1, 0.5 )
+			val contact = Contact( b1, b2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 )
 
 			b1.addContact( contact )
 			b2.addContact( -contact )
 
 			reaction.filterAndStep( 0.5, List( b1, b2 ) )
 
-			b1.velocity must beEqualTo( Vec2D( -3, 3 ) )
-			b2.velocity must beEqualTo( Vec2D( 0, 0 ) )
+			b1.velocity must beEqualTo( Vector2( -3, 3 ) )
+			b2.velocity must beEqualTo( Vector2( 0, 0 ) )
 		}
 
 		"must not remove the contacts from the shapes." in {
@@ -111,7 +111,7 @@ object ElasticCollisionReactionSpec extends Specification {
 			val s1 = new Shape {}
 			val s2 = new Shape {}
 
-			val contact = Contact( s1, s2, Vec2D( 0, 0 ), Vec2D( 1, 0 ), 1, 0.0 )
+			val contact = Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.0 )
 			s1.addContact( contact )
 			s2.addContact( -contact )
 

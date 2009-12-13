@@ -23,7 +23,7 @@ package net.habraun.sd.dynamics
 import collision.shape.Contact
 import collision.shape.Shape
 import core.StepPhase
-import math.Vec2D
+import math.Vector2
 
 import org.specs.Specification
 import org.specs.mock.Mockito
@@ -48,15 +48,15 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			val solver = new SimpleContactSolver( 0 )
 
 
-			val pos1 = Vec2D( 2, 2 )
-			val pos2 = Vec2D( 4, 4 )
+			val pos1 = Vector2( 2, 2 )
+			val pos2 = Vector2( 4, 4 )
 
 			val s1 = new Shape {}
 			s1.position = pos1
 			val s2 = new Shape {}
 			s2.position = pos2
 
-			val contact = Contact( s1, s2, Vec2D( 5, 5 ), Vec2D( 1, 0 ), 0, 0.0 )
+			val contact = Contact( s1, s2, Vector2( 5, 5 ), Vector2( 1, 0 ), 0, 0.0 )
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
@@ -73,91 +73,91 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			val solver = new SimpleContactSolver( 0 )
 
 			val s1 = new Shape {}
-			s1.position = Vec2D( 2, 0 )
+			s1.position = Vector2( 2, 0 )
 			s1.mass = 2
 			val s2 = new Shape {}
-			s2.position = Vec2D( 3, 0 )
+			s2.position = Vector2( 3, 0 )
 			s2.mass = 2
 
-			val contact = Contact( s1, s2, Vec2D( 2.5, 0 ), Vec2D( 1, 0 ), 1, 0.0 )
+			val contact = Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 1, 0.0 )
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
 			solver.filterAndStep( 0.0, List( s1, s2 ) )
 
-			s1.position must beEqualTo( Vec2D( 1.5, 0 ) )
-			s2.position must beEqualTo( Vec2D( 3.5, 0 ) )
+			s1.position must beEqualTo( Vector2( 1.5, 0 ) )
+			s2.position must beEqualTo( Vector2( 3.5, 0 ) )
 		}
 
 		"move an intersecting shape by an amount proportional to its mass ratio to to the other shape." in {
 			val solver = new SimpleContactSolver( 0 )
 
 			val s1 = new Shape {}
-			s1.position = Vec2D( 4, 0 )
+			s1.position = Vector2( 4, 0 )
 			s1.mass = 2
 			val s2 = new Shape {}
-			s2.position = Vec2D( 5, 0 )
+			s2.position = Vector2( 5, 0 )
 			s2.mass = 4
 
-			val contact = Contact( s1, s2, Vec2D( 4.5, 0 ), Vec2D( 1, 0 ), 3, 0.0 )
+			val contact = Contact( s1, s2, Vector2( 4.5, 0 ), Vector2( 1, 0 ), 3, 0.0 )
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
 			solver.filterAndStep( 0.0, List( s1, s2 ) )
 
-			s1.position must beEqualTo( Vec2D( 2, 0 ) )
-			s2.position must beEqualTo( Vec2D( 6, 0 ) )
+			s1.position must beEqualTo( Vector2( 2, 0 ) )
+			s2.position must beEqualTo( Vector2( 6, 0 ) )
 		}
 
 		"not move the first shape at all, if it has infinite mass." in {
 			val solver = new SimpleContactSolver( 0 )
 
-			val pos1 = Vec2D( 2, 0 )
+			val pos1 = Vector2( 2, 0 )
 
 			val s1 = new Shape {}
 			s1.position = pos1
 			s1.mass = Double.PositiveInfinity
 			val s2 = new Shape {}
-			s2.position = Vec2D( 3, 0 )
+			s2.position = Vector2( 3, 0 )
 			s2.mass = 2
 
-			val contact = Contact( s1, s2, Vec2D( 2.5, 0 ), Vec2D( 1, 0 ), 1, 0.0 )
+			val contact = Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 1, 0.0 )
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
 			solver.filterAndStep( 0.0, List( s1, s2 ) )
 
 			s1.position must beEqualTo( pos1 )
-			s2.position must beEqualTo( Vec2D( 4, 0 ) )
+			s2.position must beEqualTo( Vector2( 4, 0 ) )
 		}
 
 		"not move the second shape at all, if it has infinite mass." in {
 			val solver = new SimpleContactSolver( 0 )
 
-			val pos2 = Vec2D( 3, 0 )
+			val pos2 = Vector2( 3, 0 )
 
 			val s1 = new Shape {}
-			s1.position = Vec2D( 2, 0 )
+			s1.position = Vector2( 2, 0 )
 			s1.mass = 2
 			val s2 = new Shape {}
 			s2.position = pos2
 			s2.mass = Double.PositiveInfinity
 
-			val contact = Contact( s1, s2, Vec2D( 2.5, 0 ), Vec2D( 1, 0 ), 1, 0.0 )
+			val contact = Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 1, 0.0 )
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
 			solver.filterAndStep( 0.0, List( s1, s2 ) )
 
-			s1.position must beEqualTo( Vec2D( 1, 0 ) )
+			s1.position must beEqualTo( Vector2( 1, 0 ) )
 			s2.position must beEqualTo( pos2 )
 		}
 
 		"not move the shapes at all, if both have inifinte mass." in {
 			val solver = new SimpleContactSolver( 0 )
 
-			val pos1 = Vec2D( 2, 0 )
-			val pos2 = Vec2D( 3, 0 )
+			val pos1 = Vector2( 2, 0 )
+			val pos2 = Vector2( 3, 0 )
 
 			val s1 = new Shape {}
 			s1.position = pos1
@@ -166,7 +166,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s2.position = pos2
 			s2.mass = Double.PositiveInfinity
 
-			val contact = Contact( s1, s2, Vec2D( 2.5, 0 ), Vec2D( 1, 0 ), 1, 0.0 )
+			val contact = Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 1, 0.0 )
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
@@ -180,20 +180,20 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			val solver = new SimpleContactSolver( 0.5 )
 
 			val s1 = new Shape {}
-			s1.position = Vec2D( 2, 0 )
+			s1.position = Vector2( 2, 0 )
 			s1.mass = 2
 			val s2 = new Shape {}
-			s2.position = Vec2D( 3, 0 )
+			s2.position = Vector2( 3, 0 )
 			s2.mass = 2
 
-			val contact = Contact( s1, s2, Vec2D( 2.5, 0 ), Vec2D( 1, 0 ), 2, 0.0 )
+			val contact = Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 2, 0.0 )
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
 			solver.filterAndStep( 0.0, List( s1, s2 ) )
 
-			s1.position must beEqualTo( Vec2D( 0.5, 0 ) )
-			s2.position must beEqualTo( Vec2D( 4.5, 0 ) )
+			s1.position must beEqualTo( Vector2( 0.5, 0 ) )
+			s2.position must beEqualTo( Vector2( 4.5, 0 ) )
 		}
 	}
 }

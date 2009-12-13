@@ -20,7 +20,7 @@ package net.habraun.sd.core
 
 
 
-import math.Vec2D
+import math.Vector2
 
 
 
@@ -38,11 +38,11 @@ trait Body {
 	 * Must not be null.
 	 */
 
-	private[this] var _position = Vec2D( 0, 0 )
+	private[this] var _position = Vector2( 0, 0 )
 
 	def position = _position
 
-	def position_=( p: Vec2D ) {
+	def position_=( p: Vector2 ) {
 		if ( p == null ) throw new NullPointerException
 		_previousPosition = _position
 		_position = p
@@ -52,10 +52,10 @@ trait Body {
 
 	/**
 	 * The previous position of the body, before the position was set.
-	 * This attribute is initialized with the value Vec2D(0, 0).
+	 * This attribute is initialized with the value Vector2(0, 0).
 	 */
 
-	private[this] var _previousPosition = Vec2D( 0, 0 )
+	private[this] var _previousPosition = Vector2( 0, 0 )
 
 	def previousPosition = _previousPosition
 
@@ -69,11 +69,11 @@ trait Body {
 	 * Must not be null.
 	 */
 	
-	private[this] var _velocity = Vec2D( 0, 0 )
+	private[this] var _velocity = Vector2( 0, 0 )
 
 	def velocity = _velocity
 
-	def velocity_=( v: Vec2D ) {
+	def velocity_=( v: Vector2 ) {
 		if ( v == null ) throw new NullPointerException
 
 		// It is not, which means we can safely set the velocity to the new velocity.
@@ -86,11 +86,11 @@ trait Body {
 	 * The body's current acceleration.
 	 */
 
-	private[this] var _acceleration = Vec2D( 0, 0 )
+	private[this] var _acceleration = Vector2( 0, 0 )
 
 	def acceleration = _acceleration
 
-	def acceleration_=( a: Vec2D ) {
+	def acceleration_=( a: Vector2 ) {
 		if ( a == null ) throw new NullPointerException
 		
 		_acceleration = a
@@ -124,15 +124,15 @@ trait Body {
 	 * A force must never be null.
 	 */
 
-	private[this] var _appliedForce = Vec2D( 0, 0 )
+	private[this] var _appliedForce = Vector2( 0, 0 )
 
 	def appliedForce = _appliedForce
 
-	def applyForce( f: Vec2D ) {
+	def applyForce( f: Vector2 ) {
 		_appliedForce += f
 	}
 
 	def resetForce {
-		_appliedForce = Vec2D( 0, 0 )
+		_appliedForce = Vector2( 0, 0 )
 	}
 }

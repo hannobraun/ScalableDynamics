@@ -34,14 +34,14 @@ class ScalarTest extends JUnit4( ScalarSpec )
 object ScalarSpec extends Specification {
 
 	"Scalar" should {
-		"implicitely convert Double to Scalar if the Double is mutliplied with a Vec2D." in {
-			val vec = 2.0 * Vec2D( 1, 1 )
-			vec must beEqualTo ( Vec2D( 2, 2 ) )
+		"implicitely convert Double to Scalar if the Double is mutliplied with a Vector2." in {
+			val vec = 2.0 * Vector2( 1, 1 )
+			vec must beEqualTo ( Vector2( 2, 2 ) )
 		}
 
-		"implicitely convert Int to Scalar if the Int is mutliplied with a Vec2D." in {
-			val vec = 2 * Vec2D( 1, 1 )
-			vec must beEqualTo( Vec2D( 2, 2 ) )
+		"implicitely convert Int to Scalar if the Int is mutliplied with a Vector2." in {
+			val vec = 2 * Vector2( 1, 1 )
+			vec must beEqualTo( Vector2( 2, 2 ) )
 		}
 	}
 }

@@ -20,7 +20,7 @@ package net.habraun.sd.core
 
 
 
-import math.Vec2D
+import math.Vector2
 
 import org.specs.Specification
 import org.specs.runner.JUnit4
@@ -37,13 +37,13 @@ object BodySpec extends Specification {
 		"haven an initial position of (0, 0)." in {
 			val body = new Body {}
 
-			body.position must beEqualTo( Vec2D( 0, 0 ) )
+			body.position must beEqualTo( Vector2( 0, 0 ) )
 		}
 
 		"have its position assignable." in {
 			val body = new Body {}
 
-			val position = Vec2D( 10, 10 )
+			val position = Vector2( 10, 10 )
 			body.position = position
 
 			body.position must beEqualTo( position )
@@ -58,9 +58,9 @@ object BodySpec extends Specification {
 		"remember the previous position if a position is assigned." in {
 			val body = new Body {}
 
-			val previousPosition = Vec2D( 5, 0 )
+			val previousPosition = Vector2( 5, 0 )
 			body.position = previousPosition
-			body.position = Vec2D( 0, 5 )
+			body.position = Vector2( 0, 5 )
 
 			body.previousPosition must beEqualTo( previousPosition )
 		}
@@ -76,13 +76,13 @@ object BodySpec extends Specification {
 		"have an initial velocity of (0, 0)." in {
 			val body = new Body {}
 
-			body.velocity must beEqualTo( Vec2D( 0, 0 ) )
+			body.velocity must beEqualTo( Vector2( 0, 0 ) )
 		}
 
 		"have velocity assignable." in {
 			val body = new Body {}
 
-			val velocity = new Vec2D( 10, 10 )
+			val velocity = new Vector2( 10, 10 )
 			body.velocity = velocity
 
 			body.velocity must beEqualTo( velocity )
@@ -97,13 +97,13 @@ object BodySpec extends Specification {
 		"have an initial acceleration of (0, 0)." in {
 			val body = new Body {}
 
-			body.acceleration must beEqualTo( Vec2D( 0, 0 ) )
+			body.acceleration must beEqualTo( Vector2( 0, 0 ) )
 		}
 
 		"have its acceleration assignable." in {
 			val body = new Body {}
 
-			val acceleration = new Vec2D( 10, 10 )
+			val acceleration = new Vector2( 10, 10 )
 			body.acceleration = acceleration
 
 			body.acceleration must beEqualTo( acceleration )
@@ -149,13 +149,13 @@ object BodySpec extends Specification {
 		"have no applied forces initially." in {
 			val body = new Body {}
 
-			body.appliedForce must beEqualTo( Vec2D( 0, 0 ) )
+			body.appliedForce must beEqualTo( Vector2( 0, 0 ) )
 		}
 
 		"remember an applied force." in {
 			val body = new Body {}
 
-			val force = Vec2D( 10, 10 )
+			val force = Vector2( 10, 10 )
 			body.applyForce( force )
 
 			body.appliedForce must beEqualTo( force )
@@ -164,10 +164,10 @@ object BodySpec extends Specification {
 		"add up multiple applied forces." in {
 			val body = new Body {}
 
-			body.applyForce( Vec2D( 2, 1 ) )
-			body.applyForce( Vec2D( 1, 2 ) )
+			body.applyForce( Vector2( 2, 1 ) )
+			body.applyForce( Vector2( 1, 2 ) )
 
-			body.appliedForce must beEqualTo( Vec2D( 3, 3 ) )
+			body.appliedForce must beEqualTo( Vector2( 3, 3 ) )
 		}
 
 		"throw an exception if an applied force is null." in {
@@ -179,10 +179,10 @@ object BodySpec extends Specification {
 		"reset all applied forces if resetForce is called." in {
 			val body = new Body {}
 
-			body.applyForce( Vec2D( 10, 10 ) )
+			body.applyForce( Vector2( 10, 10 ) )
 			body.resetForce
 
-			body.appliedForce must beEqualTo( Vec2D( 0, 0 ) )
+			body.appliedForce must beEqualTo( Vector2( 0, 0 ) )
 		}
 	}
 }

@@ -21,7 +21,7 @@ package net.habraun.sd.collision.test
 
 
 import math.Scalar._
-import math.Vec2D
+import math.Vector2
 import shape.Circle
 import shape.Contact
 
@@ -66,7 +66,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 		// Check for several corner cases. If none of these occurs, we can compute t with the general formula.
 		if ( c <= 0.0 ) {
 			// Circles are initially overlapping. Test if the circle centers are also overlapping.
-			if ( s != Vec2D( 0, 0 ) ) {
+			if ( s != Vector2( 0, 0 ) ) {
 				// Circle centers are now overlapping.
 
 				val normal = s.normalize // the direction of the normal is given by the vector between the circle centers
@@ -84,7 +84,7 @@ class ContinuousCircleCircleTest extends CircleCircleTest {
 
 				// The contact normal is undefined, but the way Contact is currently defined, we need to put something here. Collision
 				// reaction code should just check if the circle centers overlap.
-				val normal = Vec2D( 1, 0 )
+				val normal = Vector2( 1, 0 )
 
 				// Penetration depth is ambigious in this case, but the main goal of having a Contact is to use it to resolve any
 				// contstraints. In this sense, let's assume the smaller circle has penetrated the bigger one from any direction. This

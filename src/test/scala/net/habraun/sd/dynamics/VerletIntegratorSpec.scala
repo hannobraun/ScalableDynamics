@@ -22,7 +22,7 @@ package net.habraun.sd.dynamics
 
 import core.Body
 import core.StepPhase
-import math.Vec2D
+import math.Vector2
 
 import org.specs.Specification
 import org.specs.runner.JUnit4
@@ -48,23 +48,23 @@ object VerletIntegratorSpec extends Specification {
 			val body = new Body {}
 
 			// Values influencing the new position and velocity.
-			body.position = Vec2D( 5, 5 )
-			body.velocity = Vec2D( 10, 10 )
-			body.acceleration = Vec2D( 8, 8 )
+			body.position = Vector2( 5, 5 )
+			body.velocity = Vector2( 10, 10 )
+			body.acceleration = Vector2( 8, 8 )
 
 			// Values influencing the new acceleration.
 			body.mass = 2
-			body.applyForce( Vec2D( 16, 16 ) )
+			body.applyForce( Vector2( 16, 16 ) )
 
 			integrator.filterAndStep( 0.5, List( body ) )
 
 			// Position and velocity must have been correctly integrated.
-			body.position must beEqualTo( Vec2D( 11, 11 ) )
-			body.velocity must beEqualTo( Vec2D( 14, 14 ) )
+			body.position must beEqualTo( Vector2( 11, 11 ) )
+			body.velocity must beEqualTo( Vector2( 14, 14 ) )
 
 			// The new acceleration must have been computed correctly.
-			body.acceleration must beEqualTo( Vec2D( 8, 8 ) )
-			body.appliedForce must beEqualTo( Vec2D( 0, 0 ) )
+			body.acceleration must beEqualTo( Vector2( 8, 8 ) )
+			body.appliedForce must beEqualTo( Vector2( 0, 0 ) )
 		}
 	}
 }

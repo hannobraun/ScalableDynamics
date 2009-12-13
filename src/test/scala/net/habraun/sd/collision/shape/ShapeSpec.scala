@@ -21,7 +21,7 @@ package net.habraun.sd.collision.shape
 
 
 import core.Body
-import math.Vec2D
+import math.Vector2
 
 import scala.collection.mutable.HashSet
 

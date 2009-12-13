@@ -20,7 +20,7 @@ package net.habraun.sd.collision.shape
 
 
 
-import math.Vec2D
+import math.Vector2
 
 import org.specs.Specification
 import org.specs.runner.JUnit4
@@ -37,8 +37,8 @@ object ContactSpec extends Specification {
 		"make all its attributes accessible." in {
 			val s = new Shape {}
 			val other = new Shape {}
-			val point = Vec2D( 10, 10 )
-			val normal = Vec2D( 0, 1 )
+			val point = Vector2( 10, 10 )
+			val normal = Vector2( 0, 1 )
 			val depth = 1
 			val t = 0.5
 
@@ -53,29 +53,29 @@ object ContactSpec extends Specification {
 		}
 
 		"throw an exception if normal is not a unit vector." in {
-			Contact( new Shape {}, new Shape {}, Vec2D( 0, 0 ), Vec2D( 1, 1 ), 1, 0.5 ) must
+			Contact( new Shape {}, new Shape {}, Vector2( 0, 0 ), Vector2( 1, 1 ), 1, 0.5 ) must
 					throwAn[ IllegalArgumentException ]
 		}
 
 		"not throw an exception if normal is only slightly off from being a unit vector." in {
-			Contact( new Shape {}, new Shape {}, Vec2D( 0, 0 ), Vec2D( 1.02, 0 ), 1, 0.5 )
-			Contact( new Shape {}, new Shape {}, Vec2D( 0, 0 ), Vec2D( 0.98, 0 ), 1, 0.5 )
+			Contact( new Shape {}, new Shape {}, Vector2( 0, 0 ), Vector2( 1.02, 0 ), 1, 0.5 )
+			Contact( new Shape {}, new Shape {}, Vector2( 0, 0 ), Vector2( 0.98, 0 ), 1, 0.5 )
 		}
 
 		"throw an exception if a parameter is is null." in {
-			Contact( null, new Shape {}, Vec2D( 0, 0 ), Vec2D( 1, 0 ), 1, 0.5 ) must
+			Contact( null, new Shape {}, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) must
 					throwA[ NullPointerException ]
-			Contact( new Shape {}, null, Vec2D( 0, 0 ), Vec2D( 1, 0 ), 1, 0.5 ) must
+			Contact( new Shape {}, null, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) must
 					throwA[ NullPointerException ]
-			Contact( new Shape {}, new Shape {}, null, Vec2D( 1, 0 ), 1, 0.5 ) must
+			Contact( new Shape {}, new Shape {}, null, Vector2( 1, 0 ), 1, 0.5 ) must
 					throwA[ NullPointerException ]
-			Contact( new Shape {}, new Shape {}, Vec2D( 0, 0 ), null, 1, 0.5 ) must
+			Contact( new Shape {}, new Shape {}, Vector2( 0, 0 ), null, 1, 0.5 ) must
 					throwA[ NullPointerException ]
 			
 		}
 
 		"create an inverse Contact." in {
-			val contact = Contact( new Shape {}, new Shape {}, Vec2D( 10, 10 ), Vec2D( 0, 1 ), 1, 0.5 )
+			val contact = Contact( new Shape {}, new Shape {}, Vector2( 10, 10 ), Vector2( 0, 1 ), 1, 0.5 )
 			val inverse = -contact
 
 			inverse.s must beEqualTo( contact.other )

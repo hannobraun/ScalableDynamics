@@ -20,7 +20,7 @@ package net.habraun.sd.collision.shape
 
 
 
-import math.Vec2D
+import math.Vector2
 
 
 
@@ -35,7 +35,7 @@ import math.Vec2D
  * * t: A value between 0.0 and 1.0 (inclusive), which indicates at which point of the movement the contact occured.
  */
 
-case class Contact( s: Shape, other: Shape, point: Vec2D, normal: Vec2D, depth: Double, t: Double ) {
+case class Contact( s: Shape, other: Shape, point: Vector2, normal: Vector2, depth: Double, t: Double ) {
 	// Make sure the parameters are not null.
 	if ( s == null || point == null || normal == null || other == null )
 		throw new NullPointerException

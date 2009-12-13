@@ -21,7 +21,7 @@ package net.habraun.sd.collision.phase
 
 
 import core.Body
-import math.Vec2D
+import math.Vector2
 import shape.Circle
 import shape.Contact
 import shape.LineSegment
@@ -83,10 +83,10 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val s2 = new Circle {}
 			s1.radius = 1
 			s2.radius = 2
-			s1.position = Vec2D( 1, 1 ) // position before movement
-			s2.position = Vec2D( 2, 2 )
-			s1.position = Vec2D( 7, 7 ) // position after movement, previous position is saved
-			s2.position = Vec2D( 10, 10 )
+			s1.position = Vector2( 1, 1 ) // position before movement
+			s2.position = Vector2( 2, 2 )
+			s1.position = Vector2( 7, 7 ) // position after movement, previous position is saved
+			s2.position = Vector2( 10, 10 )
 			
 			circleCircleTest( s1, s2 ) returns None
 
@@ -103,11 +103,11 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val s1 = new Circle {}
 			val s2 = new LineSegment {}
 			s1.radius = 1
-			s2.direction = Vec2D( -2, -2 )
-			s1.position = Vec2D( 1, 1 ) // position before movement
-			s2.position = Vec2D( 2, 2 )
-			s1.position = Vec2D( 7, 7 ) // position after movement, previous position is saved
-			s2.position = Vec2D( 10, 10 )
+			s2.direction = Vector2( -2, -2 )
+			s1.position = Vector2( 1, 1 ) // position before movement
+			s2.position = Vector2( 2, 2 )
+			s1.position = Vector2( 7, 7 ) // position after movement, previous position is saved
+			s2.position = Vector2( 10, 10 )
 
 			circleLineSegmentTest( s1, s2 ) returns None
 
@@ -123,12 +123,12 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			val s1 = new LineSegment {}
 			val s2 = new Circle {}
-			s1.direction = Vec2D( -2, -2 )
+			s1.direction = Vector2( -2, -2 )
 			s2.radius = 1
-			s1.position = Vec2D( 2, 2 ) // position before movement
-			s2.position = Vec2D( 1, 1 )
-			s1.position = Vec2D( 10, 10 ) // position after movement, previous position is saved
-			s2.position = Vec2D( 7, 7 )
+			s1.position = Vector2( 2, 2 ) // position before movement
+			s2.position = Vector2( 1, 1 )
+			s1.position = Vector2( 10, 10 ) // position after movement, previous position is saved
+			s2.position = Vector2( 7, 7 )
 
 			circleLineSegmentTest( s2, s1 ) returns None
 
@@ -147,7 +147,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val s2 = new Circle {}
 			s1.radius = 1
 			s2.radius = 2
-			val contact = Contact( s1, s2, Vec2D( 5, 5 ), Vec2D( 1, 0 ), 1, t )
+			val contact = Contact( s1, s2, Vector2( 5, 5 ), Vector2( 1, 0 ), 1, t )
 
 			circleCircleTest( s1, s2 ) returns Some( contact )
 
@@ -163,8 +163,8 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val s1 = new Circle {}
 			val s2 = new LineSegment {}
 			s1.radius = 1
-			s2.direction = Vec2D( 2, 2 )
-			val contact = Contact( s1, s2, Vec2D( 5, 5 ), Vec2D( 1, 0 ), 1, t )
+			s2.direction = Vector2( 2, 2 )
+			val contact = Contact( s1, s2, Vector2( 5, 5 ), Vector2( 1, 0 ), 1, t )
 
 			circleLineSegmentTest( s1, s2 ) returns Some( contact )
 
@@ -179,9 +179,9 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val t = 0.5
 			val s1 = new LineSegment {}
 			val s2 = new Circle {}
-			s1.direction = Vec2D( 2, 2 )
+			s1.direction = Vector2( 2, 2 )
 			s2.radius = 1
-			val contact = Contact( s1, s2, Vec2D( 5, 5 ), Vec2D( 1, 0 ), 1, t )
+			val contact = Contact( s1, s2, Vector2( 5, 5 ), Vector2( 1, 0 ), 1, t )
 
 			circleLineSegmentTest( s2, s1 ) returns Some( contact )
 
@@ -211,7 +211,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 			val s1 = new Circle {}
 			val s2 = new LineSegment {}
 			s1.radius = 1
-			s2.direction = Vec2D( 2, 2 )
+			s2.direction = Vector2( 2, 2 )
 
 			circleLineSegmentTest( s1, s2 ) returns None
 
@@ -225,10 +225,10 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			val s1 = new LineSegment {}
 			val s2 = new LineSegment {}
-			s1.position = Vec2D( 0, 1 )
-			s2.position = Vec2D( 0, -1 )
-			s1.direction = Vec2D( 2, -2 )
-			s2.direction = Vec2D( 2, 2 )
+			s1.position = Vector2( 0, 1 )
+			s2.position = Vector2( 0, -1 )
+			s1.direction = Vector2( 2, -2 )
+			s2.direction = Vector2( 2, 2 )
 
 			narrowPhase( s1, s2 ) must beEqualTo( None )
 		}

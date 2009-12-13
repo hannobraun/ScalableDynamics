@@ -20,7 +20,7 @@ package net.habraun.sd.collision.test
 
 
 
-import math.Vec2D
+import math.Vector2
 import shape.Circle
 import shape.Contact
 
@@ -44,10 +44,10 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
-			c1.previousPosition returns Vec2D( 0, 0 )
-			c2.previousPosition returns Vec2D( 3, 0 )
-			c1.position returns Vec2D( 0, 0 )
-			c2.position returns Vec2D( 3, 0 )
+			c1.previousPosition returns Vector2( 0, 0 )
+			c2.previousPosition returns Vector2( 3, 0 )
+			c1.position returns Vector2( 0, 0 )
+			c2.position returns Vector2( 3, 0 )
 			
 			test( c1, c2 ) must beEqualTo( None )
 		}
@@ -59,12 +59,12 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
-			c1.previousPosition returns Vec2D( 1, 0 )
-			c2.previousPosition returns Vec2D( 3, 0 )
-			c1.position returns Vec2D( 1, 0 )
-			c2.position returns Vec2D( 3, 0)
+			c1.previousPosition returns Vector2( 1, 0 )
+			c2.previousPosition returns Vector2( 3, 0 )
+			c1.position returns Vector2( 1, 0 )
+			c2.position returns Vector2( 3, 0)
 
-			test( c1, c2 ) must beEqualTo( Some(  Contact( c1, c2, Vec2D( 2, 0 ), Vec2D( 1, 0 ), 0, 0.0 ) ) )
+			test( c1, c2 ) must beEqualTo( Some(  Contact( c1, c2, Vector2( 2, 0 ), Vector2( 1, 0 ), 0, 0.0 ) ) )
 		}
 
 		"handle non-moving, colliding circles." in {
@@ -74,12 +74,12 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 2
 			c2.radius returns 2
-			c1.previousPosition returns Vec2D( 0, 0 )
-			c2.previousPosition returns Vec2D( 3, 0 )
-			c1.position returns Vec2D( 0, 0 )
-			c2.position returns Vec2D( 3, 0 )
+			c1.previousPosition returns Vector2( 0, 0 )
+			c2.previousPosition returns Vector2( 3, 0 )
+			c1.position returns Vector2( 0, 0 )
+			c2.position returns Vector2( 3, 0 )
 
-			test( c1, c2 ) must beEqualTo( Some(  Contact( c1, c2, Vec2D( 1.5, 0 ), Vec2D( 1, 0 ), 1, 0.0 ) ) )
+			test( c1, c2 ) must beEqualTo( Some(  Contact( c1, c2, Vector2( 1.5, 0 ), Vector2( 1, 0 ), 1, 0.0 ) ) )
 		}
 
 		"handle initially intersecting circles of different sizes." in {
@@ -89,12 +89,12 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 2
 			c2.radius returns 1
-			c1.previousPosition returns Vec2D( 0, 0 )
-			c2.previousPosition returns Vec2D( 2, 0 )
-			c1.position returns Vec2D( 0, 0 )
-			c2.position returns Vec2D( 2, 0 )
+			c1.previousPosition returns Vector2( 0, 0 )
+			c2.previousPosition returns Vector2( 2, 0 )
+			c1.position returns Vector2( 0, 0 )
+			c2.position returns Vector2( 2, 0 )
 
-			test( c1, c2 ) must beEqualTo( Some(  Contact( c1, c2, Vec2D( 1.5, 0 ), Vec2D( 1, 0 ), 1, 0.0 ) ) )
+			test( c1, c2 ) must beEqualTo( Some(  Contact( c1, c2, Vector2( 1.5, 0 ), Vector2( 1, 0 ), 1, 0.0 ) ) )
 		}
 
 		"handle one circle moving and colliding." in {
@@ -104,12 +104,12 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
-			c1.previousPosition returns Vec2D( -1, 0 )
-			c2.previousPosition returns Vec2D( 2, 0 )
-			c1.position returns Vec2D( 1, 0 )
-			c2.position returns Vec2D( 2, 0 )
+			c1.previousPosition returns Vector2( -1, 0 )
+			c2.previousPosition returns Vector2( 2, 0 )
+			c1.position returns Vector2( 1, 0 )
+			c2.position returns Vector2( 2, 0 )
 
-			test( c1, c2 ) must beEqualTo( Some( Contact( c1, c2, Vec2D( 1, 0 ), Vec2D( 1, 0 ), 1, 0.5 ) ) )
+			test( c1, c2 ) must beEqualTo( Some( Contact( c1, c2, Vector2( 1, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
 		}
 
 		"handle one circle moving and touching, but not intersecting the other circle." in {
@@ -119,12 +119,12 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
-			c1.previousPosition returns Vec2D( 0, 0 )
-			c2.previousPosition returns Vec2D( 3, 0 )
-			c1.position returns Vec2D( 1, 0 )
-			c2.position returns Vec2D( 3, 0)
+			c1.previousPosition returns Vector2( 0, 0 )
+			c2.previousPosition returns Vector2( 3, 0 )
+			c1.position returns Vector2( 1, 0 )
+			c2.position returns Vector2( 3, 0)
 
-			test( c1, c2 ) must beEqualTo( Some(  Contact( c1, c2, Vec2D( 2, 0 ), Vec2D( 1, 0 ), 0, 1.0 ) ) )
+			test( c1, c2 ) must beEqualTo( Some(  Contact( c1, c2, Vector2( 2, 0 ), Vector2( 1, 0 ), 0, 1.0 ) ) )
 		}
 
 		"handle circles whose centers pass each other during the movement." in {
@@ -134,12 +134,12 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
-			c1.previousPosition returns Vec2D( -3, 0 )
-			c2.previousPosition returns Vec2D( 0, 0 )
-			c1.position returns Vec2D( 1, 0 )
-			c2.position returns Vec2D( 0, 0 )
+			c1.previousPosition returns Vector2( -3, 0 )
+			c2.previousPosition returns Vector2( 0, 0 )
+			c1.position returns Vector2( 1, 0 )
+			c2.position returns Vector2( 0, 0 )
 
-			test( c1, c2 ) must beEqualTo( Some( Contact( c1, c2, Vec2D( -1, 0 ), Vec2D( 1, 0 ), 3, 0.25 ) ) )
+			test( c1, c2 ) must beEqualTo( Some( Contact( c1, c2, Vector2( -1, 0 ), Vector2( 1, 0 ), 3, 0.25 ) ) )
 		}
 
 		"handle colliding circles with their centers moving not directly towards each other." in {
@@ -149,12 +149,12 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
-			c1.previousPosition returns Vec2D( 0, 3 )
-			c2.previousPosition returns Vec2D( 2, -1 )
-			c1.position returns Vec2D( 1, 2 )
-			c2.position returns Vec2D( 1, 0)
+			c1.previousPosition returns Vector2( 0, 3 )
+			c2.previousPosition returns Vector2( 2, -1 )
+			c1.position returns Vector2( 1, 2 )
+			c2.position returns Vector2( 1, 0)
 
-			test( c1, c2 ) must beEqualTo( Some(  Contact( c1, c2, Vec2D( 1, 1 ), Vec2D( 0, -1 ), 0, 1.0 ) ) )
+			test( c1, c2 ) must beEqualTo( Some(  Contact( c1, c2, Vector2( 1, 1 ), Vector2( 0, -1 ), 0, 1.0 ) ) )
 		}
 
 		"handle circles with their centers moving not directly towards each other that are colliding in the middle of the movement." in {
@@ -164,12 +164,12 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
-			c1.previousPosition returns Vec2D( 0, 2 )
-			c2.previousPosition returns Vec2D( 1, 0 )
-			c1.position returns Vec2D( 2, 2 )
-			c2.position returns Vec2D( 1, 0)
+			c1.previousPosition returns Vector2( 0, 2 )
+			c2.previousPosition returns Vector2( 1, 0 )
+			c1.position returns Vector2( 2, 2 )
+			c2.position returns Vector2( 1, 0)
 
-			test( c1, c2 ) must beEqualTo( Some(  Contact( c1, c2, Vec2D( 1, 1 ), Vec2D( 0, -1 ), 0, 0.5 ) ) )
+			test( c1, c2 ) must beEqualTo( Some(  Contact( c1, c2, Vector2( 1, 1 ), Vector2( 0, -1 ), 0, 0.5 ) ) )
 		}
 
 		"handle one circle moving and not colliding." in {
@@ -179,10 +179,10 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
-			c1.previousPosition returns Vec2D( -3, 0 )
-			c2.previousPosition returns Vec2D( 2, 0 )
-			c1.position returns Vec2D( -1, 0 )
-			c2.position returns Vec2D( 2, 0 )
+			c1.previousPosition returns Vector2( -3, 0 )
+			c2.previousPosition returns Vector2( 2, 0 )
+			c1.position returns Vector2( -1, 0 )
+			c2.position returns Vector2( 2, 0 )
 
 			test( c1, c2 ) must be( None )
 		}
@@ -194,12 +194,12 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 2
 			c2.radius returns 2
-			c1.previousPosition returns Vec2D( -4, 0 )
-			c2.previousPosition returns Vec2D( 6, 0 )
-			c1.position returns Vec2D( 0, 0 )
-			c2.position returns Vec2D( 2, 0 )
+			c1.previousPosition returns Vector2( -4, 0 )
+			c2.previousPosition returns Vector2( 6, 0 )
+			c1.position returns Vector2( 0, 0 )
+			c2.position returns Vector2( 2, 0 )
 
-			test( c1, c2 ) must beEqualTo( Some( Contact( c1, c2, Vec2D( 1, 0 ), Vec2D( 1, 0 ), 2, 0.75 ) ) )
+			test( c1, c2 ) must beEqualTo( Some( Contact( c1, c2, Vector2( 1, 0 ), Vector2( 1, 0 ), 2, 0.75 ) ) )
 		}
 
 		"handle both circles moving towards each other, but stopping before collision." in {
@@ -209,10 +209,10 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
-			c1.previousPosition returns Vec2D( -3, 0 )
-			c2.previousPosition returns Vec2D( 4, 0 )
-			c1.position returns Vec2D( -1, 0 )
-			c2.position returns Vec2D( 2, 0 )
+			c1.previousPosition returns Vector2( -3, 0 )
+			c2.previousPosition returns Vector2( 4, 0 )
+			c1.position returns Vector2( -1, 0 )
+			c2.position returns Vector2( 2, 0 )
 
 			test( c1, c2 ) must beEqualTo( None )
 		}
@@ -224,10 +224,10 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
-			c1.previousPosition returns Vec2D( -2, 0 )
-			c2.previousPosition returns Vec2D( 2, 0 )
-			c1.position returns Vec2D( -4, 0 )
-			c2.position returns Vec2D( 4, 0 )
+			c1.previousPosition returns Vector2( -2, 0 )
+			c2.previousPosition returns Vector2( 2, 0 )
+			c1.position returns Vector2( -4, 0 )
+			c2.position returns Vector2( 4, 0 )
 
 			test( c1, c2 ) must beEqualTo( None )
 		}
@@ -239,10 +239,10 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
-			c1.previousPosition returns Vec2D( 0, 0 )
-			c2.previousPosition returns Vec2D( 5, 0 )
-			c1.position returns Vec2D( 0, 5 )
-			c2.position returns Vec2D( 0, 0 )
+			c1.previousPosition returns Vector2( 0, 0 )
+			c2.previousPosition returns Vector2( 5, 0 )
+			c1.position returns Vector2( 0, 5 )
+			c2.position returns Vector2( 0, 0 )
 
 			test( c1, c2 ) must beEqualTo( None )
 		}
@@ -254,10 +254,10 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 1
-			c1.previousPosition returns Vec2D( 0, 0 )
-			c2.previousPosition returns Vec2D( 3, 0 )
-			c1.position returns Vec2D( 0, 5 )
-			c2.position returns Vec2D( 3, 3 )
+			c1.previousPosition returns Vector2( 0, 0 )
+			c2.previousPosition returns Vector2( 3, 0 )
+			c1.position returns Vector2( 0, 5 )
+			c2.position returns Vector2( 3, 3 )
 
 			test( c1, c2 ) must beEqualTo( None )
 		}
@@ -269,12 +269,12 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 			val c2 = mock[ Circle ]
 			c1.radius returns 1
 			c2.radius returns 2
-			c1.previousPosition returns Vec2D( 3, 0 )
-			c2.previousPosition returns Vec2D( 3, 0 )
-			c1.position returns Vec2D( 3, 0 )
-			c2.position returns Vec2D( 3, 0 )
+			c1.previousPosition returns Vector2( 3, 0 )
+			c2.previousPosition returns Vector2( 3, 0 )
+			c1.position returns Vector2( 3, 0 )
+			c2.position returns Vector2( 3, 0 )
 
-			test( c1, c2 ) must beEqualTo( Some( Contact( c1, c2, Vec2D( 3, 0 ), Vec2D( 1, 0 ), 3, 0.0 ) ) )
+			test( c1, c2 ) must beEqualTo( Some( Contact( c1, c2, Vector2( 3, 0 ), Vector2( 1, 0 ), 3, 0.0 ) ) )
 		}
 	}
 }

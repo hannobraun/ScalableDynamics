@@ -28,7 +28,7 @@ import collision.shape.Contact
 import collision.shape.Shape
 import core.Body
 import dynamics.VelocityConstraintSolver
-import math.Vec2D
+import math.Vector2
 
 import scala.collection.mutable.HashSet
 

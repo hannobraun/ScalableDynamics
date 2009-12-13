@@ -20,7 +20,7 @@ package net.habraun.sd.collision.shape
 
 
 
-import math.Vec2D
+import math.Vector2
 
 
 
@@ -38,15 +38,15 @@ trait LineSegment extends Shape {
 	 * The line segment's direction vector.
 	 */
 
-	private var _direction = Vec2D( 1, 0 )
+	private var _direction = Vector2( 1, 0 )
 
 	def direction = _direction
 
-	def direction_=( newDirection: Vec2D ) {
+	def direction_=( newDirection: Vector2 ) {
 		if ( newDirection == null )
 			throw new NullPointerException
 
-		if ( newDirection == Vec2D( 0, 0 ) )
+		if ( newDirection == Vector2( 0, 0 ) )
 			throw new IllegalArgumentException( "Direction vector must not be zero." )
 
 		_direction = newDirection

@@ -20,7 +20,7 @@ package net.habraun.sd.collision.shape
 
 
 
-import math.Vec2D
+import math.Vector2
 
 import org.specs.Specification
 import org.specs.runner.JUnit4
@@ -43,13 +43,13 @@ object LineSegmentSpec extends Specification {
 		"have a default value for its direction." in {
 			val lineSegment = new LineSegment {}
 
-			lineSegment.direction must beEqualTo( Vec2D( 1, 0 ) )
+			lineSegment.direction must beEqualTo( Vector2( 1, 0 ) )
 		}
 
 		"allow reassigment of its direction." in {
 			val lineSegment = new LineSegment {}
 
-			val direction = Vec2D( 2, 1 )
+			val direction = Vector2( 2, 1 )
 			lineSegment.direction = direction
 
 			lineSegment.direction must beEqualTo( direction )
@@ -58,7 +58,7 @@ object LineSegmentSpec extends Specification {
 		"throw an exception if the direction vector is zero." in {
 			val lineSegment = new LineSegment {}
 			
-			( lineSegment.direction = Vec2D( 0, 0 ) ) must throwAn[ IllegalArgumentException ]
+			( lineSegment.direction = Vector2( 0, 0 ) ) must throwAn[ IllegalArgumentException ]
 		}
 
 		"throw an exception if null is assigned to its direction." in {

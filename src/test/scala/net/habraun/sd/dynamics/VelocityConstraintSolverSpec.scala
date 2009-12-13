@@ -22,7 +22,7 @@ package net.habraun.sd.dynamics
 
 import core.Body
 import core.StepPhase
-import math.Vec2D
+import math.Vector2
 
 import scala.collection.immutable.HashSet
 
@@ -46,7 +46,7 @@ object VelocityConstraintSolverSpec extends Specification {
 		"not modify the velocity of a passed Body if it is below the maximum velocity." in {
 			val solver = new VelocityConstraintSolver
 
-			val velocity = Vec2D( 3, 0 )
+			val velocity = Vector2( 3, 0 )
 
 			val body = new Body with VelocityConstraint {}
 			body.velocity = velocity
@@ -61,12 +61,12 @@ object VelocityConstraintSolverSpec extends Specification {
 			val solver = new VelocityConstraintSolver
 
 			val body = new Body with VelocityConstraint {}
-			body.velocity = Vec2D( 6, 0 )
+			body.velocity = Vector2( 6, 0 )
 			body.maxVelocity = 5
 
 			solver.filterAndStep( 0.0, body::Nil )
 
-			body.velocity must beEqualTo( Vec2D( 5, 0 ) )
+			body.velocity must beEqualTo( Vector2( 5, 0 ) )
 		}
 	}
 }

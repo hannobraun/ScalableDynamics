@@ -21,7 +21,7 @@ package net.habraun.sd.dynamics
 
 
 import core.StepPhase
-import math.Vec2D
+import math.Vector2
 
 
 
@@ -52,7 +52,7 @@ class PositionConstraintSolver extends StepPhase[ PositionConstraint ] {
 				case None => yAfterMin
 			}
 
-			constraint.position = Vec2D( xAfterMax, yAfterMax )
+			constraint.position = Vector2( xAfterMax, yAfterMax )
 		}
 	}
 }

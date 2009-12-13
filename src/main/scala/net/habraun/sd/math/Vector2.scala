@@ -20,23 +20,23 @@ package net.habraun.sd.math
 
 
 
-import Vec2D._
+import Vector2._
 
 
 
 /**
  * A 2D vector.
- * Important: Vec2D is immutable. This means, all operations on the vector a new vector, leaving the old one
+ * Important: Vector2 is immutable. This means, all operations on the vector a new vector, leaving the old one
  * unchanged.
  */
 
-case class Vec2D( x: Double, y: Double ) {
+case class Vector2( x: Double, y: Double ) {
 
 	/**
 	 * Adds another vector.
 	 */
 
-	def + ( vector: Vec2D ) = Vec2D( x + vector.x, y + vector.y )
+	def + ( vector: Vector2 ) = Vector2( x + vector.x, y + vector.y )
 
 
 
@@ -44,7 +44,7 @@ case class Vec2D( x: Double, y: Double ) {
 	 * Substracts another vector.
 	 */
 
-	def - ( vector: Vec2D ) = Vec2D( x - vector.x, y - vector.y )
+	def - ( vector: Vector2 ) = Vector2( x - vector.x, y - vector.y )
 
 
 
@@ -52,7 +52,7 @@ case class Vec2D( x: Double, y: Double ) {
 	 * Multiplies the vector with a scalar.
 	 */
 
-	def * ( scalar: Double ) = Vec2D( x * scalar, y * scalar )
+	def * ( scalar: Double ) = Vector2( x * scalar, y * scalar )
 
 
 
@@ -60,7 +60,7 @@ case class Vec2D( x: Double, y: Double ) {
 	 * Divides the vector with a scalar.
 	 */
 
-	def / ( scalar: Double ) = Vec2D( x / scalar, y / scalar )
+	def / ( scalar: Double ) = Vector2( x / scalar, y / scalar )
 
 
 
@@ -68,7 +68,7 @@ case class Vec2D( x: Double, y: Double ) {
 	 * Computes the dot product of this vector and another vector.
 	 */
 
-	def * ( vector: Vec2D ) = ( x * vector.x ) + ( y * vector.y )
+	def * ( vector: Vector2 ) = ( x * vector.x ) + ( y * vector.y )
 
 
 
@@ -77,7 +77,7 @@ case class Vec2D( x: Double, y: Double ) {
 	 * The inverse vector is the vector with the same length and opposite direction.
 	 */
 
-	def unary_- = Vec2D( x * -1, y * -1 )
+	def unary_- = Vector2( x * -1, y * -1 )
 
 
 
@@ -113,7 +113,7 @@ case class Vec2D( x: Double, y: Double ) {
 	 * Returns the orthogonal vector to this vector that is rotated by 90 degrees to the left.
 	 */
 
-	def orthogonal = Vec2D( -y, x )
+	def orthogonal = Vector2( -y, x )
 
 
 
@@ -121,7 +121,7 @@ case class Vec2D( x: Double, y: Double ) {
 	 * Projects the vector onto the given vector.
 	 */
 
-	def projectOn( vec: Vec2D ) = vec * ( ( this * vec ) / ( vec * vec ) )
+	def projectOn( vec: Vector2 ) = vec * ( ( this * vec ) / ( vec * vec ) )
 
 
 
@@ -137,7 +137,7 @@ case class Vec2D( x: Double, y: Double ) {
 	 * Computes if the vector is linearly independent from another.
 	 */
 
-	def isLinearlyIndependentFrom( other: Vec2D ) = {
+	def isLinearlyIndependentFrom( other: Vector2 ) = {
 		if ( other == ZeroVector ) {
 			false
 		}
@@ -165,7 +165,7 @@ case class Vec2D( x: Double, y: Double ) {
 	 * vectors.
 	 */
 
-	def computeFactorFor( other: Vec2D ) = {
+	def computeFactorFor( other: Vector2 ) = {
 		if ( this.isLinearlyIndependentFrom( other ) ) {
 			throw new IllegalArgumentException( "Vectors must be linearly dependent." )
 		}
@@ -184,10 +184,10 @@ case class Vec2D( x: Double, y: Double ) {
 
 
 /**
- * Companion object for Vec2D.
+ * Companion object for Vector2.
  */
 
-object Vec2D {
+object Vector2 {
 	val unitTolerance = 0.02
 }
 
@@ -197,7 +197,7 @@ object Vec2D {
  * The zero vector.
  */
 
-object ZeroVector extends Vec2D( 0, 0 )
+object ZeroVector extends Vector2( 0, 0 )
 
 
 
@@ -205,4 +205,4 @@ object ZeroVector extends Vec2D( 0, 0 )
  * The invalid vector, a vector whose components are Double.NaN.
  */
 
-object InvalidVector extends Vec2D( Double.NaN, Double.NaN )
+object InvalidVector extends Vector2( Double.NaN, Double.NaN )
