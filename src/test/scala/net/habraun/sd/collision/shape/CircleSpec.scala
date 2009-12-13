@@ -32,12 +32,28 @@ class CircleTest extends JUnit4( CircleSpec )
 object CircleSpec extends Specification {
 
 	"Circle" should {
-		"be a Shape and have an overridable radius." in {
-			val circle = new Circle {
-				override def radius = 2.0
-			}
+		"be a Shape." in {
+			val circle = new Circle {}
 			
 			circle must haveSuperClass[ Shape ]
+		}
+
+		"have a default radius of 1.0." in {
+			val circle = new Circle {}
+
+			circle.radius must beEqualTo( 1.0 )
+		}
+
+		"allow overriding the radius with a constant value." in {
+			new Circle {
+				override val radius = 2.0
+			}
+		}
+
+		"allow overriding the radius with a dynamic value." in {
+			new Circle {
+				override def radius = 2.0
+			}
 		}
 	}
 }
