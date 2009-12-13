@@ -38,17 +38,17 @@ trait LineSegment extends Shape {
 	 * The line segment's direction vector.
 	 */
 
-	private var _d = Vec2D( 1, 0 )
+	private var _direction = Vec2D( 1, 0 )
 
-	def d = _d
+	def direction = _direction
 
-	def d_=( newD: Vec2D ) {
-		if ( newD == null )
+	def direction_=( newDirection: Vec2D ) {
+		if ( newDirection == null )
 			throw new NullPointerException
 
-		if ( newD == Vec2D( 0, 0 ) )
+		if ( newDirection == Vec2D( 0, 0 ) )
 			throw new IllegalArgumentException( "Direction vector must not be zero." )
 
-		_d = newD
+		_direction = newDirection
 	}
 }

@@ -53,7 +53,7 @@ class ContinuousCircleLineSegmentTest extends CircleLineSegmentTest {
 		val pc = circle.previousPosition
 		val rc = circle.radius
 		val pls = lineSegment.previousPosition
-		val dls = lineSegment.d
+		val dls = lineSegment.direction
 
 		// We'll also need the velocities of the shapes and their relative velocity. We always treat the circle as moving and the line
 		// segment as standing still.

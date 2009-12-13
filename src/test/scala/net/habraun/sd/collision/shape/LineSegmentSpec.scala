@@ -43,28 +43,28 @@ object LineSegmentSpec extends Specification {
 		"have a default value for its direction." in {
 			val lineSegment = new LineSegment {}
 
-			lineSegment.d must beEqualTo( Vec2D( 1, 0 ) )
+			lineSegment.direction must beEqualTo( Vec2D( 1, 0 ) )
 		}
 
 		"allow reassigment of its direction." in {
 			val lineSegment = new LineSegment {}
 
-			val d = Vec2D( 2, 1 )
-			lineSegment.d = d
+			val direction = Vec2D( 2, 1 )
+			lineSegment.direction = direction
 
-			lineSegment.d must beEqualTo( d )
+			lineSegment.direction must beEqualTo( direction )
 		}
 
 		"throw an exception if the direction vector is zero." in {
 			val lineSegment = new LineSegment {}
 			
-			( lineSegment.d = Vec2D( 0, 0 ) ) must throwAn[ IllegalArgumentException ]
+			( lineSegment.direction = Vec2D( 0, 0 ) ) must throwAn[ IllegalArgumentException ]
 		}
 
 		"throw an exception if null is assigned to its direction." in {
 			val lineSegment = new LineSegment {}
 
-			( lineSegment.d = null ) must throwA[ NullPointerException ]
+			( lineSegment.direction = null ) must throwA[ NullPointerException ]
 		}
 	}
 }

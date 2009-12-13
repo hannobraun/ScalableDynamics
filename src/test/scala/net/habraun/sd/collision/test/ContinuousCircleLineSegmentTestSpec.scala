@@ -47,7 +47,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 0, 3 )
 			ls.position returns Vec2D( 0, 3 )
 
@@ -63,7 +63,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 4, 0 )
+			ls.direction returns Vec2D( 4, 0 )
 			ls.previousPosition returns Vec2D( -2, 1.5 )
 			ls.position returns Vec2D( -2, 1.5 )
 
@@ -82,7 +82,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 1.5, 0 )
 			ls.position returns Vec2D( 1.5, 0 )
 
@@ -101,7 +101,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( -3.5, 0 )
 			ls.position returns Vec2D( -3.5, 0 )
 
@@ -117,7 +117,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 2, 0 )
 			ls.position returns Vec2D( 2, 0 )
 
@@ -133,7 +133,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( -4, 0 )
 			ls.position returns Vec2D( -4, 0 )
 
@@ -149,7 +149,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( -4, 0.5 )
 			ls.position returns Vec2D( -4, 0.5 )
 
@@ -165,7 +165,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 2, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 0, 3 )
 			ls.position returns Vec2D( 0, 3 )
 
@@ -181,7 +181,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 2, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 3, 0 )
 			ls.position returns Vec2D( 3, 0 )
 
@@ -197,7 +197,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, -2 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 0, 3 )
 			ls.position returns Vec2D( 0, 3 )
 
@@ -213,7 +213,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 0, 3 )
 			ls.position returns Vec2D( 0, 3 )
 
@@ -229,7 +229,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( -3, 4 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 0, 2 )
 			ls.position returns Vec2D( 0, 2 )
 
@@ -245,7 +245,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 2 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 0, 3 )
 			ls.position returns Vec2D( 0, 3 )
 
@@ -261,7 +261,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 2 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 0, 1 )
 			ls.position returns Vec2D( 0, 1 )
 
@@ -277,7 +277,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 2, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 0, 2 )
+			ls.direction returns Vec2D( 0, 2 )
 			ls.previousPosition returns Vec2D( 3, 0 )
 			ls.position returns Vec2D( 3, 0 )
 
@@ -293,7 +293,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 4 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 2, 2 )
 			ls.position returns Vec2D( 2, 2 )
 
@@ -309,7 +309,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 4 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( -4, 2 )
 			ls.position returns Vec2D( -4, 2 )
 
@@ -325,7 +325,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 2 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 2 )
+			ls.direction returns Vec2D( 2, 2 )
 			ls.previousPosition returns Vec2D( -4, -1 )
 			ls.position returns Vec2D( -4, -1 )
 
@@ -341,7 +341,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( -4, 2 )
 			ls.position returns Vec2D( -4, -2 )
 
@@ -357,7 +357,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( -3, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 0, 2 )
 			ls.position returns Vec2D( 0, -2 )
 
@@ -373,7 +373,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 0 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 0, 4 )
 			ls.position returns Vec2D( 0, 0 )
 
@@ -389,7 +389,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( -3, 4 )
 
 			val ls = mock[ LineSegment ]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 0, 2 )
 			ls.position returns Vec2D( 0, 0 )
 
@@ -405,7 +405,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 2 )
 
 			val ls = mock[LineSegment]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 0, 4 )
 			ls.position returns Vec2D( 0, 2 )
 
@@ -421,7 +421,7 @@ object ContinuousCircleLineSegmentTestSpec extends Specification with Mockito {
 			c.position returns Vec2D( 0, 2 )
 
 			val ls = mock[LineSegment]
-			ls.d returns Vec2D( 2, 0 )
+			ls.direction returns Vec2D( 2, 0 )
 			ls.previousPosition returns Vec2D( 2, 1 )
 			ls.position returns Vec2D( 2, 1 )
 
