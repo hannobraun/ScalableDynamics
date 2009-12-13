@@ -27,7 +27,7 @@ import shape.LineSegment
 import shape.Shape
 import test.CircleCircleTest
 import test.CircleLineSegmentTest
-import test.ContinuousCircleCircleTest
+import test.MovingCircleCircleTest
 import test.MovingCircleLineSegmentTest
 
 
@@ -43,7 +43,7 @@ class SimpleNarrowPhase( testCircleCircle: CircleCircleTest, testCircleLineSegme
 	 */
 
 	def this() {
-		this( new ContinuousCircleCircleTest, new MovingCircleLineSegmentTest )
+		this( new MovingCircleCircleTest, new MovingCircleLineSegmentTest )
 	}
 
 

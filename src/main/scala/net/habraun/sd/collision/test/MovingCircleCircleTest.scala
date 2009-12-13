@@ -31,7 +31,7 @@ import shape.Contact
  * An circle-circle collision test implementation that performs continuous collision detection.
  */
 
-class ContinuousCircleCircleTest extends CircleCircleTest {
+class MovingCircleCircleTest extends CircleCircleTest {
 
 	/**
 	 * Performs continuous collision detection between two circles with relative movement.

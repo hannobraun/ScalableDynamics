@@ -30,15 +30,15 @@ import org.specs.runner.JUnit4
 
 
 
-class ContinuousCircleCircleTestTest extends JUnit4( ContinuousCircleCircleTestSpec )
+class MovingCircleCircleTestTest extends JUnit4( MovingCircleCircleTestSpec )
 
 
 
-object ContinuousCircleCircleTestSpec extends Specification with Mockito {
+object MovingCircleCircleTestSpec extends Specification with Mockito {
 
-	"ContinuousCircleCircleTest" should {
+	"MovingCircleCircleTest" should {
 		"handle non-moving, non-colliding circles." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -53,7 +53,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle non-moving circles that touch but don't intersect." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -68,7 +68,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle non-moving, colliding circles." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -83,7 +83,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle initially intersecting circles of different sizes." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -98,7 +98,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle one circle moving and colliding." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -113,7 +113,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle one circle moving and touching, but not intersecting the other circle." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -128,7 +128,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle circles whose centers pass each other during the movement." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -143,7 +143,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle colliding circles with their centers moving not directly towards each other." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -158,7 +158,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle circles with their centers moving not directly towards each other that are colliding in the middle of the movement." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -173,7 +173,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle one circle moving and not colliding." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -188,7 +188,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle both circles moving and colliding." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -203,7 +203,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle both circles moving towards each other, but stopping before collision." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -218,7 +218,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle both circles not moving towards each other." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -233,7 +233,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle both circles moving and occupying the same space at different times." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -248,7 +248,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle both circles moving on parallel courses with no intersection." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
@@ -263,7 +263,7 @@ object ContinuousCircleCircleTestSpec extends Specification with Mockito {
 		}
 
 		"handle two circles whose centers overlap at the beginning of the movement." in {
-			val test = new ContinuousCircleCircleTest
+			val test = new MovingCircleCircleTest
 
 			val c1 = mock[ Circle ]
 			val c2 = mock[ Circle ]
