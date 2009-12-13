@@ -27,9 +27,8 @@ import math.Vector2
 /**
  * Models a line segment.
  * A line segment is defined by the following attributes:
- * * p: The position vector of the first point of the line segment.
- * * d: The direction vector of the line segment. It points from the first point to the second point. Its
- *      length is equal to the length of the line segment.
+ * * direction: The direction vector of the line segment. It points from the first point to the second point. Its length is equal to the
+ *              length of the line segment.
  */
 
 trait LineSegment extends Shape {
