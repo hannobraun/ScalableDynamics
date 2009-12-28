@@ -70,8 +70,8 @@ class SimpleContactSolver( tolerance: Double ) extends StepPhase[ Shape ] {
 				}
 				
 				// Adjust the positions.
-				s1.position -= contact.normal * ( contact.depth * f1 + tolerance )
-				s2.position += contact.normal * ( contact.depth * f2 + tolerance )
+				s1.position -= contact.normal * ( contact.depth + tolerance ) * f1
+				s2.position += contact.normal * ( contact.depth + tolerance ) * f2
 
 				// Remove the contacts from the shapes, as they have been processed.
 				s1.removeContact( contact )

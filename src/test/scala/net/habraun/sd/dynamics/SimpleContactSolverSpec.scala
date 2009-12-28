@@ -192,8 +192,28 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 
 			solver.filterAndStep( 0.0, List( s1, s2 ) )
 
-			s1.position must beEqualTo( Vector2( 0.5, 0 ) )
-			s2.position must beEqualTo( Vector2( 4.5, 0 ) )
+			s1.position must beEqualTo( Vector2( 0.75, 0 ) )
+			s2.position must beEqualTo( Vector2( 4.25, 0 ) )
+		}
+
+		"should never move bodies of infinite mass, tolerance notwithstanding." in {
+			val solver = new SimpleContactSolver( 0.5 )
+
+			val s1 = new Shape {}
+			s1.position = Vector2( 2, 0 )
+			s1.mass = Double.PositiveInfinity
+			val s2 = new Shape {}
+			s2.position = Vector2( 3, 0 )
+			s2.mass = Double.PositiveInfinity
+
+			val contact = Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 0, 0.0 )
+			s1.addContact( contact )
+			s2.addContact( -contact )
+
+			solver.filterAndStep( 0.0, List( s1, s2 ) )
+
+			s1.position must beEqualTo( Vector2( 2, 0 ) )
+			s2.position must beEqualTo( Vector2( 3, 0 ) )
 		}
 	}
 }
