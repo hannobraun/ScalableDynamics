@@ -49,7 +49,7 @@ trait StepPhase[ B <: Body ] {
 	 * of the step phase and passes the filtered bodies to step.
 	 */
 
-	def filterAndStep( dt: Double, bodies: Iterable[Body] )( implicit m: Manifest[ B ] ) {
+	def filterAndStep( dt: Double, bodies: Iterable[ Body ] )( implicit m: Manifest[ B ] ) {
 		val filtered = bodies.filter( ( body ) => m.erasure.isAssignableFrom( body.getClass ) )
 		val result = filtered.map( ( body ) => body.asInstanceOf[ B ] )
 
