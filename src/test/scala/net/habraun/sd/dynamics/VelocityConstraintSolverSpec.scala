@@ -41,7 +41,7 @@ object VelocityConstraintSolverSpec extends Specification {
 		"be a StepPhase." in {
 			val solver = new VelocityConstraintSolver
 
-			solver must haveSuperClass[StepPhase[VelocityConstraint]]
+			solver must haveSuperClass[ StepPhase[ VelocityConstraint ] ]
 		}
 		"not modify the velocity of a passed Body if it is below the maximum velocity." in {
 			val solver = new VelocityConstraintSolver
