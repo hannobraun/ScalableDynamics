@@ -41,10 +41,10 @@ object StepPhaseSpec extends Specification {
 
 			val bodies = body1::body2::body3::Nil
 
-			val stepPhase = new StepPhase[TestTrait] {
-				var filtered: Iterable[TestTrait] = Nil
+			val stepPhase = new StepPhase[ TestTrait ] {
+				var filtered: Iterable[ TestTrait ] = Nil
 
-				override def step( dt: Double, filteredBodies: Iterable[TestTrait] ) {
+				override def step( dt: Double, filteredBodies: Iterable[ TestTrait ] ) {
 					filtered = filteredBodies
 				}
 			}
