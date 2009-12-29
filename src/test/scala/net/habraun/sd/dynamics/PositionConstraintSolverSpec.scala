@@ -39,7 +39,7 @@ object PositionConstraintSolverSpec extends Specification {
 		"be a StepPhase." in {
 			val solver = new PositionConstraintSolver
 
-			solver must haveSuperClass[StepPhase[PositionConstraint]]
+			solver must haveSuperClass[ StepPhase[ PositionConstraint ] ]
 		}
 
 		"set the x component of the position vector to minX, if it is below minX." in {
