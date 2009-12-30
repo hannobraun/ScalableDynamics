@@ -41,18 +41,4 @@ trait StepPhase[ B <: Body ] {
 	 */
 
 	def step( dt: Double, filteredBodies: Iterable[ B ] )
-
-
-
-	/**
-	 * This is a helper method that is used by World. It filters the bodies according to the type parameter
-	 * of the step phase and passes the filtered bodies to step.
-	 */
-
-	def filterAndStep( dt: Double, bodies: Iterable[ Body ] )( implicit m: Manifest[ B ] ) {
-		val filtered = bodies.filter( ( body ) => m.erasure.isAssignableFrom( body.getClass ) )
-		val result = filtered.map( ( body ) => body.asInstanceOf[ B ] )
-
-		step ( dt, result )
-	}
 }

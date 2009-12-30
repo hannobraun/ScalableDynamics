@@ -33,6 +33,7 @@ import dynamics.VelocityConstraintSolver
 import dynamics.VerletIntegrator
 
 import scala.collection.mutable.HashSet
+import scala.reflect.Manifest
 
 
 
@@ -90,11 +91,20 @@ class World[ B <: Body ] {
 	
 	def step( dt: Double ) {
 		// Execute step phases.
-		integrator.filterAndStep( dt, bodies )
-		velocityConstraintSolver.filterAndStep( dt, bodies )
-		collisionDetector.filterAndStep( dt, bodies )
-		collisionReactor.filterAndStep( dt, bodies )
-		contactSolver.filterAndStep( dt, bodies )
-		positionConstraintSolver.filterAndStep( dt, bodies )
+		integrator.step( dt, filterAndCast( bodies ) )
+		velocityConstraintSolver.step( dt, filterAndCast( bodies ) )
+		collisionDetector.step( dt, filterAndCast( bodies ) )
+		collisionReactor.step( dt, filterAndCast( bodies ) )
+		contactSolver.step( dt, filterAndCast( bodies ) )
+		positionConstraintSolver.step( dt, filterAndCast( bodies ) )
+	}
+
+
+
+	private def filterAndCast[ T <: AnyRef ]( iterable: Iterable[ AnyRef ] )( implicit m: Manifest[ T ] ): Iterable[ T ] = {
+		val filtered = iterable.filter( ( o ) => m.erasure.isAssignableFrom( o.getClass ) )
+		val filteredAndCast = filtered.map( ( o ) => o.asInstanceOf[ T ] )
+
+		filteredAndCast
 	}
 }

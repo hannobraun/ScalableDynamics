@@ -52,7 +52,7 @@ object VelocityConstraintSolverSpec extends Specification {
 			body.velocity = velocity
 			body.maxVelocity = 5
 
-			solver.filterAndStep( 0.0, body::Nil )
+			solver.step( 0.0, body::Nil )
 
 			body.velocity must beEqualTo( velocity )
 		}
@@ -64,7 +64,7 @@ object VelocityConstraintSolverSpec extends Specification {
 			body.velocity = Vector2( 6, 0 )
 			body.maxVelocity = 5
 
-			solver.filterAndStep( 0.0, body::Nil )
+			solver.step( 0.0, body::Nil )
 
 			body.velocity must beEqualTo( Vector2( 5, 0 ) )
 		}

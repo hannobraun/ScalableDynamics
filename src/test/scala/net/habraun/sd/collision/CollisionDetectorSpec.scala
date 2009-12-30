@@ -67,7 +67,7 @@ object CollisionDetectorSpec extends Specification with Mockito {
 
 			broadPhase( shape1::shape2::Nil ) returns Nil
 
-			detector.filterAndStep( 0.0, shapes )
+			detector.step( 0.0, shapes )
 
 			broadPhase( shapes ) was called
 		}
@@ -84,7 +84,7 @@ object CollisionDetectorSpec extends Specification with Mockito {
 			broadPhase( shapes ) returns ( shape1, shape2 )::Nil
 			narrowPhase( shape1, shape2 ) returns None
 			
-			detector.filterAndStep( 0.0, shapes )
+			detector.step( 0.0, shapes )
 
 			narrowPhase( shape1, shape2 ) was called
 		}
@@ -111,7 +111,7 @@ object CollisionDetectorSpec extends Specification with Mockito {
 			broadPhase( shapes ) returns ( shape1, shape2 )::Nil
 			narrowPhase( shape1, shape2 ) returns Some( contact1 )
 
-			detector.filterAndStep( 0.0, shapes )
+			detector.step( 0.0, shapes )
 
 			shape1.addContact( contact1 ) was called
 			shape2.addContact( contact2 ) was called
