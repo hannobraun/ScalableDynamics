@@ -38,7 +38,9 @@ trait StepPhase[ B <: Body, C <: AnyRef ] {
 	 *           concerned with something collision-related, it would extend StepPhase[ Shape ] and only Bodies with Shape mixed in would
 	 *           be passed to this step method.
 	 * * constraints: All constraints, filtered according to the type parameter.
+	 *
+	 * The method is supposed to return the updated body and constraint iterables.
 	 */
 
-	def step( dt: Double, bodies: Iterable[ B ], constraints: Iterable[ C ] )
+	def step( dt: Double, bodies: Iterable[ B ], constraints: Iterable[ C ] ): ( Iterable[ B ], Iterable[ C ] )
 }

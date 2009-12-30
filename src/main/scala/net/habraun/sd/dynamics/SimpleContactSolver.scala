@@ -37,7 +37,7 @@ class SimpleContactSolver( tolerance: Double ) extends StepPhase[ Shape, Nothing
 
 
 
-	def step( dt: Double, shapes: Iterable[ Shape ], constraints: Iterable[ Nothing ] ) {
+	def step( dt: Double, shapes: Iterable[ Shape ], constraints: Iterable[ Nothing ] ) = {
 		for ( shape <- shapes ) {
 			for ( contact <- shape.contacts ) {
 				// These are the two shapes that are in contact.
@@ -78,5 +78,7 @@ class SimpleContactSolver( tolerance: Double ) extends StepPhase[ Shape, Nothing
 				s2.removeContact( -contact )
 			}
 		}
+
+		( shapes, constraints )
 	}
 }

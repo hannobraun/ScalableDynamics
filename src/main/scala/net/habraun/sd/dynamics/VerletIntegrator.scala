@@ -32,7 +32,7 @@ import math.Scalar._
 
 class VerletIntegrator extends StepPhase[ Body, Nothing ] {
 	
-	def step( dt: Double, bodies: Iterable[ Body ], constraints: Iterable[ Nothing ] ) {
+	def step( dt: Double, bodies: Iterable[ Body ], constraints: Iterable[ Nothing ] ) = {
 		for ( body <- bodies ) {
 			// Integrate position.
 			body.position += body.velocity * dt + 0.5 * body.acceleration * dt * dt
@@ -45,5 +45,7 @@ class VerletIntegrator extends StepPhase[ Body, Nothing ] {
 			// Reset the forces, since they were already applied to the new velocity.
 			body.resetForce
 		}
+
+		( bodies, constraints )
 	}
 }

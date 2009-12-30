@@ -26,7 +26,7 @@ import core.StepPhase
 
 class VelocityConstraintSolver extends StepPhase[ VelocityConstraint, Nothing ] {
 
-	def step( dt: Double, constraints: Iterable[ VelocityConstraint ], c: Iterable[ Nothing ] ) {
+	def step( dt: Double, constraints: Iterable[ VelocityConstraint ], c: Iterable[ Nothing ] ) = {
 		for ( constraint <- constraints ) {
 			// Check if the actual velocity is greater than the maximum velocity.
 			if ( constraint.velocity.squaredLength > constraint.maxVelocity * constraint.maxVelocity ) {
@@ -36,5 +36,7 @@ class VelocityConstraintSolver extends StepPhase[ VelocityConstraint, Nothing ] 
 						constraint.velocity * constraint.velocity ) )
 			}
 		}
+
+		( constraints, c )
 	}
 }

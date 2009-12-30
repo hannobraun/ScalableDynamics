@@ -34,7 +34,7 @@ import scala.collection.mutable.HashSet
 
 class ElasticCollisionReaction extends StepPhase[ Shape, Nothing ] {
 
-	def step( dt: Double, shapes: Iterable[ Shape ], constraints: Iterable[ Nothing ] ) {
+	def step( dt: Double, shapes: Iterable[ Shape ], constraints: Iterable[ Nothing ] ) = {
 		val contacts = new HashSet[ Contact ]
 		for ( shape <- shapes ) {
 			for ( contact <- shape.contacts ) {
@@ -73,5 +73,7 @@ class ElasticCollisionReaction extends StepPhase[ Shape, Nothing ] {
 			contacts.removeEntry( contact )
 			contacts.removeEntry( -contact )
 		}
+
+		( shapes, constraints )
 	}
 }
