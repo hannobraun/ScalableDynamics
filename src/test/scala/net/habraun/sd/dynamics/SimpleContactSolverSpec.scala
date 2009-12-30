@@ -41,7 +41,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 		"be a StepPhase." in {
 			val solver = new SimpleContactSolver( 0 )
 			
-			solver must haveSuperClass[ StepPhase[ Shape, Nothing ] ]
+			solver must haveSuperClass[ StepPhase[ Shape, Contact ] ]
 		}
 
 		"remove the contact from two touching shapes and otherwise not change their position." in {

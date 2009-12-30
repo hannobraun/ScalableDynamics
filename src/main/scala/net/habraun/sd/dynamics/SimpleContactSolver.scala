@@ -20,12 +20,13 @@ package net.habraun.sd.dynamics
 
 
 
+import collision.shape.Contact
 import collision.shape.Shape
 import core.StepPhase
 
 
 
-class SimpleContactSolver( tolerance: Double ) extends StepPhase[ Shape, Nothing ] {
+class SimpleContactSolver( tolerance: Double ) extends StepPhase[ Shape, Contact ] {
 
 	/**
 	 * Constructor that provides a default tolerance value.
@@ -37,7 +38,7 @@ class SimpleContactSolver( tolerance: Double ) extends StepPhase[ Shape, Nothing
 
 
 
-	def step( dt: Double, shapes: Iterable[ Shape ], constraints: Iterable[ Nothing ] ) = {
+	def step( dt: Double, shapes: Iterable[ Shape ], constraints: Iterable[ Contact ] ) = {
 		for ( shape <- shapes ) {
 			for ( contact <- shape.contacts ) {
 				// These are the two shapes that are in contact.
