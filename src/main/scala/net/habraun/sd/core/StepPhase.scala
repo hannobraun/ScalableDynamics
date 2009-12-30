@@ -28,7 +28,7 @@ import scala.reflect.Manifest
  * A single phase of the iteration step that is executed by World.
  */
 
-trait StepPhase[ B <: Body ] {
+trait StepPhase[ B <: Body, C <: AnyRef ] {
 
 	/**
 	 * A concrete iteration step phase must implement this method. It will be called during each step and the
@@ -39,5 +39,5 @@ trait StepPhase[ B <: Body ] {
 	 *           be passed to this step method.
 	 */
 
-	def step( dt: Double, bodies: Iterable[ B ] )
+	def step( dt: Double, bodies: Iterable[ B ], constraints: Iterable[ C ] )
 }

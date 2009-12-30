@@ -53,7 +53,7 @@ object CollisionDetectorSpec extends Specification with Mockito {
 			val narrowPhase = mock[ NarrowPhase ]
 			val detector = new CollisionDetector( broadPhase, narrowPhase )
 
-			detector must haveSuperClass[ StepPhase[ Shape ] ]
+			detector must haveSuperClass[ StepPhase[ Shape, Nothing ] ]
 		}
 
 		"pass a list of all objects to the broad phase." in {
@@ -67,7 +67,7 @@ object CollisionDetectorSpec extends Specification with Mockito {
 
 			broadPhase( shape1::shape2::Nil ) returns Nil
 
-			detector.step( 0.0, shapes )
+			detector.step( 0.0, shapes, Nil )
 
 			broadPhase( shapes ) was called
 		}
@@ -84,7 +84,7 @@ object CollisionDetectorSpec extends Specification with Mockito {
 			broadPhase( shapes ) returns ( shape1, shape2 )::Nil
 			narrowPhase( shape1, shape2 ) returns None
 			
-			detector.step( 0.0, shapes )
+			detector.step( 0.0, shapes, Nil )
 
 			narrowPhase( shape1, shape2 ) was called
 		}
@@ -111,7 +111,7 @@ object CollisionDetectorSpec extends Specification with Mockito {
 			broadPhase( shapes ) returns ( shape1, shape2 )::Nil
 			narrowPhase( shape1, shape2 ) returns Some( contact1 )
 
-			detector.step( 0.0, shapes )
+			detector.step( 0.0, shapes, Nil )
 
 			shape1.addContact( contact1 ) was called
 			shape2.addContact( contact2 ) was called

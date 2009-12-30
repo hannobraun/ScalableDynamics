@@ -30,9 +30,9 @@ import math.Scalar._
  * Integrates the position and velocity of bodies using the Velocity Verlet algorithm.
  */
 
-class VerletIntegrator extends StepPhase[ Body ] {
+class VerletIntegrator extends StepPhase[ Body, Nothing ] {
 	
-	def step( dt: Double, bodies: Iterable[ Body ] ) {
+	def step( dt: Double, bodies: Iterable[ Body ], constraints: Iterable[ Nothing ] ) {
 		for ( body <- bodies ) {
 			// Integrate position.
 			body.position += body.velocity * dt + 0.5 * body.acceleration * dt * dt

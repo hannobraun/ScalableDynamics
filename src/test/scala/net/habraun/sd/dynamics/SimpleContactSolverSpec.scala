@@ -41,7 +41,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 		"be a StepPhase." in {
 			val solver = new SimpleContactSolver( 0 )
 			
-			solver must haveSuperClass[ StepPhase[ Shape ] ]
+			solver must haveSuperClass[ StepPhase[ Shape, Nothing ] ]
 		}
 
 		"remove the contact from two touching shapes and otherwise not change their position." in {
@@ -60,7 +60,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
-			solver.step( 0.0, List( s1, s2 ) )
+			solver.step( 0.0, List( s1, s2 ), Nil )
 
 			s1.position must beEqualTo( pos1 )
 			s2.position must beEqualTo( pos2 )
@@ -83,7 +83,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
-			solver.step( 0.0, List( s1, s2 ) )
+			solver.step( 0.0, List( s1, s2 ), Nil )
 
 			s1.position must beEqualTo( Vector2( 1.5, 0 ) )
 			s2.position must beEqualTo( Vector2( 3.5, 0 ) )
@@ -103,7 +103,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
-			solver.step( 0.0, List( s1, s2 ) )
+			solver.step( 0.0, List( s1, s2 ), Nil )
 
 			s1.position must beEqualTo( Vector2( 2, 0 ) )
 			s2.position must beEqualTo( Vector2( 6, 0 ) )
@@ -125,7 +125,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
-			solver.step( 0.0, List( s1, s2 ) )
+			solver.step( 0.0, List( s1, s2 ), Nil )
 
 			s1.position must beEqualTo( pos1 )
 			s2.position must beEqualTo( Vector2( 4, 0 ) )
@@ -147,7 +147,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
-			solver.step( 0.0, List( s1, s2 ) )
+			solver.step( 0.0, List( s1, s2 ), Nil )
 
 			s1.position must beEqualTo( Vector2( 1, 0 ) )
 			s2.position must beEqualTo( pos2 )
@@ -170,7 +170,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
-			solver.step( 0.0, List( s1, s2 ) )
+			solver.step( 0.0, List( s1, s2 ), Nil )
 
 			s1.position must beEqualTo( pos1 )
 			s2.position must beEqualTo( pos2 )
@@ -190,7 +190,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
-			solver.step( 0.0, List( s1, s2 ) )
+			solver.step( 0.0, List( s1, s2 ), Nil )
 
 			s1.position must beEqualTo( Vector2( 0.75, 0 ) )
 			s2.position must beEqualTo( Vector2( 4.25, 0 ) )
@@ -210,7 +210,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
-			solver.step( 0.0, List( s1, s2 ) )
+			solver.step( 0.0, List( s1, s2 ), Nil )
 
 			s1.position must beEqualTo( Vector2( 2, 0 ) )
 			s2.position must beEqualTo( Vector2( 3, 0 ) )

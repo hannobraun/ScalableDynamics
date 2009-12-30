@@ -39,7 +39,7 @@ object ElasticCollisionReactionSpec extends Specification {
 	"ElasticCollisionReaction" should {
 		"be a StepPhase." in {
 			val reaction = new ElasticCollisionReaction
-			reaction must haveSuperClass[ StepPhase[ Shape ] ]
+			reaction must haveSuperClass[ StepPhase[ Shape, Nothing ] ]
 		}
 
 		"just switch velocities if two objects of equal mass are colliding." in {
@@ -57,7 +57,7 @@ object ElasticCollisionReactionSpec extends Specification {
 			b1.addContact( contact )
 			b2.addContact( -contact )
 
-			reaction.step( 0.5, List( b1, b2 ) )
+			reaction.step( 0.5, List( b1, b2 ), Nil )
 
 			b1.velocity must beEqualTo( Vector2( -4, 5 ) )
 			b2.velocity must beEqualTo( Vector2( 5, -4 ) )
@@ -78,7 +78,7 @@ object ElasticCollisionReactionSpec extends Specification {
 			b1.addContact( contact )
 			b2.addContact( -contact )
 
-			reaction.step( 0.5, List( b1, b2 ) )
+			reaction.step( 0.5, List( b1, b2 ), Nil )
 
 			b1.velocity must beEqualTo( Vector2( -1, 3 ) )
 			b2.velocity must beEqualTo( Vector2( 6, -3 ) )
@@ -99,7 +99,7 @@ object ElasticCollisionReactionSpec extends Specification {
 			b1.addContact( contact )
 			b2.addContact( -contact )
 
-			reaction.step( 0.5, List( b1, b2 ) )
+			reaction.step( 0.5, List( b1, b2 ), Nil )
 
 			b1.velocity must beEqualTo( Vector2( -3, 3 ) )
 			b2.velocity must beEqualTo( Vector2( 0, 0 ) )
@@ -115,7 +115,7 @@ object ElasticCollisionReactionSpec extends Specification {
 			s1.addContact( contact )
 			s2.addContact( -contact )
 
-			reaction.step( 0.0, List( s1, s2 ) )
+			reaction.step( 0.0, List( s1, s2 ), Nil )
 
 			s1.contacts must beEqualTo( Set( contact ) )
 			s2.contacts must beEqualTo( Set( -contact ) )

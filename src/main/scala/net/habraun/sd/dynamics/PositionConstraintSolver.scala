@@ -25,9 +25,9 @@ import math.Vector2
 
 
 
-class PositionConstraintSolver extends StepPhase[ PositionConstraint ] {
+class PositionConstraintSolver extends StepPhase[ PositionConstraint, Nothing ] {
 
-	def step( dt: Double, constraints: Iterable[ PositionConstraint ] ) {
+	def step( dt: Double, constraints: Iterable[ PositionConstraint ], c: Iterable[ Nothing ] ) {
 		for ( constraint <- constraints ) {
 			val initialX = constraint.position.x
 			val initialY = constraint.position.y

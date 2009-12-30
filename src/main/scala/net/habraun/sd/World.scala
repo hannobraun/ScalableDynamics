@@ -91,12 +91,12 @@ class World[ B <: Body ] {
 	
 	def step( dt: Double ) {
 		// Execute step phases.
-		integrator.step( dt, filterAndCast( bodies ) )
-		velocityConstraintSolver.step( dt, filterAndCast( bodies ) )
-		collisionDetector.step( dt, filterAndCast( bodies ) )
-		collisionReactor.step( dt, filterAndCast( bodies ) )
-		contactSolver.step( dt, filterAndCast( bodies ) )
-		positionConstraintSolver.step( dt, filterAndCast( bodies ) )
+		integrator.step( dt, filterAndCast( bodies ), Nil )
+		velocityConstraintSolver.step( dt, filterAndCast( bodies ), Nil )
+		collisionDetector.step( dt, filterAndCast( bodies ), Nil )
+		collisionReactor.step( dt, filterAndCast( bodies ), Nil )
+		contactSolver.step( dt, filterAndCast( bodies ), Nil )
+		positionConstraintSolver.step( dt, filterAndCast( bodies ), Nil )
 	}
 
 

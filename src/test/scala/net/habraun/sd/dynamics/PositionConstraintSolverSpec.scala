@@ -39,7 +39,7 @@ object PositionConstraintSolverSpec extends Specification {
 		"be a StepPhase." in {
 			val solver = new PositionConstraintSolver
 
-			solver must haveSuperClass[ StepPhase[ PositionConstraint ] ]
+			solver must haveSuperClass[ StepPhase[ PositionConstraint, Nothing ] ]
 		}
 
 		"set the x component of the position vector to minX, if it is below minX." in {
@@ -49,7 +49,7 @@ object PositionConstraintSolverSpec extends Specification {
 			body.position = Vector2( 1, 2 )
 			body.minX = Some( 2 )
 
-			solver.step( 0.0, body::Nil )
+			solver.step( 0.0, body::Nil, Nil )
 
 			body.position must beEqualTo( Vector2( 2, 2 ) )
 		}
@@ -61,7 +61,7 @@ object PositionConstraintSolverSpec extends Specification {
 			body.position = Vector2( 2, 1 )
 			body.minY = Some( 2 )
 
-			solver.step( 0.0, body::Nil )
+			solver.step( 0.0, body::Nil, Nil )
 
 			body.position must beEqualTo( Vector2( 2, 2 ) )
 		}
@@ -73,7 +73,7 @@ object PositionConstraintSolverSpec extends Specification {
 			body.position = Vector2( 3, 2 )
 			body.maxX = Some( 2 )
 
-			solver.step( 0.0, body::Nil )
+			solver.step( 0.0, body::Nil, Nil )
 
 			body.position must beEqualTo( Vector2( 2, 2 ) )
 		}
@@ -85,7 +85,7 @@ object PositionConstraintSolverSpec extends Specification {
 			body.position = Vector2( 2, 3 )
 			body.maxY = Some( 2 )
 
-			solver.step( 0.0, body::Nil )
+			solver.step( 0.0, body::Nil, Nil )
 
 			body.position must beEqualTo( Vector2( 2, 2 ) )
 		}
