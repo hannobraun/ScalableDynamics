@@ -50,10 +50,10 @@ class ElasticCollisionReaction extends StepPhase[ Nothing, Contact ] {
 				s1.velocity += -v1 + v2 * m2 / m1
 				s2.velocity += -v2 + v1 * m1 / m2
 			}
-			else if ( m1 == Double.PositiveInfinity ) {
+			else if ( m1 == Double.PositiveInfinity && m2 != Double.PositiveInfinity ) {
 				s2.velocity += ( 2 * -v2 ) + v1
 			}
-			else if ( m2 == Double.PositiveInfinity ) {
+			else if ( m2 == Double.PositiveInfinity && m1 != Double.PositiveInfinity ) {
 				s1.velocity += ( 2 * -v1 ) + v2
 			}
 		}

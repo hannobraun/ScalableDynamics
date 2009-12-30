@@ -137,5 +137,21 @@ object ElasticCollisionReactionSpec extends Specification {
 			s1.velocity must beEqualTo( Vector2( 1, 0 ) )
 			s2.velocity must beEqualTo( Vector2( 4, 3 ) )
 		}
+
+		"not change the speed at all if both bodies have infinite mass." in {
+			val reaction = new ElasticCollisionReaction
+
+			val s1 = new Shape {}
+			s1.mass = Double.PositiveInfinity
+			s1.velocity = Vector2( 1, 1 )
+			val s2 = new Shape {}
+			s2.mass = Double.PositiveInfinity
+			s2.velocity = Vector2( -1, -1 )
+
+			reaction.step( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
+
+			s1.velocity must beEqualTo( Vector2( 1, 1 ) )
+			s2.velocity must beEqualTo( Vector2( -1, -1 ) )
+		}
 	}
 }
