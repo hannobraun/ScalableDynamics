@@ -43,45 +43,5 @@ object ShapeSpec extends Specification with Mockito {
 
 			shape must haveSuperClass[ Body ]
 		}
-
-		"have no contacts initially." in {
-			val shape = new Shape {}
-
-			shape.contacts must beEqualTo( HashSet[ Contact ]() )
-		}
-
-		"add contacts to the contact set." in {
-			val shape = new Shape {}
-
-			val contact = mock[ Contact ]
-
-			shape.addContact( contact )
-
-			shape.contacts must beEqualTo( HashSet( contact ) )
-		}
-
-		"throw an exception if a null contact is added." in {
-			val shape = new Shape {}
-
-			shape.addContact( null ) must throwA[ NullPointerException ]
-		}
-
-		"remove a contact from the contact set." in {
-			val shape = new Shape {}
-			val contact = mock[ Contact ]
-
-			shape.addContact( contact )
-			shape.removeContact( contact )
-
-			shape.contacts must beEqualTo( HashSet[ Contact ]() )
-		}
-
-		"should throw an exception if a to-be-removed contact has not been added." in {
-			val shape = new Shape {}
-			
-			val contact = mock[ Contact ]
-
-			shape.removeContact( contact ) must throwAn[ IllegalArgumentException ]
-		}
 	}
 }

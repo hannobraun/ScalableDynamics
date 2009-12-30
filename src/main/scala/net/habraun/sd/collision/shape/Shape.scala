@@ -32,28 +32,4 @@ import scala.collection.mutable.HashSet
  * body.
  */
 
-trait Shape extends Body {
-
-	/**
-	 * The shape's list of contacts. Contacts are usually added when collisions are checked. They may be
-	 * referred to later, when collision reaction is computed.
-	 */
-
-	private var _contacts = HashSet[ Contact ]()
-
-	def contacts = _contacts
-
-	def addContact( contact: Contact ) {
-		if ( contact == null )
-			throw new NullPointerException
-
-		_contacts += contact
-	}
-
-	def removeContact( contact: Contact ) {
-		if ( !contacts.contains( contact ) )
-			throw new IllegalArgumentException( "Contact " + contact + " is not in contact set." )
-
-		_contacts -= contact
-	}
-}
+trait Shape extends Body
