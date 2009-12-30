@@ -23,6 +23,7 @@ package net.habraun.sd.dynamics
 import core.StepPhase
 import collision.shape.Contact
 import collision.shape.Shape
+import math.Scalar._
 
 import scala.collection.mutable.HashSet
 
@@ -45,22 +46,15 @@ class ElasticCollisionReaction extends StepPhase[ Nothing, Contact ] {
 			val m1 = s1.mass
 			val m2 = s2.mass
 
-			s1.velocity -= v1
-			s2.velocity -= v2
-
-			if ( m2 != Double.PositiveInfinity ) {
-				s1.velocity += v2 * m2 / m1
+			if ( m1 != Double.PositiveInfinity && m2 != Double.PositiveInfinity ) {
+				s1.velocity += -v1 + v2 * m2 / m1
+				s2.velocity += -v2 + v1 * m1 / m2
 			}
-			else {
-				s1.velocity -= v1
+			else if ( m1 == Double.PositiveInfinity ) {
+				s2.velocity += ( 2 * -v2 ) + v1
 			}
-			
-
-			if ( m1 != Double.PositiveInfinity ) {
-				s2.velocity += v1 * m1 / m2
-			}
-			else {
-				s2.velocity -= v2
+			else if ( m2 == Double.PositiveInfinity ) {
+				s1.velocity += ( 2 * -v1 ) + v2
 			}
 		}
 

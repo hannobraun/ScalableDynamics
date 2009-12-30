@@ -74,7 +74,7 @@ object ElasticCollisionReactionSpec extends Specification {
 			s2.velocity must beEqualTo( Vector2( 6, -3 ) )
 		}
 
-		"reflect a body off another body with infinite mass." in {
+		"just reflect a body off another non-moving body with infinite mass." in {
 			val reaction = new ElasticCollisionReaction
 
 			val s1 = new Shape {}
@@ -88,6 +88,22 @@ object ElasticCollisionReactionSpec extends Specification {
 
 			s1.velocity must beEqualTo( Vector2( -3, 3 ) )
 			s2.velocity must beEqualTo( Vector2( 0, 0 ) )
+		}
+
+		"reflect a body off another moving body with infinite mass, additionally adding its velocity." in {
+			val reaction = new ElasticCollisionReaction
+
+			val s1 = new Shape {}
+			s1.mass = 2
+			s1.velocity = Vector2( 3, 3 )
+			val s2 = new Shape {}
+			s2.mass = Double.PositiveInfinity
+			s2.velocity = Vector2( -1, 0 )
+
+			reaction.step( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
+
+			s1.velocity must beEqualTo( Vector2( -4, 3 ) )
+			s2.velocity must beEqualTo( Vector2( -1, 0 ) )
 		}
 	}
 }
