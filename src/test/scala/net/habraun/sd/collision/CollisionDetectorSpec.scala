@@ -114,51 +114,14 @@ object CollisionDetectorSpec extends Specification with Mockito {
 			val shape2 = mock[ Shape ]
 			val shapes = List( shape1, shape2 )
 
-			val contact1 = mock[ Contact ]
-			val contact2 = mock[ Contact ]
-
-			// Temporary code. To be removed once CollisionDetector doesn't add shapes to contacts any more.
-			-contact1 returns contact2
-			-contact2 returns contact1
-			contact1.s returns shape1
-			contact1.other returns shape2
-			contact2.s returns shape2
-			contact2.other returns shape1
+			val contact = mock[ Contact ]
 
 			broadPhase( shapes ) returns List( ( shape1, shape2 ) )
-			narrowPhase( shape1, shape2 ) returns Some( contact1 )
+			narrowPhase( shape1, shape2 ) returns Some( contact )
 
 			val ( updatedShapes, updatedConstraints ) = detector.step( 0.0, shapes, Nil )
 
-			updatedConstraints must haveTheSameElementsAs( List( contact1 ) )
-		}
-
-		"add the contacts returned by the narrow phase to the shape." in {
-			val broadPhase = mock[ BroadPhase ]
-			val narrowPhase = mock[ NarrowPhase ]
-			val detector = new CollisionDetector( broadPhase, narrowPhase )
-
-			val t = 0.5
-			val shape1 = mock[ Shape ]
-			val shape2 = mock[ Shape ]
-			val shapes = List( shape1, shape2 )
-			val contact1 = mock[ Contact ]
-			val contact2 = mock[ Contact ]
-
-			-contact1 returns contact2
-			-contact2 returns contact1
-			contact1.s returns shape1
-			contact1.other returns shape2
-			contact2.s returns shape2
-			contact2.other returns shape1
-
-			broadPhase( shapes ) returns List( ( shape1, shape2 ) )
-			narrowPhase( shape1, shape2 ) returns Some( contact1 )
-
-			detector.step( 0.0, shapes, Nil )
-
-			shape1.addContact( contact1 ) was called
-			shape2.addContact( contact2 ) was called
+			updatedConstraints must haveTheSameElementsAs( List( contact ) )
 		}
 	}
 }

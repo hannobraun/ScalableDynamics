@@ -40,12 +40,7 @@ class CollisionDetector( broadPhase: BroadPhase, narrowPhase: NarrowPhase ) exte
 			narrowPhase( possibleContact._1, possibleContact._2 )
 		}
 
-		// Add all detected contacts to the shapes they belong to.
-		for ( possibleContact <- possibleContacts; contact <- possibleContact ) {
-			contact.s.addContact( contact )
-			contact.other.addContact( -contact )
-		}
-
+		// Compile a list of all actual contacts that we can return.
 		val updatedConstraints = for( possibleContact <- possibleContacts; contact <- possibleContact ) yield {
 			contact
 		}
