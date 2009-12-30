@@ -26,7 +26,7 @@ import core.StepPhase
 
 
 
-class SimpleContactSolver( tolerance: Double ) extends StepPhase[ Shape, Contact ] {
+class SimpleContactSolver( tolerance: Double ) extends StepPhase[ Nothing, Contact ] {
 
 	/**
 	 * Constructor that provides a default tolerance value.
@@ -38,7 +38,7 @@ class SimpleContactSolver( tolerance: Double ) extends StepPhase[ Shape, Contact
 
 
 
-	def step( dt: Double, shapes: Iterable[ Shape ], contacts: Iterable[ Contact ] ) = {
+	def step( dt: Double, bodies: Iterable[ Nothing ], contacts: Iterable[ Contact ] ) = {
 		for ( contact <- contacts ) {
 			// These are the two shapes that are in contact.
 			val s1 = contact.s
@@ -74,6 +74,6 @@ class SimpleContactSolver( tolerance: Double ) extends StepPhase[ Shape, Contact
 			s2.position += contact.normal * ( contact.depth + tolerance ) * f2
 		}
 
-		( shapes, Nil )
+		( Nil, Nil )
 	}
 }

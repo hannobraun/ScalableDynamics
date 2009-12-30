@@ -41,7 +41,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 		"be a StepPhase." in {
 			val solver = new SimpleContactSolver( 0 )
 			
-			solver must haveSuperClass[ StepPhase[ Shape, Contact ] ]
+			solver must haveSuperClass[ StepPhase[ Nothing, Contact ] ]
 		}
 
 		"not change the position of two shapes that are just touching." in {
@@ -56,7 +56,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			val s2 = new Shape {}
 			s2.position = pos2
 
-			solver.step( 0.0, List( s1, s2 ), List( Contact( s1, s2, Vector2( 5, 5 ), Vector2( 1, 0 ), 0, 0.0 ) ) )
+			solver.step( 0.0, Nil, List( Contact( s1, s2, Vector2( 5, 5 ), Vector2( 1, 0 ), 0, 0.0 ) ) )
 
 			s1.position must beEqualTo( pos1 )
 			s2.position must beEqualTo( pos2 )
@@ -72,7 +72,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s2.position = Vector2( 3, 0 )
 			s2.mass = 2
 
-			solver.step( 0.0, List( s1, s2 ), List( Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 1, 0.0 ) ) )
+			solver.step( 0.0, Nil, List( Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 1, 0.0 ) ) )
 
 			s1.position must beEqualTo( Vector2( 1.5, 0 ) )
 			s2.position must beEqualTo( Vector2( 3.5, 0 ) )
@@ -88,7 +88,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s2.position = Vector2( 5, 0 )
 			s2.mass = 4
 
-			solver.step( 0.0, List( s1, s2 ), List( Contact( s1, s2, Vector2( 4.5, 0 ), Vector2( 1, 0 ), 3, 0.0 ) ) )
+			solver.step( 0.0, Nil, List( Contact( s1, s2, Vector2( 4.5, 0 ), Vector2( 1, 0 ), 3, 0.0 ) ) )
 
 			s1.position must beEqualTo( Vector2( 2, 0 ) )
 			s2.position must beEqualTo( Vector2( 6, 0 ) )
@@ -106,7 +106,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s2.position = Vector2( 3, 0 )
 			s2.mass = 2
 
-			solver.step( 0.0, List( s1, s2 ), List( Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 1, 0.0 ) ) )
+			solver.step( 0.0, Nil, List( Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 1, 0.0 ) ) )
 
 			s1.position must beEqualTo( pos1 )
 			s2.position must beEqualTo( Vector2( 4, 0 ) )
@@ -124,7 +124,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s2.position = pos2
 			s2.mass = Double.PositiveInfinity
 
-			solver.step( 0.0, List( s1, s2 ), List( Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 1, 0.0 ) ) )
+			solver.step( 0.0, Nil, List( Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 1, 0.0 ) ) )
 
 			s1.position must beEqualTo( Vector2( 1, 0 ) )
 			s2.position must beEqualTo( pos2 )
@@ -143,7 +143,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s2.position = pos2
 			s2.mass = Double.PositiveInfinity
 
-			solver.step( 0.0, List( s1, s2 ), List( Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 1, 0.0 ) ) )
+			solver.step( 0.0, Nil, List( Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 1, 0.0 ) ) )
 
 			s1.position must beEqualTo( pos1 )
 			s2.position must beEqualTo( pos2 )
@@ -159,7 +159,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s2.position = Vector2( 3, 0 )
 			s2.mass = 2
 
-			solver.step( 0.0, List( s1, s2 ), List( Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 2, 0.0 ) ) )
+			solver.step( 0.0, Nil, List( Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 2, 0.0 ) ) )
 
 			s1.position must beEqualTo( Vector2( 0.75, 0 ) )
 			s2.position must beEqualTo( Vector2( 4.25, 0 ) )
@@ -175,7 +175,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s2.position = Vector2( 3, 0 )
 			s2.mass = Double.PositiveInfinity
 
-			solver.step( 0.0, List( s1, s2 ), List( Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 0, 0.0 ) ) )
+			solver.step( 0.0, Nil, List( Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 0, 0.0 ) ) )
 
 			s1.position must beEqualTo( Vector2( 2, 0 ) )
 			s2.position must beEqualTo( Vector2( 3, 0 ) )
@@ -192,7 +192,7 @@ object SimpleContactSolverSpec extends Specification with Mockito {
 			s2.mass = Double.PositiveInfinity
 
 			val contacts = List( Contact( s1, s2, Vector2( 2.5, 0 ), Vector2( 1, 0 ), 0, 0.0 ) )
-			val ( updatedBodies, updatedConstraints ) = solver.step( 0.0, List( s1, s2 ), contacts )
+			val ( updatedBodies, updatedConstraints ) = solver.step( 0.0, Nil, contacts )
 
 			updatedConstraints must beEmpty
 		}

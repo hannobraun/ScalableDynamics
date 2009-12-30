@@ -98,7 +98,7 @@ class World[ B <: Body ] {
 		velocityConstraintSolver.step( dt, filterAndCast[ VelocityConstraint ]( bodies ), Nil )
 		val ( updatedBodies, updatedConstraints ) = collisionDetector.step( dt, filterAndCast[ Shape ]( bodies ), Nil )
 		collisionReactor.step( dt, filterAndCast[ Shape ]( bodies ), updatedConstraints )
-		contactSolver.step( dt, filterAndCast[ Shape ]( bodies ), updatedConstraints )
+		contactSolver.step( dt, Nil, updatedConstraints )
 		positionConstraintSolver.step( dt, filterAndCast[ PositionConstraint ]( bodies ), Nil )
 	}
 
