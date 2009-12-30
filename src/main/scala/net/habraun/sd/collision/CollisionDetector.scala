@@ -23,13 +23,14 @@ package net.habraun.sd.collision
 import core.StepPhase
 import phase.BroadPhase
 import phase.NarrowPhase
+import shape.Contact
 import shape.Shape
 
 
 
-class CollisionDetector( broadPhase: BroadPhase, narrowPhase: NarrowPhase ) extends StepPhase[ Shape, Nothing ] {
+class CollisionDetector( broadPhase: BroadPhase, narrowPhase: NarrowPhase ) extends StepPhase[ Shape, Contact ] {
 
-	def step( dt: Double, shapes: Iterable[ Shape ], constraints: Iterable[ Nothing ] ) = {
+	def step( dt: Double, shapes: Iterable[ Shape ], constraints: Iterable[ Contact ] ) = {
 		// Broad phase. Checks all shapes in a performant way and returns a list of possible collisions.
 		val possiblyCollidingPairs = broadPhase( shapes )
 
@@ -45,6 +46,10 @@ class CollisionDetector( broadPhase: BroadPhase, narrowPhase: NarrowPhase ) exte
 			contact.other.addContact( -contact )
 		}
 
-		( shapes, constraints )
+		val updatedConstraints = for( possibleContact <- possibleContacts; contact <- possibleContact ) yield {
+			contact
+		}
+
+		( shapes, updatedConstraints )
 	}
 }
