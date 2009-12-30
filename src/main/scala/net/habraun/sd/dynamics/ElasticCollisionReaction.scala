@@ -32,16 +32,9 @@ import scala.collection.mutable.HashSet
  * Performs elastic collision reaction.
  */
 
-class ElasticCollisionReaction extends StepPhase[ Shape, Nothing ] {
+class ElasticCollisionReaction extends StepPhase[ Shape, Contact ] {
 
-	def step( dt: Double, shapes: Iterable[ Shape ], constraints: Iterable[ Nothing ] ) = {
-		val contacts = new HashSet[ Contact ]
-		for ( shape <- shapes ) {
-			for ( contact <- shape.contacts ) {
-				contacts.addEntry( contact )
-			}
-		}
-
+	def step( dt: Double, shapes: Iterable[ Shape ], contacts: Iterable[ Contact ] ) = {
 		for ( contact <- contacts ) {
 			val s1 = contact.s
 			val s2 = contact.other
@@ -69,11 +62,8 @@ class ElasticCollisionReaction extends StepPhase[ Shape, Nothing ] {
 			else {
 				s2.velocity -= v2
 			}
-
-			contacts.removeEntry( contact )
-			contacts.removeEntry( -contact )
 		}
 
-		( shapes, constraints )
+		( shapes, contacts )
 	}
 }

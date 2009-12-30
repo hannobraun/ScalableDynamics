@@ -93,8 +93,8 @@ class World[ B <: Body ] {
 		// Execute step phases.
 		integrator.step( dt, filterAndCast( bodies ), Nil )
 		velocityConstraintSolver.step( dt, filterAndCast( bodies ), Nil )
-		collisionDetector.step( dt, filterAndCast( bodies ), Nil )
-		collisionReactor.step( dt, filterAndCast( bodies ), Nil )
+		val ( updatedBodies, updatedConstraints ) = collisionDetector.step( dt, filterAndCast( bodies ), Nil )
+		collisionReactor.step( dt, filterAndCast( bodies ), updatedConstraints )
 		contactSolver.step( dt, filterAndCast( bodies ), Nil )
 		positionConstraintSolver.step( dt, filterAndCast( bodies ), Nil )
 	}
