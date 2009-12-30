@@ -21,8 +21,6 @@ package net.habraun.sd
 
 
 import collision.CollisionDetector
-import collision.phase.BroadPhase
-import collision.phase.NarrowPhase
 import collision.phase.SimpleBroadPhase
 import collision.phase.SimpleNarrowPhase
 import collision.shape.Shape
