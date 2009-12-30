@@ -25,10 +25,13 @@ import collision.phase.BroadPhase
 import collision.phase.NarrowPhase
 import collision.phase.SimpleBroadPhase
 import collision.phase.SimpleNarrowPhase
+import collision.shape.Shape
 import core.Body
 import dynamics.ElasticCollisionReaction
+import dynamics.PositionConstraint
 import dynamics.PositionConstraintSolver
 import dynamics.SimpleContactSolver
+import dynamics.VelocityConstraint
 import dynamics.VelocityConstraintSolver
 import dynamics.VerletIntegrator
 
@@ -91,12 +94,12 @@ class World[ B <: Body ] {
 	
 	def step( dt: Double ) {
 		// Execute step phases.
-		integrator.step( dt, filterAndCast( bodies ), Nil )
-		velocityConstraintSolver.step( dt, filterAndCast( bodies ), Nil )
-		val ( updatedBodies, updatedConstraints ) = collisionDetector.step( dt, filterAndCast( bodies ), Nil )
-		collisionReactor.step( dt, filterAndCast( bodies ), updatedConstraints )
-		contactSolver.step( dt, filterAndCast( bodies ), Nil )
-		positionConstraintSolver.step( dt, filterAndCast( bodies ), Nil )
+		integrator.step( dt, filterAndCast[ Body ]( bodies ), Nil )
+		velocityConstraintSolver.step( dt, filterAndCast[ VelocityConstraint ]( bodies ), Nil )
+		val ( updatedBodies, updatedConstraints ) = collisionDetector.step( dt, filterAndCast[ Shape ]( bodies ), Nil )
+		collisionReactor.step( dt, filterAndCast[ Shape ]( bodies ), updatedConstraints )
+		contactSolver.step( dt, filterAndCast[ Shape ]( bodies ), Nil )
+		positionConstraintSolver.step( dt, filterAndCast[ PositionConstraint ]( bodies ), Nil )
 	}
 
 
