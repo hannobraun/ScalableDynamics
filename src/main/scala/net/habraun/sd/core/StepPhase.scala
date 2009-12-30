@@ -34,11 +34,10 @@ trait StepPhase[ B <: Body ] {
 	 * A concrete iteration step phase must implement this method. It will be called during each step and the
 	 * following parameters will be passed:
 	 * * dt: The time that has passed since the last step.
-	 * * filteredBodies: All bodies, filtered according to the type parameter of the step phase. For example,
-	 *                   if a concrete step phase was concerned with something collision-related, it would
-	 *                   extend StepPhase[Shape] and only Bodies with Shape mixed in would be passed to this
-	 *                   step method.
+	 * * bodies: All bodies, filtered according to the type parameter of the step phase. For example, if a concrete step phase was
+	 *           concerned with something collision-related, it would extend StepPhase[ Shape ] and only Bodies with Shape mixed in would
+	 *           be passed to this step method.
 	 */
 
-	def step( dt: Double, filteredBodies: Iterable[ B ] )
+	def step( dt: Double, bodies: Iterable[ B ] )
 }
