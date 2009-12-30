@@ -56,6 +56,22 @@ object CollisionDetectorSpec extends Specification with Mockito {
 			detector must haveSuperClass[ StepPhase[ Shape, Nothing ] ]
 		}
 
+		"return the body iterable unchanged." in {
+			val broadPhase = mock[ BroadPhase ]
+			val narrowPhase = mock[ NarrowPhase ]
+			val detector = new CollisionDetector( broadPhase, narrowPhase )
+
+			val shape1 = mock[ Shape ]
+			val shape2 = mock[ Shape ]
+			val shapes = List( shape1, shape2 )
+
+			broadPhase( shapes ) returns Nil
+
+			val ( updatedShapes, updatedConstraints ) = detector.step( 0.0, shapes, Nil )
+
+			updatedShapes must beEqualTo( shapes )
+		}
+
 		"pass a list of all objects to the broad phase." in {
 			val broadPhase = mock[ BroadPhase ]
 			val narrowPhase = mock[ NarrowPhase ]
