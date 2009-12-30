@@ -45,49 +45,49 @@ object ElasticCollisionReactionSpec extends Specification {
 		"just switch velocities if two objects of equal mass are colliding." in {
 			val reaction = new ElasticCollisionReaction
 
-			val b1 = new Shape {}
-			val b2 = new Shape {}
-			b1.mass = 2
-			b2.mass = 2
-			b1.velocity = Vector2( 5, 5 )
-			b2.velocity = Vector2( -4, -4 )
+			val s1 = new Shape {}
+			val s2 = new Shape {}
+			s1.mass = 2
+			s2.mass = 2
+			s1.velocity = Vector2( 5, 5 )
+			s2.velocity = Vector2( -4, -4 )
 
-			reaction.step( 0.5, Nil, List( Contact( b1, b2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
+			reaction.step( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
 
-			b1.velocity must beEqualTo( Vector2( -4, 5 ) )
-			b2.velocity must beEqualTo( Vector2( 5, -4 ) )
+			s1.velocity must beEqualTo( Vector2( -4, 5 ) )
+			s2.velocity must beEqualTo( Vector2( 5, -4 ) )
 		}
 
-		"take the mass ratio into account when switching velocities of different masses." in {
+		"take the mass ratio into account when switching velocities of different shapes." in {
 			val reaction = new ElasticCollisionReaction
 
-			val b1 = new Shape {}
-			val b2 = new Shape {}
-			b1.mass = 6
-			b2.mass = 2
-			b1.velocity = Vector2( 2, 3 )
-			b2.velocity = Vector2( -3, -3 )
+			val s1 = new Shape {}
+			val s2 = new Shape {}
+			s1.mass = 6
+			s2.mass = 2
+			s1.velocity = Vector2( 2, 3 )
+			s2.velocity = Vector2( -3, -3 )
 
-			reaction.step( 0.5, Nil, List( Contact( b1, b2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
+			reaction.step( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
 
-			b1.velocity must beEqualTo( Vector2( -1, 3 ) )
-			b2.velocity must beEqualTo( Vector2( 6, -3 ) )
+			s1.velocity must beEqualTo( Vector2( -1, 3 ) )
+			s2.velocity must beEqualTo( Vector2( 6, -3 ) )
 		}
 
 		"reflect a body off another body with infinite mass." in {
 			val reaction = new ElasticCollisionReaction
 
-			val b1 = new Shape {}
-			val b2 = new Shape {}
-			b1.mass = 2
-			b2.mass = Double.PositiveInfinity
-			b1.velocity = Vector2( 3, 3 )
-			b2.velocity = Vector2( 0, 0 )
+			val s1 = new Shape {}
+			val s2 = new Shape {}
+			s1.mass = 2
+			s2.mass = Double.PositiveInfinity
+			s1.velocity = Vector2( 3, 3 )
+			s2.velocity = Vector2( 0, 0 )
 
-			reaction.step( 0.5, Nil, List( Contact( b1, b2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
+			reaction.step( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
 
-			b1.velocity must beEqualTo( Vector2( -3, 3 ) )
-			b2.velocity must beEqualTo( Vector2( 0, 0 ) )
+			s1.velocity must beEqualTo( Vector2( -3, 3 ) )
+			s2.velocity must beEqualTo( Vector2( 0, 0 ) )
 		}
 	}
 }
