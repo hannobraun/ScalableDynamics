@@ -97,7 +97,7 @@ class World[ B <: Body ] {
 		integrator.step( dt, filterAndCast[ Body ]( bodies ), Nil )
 		velocityConstraintSolver.step( dt, filterAndCast[ VelocityConstraint ]( bodies ), Nil )
 		val ( updatedBodies, updatedConstraints ) = collisionDetector.step( dt, filterAndCast[ Shape ]( bodies ), Nil )
-		collisionReactor.step( dt, filterAndCast[ Shape ]( bodies ), updatedConstraints )
+		collisionReactor.step( dt, Nil, updatedConstraints )
 		contactSolver.step( dt, Nil, updatedConstraints )
 		positionConstraintSolver.step( dt, filterAndCast[ PositionConstraint ]( bodies ), Nil )
 	}
