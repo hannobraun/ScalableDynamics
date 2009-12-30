@@ -37,6 +37,7 @@ trait StepPhase[ B <: Body, C <: AnyRef ] {
 	 * * bodies: All bodies, filtered according to the type parameter of the step phase. For example, if a concrete step phase was
 	 *           concerned with something collision-related, it would extend StepPhase[ Shape ] and only Bodies with Shape mixed in would
 	 *           be passed to this step method.
+	 * * constraints: All constraints, filtered according to the type parameter.
 	 */
 
 	def step( dt: Double, bodies: Iterable[ B ], constraints: Iterable[ C ] )
