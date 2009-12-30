@@ -26,6 +26,7 @@ import core.StepPhase
 import math.Vector2
 
 import org.specs.Specification
+import org.specs.mock.Mockito
 import org.specs.runner.JUnit4
 
 
@@ -34,12 +35,29 @@ class ElasticCollisionReactionTest extends JUnit4( ElasticCollisionReactionSpec 
 
 
 
-object ElasticCollisionReactionSpec extends Specification {
+object ElasticCollisionReactionSpec extends Specification with Mockito {
 
 	"ElasticCollisionReaction" should {
 		"be a StepPhase." in {
 			val reaction = new ElasticCollisionReaction
 			reaction must haveSuperClass[ StepPhase[ Nothing, Contact ] ]
+		}
+
+		"return the passed constraints unchanged." in {
+			val reaction = new ElasticCollisionReaction
+
+			val s1 = new Shape {}
+			val s2 = new Shape {}
+			s1.mass = 2
+			s2.mass = 2
+			s1.velocity = Vector2( 5, 5 )
+			s2.velocity = Vector2( -4, -4 )
+
+			val contacts = List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) )
+
+			val ( updatedBodies, updatedContacts ) = reaction.step( 0.5, Nil, contacts )
+
+			updatedContacts must haveSameElementsAs( contacts )
 		}
 
 		"just switch velocities if two objects of equal mass are colliding." in {
