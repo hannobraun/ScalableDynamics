@@ -38,7 +38,7 @@ class SimpleContactSolver( tolerance: Double ) extends StepPhase[ Nothing, Conta
 
 
 
-	def step( dt: Double, bodies: Iterable[ Nothing ], contacts: Iterable[ Contact ] ) = {
+	def execute( dt: Double, bodies: Iterable[ Nothing ], contacts: Iterable[ Contact ] ) = {
 		for ( contact <- contacts ) {
 			// These are the two shapes that are in contact.
 			val s1 = contact.s

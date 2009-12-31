@@ -67,7 +67,7 @@ object CollisionDetectorSpec extends Specification with Mockito {
 
 			broadPhase( shapes ) returns Nil
 
-			val ( updatedShapes, updatedConstraints ) = detector.step( 0.0, shapes, Nil )
+			val ( updatedShapes, updatedConstraints ) = detector.execute( 0.0, shapes, Nil )
 
 			updatedShapes must beEqualTo( shapes )
 		}
@@ -83,7 +83,7 @@ object CollisionDetectorSpec extends Specification with Mockito {
 
 			broadPhase( shapes ) returns Nil
 
-			detector.step( 0.0, shapes, Nil )
+			detector.execute( 0.0, shapes, Nil )
 
 			broadPhase( shapes ) was called
 		}
@@ -100,7 +100,7 @@ object CollisionDetectorSpec extends Specification with Mockito {
 			broadPhase( shapes ) returns List( ( shape1, shape2 ) )
 			narrowPhase( shape1, shape2 ) returns None
 			
-			detector.step( 0.0, shapes, Nil )
+			detector.execute( 0.0, shapes, Nil )
 
 			narrowPhase( shape1, shape2 ) was called
 		}
@@ -119,7 +119,7 @@ object CollisionDetectorSpec extends Specification with Mockito {
 			broadPhase( shapes ) returns List( ( shape1, shape2 ) )
 			narrowPhase( shape1, shape2 ) returns Some( contact )
 
-			val ( updatedShapes, updatedConstraints ) = detector.step( 0.0, shapes, Nil )
+			val ( updatedShapes, updatedConstraints ) = detector.execute( 0.0, shapes, Nil )
 
 			updatedConstraints must haveTheSameElementsAs( List( contact ) )
 		}

@@ -56,7 +56,7 @@ object VerletIntegratorSpec extends Specification {
 			body.mass = 2
 			body.applyForce( Vector2( 16, 16 ) )
 
-			integrator.step( 0.5, List( body ), Nil )
+			integrator.execute( 0.5, List( body ), Nil )
 
 			// Position and velocity must have been correctly integrated.
 			body.position must beEqualTo( Vector2( 11, 11 ) )

@@ -42,5 +42,5 @@ trait StepPhase[ B <: Body, C <: AnyRef ] {
 	 * The method is supposed to return the updated body and constraint iterables.
 	 */
 
-	def step( dt: Double, bodies: Iterable[ B ], constraints: Iterable[ C ] ): ( Iterable[ B ], Iterable[ C ] )
+	def execute( dt: Double, bodies: Iterable[ B ], constraints: Iterable[ C ] ): ( Iterable[ B ], Iterable[ C ] )
 }

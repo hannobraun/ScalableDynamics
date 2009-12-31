@@ -30,7 +30,7 @@ import shape.Shape
 
 class CollisionDetector( broadPhase: BroadPhase, narrowPhase: NarrowPhase ) extends StepPhase[ Shape, Contact ] {
 
-	def step( dt: Double, shapes: Iterable[ Shape ], constraints: Iterable[ Contact ] ) = {
+	def execute( dt: Double, shapes: Iterable[ Shape ], constraints: Iterable[ Contact ] ) = {
 		// Broad phase. Checks all shapes in a performant way and returns a list of possible collisions.
 		val possiblyCollidingPairs = broadPhase( shapes )
 

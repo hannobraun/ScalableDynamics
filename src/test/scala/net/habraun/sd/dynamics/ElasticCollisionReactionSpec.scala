@@ -55,7 +55,7 @@ object ElasticCollisionReactionSpec extends Specification with Mockito {
 
 			val contacts = List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) )
 
-			val ( updatedBodies, updatedContacts ) = reaction.step( 0.5, Nil, contacts )
+			val ( updatedBodies, updatedContacts ) = reaction.execute( 0.5, Nil, contacts )
 
 			updatedContacts must haveSameElementsAs( contacts )
 		}
@@ -70,7 +70,7 @@ object ElasticCollisionReactionSpec extends Specification with Mockito {
 			s1.velocity = Vector2( 5, 5 )
 			s2.velocity = Vector2( -4, -4 )
 
-			reaction.step( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
+			reaction.execute( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
 
 			s1.velocity must beEqualTo( Vector2( -4, 5 ) )
 			s2.velocity must beEqualTo( Vector2( 5, -4 ) )
@@ -86,7 +86,7 @@ object ElasticCollisionReactionSpec extends Specification with Mockito {
 			s1.velocity = Vector2( 2, 3 )
 			s2.velocity = Vector2( -3, -3 )
 
-			reaction.step( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
+			reaction.execute( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
 
 			s1.velocity must beEqualTo( Vector2( -1, 3 ) )
 			s2.velocity must beEqualTo( Vector2( 6, -3 ) )
@@ -102,7 +102,7 @@ object ElasticCollisionReactionSpec extends Specification with Mockito {
 			s1.velocity = Vector2( 3, 3 )
 			s2.velocity = Vector2( 0, 0 )
 
-			reaction.step( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
+			reaction.execute( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
 
 			s1.velocity must beEqualTo( Vector2( -3, 3 ) )
 			s2.velocity must beEqualTo( Vector2( 0, 0 ) )
@@ -118,7 +118,7 @@ object ElasticCollisionReactionSpec extends Specification with Mockito {
 			s2.mass = 2
 			s2.velocity = Vector2( -3, 3 )
 
-			reaction.step( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
+			reaction.execute( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
 
 			s1.velocity must beEqualTo( Vector2( 0, 0 ) )
 			s2.velocity must beEqualTo( Vector2( 3, 3 ) )
@@ -134,7 +134,7 @@ object ElasticCollisionReactionSpec extends Specification with Mockito {
 			s2.mass = Double.PositiveInfinity
 			s2.velocity = Vector2( -1, 0 )
 
-			reaction.step( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
+			reaction.execute( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
 
 			s1.velocity must beEqualTo( Vector2( -4, 3 ) )
 			s2.velocity must beEqualTo( Vector2( -1, 0 ) )
@@ -150,7 +150,7 @@ object ElasticCollisionReactionSpec extends Specification with Mockito {
 			s2.mass = 2
 			s2.velocity = Vector2( -3, 3 )
 
-			reaction.step( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
+			reaction.execute( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
 
 			s1.velocity must beEqualTo( Vector2( 1, 0 ) )
 			s2.velocity must beEqualTo( Vector2( 4, 3 ) )
@@ -166,7 +166,7 @@ object ElasticCollisionReactionSpec extends Specification with Mockito {
 			s2.mass = Double.PositiveInfinity
 			s2.velocity = Vector2( -1, -1 )
 
-			reaction.step( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
+			reaction.execute( 0.5, Nil, List( Contact( s1, s2, Vector2( 0, 0 ), Vector2( 1, 0 ), 1, 0.5 ) ) )
 
 			s1.velocity must beEqualTo( Vector2( 1, 1 ) )
 			s2.velocity must beEqualTo( Vector2( -1, -1 ) )
