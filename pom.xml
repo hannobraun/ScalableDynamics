@@ -77,21 +77,6 @@
 			<version>1.8.4</version>
 			<scope>test</scope>
 		</dependency>
-
-		<dependency>
-			<!--
-				Scalable Dynamics doesn't directly depend on this, but it is needed by Specs or Mockito.
-				If the dependency is not there, this will lead to a NoClassDefFoundError because
-				org.hamcrest.TypeSafeMatcher is missing.
-				This should sort itself out eventually, since TypeSafeMatcher has been moved from
-				hamcrest-library to hamcrest-core after version 1.1, which seems to be included in
-				mockito-all.
-			-->
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-library</artifactId>
-			<version>1.1</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 
 	<build>
