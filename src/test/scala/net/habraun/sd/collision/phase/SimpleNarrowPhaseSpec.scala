@@ -26,7 +26,6 @@ import net.habraun.sd.collision.shape.LineSegment
 import net.habraun.sd.collision.shape.Shape
 import net.habraun.sd.collision.test.CircleCircleTest
 import net.habraun.sd.collision.test.CircleLineSegmentTest
-import net.habraun.sd.core.Body
 import net.habraun.sd.math.Vector2
 
 import org.specs.Specification

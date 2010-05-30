@@ -23,7 +23,6 @@ package net.habraun.sd.collision.test
 import net.habraun.sd.collision.shape.Circle
 import net.habraun.sd.collision.shape.Contact
 import net.habraun.sd.collision.shape.LineSegment
-import net.habraun.sd.math.Vector2
 
 
 

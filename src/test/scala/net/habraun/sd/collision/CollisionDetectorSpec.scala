@@ -25,7 +25,6 @@ import net.habraun.sd.collision.phase.NarrowPhase
 import net.habraun.sd.collision.shape.Contact
 import net.habraun.sd.collision.shape.Shape
 import net.habraun.sd.core.StepPhase
-import net.habraun.sd.math.Vector2
 
 import org.specs.Specification
 import org.specs.mock.Mockito

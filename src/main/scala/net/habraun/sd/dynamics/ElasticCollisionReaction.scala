@@ -22,10 +22,7 @@ package net.habraun.sd.dynamics
 
 import net.habraun.sd.core.StepPhase
 import net.habraun.sd.collision.shape.Contact
-import net.habraun.sd.collision.shape.Shape
 import net.habraun.sd.math.Scalar._
-
-import scala.collection.mutable.HashSet
 
 
 

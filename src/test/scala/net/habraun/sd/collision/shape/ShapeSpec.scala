@@ -21,9 +21,6 @@ package net.habraun.sd.collision.shape
 
 
 import net.habraun.sd.core.Body
-import net.habraun.sd.math.Vector2
-
-import scala.collection.mutable.HashSet
 
 import org.specs.Specification
 import org.specs.mock.Mockito

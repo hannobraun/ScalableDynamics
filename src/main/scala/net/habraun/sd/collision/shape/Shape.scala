@@ -22,8 +22,6 @@ package net.habraun.sd.collision.shape
 
 import net.habraun.sd.core.Body
 
-import scala.collection.mutable.HashSet
-
 
 
 /**

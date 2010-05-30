@@ -24,8 +24,6 @@ import net.habraun.sd.core.Body
 import net.habraun.sd.core.StepPhase
 import net.habraun.sd.math.Vector2
 
-import scala.collection.immutable.HashSet
-
 import org.specs.Specification
 import org.specs.runner.JUnit4
 

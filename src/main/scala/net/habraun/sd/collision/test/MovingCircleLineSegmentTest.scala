@@ -25,7 +25,6 @@ import net.habraun.sd.collision.shape.Contact
 import net.habraun.sd.collision.shape.LineSegment
 import net.habraun.sd.math.Scalar._
 import net.habraun.sd.math.Vector2
-import net.habraun.sd.math.ZeroVector
 
 
 
