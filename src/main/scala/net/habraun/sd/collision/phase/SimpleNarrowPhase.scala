@@ -16,17 +16,17 @@
 
 
 
-package net.habraun.sd.collision.phase
+package com.hannobraun.sd.collision.phase
 
 
 
-import net.habraun.sd.collision.shape.Circle
-import net.habraun.sd.collision.shape.LineSegment
-import net.habraun.sd.collision.shape.Shape
-import net.habraun.sd.collision.test.CircleCircleTest
-import net.habraun.sd.collision.test.CircleLineSegmentTest
-import net.habraun.sd.collision.test.MovingCircleCircleTest
-import net.habraun.sd.collision.test.MovingCircleLineSegmentTest
+import com.hannobraun.sd.collision.shape.Circle
+import com.hannobraun.sd.collision.shape.LineSegment
+import com.hannobraun.sd.collision.shape.Shape
+import com.hannobraun.sd.collision.test.CircleCircleTest
+import com.hannobraun.sd.collision.test.CircleLineSegmentTest
+import com.hannobraun.sd.collision.test.MovingCircleCircleTest
+import com.hannobraun.sd.collision.test.MovingCircleLineSegmentTest
 
 
 

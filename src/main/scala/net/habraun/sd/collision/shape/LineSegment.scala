@@ -16,11 +16,11 @@
 
 
 
-package net.habraun.sd.collision.shape
+package com.hannobraun.sd.collision.shape
 
 
 
-import net.habraun.sd.math.Vector2
+import com.hannobraun.sd.math.Vector2
 
 
 

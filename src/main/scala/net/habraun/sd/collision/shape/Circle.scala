@@ -16,7 +16,7 @@
 
 
 
-package net.habraun.sd.collision.shape
+package com.hannobraun.sd.collision.shape
 
 
 

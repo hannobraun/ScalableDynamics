@@ -16,11 +16,11 @@
 
 
 
-package net.habraun.sd.collision.phase
+package com.hannobraun.sd.collision.phase
 
 
 
-import net.habraun.sd.collision.shape.Shape
+import com.hannobraun.sd.collision.shape.Shape
 
 import org.specs.Specification
 import org.specs.runner.JUnit4

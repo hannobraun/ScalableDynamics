@@ -16,11 +16,11 @@
 
 
 
-package net.habraun.sd.collision.shape
+package com.hannobraun.sd.collision.shape
 
 
 
-import net.habraun.sd.core.Body
+import com.hannobraun.sd.core.Body
 
 import org.specs.Specification
 import org.specs.mock.Mockito

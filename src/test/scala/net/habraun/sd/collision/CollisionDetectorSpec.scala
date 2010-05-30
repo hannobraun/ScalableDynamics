@@ -16,15 +16,15 @@
 
 
 
-package net.habraun.sd.collision
+package com.hannobraun.sd.collision
 
 
 
-import net.habraun.sd.collision.phase.BroadPhase
-import net.habraun.sd.collision.phase.NarrowPhase
-import net.habraun.sd.collision.shape.Contact
-import net.habraun.sd.collision.shape.Shape
-import net.habraun.sd.core.StepPhase
+import com.hannobraun.sd.collision.phase.BroadPhase
+import com.hannobraun.sd.collision.phase.NarrowPhase
+import com.hannobraun.sd.collision.shape.Contact
+import com.hannobraun.sd.collision.shape.Shape
+import com.hannobraun.sd.core.StepPhase
 
 import org.specs.Specification
 import org.specs.mock.Mockito

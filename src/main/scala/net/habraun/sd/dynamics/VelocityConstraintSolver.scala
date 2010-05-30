@@ -16,11 +16,11 @@
 
 
 
-package net.habraun.sd.dynamics
+package com.hannobraun.sd.dynamics
 
 
 
-import net.habraun.sd.core.StepPhase
+import com.hannobraun.sd.core.StepPhase
 
 
 

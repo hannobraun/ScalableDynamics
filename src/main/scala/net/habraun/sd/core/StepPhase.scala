@@ -16,7 +16,7 @@
 
 
 
-package net.habraun.sd.core
+package com.hannobraun.sd.core
 
 
 

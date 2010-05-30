@@ -16,13 +16,13 @@
 
 
 
-package net.habraun.sd.dynamics
+package com.hannobraun.sd.dynamics
 
 
 
-import net.habraun.sd.core.StepPhase
-import net.habraun.sd.collision.shape.Contact
-import net.habraun.sd.math.Scalar._
+import com.hannobraun.sd.core.StepPhase
+import com.hannobraun.sd.collision.shape.Contact
+import com.hannobraun.sd.math.Scalar._
 
 
 

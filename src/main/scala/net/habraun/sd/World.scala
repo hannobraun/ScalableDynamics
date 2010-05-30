@@ -16,22 +16,22 @@
 
 
 
-package net.habraun.sd
+package com.hannobraun.sd
 
 
 
-import collision.CollisionDetector
-import collision.phase.SimpleBroadPhase
-import collision.phase.SimpleNarrowPhase
-import collision.shape.Shape
-import core.Body
-import dynamics.ElasticCollisionReaction
-import dynamics.PositionConstraint
-import dynamics.PositionConstraintSolver
-import dynamics.SimpleContactSolver
-import dynamics.VelocityConstraint
-import dynamics.VelocityConstraintSolver
-import dynamics.VerletIntegrator
+import com.hannobraun.sd.collision.CollisionDetector
+import com.hannobraun.sd.collision.phase.SimpleBroadPhase
+import com.hannobraun.sd.collision.phase.SimpleNarrowPhase
+import com.hannobraun.sd.collision.shape.Shape
+import com.hannobraun.sd.core.Body
+import com.hannobraun.sd.dynamics.ElasticCollisionReaction
+import com.hannobraun.sd.dynamics.PositionConstraint
+import com.hannobraun.sd.dynamics.PositionConstraintSolver
+import com.hannobraun.sd.dynamics.SimpleContactSolver
+import com.hannobraun.sd.dynamics.VelocityConstraint
+import com.hannobraun.sd.dynamics.VelocityConstraintSolver
+import com.hannobraun.sd.dynamics.VerletIntegrator
 
 import scala.collection.mutable.HashSet
 import scala.reflect.Manifest

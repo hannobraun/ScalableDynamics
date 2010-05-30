@@ -16,12 +16,12 @@
 
 
 
-package net.habraun.sd.collision.phase
+package com.hannobraun.sd.collision.phase
 
 
 
-import net.habraun.sd.collision.shape.Contact
-import net.habraun.sd.collision.shape.Shape
+import com.hannobraun.sd.collision.shape.Contact
+import com.hannobraun.sd.collision.shape.Shape
 
 
 

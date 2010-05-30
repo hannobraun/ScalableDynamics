@@ -16,13 +16,13 @@
 
 
 
-package net.habraun.sd.collision.test
+package com.hannobraun.sd.collision.test
 
 
 
-import net.habraun.sd.math.Vector2
-import net.habraun.sd.collision.shape.Circle
-import net.habraun.sd.collision.shape.Contact
+import com.hannobraun.sd.math.Vector2
+import com.hannobraun.sd.collision.shape.Circle
+import com.hannobraun.sd.collision.shape.Contact
 
 import org.specs.Specification
 import org.specs.mock.Mockito

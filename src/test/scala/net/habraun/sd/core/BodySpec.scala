@@ -16,11 +16,11 @@
 
 
 
-package net.habraun.sd.core
+package com.hannobraun.sd.core
 
 
 
-import net.habraun.sd.math.Vector2
+import com.hannobraun.sd.math.Vector2
 
 import org.specs.Specification
 import org.specs.runner.JUnit4

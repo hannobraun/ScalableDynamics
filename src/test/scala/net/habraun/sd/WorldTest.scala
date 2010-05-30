@@ -16,22 +16,21 @@
 
 
 
-package net.habraun.sd
+package com.hannobraun.sd
 
 
 
-import collision.phase.BroadPhase
-import collision.phase.NarrowPhase
-import collision.phase.SimpleBroadPhase
-import collision.phase.SimpleNarrowPhase
-import collision.shape.Contact
-import collision.shape.Shape
-import core.Body
-import dynamics.VelocityConstraintSolver
-import math.Vector2
+import com.hannobraun.sd.collision.phase.BroadPhase
+import com.hannobraun.sd.collision.phase.NarrowPhase
+import com.hannobraun.sd.collision.phase.SimpleBroadPhase
+import com.hannobraun.sd.collision.phase.SimpleNarrowPhase
+import com.hannobraun.sd.collision.shape.Contact
+import com.hannobraun.sd.collision.shape.Shape
+import com.hannobraun.sd.core.Body
+import com.hannobraun.sd.dynamics.VelocityConstraintSolver
+import com.hannobraun.sd.math.Vector2
 
 import scala.collection.mutable.HashSet
-
 
 import org.junit.Before
 import org.junit.Test

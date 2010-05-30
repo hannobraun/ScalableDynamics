@@ -16,11 +16,11 @@
 
 
 
-package net.habraun.sd.dynamics
+package com.hannobraun.sd.dynamics
 
 
 
-import net.habraun.sd.core.Body
+import com.hannobraun.sd.core.Body
 
 import org.specs.Specification
 import org.specs.runner.JUnit4
