@@ -16,7 +16,7 @@
 
 
 	<groupId>com.hannobraun</groupId>
-	<artifactId>scalable-dynamics</artifactId>
+	<artifactId>scalable-dynamics_${scala.version}</artifactId>
 	<version>0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
