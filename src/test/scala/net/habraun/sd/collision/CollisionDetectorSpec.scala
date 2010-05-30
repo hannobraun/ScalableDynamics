@@ -20,12 +20,12 @@ package net.habraun.sd.collision
 
 
 
-import core.StepPhase
-import math.Vector2
-import phase.BroadPhase
-import phase.NarrowPhase
-import shape.Contact
-import shape.Shape
+import net.habraun.sd.collision.phase.BroadPhase
+import net.habraun.sd.collision.phase.NarrowPhase
+import net.habraun.sd.collision.shape.Contact
+import net.habraun.sd.collision.shape.Shape
+import net.habraun.sd.core.StepPhase
+import net.habraun.sd.math.Vector2
 
 import org.specs.Specification
 import org.specs.mock.Mockito

@@ -20,8 +20,8 @@ package net.habraun.sd.dynamics
 
 
 
-import core.StepPhase
-import math.Vector2
+import net.habraun.sd.core.StepPhase
+import net.habraun.sd.math.Vector2
 
 
 

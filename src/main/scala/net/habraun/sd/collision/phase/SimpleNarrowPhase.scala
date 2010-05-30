@@ -20,15 +20,15 @@ package net.habraun.sd.collision.phase
 
 
 
-import math.Vector2
-import shape.Circle
-import shape.Contact
-import shape.LineSegment
-import shape.Shape
-import test.CircleCircleTest
-import test.CircleLineSegmentTest
-import test.MovingCircleCircleTest
-import test.MovingCircleLineSegmentTest
+import net.habraun.sd.collision.shape.Circle
+import net.habraun.sd.collision.shape.Contact
+import net.habraun.sd.collision.shape.LineSegment
+import net.habraun.sd.collision.shape.Shape
+import net.habraun.sd.collision.test.CircleCircleTest
+import net.habraun.sd.collision.test.CircleLineSegmentTest
+import net.habraun.sd.collision.test.MovingCircleCircleTest
+import net.habraun.sd.collision.test.MovingCircleLineSegmentTest
+import net.habraun.sd.math.Vector2
 
 
 

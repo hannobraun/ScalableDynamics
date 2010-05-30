@@ -20,7 +20,7 @@ package net.habraun.sd.collision.phase
 
 
 
-import shape.Shape
+import net.habraun.sd.collision.shape.Shape
 
 import org.specs.Specification
 import org.specs.runner.JUnit4

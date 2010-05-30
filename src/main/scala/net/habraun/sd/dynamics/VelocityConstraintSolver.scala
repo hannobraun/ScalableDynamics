@@ -20,7 +20,7 @@ package net.habraun.sd.dynamics
 
 
 
-import core.StepPhase
+import net.habraun.sd.core.StepPhase
 
 
 

@@ -20,7 +20,7 @@ package net.habraun.sd.dynamics
 
 
 
-import core.Body
+import net.habraun.sd.core.Body
 
 
 

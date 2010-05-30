@@ -20,9 +20,9 @@ package net.habraun.sd.dynamics
 
 
 
-import core.Body
-import core.StepPhase
-import math.Vector2
+import net.habraun.sd.core.Body
+import net.habraun.sd.core.StepPhase
+import net.habraun.sd.math.Vector2
 
 import scala.collection.immutable.HashSet
 

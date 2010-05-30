@@ -20,7 +20,7 @@ package net.habraun.sd.collision.shape
 
 
 
-import math.Vector2
+import net.habraun.sd.math.Vector2
 
 
 

@@ -20,10 +20,10 @@ package net.habraun.sd.dynamics
 
 
 
-import collision.shape.Contact
-import collision.shape.Shape
-import core.StepPhase
-import math.Vector2
+import net.habraun.sd.collision.shape.Contact
+import net.habraun.sd.collision.shape.Shape
+import net.habraun.sd.core.StepPhase
+import net.habraun.sd.math.Vector2
 
 import org.specs.Specification
 import org.specs.mock.Mockito

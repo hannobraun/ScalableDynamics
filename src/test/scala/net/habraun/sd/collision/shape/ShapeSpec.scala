@@ -20,8 +20,8 @@ package net.habraun.sd.collision.shape
 
 
 
-import core.Body
-import math.Vector2
+import net.habraun.sd.core.Body
+import net.habraun.sd.math.Vector2
 
 import scala.collection.mutable.HashSet
 

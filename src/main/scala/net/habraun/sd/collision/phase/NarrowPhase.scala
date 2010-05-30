@@ -20,8 +20,8 @@ package net.habraun.sd.collision.phase
 
 
 
-import shape.Contact
-import shape.Shape
+import net.habraun.sd.collision.shape.Contact
+import net.habraun.sd.collision.shape.Shape
 
 
 

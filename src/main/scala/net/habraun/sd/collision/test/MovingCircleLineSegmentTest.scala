@@ -20,12 +20,12 @@ package net.habraun.sd.collision.test
 
 
 
-import math.Scalar._
-import math.Vector2
-import math.ZeroVector
-import shape.Circle
-import shape.Contact
-import shape.LineSegment
+import net.habraun.sd.collision.shape.Circle
+import net.habraun.sd.collision.shape.Contact
+import net.habraun.sd.collision.shape.LineSegment
+import net.habraun.sd.math.Scalar._
+import net.habraun.sd.math.Vector2
+import net.habraun.sd.math.ZeroVector
 
 
 

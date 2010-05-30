@@ -20,7 +20,7 @@ package net.habraun.sd.collision.shape
 
 
 
-import core.Body
+import net.habraun.sd.core.Body
 
 import scala.collection.mutable.HashSet
 
