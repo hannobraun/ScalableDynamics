@@ -143,7 +143,7 @@ object Vector2Spec extends Specification {
 	}
 
 	"InvalidVector should be a vector with both components being Double.NaN." in {
-		InvalidVector.x must beEqualTo( Double.NaN )
-		InvalidVector.y must beEqualTo( Double.NaN )
+		InvalidVector.x.isNaN must beTrue
+		InvalidVector.y.isNaN must beTrue
 	}
 }
