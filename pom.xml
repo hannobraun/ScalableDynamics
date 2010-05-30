@@ -6,16 +6,14 @@
 
 
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-		<scala.version>2.8.0.Beta1</scala.version>
-	</properties>
-
+	<parent>
+		<groupId>com.hannobraun</groupId>
+		<artifactId>hannobraun-parent</artifactId>
+		<version>0.1-SNAPSHOT</version>
+	</parent>
 
 
-	<groupId>com.hannobraun</groupId>
+
 	<artifactId>scalable-dynamics_${scala.version}</artifactId>
 	<version>0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -39,80 +37,21 @@
 	
 
 	<dependencies>
-		<!-- Compilation dependencies -->
-		<dependency>
-			<groupId>org.scala-lang</groupId>
-			<artifactId>scala-library</artifactId>
-			<version>${scala.version}</version>
-		</dependency>
-
 		<!--
-			Specs-related dependencies
-			The following dependencies consist of Specs itself and its optional dependencies that SD makes use of. Make sure to keep all
-			the of the optional dependencies in sync to the Specs version.
+			Basic dependencies like scala-library and Specs are inherited from the parent POM. Additional dependencies can be specified
+			here.
 		-->
-		<dependency>
-			<groupId>org.scala-tools.testing</groupId>
-			<artifactId>specs_${scala.version}</artifactId>
-			<version>1.6.4</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency> <!-- Optional Specs dependency -->
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.7</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency> <!-- Optional Specs dependency -->
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.8.4</version>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 
 
 
 	<build>
-		<sourceDirectory>src/main/scala</sourceDirectory>
-		<testSourceDirectory>src/test/scala</testSourceDirectory>
-
 		<plugins>
 			<plugin>
 				<groupId>org.scala-tools</groupId>
 				<artifactId>maven-scala-plugin</artifactId>
-				<version>2.13.1</version>
-
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-							<goal>testCompile</goal>
-						</goals>
-					</execution>
-				</executions>
-
-				<configuration>
-					<args>
-						<arg>-target:jvm-1.5</arg>
-						<arg>-unchecked</arg>
-					</args>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-
-
-
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.scala-tools</groupId>
-				<artifactId>maven-scala-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</reporting>
 	
 </project>
