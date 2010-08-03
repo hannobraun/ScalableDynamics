@@ -85,7 +85,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			narrowPhase( s1, s2 )
 
-			circleCircleTest( s1, s2 ) was called
+			there was one( circleCircleTest ).apply( s1, s2 )
 		}
 
 		"pass the parameters to the circle-line segment test if a circle and a line segment are passed." in {
@@ -100,7 +100,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			narrowPhase( s1, s2 )
 
-			circleLineSegmentTest( s1, s2 ) was called
+			there was one( circleLineSegmentTest ).apply( s1, s2 )
 		}
 
 		"pass the parameters to the circle-line segment test if a line segment and a circle are passed." in {
@@ -115,7 +115,7 @@ object SimpleNarrowPhaseSpec extends Specification with Mockito {
 
 			narrowPhase( s1, s2 )
 
-			circleLineSegmentTest( s2, s1 ) was called
+			there was one( circleLineSegmentTest ).apply( s2, s1 )
 		}
 
 		"pass on the Contact returned by the circle-circle test." in {

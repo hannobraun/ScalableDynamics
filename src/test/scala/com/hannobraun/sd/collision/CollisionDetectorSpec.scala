@@ -84,7 +84,7 @@ object CollisionDetectorSpec extends Specification with Mockito {
 
 			detector.execute( 0.0, shapes, Nil )
 
-			broadPhase( shapes ) was called
+			there was one( broadPhase ).apply( shapes )
 		}
 
 		"pass the pairs returned by the broad phase to the narrow phase." in {
@@ -101,7 +101,7 @@ object CollisionDetectorSpec extends Specification with Mockito {
 			
 			detector.execute( 0.0, shapes, Nil )
 
-			narrowPhase( shape1, shape2 ) was called
+			there was one( narrowPhase ).apply( shape1, shape2 )
 		}
 
 		"return the contacts returned by the narrow phase in the constraints iterable." in {
