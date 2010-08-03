@@ -22,6 +22,8 @@ package com.hannobraun.sd.dynamics
 
 import com.hannobraun.sd.core.StepPhase
 
+import scala.math._
+
 
 
 class VelocityConstraintSolver extends StepPhase[ VelocityConstraint, Nothing ] {
@@ -32,7 +34,7 @@ class VelocityConstraintSolver extends StepPhase[ VelocityConstraint, Nothing ] 
 			if ( constraint.velocity.squaredLength > constraint.maxVelocity * constraint.maxVelocity ) {
 				// It is. Set the velocity to the maximum velocity while retaining the direction of the new
 				// velocity.
-				constraint.velocity = constraint.velocity * ( constraint.maxVelocity / Math.sqrt(
+				constraint.velocity = constraint.velocity * ( constraint.maxVelocity / sqrt(
 						constraint.velocity * constraint.velocity ) )
 			}
 		}

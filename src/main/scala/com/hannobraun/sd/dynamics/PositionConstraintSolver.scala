@@ -23,6 +23,8 @@ package com.hannobraun.sd.dynamics
 import com.hannobraun.sd.core.StepPhase
 import com.hannobraun.sd.math.Vector2
 
+import scala.math._
+
 
 
 class PositionConstraintSolver extends StepPhase[ PositionConstraint, Nothing ] {
@@ -33,22 +35,22 @@ class PositionConstraintSolver extends StepPhase[ PositionConstraint, Nothing ] 
 			val initialY = constraint.position.y
 
 			val xAfterMin = constraint.minX match {
-				case Some( minX ) => Math.max( initialX, minX )
+				case Some( minX ) => max( initialX, minX )
 				case None => initialX
 			}
 
 			val yAfterMin = constraint.minY match {
-				case Some( minY ) => Math.max( initialY, minY )
+				case Some( minY ) => max( initialY, minY )
 				case None => initialY
 			}
 
 			val xAfterMax = constraint.maxX match {
-				case Some( maxX ) => Math.min( xAfterMin, maxX )
+				case Some( maxX ) => min( xAfterMin, maxX )
 				case None => xAfterMin
 			}
 
 			val yAfterMax = constraint.maxY match {
-				case Some( maxY ) => Math.min( yAfterMin, maxY )
+				case Some( maxY ) => min( yAfterMin, maxY )
 				case None => yAfterMin
 			}
 

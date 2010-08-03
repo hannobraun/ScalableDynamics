@@ -22,6 +22,8 @@ package com.hannobraun.sd.math
 
 import Vector2._
 
+import scala.math._
+
 
 
 /**
@@ -87,7 +89,7 @@ case class Vector2( x: Double, y: Double ) {
 	 * performance is critical, it is recommended to use squaredLength where applicable.
 	 */
 
-	def length = Math.sqrt( ( x * x ) + ( y * y ) )
+	def length = sqrt( ( x * x ) + ( y * y ) )
 
 
 

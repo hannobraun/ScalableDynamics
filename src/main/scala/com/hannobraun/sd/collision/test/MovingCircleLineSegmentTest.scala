@@ -27,6 +27,8 @@ import com.hannobraun.sd.math.Scalar._
 import com.hannobraun.sd.math.Vector2
 import com.hannobraun.sd.math.ZeroVector
 
+import scala.math._
+
 
 
 /**
@@ -158,14 +160,14 @@ class MovingCircleLineSegmentTest extends CircleLineSegmentTest {
 				val lineNormal = dls.orthogonal.normalize
 				val lineDistanceFromOrigin = pls * lineNormal
 
-				Math.abs( lineNormal * pc - lineDistanceFromOrigin )
+				abs( lineNormal * pc - lineDistanceFromOrigin )
 			}
 
 			// Now we'll compute the distance vector, which is orthogonal to the line defined by the line segment and points from the point
 			// where the circle would touch the line to the center of the line segment. If the circle is already touching the line, the
 			// distance vector will just point from the closest point on the line to the circle center.
 			val dist = {
-				val length = Math.min( rc, Math.abs( circleCenterDistanceFromLine ) )
+				val length = min( rc, abs( circleCenterDistanceFromLine ) )
 				val lineOrthogonal = dls.orthogonal.normalize * length
 				if ( lineOrthogonal * ( pc - pls ) >= 0 ) lineOrthogonal else -lineOrthogonal
 			}
@@ -254,7 +256,7 @@ class MovingCircleLineSegmentTest extends CircleLineSegmentTest {
 		else {
 			// Normally we would have to check if there's one or two real solutions, but since all the code using this method only cares
 			// for the smaller solution, let's just return this one.
-			List( ( -b - Math.sqrt( d ) ) / ( 2 * a ) )
+			List( ( -b - sqrt( d ) ) / ( 2 * a ) )
 		}
 	}
 }

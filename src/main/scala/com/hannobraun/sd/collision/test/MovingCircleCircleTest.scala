@@ -25,6 +25,8 @@ import com.hannobraun.sd.collision.shape.Contact
 import com.hannobraun.sd.math.Scalar._
 import com.hannobraun.sd.math.Vector2
 
+import scala.math._
+
 
 
 /**
@@ -114,7 +116,7 @@ class MovingCircleCircleTest extends CircleCircleTest {
 		}
 		else {
 			// None of the edge cases has occured, so we need to compute the time of contact.
-			val t = ( -b - Math.sqrt( d ) ) / a
+			val t = ( -b - sqrt( d ) ) / a
 			if ( t <= 1.0 ) {
 				// Time of contact is within the timeframe we're checking. Let's compute the other attributes of the contact.
 
